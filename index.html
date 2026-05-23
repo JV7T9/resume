@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Va'afuti - Professional Trait Stack</title>
+    <style>
+        :root {
+            --primary-color: #1e293b;
+            --secondary-color: #0f172a;
+            --accent-color: #2563eb;
+            --text-color: #334155;
+            --light-bg: #f8fafc;
+            --border-color: #e2e8f0;
+            --dropdown-highlight: rgba(37, 99, 235, 0.08);
+            --dropdown-highlight-hover: rgba(37, 99, 235, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f1f5f9;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Header Styling */
+        header {
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 25px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .header-title h1 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .header-title p {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .contact-info {
+            text-align: right;
+            font-size: 0.9rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 3px;
+        }
+
+        .contact-info a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        /* Section Layouts */
+        section {
+            margin-bottom: 35px;
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+
+        p.profile-statement {
+            font-size: 1rem;
+            text-align: justify;
+            margin-bottom: 12px;
+        }
+
+        /* Grid Frameworks */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+        }
+
+        .card ul {
+            list-style-type: square;
+            padding-left: 20px;
+            font-size: 0.9rem;
+        }
+
+        .card li {
+            margin-bottom: 5px;
+        }
+
+        /* Tag Lists */
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        /* Interactive Dropdowns Styles */
+        .accordion-item {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .accordion-header {
+            background-color: var(--dropdown-highlight);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .accordion-header:hover {
+            background-color: var(--dropdown-highlight-hover);
+        }
+
+        .accordion-title {
+            font-weight: 600;
+            color: var(--secondary-color);
+            font-size: 1rem;
+        }
+
+        .accordion-year {
+            background: var(--primary-color);
+            color: white;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: auto;
+            margin-right: 20px;
+        }
+
+        .accordion-icon {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+            color: var(--text-color);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: #ffffff;
+        }
+
+        .accordion-body {
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.95rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* Active state classes handled by JS */
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 2000px;
+        }
+
+        /* Tables inside history dropdowns */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--light-bg);
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .year-col { width: 12%; }
+        .pos-col { width: 28%; }
+        .comp-col { width: 25%; }
+        .desc-col { width: 35%; }
+
+        /* Privacy Gate Shielding */
+        .privacy-gate {
+            background: var(--light-bg);
+            border: 2px dashed #cbd5e1;
+            padding: 30px;
+            text-align: center;
+            border-radius: 8px;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .privacy-gate p {
+            margin-bottom: 15px;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        .gate-form {
+            display: flex;
+            justify-content: center;
+            max-width: 450px;
+            margin: 0 auto;
+            gap: 10px;
+        }
+
+        .gate-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .gate-input:disabled {
+            background: #e2e8f0;
+            cursor: not-allowed;
+        }
+
+        .gate-input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+        }
+
+        .gate-btn {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.2s ease;
+        }
+
+        .gate-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .gate-btn:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        .error-msg {
+            color: #dc2626;
+            font-size: 0.85rem;
+            margin-top: 8px;
+            display: none;
+            font-weight: 500;
+        }
+
+        /* Hidden Blocks Framework */
+        .hidden-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .references-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 6px;
+        }
+
+        .ref-card h4 {
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+
+        .ref-card p {
+            font-size: 0.85rem;
+            margin-bottom: 2px;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.9rem;
+            font-style: italic;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        /* PRINT STYLES */
+        @media print {
+            body {
+                background: #ffffff;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                padding: 0;
+                max-width: 100%;
+            }
+            .card {
+                background: #ffffff;
+                border: 1px solid var(--border-color);
+                border-left: 4px solid var(--accent-color);
+                page-break-inside: avoid;
+            }
+            .privacy-gate {
+                display: none !important;
+            }
+            .hidden-content {
+                display: block !important;
+                opacity: 1 !important;
+            }
+            .accordion-content {
+                max-height: none !important;
+                display: block !important;
+            }
+            .accordion-icon {
+                display: none !important;
+            }
+            tr, section, footer, .accordion-item {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="header-title">
+            <h1>John Va’afuti</h1>
+            <p>Digital Technology & Site Security Operations Specialist</p>
+        </div>
+        <div class="contact-info">
+            <p><strong>Mobile:</strong> 021 293 2877</p>
+            <p><strong>Email:</strong> <a href="mailto:John.Vaafuti@gmail.com">John.Vaafuti@gmail.com</a></p>
+            <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/john-va-afuti-096233294" target="_blank">john-va-afuti-096233294</a></p>
+        </div>
+    </header>
+
+    <section>
+        <h2>Profile Statement</h2>
+        <p class="profile-statement">Seeking a professional company to apply skills and experiences in all aspects of my professional background. This document provides a brief outlook on my work history and the knowledge that I would bring to your company, business and work environment.</p>
+        <p class="profile-statement">My professional objective is to share my experience, knowledge and energy into improving your professional environment, encouraging those around me to be motivated in that same light. I am polite, easy to get along with, very reliable and listen to what people have to say.</p>
+    </section>
+
+    <section class="grid-2">
+        <div class="card">
+            <h3>Digital Intelligence</h3>
+            <p style="font-size: 0.9rem; text-align: justify;">Recently graduated with a Diploma in 2025 studying the expanding world of Digital Technology. Experienced in IT Networks & Technical Support, Website Design & Development, UX/UI design, Artificial Intelligence Engines, and Database Systems. Currently utilizing public AI models to architect newer fusion forms of AI engines.</p>
+        </div>
+        <div class="card">
+            <h3>Site Security Ops Specialist</h3>
+            <ul>
+                <li>Forming full-scale site security operations</li>
+                <li>Design & build of operational security workstations</li>
+                <li>Access Management, Surveillance & Data-storage Systems</li>
+                <li>Security Administration, Field Operations & Solutions</li>
+                <li>OHS, risk procedures, and protocol compliance training</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>Key Traits</h2>
+        <div class="tag-container">
+            <span class="tag">Digital Technology / Software & Hardware</span>
+            <span class="tag">Site Security Operations & Management</span>
+            <span class="tag">Systems Administration & Database</span>
+            <span class="tag">Risk Management, Assessment & Solutions</span>
+            <span class="tag">Access Management & Systems Surveillance Technology</span>
+            <span class="tag">Interpersonal Interaction & Communication</span>
+            <span class="tag">Infrastructure Works / Construction & Design</span>
+        </div>
+    </section>
+
+    <section>
+        <h2>Training & Education</h2>
+        <div class="grid-2" style="margin-bottom: 20px;">
+            <div class="card" style="border-left-color: var(--primary-color);">
+                <h3>Diploma Studies Focus</h3>
+                <p style="font-size: 0.85rem; line-height: 1.5;">Fundamentals of Programming & Problem Solving | Hardware Servicing | IT Systems Overview | Professional Practice | Database Administration | Implementing Networks | IT Technical Support | Server Management</p>
+            </div>
+            <div class="card" style="border-left-color: var(--primary-color);">
+                <h3>Security Engagements</h3>
+                <p style="font-size: 0.85rem; line-height: 1.5;">Site Security & Control Room Operations | Private Investigator | Close Protection Agent | Static Guarding | Digital Site Mapping | Corporate & Covert Security | Loss Prevention | Access Control</p>
+            </div>
+        </div>
+
+        <div class="accordion-container">
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span class="accordion-title">Manukau Institute of Technology</span>
+                    <span class="accordion-year">2025</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <div><strong>Field of Study:</strong> Digital Technology – IT Technical Support</div>
+                        <div><strong>Qualification:</strong> New Zealand Diploma</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span class="accordion-title">Downer Civils & Infrastructure Program</span>
+                    <span class="accordion-year">2014</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <div><strong>Field of Study:</strong> Civil Works & Infrastructure</div>
+                        <div><strong>Qualification:</strong> NZQA Accredited</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span class="accordion-title">Best Pacific Institute of Education</span>
+                    <span class="accordion-year">2008</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <div><strong>Field of Study:</strong> Freight Operations</div>
+                        <div><strong>Qualification:</strong> National Certificate</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span class="accordion-title">Connect Training Services – NSW</span>
+                    <span class="accordion-year">2000</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <div><strong>Field of Study:</strong> Security</div>
+                        <div><strong>Qualification:</strong> National Certificate</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span class="accordion-title">Manukau Institute of Technology</span>
+                    <span class="accordion-year">1997</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <div><strong>Field of Study:</strong> Light Fabrication Engineering</div>
+                        <div><strong>Qualification:</strong> National Certificate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Employment History</h2>
+        
+        <div class="privacy-gate" id="historyGate">
+            <p>🔒 Please enter your professional email address to view career milestones and employment history.</p>
+            <form class="gate-form" onsubmit="unlockSection(event, 'historyGate', 'historyContent', 'Employment History Verification')">
+                <input type="email" name="email" class="gate-input" placeholder="name@company.com" required>
+                <button type="submit" class="gate-btn">Unlock History</button>
+            </form>
+            <div class="error-msg" id="historyGate-error">Verification failed. Please check your internet connection or use a valid email format.</div>
+        </div>
+
+        <div class="hidden-content" id="historyContent">
+            <div class="accordion-container" style="margin-top: 15px;">
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="accordion-title" style="color: var(--accent-color);">💼 Professional Occupations</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <table style="background: #fff;">
+                            <thead>
+                                <tr>
+                                    <th class="year-col">Year</th>
+                                    <th class="pos-col">Position</th>
+                                    <th class="comp-col">Company / Location</th>
+                                    <th class="desc-col">Job Brief</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>2023</td><td><strong>Consultant & Advisor</strong></td><td>Independent Contractor</td><td>Site Security Services & Technology</td></tr>
+                                <tr><td>2014</td><td><strong>Security Specialist</strong></td><td>Downer NZ Ltd</td><td>Site Security Operations</td></tr>
+                                <tr><td>2013</td><td><strong>Private Security Contractor</strong></td><td>Executive Security Group Ltd (NT)</td><td>Corporate Security, Close Protection, Private Investigations</td></tr>
+                                <tr><td>2012</td><td><strong>Operations Supervisor / Admin</strong></td><td>Simply Security - Auckland</td><td>Oversee guards for UoA Campuses, ASB, and Westpac branches</td></tr>
+                                <tr><td>2010</td><td><strong>Control Room / Security Liaison</strong></td><td>Icon Group Security (Now Global)</td><td>ASB Cash Processing Centre / Dominion Rd Business Assoc.</td></tr>
+                                <tr><td>2008</td><td><strong>Contractor</strong></td><td>EcoWorx</td><td>Environmental Services, Heavy Machinery, Project Designer</td></tr>
+                                <tr><td>2006</td><td><strong>Professional Labourer</strong></td><td>Action Labour / Recruitment Agency</td><td>Building, Concrete, Tiling, Roofing, Plastering, Electrical, Plumbing</td></tr>
+                                <tr><td>2005</td><td><strong>Painter & Decor</strong></td><td>Golden Touch Service</td><td>Internal & External House Restorations</td></tr>
+                                <tr><td>2003</td><td><strong>Gatehouse / Site Security</strong></td><td>Chubb Security (Onehunga-Otahuhu)</td><td>Inquiries, Alarm Response, CCTV Monitoring, Patrols, Admin</td></tr>
+                                <tr><td>2002</td><td><strong>Furnace Man & Die Caster</strong></td><td>Cheviot Alloy Wheels (Onehunga)</td><td>Die Setter, Heat Treatment, Foundry Operations</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="accordion-title" style="color: var(--accent-color);">🛡️ Entry Level Occupations</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="year-col">Year</th>
+                                    <th class="pos-col">Position</th>
+                                    <th class="comp-col">Company / Location</th>
+                                    <th class="desc-col">Job Brief</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>2000</td><td><strong>Security Officer</strong></td><td>Group 4 Securitas (Sydney, NSW)</td><td>Security Field Work across multiple Sydney CBD sites</td></tr>
+                                <tr><td>1999</td><td><strong>Fabrication & Welding</strong></td><td>Premier Stainless Steel Ltd (NSW)</td><td>Aluminium & Stainless-Steel Projects</td></tr>
+                                <tr><td>1998</td><td><strong>Trainee Maintenance Tech</strong></td><td>Autodor Services Ltd (Onehunga)</td><td>General Maintenance & Automatic Sliding Door Installations</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="accordion-title" style="color: var(--accent-color);">🎓 College & Tertiary Years</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="year-col">Year</th>
+                                    <th class="pos-col">Position</th>
+                                    <th class="comp-col">Company / Location</th>
+                                    <th class="desc-col">Job Brief</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1996</td><td><strong>Crew Staff & Trainer</strong></td><td>McDonalds / Fun Station (Panmure)</td><td>Kitchen Duties, Customer Service, Maintenance</td></tr>
+                                <tr><td>1995</td><td><strong>Kitchen Hand</strong></td><td>Ashby Takeaways Restaurant</td><td>Prep & Cook Assistant, Cleaning & Maintenance</td></tr>
+                                <tr><td>1994</td><td><strong>Produce Worker</strong></td><td>3 Guys Supermarket (Glen Innes)</td><td>Handling fresh produce, Department Floor Setup, Customer Service</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Professional References</h2>
+        
+        <div class="privacy-gate" id="privacyGate">
+            <p>🔒 To protect referee privacy, please enter your professional email address to view contact details.</p>
+            <form class="gate-form" onsubmit="unlockSection(event, 'privacyGate', 'referencesContent', 'Professional References Verification')">
+                <input type="email" name="email" class="gate-input" placeholder="name@company.com" required>
+                <button type="submit" class="gate-btn">Unlock References</button>
+            </form>
+            <div class="error-msg" id="privacyGate-error">Verification failed. Please check your internet connection or use a valid email format.</div>
+        </div>
+
+        <div class="hidden-content" id="referencesContent">
+            <div class="references-grid">
+                <div class="ref-card">
+                    <h4>Kourosh Ahmadi</h4>
+                    <p><em>Lecturer</em></p>
+                    <p>Manukau Institute of Technology</p>
+                    <p>Mob: 021 0827 5090</p>
+                    <p>Email: Kourosh.ahmadi@gmail.com</p>
+                </div>
+                <div class="ref-card">
+                    <h4>Gary Holmes</h4>
+                    <p><em>Manager / Local Board Member</em></p>
+                    <p>Campaigns Ltd / Akld City Council</p>
+                    <p>Mob: 027 496 6283</p>
+                    <p>Email: gary@campaignz.co.nz</p>
+                </div>
+                <div class="ref-card">
+                    <h4>Adam De Beer</h4>
+                    <p><em>Owner</em></p>
+                    <p>Integris Group Ltd NZ</p>
+                    <p>Mob: 022 632 9790</p>
+                    <p>Email: adam@integrisgl.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        Thank you for taking the time to read this document. References, qualifications, and project demonstrations can be provided during an interview session.
+    </footer>
+</div>
+
+<script>
+    function toggleAccordion(element) {
+        const item = element.parentElement;
+        item.classList.toggle('active');
+    }
+
+function unlockSection(event, gateId, contentId, subjectText) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const emailInput = form.querySelector('input[name="email"]');
+    const button = form.querySelector('button');
+    const errorDiv = document.getElementById(gateId + '-error');
+    const typedEmail = emailInput.value.trim();
+    
+    if(!typedEmail.includes('@') || !typedEmail.includes('.') || typedEmail.length < 5) {
+        errorDiv.style.display = 'block';
+        errorDiv.innerText = "Please enter a valid email address style (e.g., name@company.com)";
+        return;
+    }
+
+    errorDiv.style.display = 'none';
+    button.disabled = true;
+    emailInput.disabled = true;
+    button.innerText = "Verifying...";
+
+    const formData = new FormData();
+    // Your actual API key entered below:
+    formData.append("apiKey", "sf_cd80daefea1cfd2b21a86e62"); 
+    formData.append("subject", subjectText);
+    formData.append("email", typedEmail);
+    formData.append("message", `Employer content token unlock.\nTarget Section: ${contentId}\nVerified Contact: ${typedEmail}\nTimestamp: ${new Date().toLocaleString()}`);
+
+    // Updated to the secure submission endpoint
+    fetch("https://api.staticforms.dev/submit", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            document.getElementById(gateId).style.display = 'none';
+            document.getElementById(contentId).style.display = 'block';
+        } else {
+            throw new Error("Network submission rejected");
+        }
+    })
+    .catch(() => {
+        button.disabled = false;
+        emailInput.disabled = false;
+        button.innerText = "Unlock Block";
+        errorDiv.style.display = 'block';
+        errorDiv.innerText = "Verification failed. Please ensure the file is hosted online (GitHub or Tiiny.host) to activate form handshakes.";
+    });
+}
+</script>
+
+</body>
+</html>
