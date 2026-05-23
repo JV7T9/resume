@@ -532,10 +532,11 @@
         
         <div class="privacy-gate" id="historyGate">
             <p>🔒 Please enter your professional email address to view career milestones and employment history.</p>
-            <form class="gate-form" onsubmit="unlockSection(event, 'historyGate', 'historyContent', 'Employment History Verification')">
-                <input type="email" name="email" class="gate-input" placeholder="name@company.com" required>
-                <button type="submit" class="gate-btn">Unlock History</button>
-            </form>
+                <form class="gate-form" onsubmit="unlockSection(event, 'historyGate', 'historyContent', 'Employment History Verification')">
+                    <input type="hidden" name="form-name" value="Employment History Gate">
+                        <input type="email" name="email" class="gate-input" placeholder="name@company.com" required>
+                    <button type="submit" class="gate-btn">Unlock History</button>
+                </form>
             <div class="error-msg" id="historyGate-error">Verification failed. Please check your internet connection or use a valid email format.</div>
         </div>
 
@@ -630,10 +631,11 @@
         
         <div class="privacy-gate" id="privacyGate">
             <p>🔒 To protect referee privacy, please enter your professional email address to view contact details.</p>
-            <form class="gate-form" onsubmit="unlockSection(event, 'privacyGate', 'referencesContent', 'Professional References Verification')">
-                 <input type="email" name="ref-email" class="gate-input" placeholder="name@company.com" required>
-                <button type="submit" class="gate-btn">Unlock References</button>
-            </form>
+                <form class="gate-form" onsubmit="unlockSection(event, 'privacyGate', 'referencesContent', 'Professional References Verification')">
+                        <input type="hidden" name="form-name" value="Professional References Gate">
+                            <input type="email" name="email" class="gate-input" placeholder="name@company.com" required>
+                        <button type="submit" class="gate-btn">Unlock References</button>
+                </form>
             <div class="error-msg" id="privacyGate-error">Verification failed. Please check your internet connection or use a valid email format.</div>
         </div>
 
