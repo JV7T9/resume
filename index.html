@@ -679,9 +679,11 @@ function unlockSection(event, gateId, contentId, subjectText) {
     event.preventDefault();
     
     const form = event.target;
-    const emailInput = form.querySelector('input[name="email"]');
+    const emailInput = form.querySelector('input[type="email"]');
     const button = form.querySelector('button');
     const errorDiv = document.getElementById(gateId + '-error');
+    
+    if (!emailInput) return;
     const typedEmail = emailInput.value.trim();
     
     if(!typedEmail.includes('@') || !typedEmail.includes('.') || typedEmail.length < 5) {
@@ -696,13 +698,11 @@ function unlockSection(event, gateId, contentId, subjectText) {
     button.innerText = "Verifying...";
 
     const formData = new FormData();
-    // Your actual API key entered below:
     formData.append("apiKey", "sf_cd80daefea1cfd2b21a86e62"); 
     formData.append("subject", subjectText);
     formData.append("email", typedEmail);
     formData.append("message", `Employer content token unlock.\nTarget Section: ${contentId}\nVerified Contact: ${typedEmail}\nTimestamp: ${new Date().toLocaleString()}`);
 
-    // Updated to the secure submission endpoint
     fetch("https://api.staticforms.dev/submit", {
         method: "POST",
         body: formData
