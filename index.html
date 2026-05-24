@@ -388,16 +388,47 @@
                 page-break-inside: avoid;
             }
         }
+
+        /* Container styling if needed */
+.header-title {
+    text-align: left; /* Or center, depending on your current layout */
+}
+
+/* New Primary Title */
+.header-title h1 {
+    font-family: 'Biome', sans-serif; /* Uses Biome, falls back to sans-serif if not loaded */
+    font-size: 2.5rem; /* Makes this the largest text */
+    font-weight: bold;
+    text-transform: uppercase; /* Ensures it stays in all caps */
+    margin-bottom: 5px;
+}
+
+/* Your Name (Shrunk down) */
+.header-title h2 {
+    font-size: 1.8rem; /* Smaller than the h1 title */
+    font-weight: bold;
+    color: #333; /* Adjust color to fit your theme */
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+/* Subtitle/Tagline */
+.header-title p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-top: 0;
+}
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <div class="header-title">
-            <h1>John Va’afuti</h1>
-            <p>Digital Technology & Site Security Operations Specialist</p>
-        </div>
+<div class="header-title">
+    <h1>PRO TRAIT STACK</h1>
+    <h2>John Va’afuti</h2>
+    <p>Digital Technology & Site Security Operations Specialist</p>
+</div>
         <div class="contact-info">
             <p><strong>Mobile:</strong> 021 293 2877</p>
             <p><strong>Email:</strong> <a href="mailto:John.Vaafuti@gmail.com">John.Vaafuti@gmail.com</a></p>
