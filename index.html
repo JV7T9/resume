@@ -418,6 +418,74 @@
     color: #555;
     margin-top: 0;
 }
+
+/* ==========================================================================
+   MOBILE SNAP LAYOUT (For screens under 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+    
+    /* 1. Reset main container spacing for mobile edges */
+    body, .container, main {
+        padding: 15px !important;
+        margin: 0 !important;
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    /* 2. Header Snap: Force title, name, and contact info into a neat center column */
+    .header-title {
+        text-align: center !important;
+        width: 100% !important;
+        margin-bottom: 20px;
+    }
+
+    /* Re-aligning your contact details (Mobile, Email, LinkedIn) to stack centrally */
+    .contact-info, .header-right, [style*="float: right"] {
+        float: none !important;
+        text-align: center !important;
+        margin: 15px auto !important;
+        display: block;
+    }
+
+    /* 3. Title typography optimizations */
+    .header-title h1 {
+        font-family: 'Biome', sans-serif;
+        font-size: 2rem !important;
+        line-height: 1.2;
+        margin-bottom: 8px;
+    }
+
+    .header-title h2 {
+        font-size: 1.5rem !important;
+        margin-bottom: 8px;
+    }
+
+    /* 4. Column Snap: Force your 2-column sections (like Digital Intelligence / Site Security) to drop into a single column */
+    .row, .grid, .columns, [style*="display: flex"] {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 20px !important;
+    }
+
+    .column, .cell, [style*="width: 50%"], [style*="flex:"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 0 15px 0 !important;
+    }
+
+    /* 5. Key Traits list smoothing */
+    .key-traits, [style*="display: inline-block"] {
+        text-align: center !important;
+    }
+    
+    /* Optional: Adds a subtle separator between the newly stacked columns */
+    .column + .column {
+        border-top: 1px solid #e0e0e0;
+        padding-top: 20px !important;
+    }
+}
     </style>
 </head>
 <body>
