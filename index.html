@@ -5,426 +5,441 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>John Va'afuti - Professional Trait Stack</title>
     <style>
-        :root {
-            --primary-color: #1e293b;
-            --secondary-color: #0f172a;
-            --accent-color: #2563eb;
-            --text-color: #334155;
-            --light-bg: #f8fafc;
-            --border-color: #e2e8f0;
-            --dropdown-highlight: rgba(37, 99, 235, 0.08);
-            --dropdown-highlight-hover: rgba(37, 99, 235, 0.15);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: #f1f5f9;
-            padding: 40px 20px;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: #ffffff;
-            padding: 50px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-
-        /* Header Styling */
-        header {
-            border-bottom: 3px solid var(--primary-color);
-            padding-bottom: 25px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        .header-title h1 {
-            font-size: 2.5rem;
-            color: var(--secondary-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-        }
-
-        .header-title p {
-            font-size: 1.1rem;
-            color: var(--accent-color);
-            font-weight: 600;
-        }
-
-        .contact-info {
-            text-align: right;
-            font-size: 0.9rem;
-        }
-
-        .contact-info p {
-            margin-bottom: 3px;
-        }
-
-        .contact-info a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-
-        /* Section Layouts */
-        section {
-            margin-bottom: 35px;
-        }
-
-        h2 {
-            font-size: 1.3rem;
-            color: var(--primary-color);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 8px;
-            margin-bottom: 15px;
-        }
-
-        p.profile-statement {
-            font-size: 1rem;
-            text-align: justify;
-            margin-bottom: 12px;
-        }
-
-        /* Grid Frameworks */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .card {
-            background: var(--light-bg);
-            padding: 20px;
-            border-radius: 6px;
-            border-left: 4px solid var(--accent-color);
-        }
-
-        .card h3 {
-            margin-bottom: 10px;
-            color: var(--secondary-color);
-            font-size: 1.1rem;
-        }
-
-        .card ul {
-            list-style-type: square;
-            padding-left: 20px;
-            font-size: 0.9rem;
-        }
-
-        .card li {
-            margin-bottom: 5px;
-        }
-
-        /* Tag Lists */
-        .tag-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .tag {
-            background: var(--light-bg);
-            border: 1px solid var(--border-color);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--primary-color);
-        }
-
-        /* Interactive Dropdowns Styles */
-        .accordion-item {
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            margin-bottom: 10px;
-            overflow: hidden;
-            background: #fff;
-        }
-
-        .accordion-header {
-            background-color: var(--dropdown-highlight);
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            user-select: none;
-            transition: background-color 0.2s ease;
-        }
-
-        .accordion-header:hover {
-            background-color: var(--dropdown-highlight-hover);
-        }
-
-        .accordion-title {
-            font-weight: 600;
-            color: var(--secondary-color);
-            font-size: 1rem;
-        }
-
-        .accordion-year {
-            background: var(--primary-color);
-            color: white;
-            padding: 2px 10px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-left: auto;
-            margin-right: 20px;
-        }
-
-        .accordion-icon {
-            font-size: 0.8rem;
-            transition: transform 0.3s ease;
-            color: var(--text-color);
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            background: #ffffff;
-        }
-
-        .accordion-body {
-            padding: 20px;
-            border-top: 1px solid var(--border-color);
-            font-size: 0.95rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        /* Active state classes handled by JS */
-        .accordion-item.active .accordion-icon {
-            transform: rotate(180deg);
-        }
-
-        .accordion-item.active .accordion-content {
-            max-height: 2000px;
-        }
-
-        /* Tables inside history dropdowns */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9rem;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        th {
-            background-color: var(--light-bg);
-            color: var(--secondary-color);
-            font-weight: 600;
-        }
-
-        .year-col { width: 12%; }
-        .pos-col { width: 28%; }
-        .comp-col { width: 25%; }
-        .desc-col { width: 35%; }
-
-        /* Privacy Gate Shielding */
-        .privacy-gate {
-            background: var(--light-bg);
-            border: 2px dashed #cbd5e1;
-            padding: 30px;
-            text-align: center;
-            border-radius: 8px;
-            margin-top: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .privacy-gate p {
-            margin-bottom: 15px;
-            font-weight: 500;
-            color: var(--primary-color);
-        }
-
-        .gate-form {
-            display: flex;
-            justify-content: center;
-            max-width: 450px;
-            margin: 0 auto;
-            gap: 10px;
-        }
-
-        .gate-input {
-            flex: 1;
-            padding: 10px 15px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 0.9rem;
-            outline: none;
-        }
-
-        .gate-input:disabled {
-            background: #e2e8f0;
-            cursor: not-allowed;
-        }
-
-        .gate-input:focus {
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
-        }
-
-        .gate-btn {
-            background: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: background 0.2s ease;
-        }
-
-        .gate-btn:hover {
-            background: #1d4ed8;
-        }
-
-        .gate-btn:disabled {
-            background: #94a3b8;
-            cursor: not-allowed;
-        }
-
-        .error-msg {
-            color: #dc2626;
-            font-size: 0.85rem;
-            margin-top: 8px;
-            display: none;
-            font-weight: 500;
-        }
-
-        /* Hidden Blocks Framework */
-        .hidden-content {
-            display: none;
-            animation: fadeIn 0.5s ease-in-out forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .references-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            background: var(--light-bg);
-            padding: 20px;
-            border-radius: 6px;
-        }
-
-        .ref-card h4 {
-            color: var(--secondary-color);
-            margin-bottom: 5px;
-        }
-
-        .ref-card p {
-            font-size: 0.85rem;
-            margin-bottom: 2px;
-        }
-
-        footer {
-            margin-top: 40px;
-            text-align: center;
-            font-size: 0.9rem;
-            font-style: italic;
-            border-top: 1px solid var(--border-color);
-            padding-top: 20px;
-        }
-
-        /* PRINT STYLES */
-        @media print {
-            body {
-                background: #ffffff;
-                padding: 0;
-            }
-            .container {
-                box-shadow: none;
-                padding: 0;
-                max-width: 100%;
-            }
-            .card {
-                background: #ffffff;
-                border: 1px solid var(--border-color);
-                border-left: 4px solid var(--accent-color);
-                page-break-inside: avoid;
-            }
-            .privacy-gate {
-                display: none !important;
-            }
-            .hidden-content {
-                display: block !important;
-                opacity: 1 !important;
-            }
-            .accordion-content {
-                max-height: none !important;
-                display: block !important;
-            }
-            .accordion-icon {
-                display: none !important;
-            }
-            tr, section, footer, .accordion-item {
-                page-break-inside: avoid;
-            }
-        }
-
-        /* Container styling if needed */
-.header-title {
-    text-align: left; /* Or center, depending on your current layout */
+:root {
+    --primary-color: #1e293b;
+    --secondary-color: #0f172a;
+    --accent-color: #2563eb;
+    --text-color: #334155;
+    --light-bg: #f8fafc;
+    --border-color: #e2e8f0;
+    --dropdown-highlight: rgba(37, 99, 235, 0.08);
+    --dropdown-highlight-hover: rgba(37, 99, 235, 0.15);
 }
 
-/* New Primary Title */
-.header-title h1 {
-    font-family: 'Biome', sans-serif; /* Uses Biome, falls back to sans-serif if not loaded */
-    font-size: 2.5rem; /* Makes this the largest text */
-    font-weight: bold;
-    text-transform: uppercase; /* Ensures it stays in all caps */
-    margin-bottom: 5px;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-/* Your Name (Shrunk down) */
-.header-title h2 {
-    font-size: 1.8rem; /* Smaller than the h1 title */
-    font-weight: bold;
-    color: #333; /* Adjust color to fit your theme */
-    margin-top: 0;
-    margin-bottom: 5px;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #e2e8f0; /* Crisp slate white for excellent readability on dark backgrounds */
+    background-color: #1e293b; /* Sleek gunmetal base */
+    padding: 40px 20px;
 }
 
-/* Subtitle/Tagline */
-.header-title p {
-    font-size: 1.1rem;
-    color: #555;
-    margin-top: 0;
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #0f172a; /* Deep charcoal container body */
+    padding: 50px;
+    border-radius: 12px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
 /* ==========================================================================
-   MOBILE SNAP LAYOUT (For screens under 768px)
+   GLOWING MIRROR HEADER BOX (Original Positioning)
+   ========================================================================== */
+/* ==========================================================================
+   GLOWING LIGHT TEAL MIRROR HEADER BOX
+   ========================================================================== */
+.glass-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px;
+    margin-bottom: 35px;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    
+    /* Dark Mode Frosted Glass Effect */
+    background: rgba(15, 23, 42, 0.6); 
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px);
+    
+    /* Neon Teal Edge Glow Burst */
+    border: 1px solid rgba(45, 212, 191, 0.4);
+    box-shadow: 
+        0 0 30px rgba(13, 148, 136, 0.25),       /* Ambient outer aura */
+        inset 0 0 12px rgba(255, 255, 255, 0.05),  /* Minor inner surface reflection */
+        0 0 20px rgba(45, 212, 191, 0.35);         /* Crisp glowing trim */
+}
+
+/* Left Side: Primary Brand Title */
+.header-brand {
+    flex: 1;
+    text-align: left;
+}
+/* Left Side: Primary Brand Title */
+.header-brand h1 {
+    font-family: 'Biome', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #38bdf8; /* Matches the vibrant section headers */
+    margin: 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Center Section: Your Identity */
+.header-identity {
+    flex: 1.5;
+    text-align: left; 
+    padding-left: 0;   
+    margin-top: 10px;
+    margin-bottom: 45px; /* Increased from 25px to create a spacious gap */
+}
+.header-identity h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #ffffff; /* Pure white name to stand out sharply */
+    margin: 0 0 4px 0;
+    letter-spacing: 0.5px;
+}
+.header-identity .tagline {
+    font-size: 1rem;
+    color: #666;
+    margin: 0;
+    font-style: italic;
+}
+
+/* Right Side: Contact Information */
+.header-contact {
+    flex: 1;
+    text-align: right;
+}
+.header-contact p {
+    margin: 4px 0;
+    font-size: 0.95rem;
+    color: #cbd5e1; /* Soft light grey text */
+}
+.header-contact a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+.header-contact a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   Section Layouts & General Typography
+   ========================================================================== */
+section {
+    margin-bottom: 35px;
+}
+
+h2 {
+    font-size: 1.3rem;
+    color: #38bdf8; /* Brilliant electric blue/teal for section headings */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #334155; /* Subtle dark divider line */
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+p.profile-statement {
+    font-size: 1rem;
+    text-align: justify;
+    margin-bottom: 12px;
+}
+
+/* Grid Frameworks (Your side-by-side columns) */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.card {
+    background: #1e293b; 
+    padding: 20px;
+    border-radius: 8px; /* Slightly smoother corners to match the header box */
+    border-left: 4px solid #38bdf8; 
+    
+    /* Subtle Glass & Soft Matching Glow Effect */
+    border-top: 1px solid rgba(56, 189, 248, 0.1);    /* Tiny bit of light reflection on top */
+    border-right: 1px solid rgba(56, 189, 248, 0.05);
+    border-bottom: 1px solid rgba(56, 189, 248, 0.05);
+    
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.2),                /* Drop shadow for separation */
+        0 0 15px rgba(56, 189, 248, 0.08);            /* Soft, restrained matching glow */
+    
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 6px 25px rgba(0, 0, 0, 0.25),
+        0 0 20px rgba(56, 189, 248, 0.15);            /* Becomes just a touch more brilliant on hover */
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    color: #f8fafc; /* Crisp light header text */
+    font-size: 1.1rem;
+}
+
+.card ul {
+    list-style-type: square;
+    padding-left: 20px;
+    font-size: 0.9rem;
+}
+
+.card li {
+    margin-bottom: 5px;
+}
+
+/* Tag Lists */
+.tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tag {
+    background: var(--light-bg);
+    border: 1px solid var(--border-color);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+/* Interactive Dropdowns Styles */
+.accordion-item {
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.accordion-header {
+    background-color: var(--dropdown-highlight);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease;
+}
+
+.accordion-header:hover {
+    background-color: var(--dropdown-highlight-hover);
+}
+
+.accordion-title {
+    font-weight: 600;
+    color: var(--secondary-color);
+    font-size: 1rem;
+}
+
+.accordion-year {
+    background: var(--primary-color);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.accordion-icon {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+    color: var(--text-color);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background: #1e293b; /* Matches your slightly lighter gunmetal */
+}
+
+.accordion-body {
+    padding: 20px;
+    background-color: #1e293b !important; /* Forces the gunmetal background */
+    border-top: 1px solid var(--border-color);
+    font-size: 0.95rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    color: #f8fafc; /* Crisp light slate text for the body */
+}
+
+.accordion-item.active .accordion-icon {
+    transform: rotate(180deg);
+}
+
+.accordion-item.active .accordion-content {
+    max-height: 2000px;
+}
+
+/* Tables inside history dropdowns */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+/* FIX: Explicitly forces the table rows and cells to stay dark gunmetal */
+table tr, td {
+    padding: 12px;
+    text-align: left;
+    background-color: #1e293b !important; /* Strips the default browser white background */
+    border-bottom: 1px solid #334155 !important; /* Clean dark divider line */
+    color: #cbd5e1 !important; /* Clear, highly readable grey-white text */
+}
+
+th {
+    background-color: #0f172a; /* Deep charcoal background for headers */
+    color: #38bdf8; /* Matches your bright electric blue headers */
+    font-weight: 600;
+    padding: 12px;
+    text-align: left;
+}
+
+/* Style overrides for highlighted position/company italics if needed */
+td em, td i {
+    color: #38bdf8 !important; /* Pops your job titles in electric blue */
+}
+
+.year-col { width: 12%; }
+.pos-col { width: 28%; }
+.comp-col { width: 25%; }
+.desc-col { width: 35%; }
+/* Privacy Gate Shielding */
+.privacy-gate {
+    background: #1e293b !important;
+    border: 2px dashed #334155 !important; /* Subtle dark border */
+    color: #f8fafc !important;
+    padding: 30px;
+    text-align: center;
+    border-radius: 8px;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+}
+
+.privacy-gate p {
+    margin-bottom: 15px;
+    font-weight: 500;
+    color: #f8fafc !important;
+}
+
+.gate-form {
+    display: flex;
+    justify-content: center;
+    max-width: 450px;
+    margin: 0 auto;
+    gap: 10px;
+}
+
+.gate-input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.gate-input:disabled {
+    background: #e2e8f0;
+    cursor: not-allowed;
+}
+
+.gate-input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.gate-btn {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+}
+
+.gate-btn:hover {
+    background: #1d4ed8;
+}
+
+.gate-btn:disabled {
+    background: #94a3b8;
+    cursor: not-allowed;
+}
+
+.error-msg {
+    color: #dc2626;
+    font-size: 0.85rem;
+    margin-top: 8px;
+    display: none;
+    font-weight: 500;
+}
+
+/* Hidden Blocks Framework */
+.hidden-content {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.references-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    background: #1e293b; /* Deep gunmetal background */
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(56, 189, 248, 0.1); /* Subtle blue boundary */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.ref-card h4 {
+    color: #ffffff; /* Crisp white for the referee names */
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+.ref-card p {
+    font-size: 0.9rem;
+    margin-bottom: 2px;
+    color: #cbd5e1; /* Light slate grey so titles and phone numbers are highly readable */
+}
+
+footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-style: italic;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+}
+
+/* ==========================================================================
+   CONSOLIDATED MOBILE SNAP LAYOUT (For screens under 768px)
    ========================================================================== */
 @media (max-width: 768px) {
-    
-    /* 1. Reset main container spacing for mobile edges */
+    /* 1. Global Reset for layout container edges */
     body, .container, main {
         padding: 15px !important;
         margin: 0 !important;
@@ -432,77 +447,107 @@
         box-sizing: border-box;
     }
 
-    /* 2. Header Snap: Force title, name, and contact info into a neat center column */
-    .header-title {
+    /* 2. Glass Header responsive transformation */
+    .glass-header {
+        flex-direction: column !important;
         text-align: center !important;
+        padding: 20px !important;
+        gap: 15px;
+    }
+
+    .header-brand, .header-identity, .header-contact {
+        flex: none !important;
         width: 100% !important;
-        margin-bottom: 20px;
-    }
-
-    /* Re-aligning your contact details (Mobile, Email, LinkedIn) to stack centrally */
-    .contact-info, .header-right, [style*="float: right"] {
-        float: none !important;
         text-align: center !important;
-        margin: 15px auto !important;
-        display: block;
     }
 
-    /* 3. Title typography optimizations */
-    .header-title h1 {
-        font-family: 'Biome', sans-serif;
-        font-size: 2rem !important;
-        line-height: 1.2;
-        margin-bottom: 8px;
+    .header-brand h1 {
+        font-size: 1.2rem !important;
+    }
+    
+    .header-identity h2 {
+        font-size: 1.4rem !important;
     }
 
-    .header-title h2 {
-        font-size: 1.5rem !important;
-        margin-bottom: 8px;
+    .header-contact { 
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        padding-top: 12px;
+        margin-top: 5px;
     }
 
-    /* 4. Column Snap: Force your 2-column sections (like Digital Intelligence / Site Security) to drop into a single column */
-    .row, .grid, .columns, [style*="display: flex"] {
+    /* 3. Drop grids (Digital Intel / Site Security columns) to clean vertical rows */
+    .grid-2, .accordion-body, [style*="display: flex"] {
         display: flex !important;
         flex-direction: column !important;
         width: 100% !important;
-        gap: 20px !important;
+        gap: 15px !important;
     }
 
-    .column, .cell, [style*="width: 50%"], [style*="flex:"] {
+    .card, .ref-card {
         width: 100% !important;
-        max-width: 100% !important;
-        padding: 0 !important;
-        margin: 0 0 15px 0 !important;
-    }
-
-    /* 5. Key Traits list smoothing */
-    .key-traits, [style*="display: inline-block"] {
-        text-align: center !important;
-    }
-    
-    /* Optional: Adds a subtle separator between the newly stacked columns */
-    .column + .column {
-        border-top: 1px solid #e0e0e0;
-        padding-top: 20px !important;
+        margin-bottom: 10px;
     }
 }
+
+/* ==========================================================================
+   PRINT STYLES
+   ========================================================================== */
+@media print {
+    body {
+        background: #ffffff;
+        padding: 0;
+    }
+    .container {
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+    }
+    .card {
+        background: #ffffff;
+        border: 1px solid var(--border-color);
+        border-left: 4px solid var(--accent-color);
+        page-break-inside: avoid;
+    }
+    .privacy-gate {
+        display: none !important;
+    }
+    .hidden-content {
+        display: block !important;
+        opacity: 1 !important;
+    }
+    .accordion-content {
+        max-height: none !important;
+        display: block !important;
+    }
+    .accordion-icon {
+        display: none !important;
+    }
+    tr, section, footer, .accordion-item {
+        page-break-inside: avoid;
+    }
+}
+
     </style>
 </head>
 <body>
 
 <div class="container">
-    <header>
-<div class="header-title">
-    <h1>PRO-TRAIT STACK</h1>
-    <h2>John Va’afuti</h2>
-    <p>Digital Technology & Site Security Operations Specialist</p>
+<header class="glass-header">
+    <div class="header-brand">
+        <h1>PRO-TRAIT STACK</h1>
+    </div>
+
+    <div class="header-contact">
+        <p><strong>Mobile:</strong> 021 293 2877</p>
+        <p><strong>Email:</strong> <a href="mailto:John.Vaafuti@gmail.com">John.Vaafuti@gmail.com</a></p>
+        <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/john-va-afuti-096233294" target="_blank">john-va-afuti-096233294</a></p>
+    </div>
+</header>
+
+<div class="header-identity">
+    <h2>JOHN VA’AFUTI</h2>
+    <p class="tagline">Digital Technology & Site Security Operations Specialist</p>
 </div>
-        <div class="contact-info">
-            <p><strong>Mobile:</strong> 021 293 2877</p>
-            <p><strong>Email:</strong> <a href="mailto:John.Vaafuti@gmail.com">John.Vaafuti@gmail.com</a></p>
-            <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/john-va-afuti-096233294" target="_blank">john-va-afuti-096233294</a></p>
-        </div>
-    </header>
 
     <section>
         <h2>Profile Statement</h2>
@@ -630,12 +675,11 @@
         <h2>Employment History</h2>
         
         <div class="privacy-gate" id="historyGate">
-            <p>🔒 Please enter your professional email address to view career milestones and employment history.</p>
-                <form class="gate-form" onsubmit="unlockSection(event, 'historyGate', 'historyContent', 'Employment History Verification')">
-                    <input type="hidden" name="form-name" value="Employment History Gate">
-                        <input type="email" name="email" class="gate-input" placeholder="name@company.com" required>
-                    <button type="submit" class="gate-btn">Unlock History</button>
-                </form>
+            <form class="gate-form" onsubmit="unlockSection(event, 'historyGate', 'historyContent', 'Employment History Verification')">
+    		<input type="hidden" name="form-name" value="Employment History Gate">
+    			<input type="email" name="email" class="gate-input" placeholder="name@company.com" required>
+    		<button type="submit" class="gate-btn">Unlock History</button>
+	    </form>
             <div class="error-msg" id="historyGate-error">Verification failed. Please check your internet connection or use a valid email format.</div>
         </div>
 
@@ -730,11 +774,11 @@
         
         <div class="privacy-gate" id="privacyGate">
             <p>🔒 To protect referee privacy, please enter your professional email address to view contact details.</p>
-                <form class="gate-form" onsubmit="unlockSection(event, 'privacyGate', 'referencesContent', 'Professional References Verification')">
-                        <input type="hidden" name="form-name" value="Professional References Gate">
-                            <input type="email" name="email" class="gate-input" placeholder="name@company.com" required>
-                        <button type="submit" class="gate-btn">Unlock References</button>
-                </form>
+            <form class="gate-form" onsubmit="unlockSection(event, 'privacyGate', 'referencesContent', 'Professional References Verification')">
+    		<input type="hidden" name="form-name" value="Professional References Gate">
+    			<input type="email" name="email" class="gate-input" placeholder="name@company.com" required>
+    		<button type="submit" class="gate-btn">Unlock References</button>
+	    </form>
             <div class="error-msg" id="privacyGate-error">Verification failed. Please check your internet connection or use a valid email format.</div>
         </div>
 
