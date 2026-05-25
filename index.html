@@ -691,7 +691,9 @@ footer {
 <section>
         <h2>Employment History</h2>
         <div class="privacy-gate" id="historyGate">
-            <p>𖦤 To protect work history privacy, please enter your professional email address to view contact details.</p>
+           <p class="gate-instructions">
+    <span class="glow-glyph">𖦤</span> To protect work history privacy, entering your professional email address will unlock this section.
+</p>
             
             <form class="gate-form" onsubmit="unlockSection(event, 'historyGate', 'historyContent', 'Employment History Verification')">
                 <input type="hidden" name="form-name" value="Employment History Gate">
@@ -791,7 +793,9 @@ footer {
         <h2>Professional References</h2>
         
         <div class="privacy-gate" id="privacyGate">
-            <p>𖦤 To protect referee privacy, please enter your professional email address to view contact details.</p>
+            <p class="gate-instructions">
+    <span class="glow-glyph">𖦤</span> To protect referee privacy, entering your professional email address will unlock this section.
+</p>
             <form class="gate-form" onsubmit="unlockSection(event, 'privacyGate', 'referencesContent', 'Professional References Verification')">
                 <input type="hidden" name="form-name" value="Professional References Gate">
                 <input type="email" name="email" class="gate-input" placeholder="name@company.com" required>
