@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2&family=Michroma&family=Orbitron:wght@400;900&family=Rajdhani:wght@600&display=swap" rel="stylesheet">
     <title>John Va'afuti - Professional Trait Stack</title>
     <style>
 :root {
@@ -23,46 +24,101 @@
 }
 
 body {
+    margin: 0;
+    padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #e2e8f0; /* Crisp slate white for excellent readability on dark backgrounds */
     background-color: #1e293b; /* Sleek gunmetal base */
     padding: 40px 20px;
+    overflow-y: auto; 
+    height: 100vh;
 }
 
 .container {
     max-width: 900px;
-    margin: 0 auto;
-    background: #0f172a; /* Deep charcoal container body */
-    padding: 50px;
+    margin: -25px auto;
+    margin-bottom: 10px;
+    background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), 
+                url('assets/RSG.jpg');
+    
+    padding: 30px 30px; 
     border-radius: 12px;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
 }
+
+.sub-header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Changed from center to top-aligned */
+    padding: 0 10px;
+    width: 100%;             /* Ensure it fills the container */
+    gap: 20px;               /* Add space between text and button */
+}
+/* ==========================================================================
+   GLOWING MIRROR HEADER BOX (Original Positioning)
+   ========================================================================== */
 /* ==========================================================================
    GLOWING LIGHT TEAL MIRROR HEADER BOX
    ========================================================================== */
 .glass-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     padding: 25px 30px;
-    margin-bottom: 35px;
+    margin-bottom: 20px; /* Space between title box and name */
     border-radius: 12px;
-    position: relative;
-    overflow: hidden;
-    
-    /* Dark Mode Frosted Glass Effect */
-    background: rgba(15, 23, 42, 0.6); 
-    backdrop-filter: blur(12px); 
-    -webkit-backdrop-filter: blur(12px);
-    
-    /* Neon Teal Edge Glow Burst */
+        background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), 
+                url('assets/Image_tech.png');
+    backdrop-filter: blur(10px);
     border: 1px solid rgba(45, 212, 191, 0.4);
-    box-shadow: 
-        0 0 30px rgba(13, 148, 136, 0.25),       /* Ambient outer aura */
-        inset 0 0 12px rgba(255, 255, 255, 0.05),  /* Minor inner surface reflection */
-        0 0 20px rgba(45, 212, 191, 0.35);         /* Crisp glowing trim */
+    display: flex;
+    justify-content: center; /* Centers the dynamic header in its box */
 }
+
+.header-main-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* This pushes the contact button to the far right */
+    gap: 8px;
+}
+
+/* Dynamic Header Title */
+#dynamic-header {
+    font-size: 2.5rem; /* Increased from 1.5rem for "Big" impact */
+    font-weight: 600;
+    color: #38bdf8;
+    margin: 0;
+    letter-spacing: 2px; /* Wider spacing makes it look longer */
+    text-transform: uppercase;
+    transition: opacity 0.5s ease-in-out, font-family 0.3s;
+    cursor: pointer;
+    display: inline-block;
+    min-height: 3rem;
+}
+
+/* Specific Font Classes - Add the glow to your states */
+.font-industrial { 
+    font-family: 'Rajdhani', sans-serif;
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.5); /* Soft blue glow */
+}
+
+.font-digital { 
+    font-family: 'Orbitron', sans-serif; 
+    text-shadow: 0 0 10px rgba(45, 212, 191, 0.6), 0 0 20px rgba(45, 212, 191, 0.3); /* Stronger teal sci-fi glow */
+}
+
+.font-security { 
+    font-family: 'Michroma', sans-serif; 
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 20px rgba(37, 99, 235, 0.5); /* White and blue futuristic glow */
+}
+
+@keyframes pulse-glow {
+    0%, 100% { text-shadow: 0 0 10px rgba(56, 189, 248, 0.5); }
+    50% { text-shadow: 0 0 20px rgba(56, 189, 248, 0.8); }
+}
+
+#dynamic-header {
+    animation: pulse-glow 3s infinite ease-in-out;
+}
+
 
 /* Left Side: Primary Brand Title */
 .header-brand {
@@ -85,21 +141,31 @@ body {
     flex: 1.5;
     text-align: left; 
     padding-left: 0;   
-    margin-top: 10px;
-    margin-bottom: 45px; /* Increased from 25px to create a spacious gap */
+    margin-top: 0px;
+    margin-bottom: 35px; 
+    flex: 2;
 }
+/* Elevate the name size */
 .header-identity h2 {
-    font-size: 2rem;
-    font-weight: 800;
-    color: #ffffff; /* Pure white name to stand out sharply */
-    margin: 0 0 4px 0;
+    font-size: 2.2rem;
+    font-family: 'Exo 2', sans-serif; 
+    color: #ffffff;
+    margin: 0;
     letter-spacing: 0.5px;
 }
+
+.header-identity h2 {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* Adjust the tagline */
 .header-identity .tagline {
-    font-size: 1rem;
-    color: #666;
-    margin: 0;
+    font-size: 1.1rem; /* Slightly larger for readability */
+    color: #94a3b8;
     font-style: italic;
+    margin: 0;
 }
 
 /* Right Side: Contact Information */
@@ -118,6 +184,43 @@ body {
 }
 .header-contact a:hover {
     text-decoration: underline;
+}
+
+/* Dropdown styling to match the Glass theme */
+.dropdown { 
+    position: relative; 
+    flex: 0 0 auto;
+    text-align: right;
+}
+.dropbtn {
+    margin-bottom: 60px;
+    background: rgba(45, 212, 191, 0.1);
+    color: #38bdf8;
+    border: 1px solid rgba(45, 212, 191, 0.4);
+    padding: 8px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Share Tech Mono', sans-serif;
+    z-index: 0;
+}
+.dropdown-content {
+    display: none; /* Hidden by default */
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: #0f172a;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(45, 212, 191, 0.4);
+    min-width: 300px;
+    z-index: 0;
+    margin-top: -55px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+/* This class is added by JS to show the menu */
+.dropdown-content.show {
+    display: block;
 }
 
 /* ==========================================================================
@@ -544,28 +647,42 @@ footer {
     }
 }
 
+.glow-glyph {
+    color: #3182ce; /* Matches your premium header blue */
+    text-shadow: 0 0 8px rgba(49, 130, 206, 0.8), 
+                 0 0 15px rgba(49, 130, 206, 0.4);
+    font-size: 1.2rem;
+    margin-right: 8px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
     </style>
 </head>
 <body>
 
 <div class="container">
-<header class="glass-header">
-    <div class="header-brand">
-        <h1>PRO-TRAIT STACK</h1>
+    <!-- Main Title Box -->
+    <header class="glass-header">
+        <h1 id="dynamic-header" class="font-pro-trait"></h1>
+    </header>
+
+    <!-- Sub-Header Alignment Wrapper -->
+    <div class="sub-header-wrapper">
+        <div class="header-identity">
+            <h2>John Va'afuti</h2>
+            <p class="tagline">Digital Architect & Site Security Operations Specialist</p>
+        </div>
+
+        <div class="dropdown">
+            <button class="dropbtn" onclick="toggleDropdown()">Contact ▾</button>
+            <div id="contactDropdown" class="dropdown-content">
+                <p><strong>Mobile:</strong> 021 293 2877</p>
+                <p><strong>Email:</strong> <a href="mailto:John.Vaafuti@gmail.com">John.Vaafuti@gmail.com</a></p>
+                <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/john-va-afuti-096233294" target="_blank">View Profile</a></p>
+            </div>
+        </div>
     </div>
-
-    <div class="header-contact">
-        <p><strong>Mobile:</strong> 021 293 2877</p>
-        <p><strong>Email:</strong> <a href="mailto:John.Vaafuti@gmail.com">John.Vaafuti@gmail.com</a></p>
-        <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/john-va-afuti-096233294" target="_blank">john-va-afuti-096233294</a></p>
-    </div>
-</header>
-
-<div class="header-identity">
-    <h2>JOHN VA’AFUTI</h2>
-    <p class="tagline">Digital Technology & Site Security Operations Specialist</p>
-</div>
-
     <section>
         <h2>Profile Statement</h2>
         <p class="profile-statement">Seeking professional companies, clients, and contracts to apply the skills, experience, and design aspects of my professional background. This document provides a brief outlook on my work history and the value I will bring to your business environment.</p>
@@ -835,7 +952,7 @@ footer {
         Thank you for taking the time to read this document. References, qualifications, and project demonstrations can be provided during an interview session.
     </footer>
 </div>
-
+</div>
 <script>
     function toggleAccordion(element) {
         const item = element.parentElement;
@@ -889,6 +1006,56 @@ function unlockSection(event, gateId, contentId, subjectText) {
         errorDiv.style.display = 'block';
         errorDiv.innerText = "Verification failed. Please ensure the file is hosted online (GitHub or Tiiny.host) to activate form handshakes.";
     });
+}
+</script>
+
+<script>
+const header = document.getElementById('dynamic-header');
+const states = [
+    { text: "PRO-TRAIT STACK", class: "font-industrial"},
+    { text: "DIGITAL ARCHITECT", class: "font-digital" },
+    { text: "SECURITY SPECIALIST", class: "font-security" }
+];
+
+let i = 0;
+
+function rotateHeader() {
+    header.style.opacity = 0;
+
+    setTimeout(() => {
+        i = (i + 1) % states.length;
+        header.innerText = states[i].text;
+        header.className = states[i].class;
+        header.style.opacity = 1;
+    }, 500);
+}
+
+// 1. Set the initial state immediately
+header.innerText = states[0].text;
+header.className = states[0].class;
+header.style.opacity = 1;
+
+// 2. Start the rotation
+setInterval(rotateHeader, 3000);
+</script>
+
+<script>
+// Corrected: Matches the id="contactDropdown" in your HTML
+function toggleDropdown() {
+    document.getElementById("contactDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.closest('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    for (var i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
 }
 </script>
 
