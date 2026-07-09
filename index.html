@@ -82,7 +82,6 @@ body {
 
 /* Dynamic Header Title */
 #dynamic-header {
-    font-size: 2.5rem; /* Increased from 1.5rem for "Big" impact */
     font-weight: 600;
     color: #38bdf8;
     margin: 0;
@@ -92,6 +91,7 @@ body {
     cursor: pointer;
     display: inline-block;
     min-height: 3rem;
+    animation: pulse-glow 3s infinite ease-in-out;
 }
 
 /* Specific Font Classes - Add the glow to your states */
@@ -114,11 +114,6 @@ body {
     0%, 100% { text-shadow: 0 0 10px rgba(56, 189, 248, 0.5); }
     50% { text-shadow: 0 0 20px rgba(56, 189, 248, 0.8); }
 }
-
-#dynamic-header {
-    animation: pulse-glow 3s infinite ease-in-out;
-}
-
 
 /* Left Side: Primary Brand Title */
 .header-brand {
