@@ -163,15 +163,21 @@ body {
     margin: 0;
 }
 
+/* ==========================================================================
+   CONTACT DROPDOWN CONTAINER
+   ========================================================================== */
 /* Right Side: Contact Information */
 .header-contact {
-    flex: 1;
-    text-align: right;
+    flex: 0 0 auto;
+    text-align: left;
+    margin-left: 50px;
+    
 }
 .header-contact p {
     margin: 4px 0;
     font-size: 0.95rem;
     color: #cbd5e1; /* Soft light grey text */
+    
 }
 .header-contact a {
     color: var(--accent-color);
@@ -185,8 +191,9 @@ body {
 .dropdown { 
     position: relative; 
     flex: 0 0 auto;
-    font-family: 'Exo 2', sans-serif; 
     text-align: right;
+    font-family: 'Exo 2', sans-serif; 
+    font-size: 0.95rem;
 }
 .dropbtn {
     margin-bottom: 60px;
@@ -208,7 +215,7 @@ body {
     padding: 15px;
     border-radius: 8px;
     border: 1px solid rgba(45, 212, 191, 0.4);
-    min-width: 300px;
+    min-width: 250px;
     z-index: 0;
     margin-top: -55px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.5);
@@ -218,6 +225,7 @@ body {
 .dropdown-content.show {
     display: block;
 }
+
 
 /* ==========================================================================
    Section Layouts & General Typography
