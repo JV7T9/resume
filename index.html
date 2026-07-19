@@ -759,6 +759,21 @@ footer {
     border-left: 3px solid #38bdf8;
     border-radius: 0 0 6px 6px;
     margin-top: 4px;
+    overflow-y: auto; /* enables vertical scrolling */
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #38bdf8 #0f172a; /* thumb + track */
+}
+.trait-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.trait-body::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+
+.trait-body::-webkit-scrollbar-thumb {
+    background-color: #38bdf8;
+    border-radius: 10px;
 }
 
 .trait-body.open {
@@ -780,6 +795,12 @@ footer {
 .trait-body ul {
     margin-left: 28px;
     padding-left: 12px;
+}
+
+@media (max-width: 768px) {
+    .trait-body.open {
+        max-height: 400px; /* scroll inside dropdown */
+    }
 }
 
     </style>
