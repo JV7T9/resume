@@ -126,6 +126,42 @@ body {
     width: 100%;
     text-align: center;
 }
+/* Sliding Header Container */
+#sliding-header {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    padding: 10px 0;
+}
+
+/* Sliding Track */
+.sliding-track {
+    display: inline-flex;
+    gap: 60px; /* spacing between titles */
+    animation: slideLoop 18s linear infinite;
+}
+
+/* Header Text Style */
+.sliding-track span {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #38bdf8; /* neon cyan */
+    text-shadow: 
+        0 0 10px rgba(56, 189, 248, 0.5),
+        0 0 20px rgba(56, 189, 248, 0.3);
+}
+
+/* Animation */
+@keyframes slideLoop {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
 
 /* ==========================================================================
    MAIN ROTATING HEADER (dynamic-header)
@@ -940,9 +976,21 @@ footer {
     </video>
 
     <!-- Main Title Box -->
-    <header class="glass-header">
-        <h1 id="dynamic-header" class="font-pro-trait"></h1>
-    </header>
+<header class="glass-header">
+    <div id="sliding-header">
+        <div class="sliding-track">
+            <span>PRO‑TRAIT STACK</span>
+            <span>CURRICULUM VITAE</span>
+            <span>PORT‑FOLIO</span>
+
+            <!-- Repeat for seamless looping -->
+            <span>PRO‑TRAIT STACK</span>
+            <span>CURRICULUM VITAE</span>
+            <span>PORT‑FOLIO</span>
+        </div>
+    </div>
+</header>
+
 
 <div id="overlay-panel"></div>
 
@@ -1905,39 +1953,6 @@ function unlockSection(event, gateId, contentId, subjectText) {
         errorDiv.innerText = "Verification failed. Please ensure the file is hosted online (GitHub or Tiiny.host) to activate form handshakes.";
     });
 }
-</script>
-
-<script>
-// ===============================
-// ROTATING MAIN HEADER TEXT
-// ===============================
-const header = document.getElementById('dynamic-header');
-const mainStates = [
-    { text: "PRO-TRAIT STACK", class: "font-industrial"},
-    { text: "CURRICULUM VITAE", class: "font-digital" },
-    { text: "PORT-FOLIO", class: "font-security" }
-];
-
-let mainIndex = 0;
-
-function rotateMainHeader() {
-    header.style.opacity = 0;
-
-    setTimeout(() => {
-        mainIndex = (mainIndex + 1) % mainStates.length;
-        header.innerText = mainStates[mainIndex].text;
-        header.className = mainStates[mainIndex].class;
-        header.style.opacity = 1;
-    }, 500);
-}
-
-// Initial state
-header.innerText = mainStates[0].text;
-header.className = mainStates[0].class;
-header.style.opacity = 1;
-
-// Start rotation
-setInterval(rotateMainHeader, 2500);
 </script>
 
 <script>
