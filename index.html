@@ -30,13 +30,14 @@ body {
     line-height: 1.6;
     color: #e2e8f0; /* Crisp slate white for excellent readability on dark backgrounds */
     background-color: #1e293c; /* Sleek gunmetal base */
-    padding: 40px 20px;
+    padding: 25px 10px;
     overflow-y: auto;
     overflow-x: hidden; 
     height: 100vh;
 }
 
 .container {
+    min-height: 700px;
     position: relative;
     overflow: hidden;
     max-width: 900px;
@@ -53,10 +54,10 @@ body {
     position: absolute;
     top: 0;
     right: 0; /* aligns video to the right side */
-    width: 100%;
-    height: 100%;
+    width: 125%;
+    height: 115%;
     object-fit: cover;
-    opacity: 0.25; /* subtle visibility */
+    opacity: 1.00; /* subtle visibility */
     z-index: -1; /* behind content */
 }
 
@@ -78,18 +79,30 @@ body {
     width: 100%;             /* Ensure it fills the container */
     gap: 20px;               /* Add space between text and button */
 }
+
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -2;
+    pointer-events: none;
+}
+
 /* ==========================================================================
    GLOWING MIRROR HEADER BOX (UPDATED)
    ========================================================================== */
 .glass-header {
-    padding: 28px 32px;
+    padding: 15px 32px;
     margin-bottom: 30px;
     border-radius: 14px;
 
     background: linear-gradient(
         rgba(15, 23, 42, 0.88),
         rgba(15, 23, 42, 0.88)
-    ), url('assets/Image_tech.png');
+    ), url('Image_tech.png');
 
     background-size: cover;
     background-position: center;
@@ -100,6 +113,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 10;
 
     text-shadow: 0 0 12px rgba(56, 189, 248, 0.55);
 }
@@ -204,7 +218,7 @@ body {
    ========================================================================== */
 .header-identity { 
     text-align: left;
-    margin-top: -20px; 
+    margin-top: 0px; 
     margin-bottom: 45px;
     padding-left: 4px;
 }
@@ -555,8 +569,8 @@ td em, td i {
 
 footer {
     margin-top: 40px;
-    text-align: center;
-    font-size: 0.85rem;
+    text-align: left;
+    font-size: 0.80rem;
     font-family: 'Michroma', sans-serif;
     border-top: 1px solid var(--border-color);
     padding-top: 20px;
@@ -730,7 +744,7 @@ footer {
     display: block;
 }
 
-        .dropdown-header:hover {
+.dropdown-header:hover {
     color: #7dd3fc; /* brighter neon */
     text-shadow: 0 0 6px #7dd3fc, 0 0 12px #38bdf8;
 }
@@ -833,6 +847,73 @@ footer {
     }
 }
 
+
+
+/* ==========================================================================
+   NEW DROPDOWN PANEL STYLING
+   ========================================================================== */
+:root {
+    --header-bottom: 120px;     /* adjust to match your header height */
+    --footer-height: 50px;      /* adjust to match your footer height */
+}
+
+
+@media (min-width: 900px) {
+    #overlay-panel {
+        position: absolute;
+        top: var(--header-bottom);
+        right: 0;
+        width: 60%;
+        height: calc(100vh - var(--header-bottom) - var(--footer-height));
+        overflow-y: auto;
+        background: transparent;
+        border-left: 1px solid rgba(56, 189, 248, 0.3);
+        padding: 20px;
+        display: none;
+        z-index: 10;
+        animation: fadeGlideRight 0.45s ease forwards;
+    }
+}
+
+
+@keyframes fadeGlideRight {
+    0% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+@media (max-width: 899px) {
+    #overlay-panel {
+        display: none !important;
+    }
+}
+
+/* Overlay Panel Scrollbar */
+#overlay-panel::-webkit-scrollbar {
+    width: 8px;
+}
+
+#overlay-panel::-webkit-scrollbar-track {
+    background: transparent; /* invisible track */
+}
+
+#overlay-panel::-webkit-scrollbar-thumb {
+    background: rgba(56, 189, 248, 0.15); /* faint neon ghost */
+    border-radius: 4px;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+#overlay-panel::-webkit-scrollbar-thumb:hover {
+    background: rgba(56, 189, 248, 0.35); /* brighter neon */
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.6); /* neon glow */
+}
+
     </style>
 </head>
 <body>
@@ -840,13 +921,16 @@ footer {
 <div class="container">
 
     <video autoplay muted loop playsinline class="container-video">
-        <source src="assets/Cube04.mp4" type="video/mp4">
+        <source src="Cube04.mp4" type="video/mp4">
     </video>
+
 
     <!-- Main Title Box -->
     <header class="glass-header">
         <h1 id="dynamic-header" class="font-pro-trait"></h1>
     </header>
+
+<div id="overlay-panel"></div>
 
 <!-- Sub-Header Alignment Wrapper -->
 <div class="sub-header-wrapper">
@@ -862,49 +946,48 @@ footer {
 
 
 <div class="dropdown-block">
-    <button class="dropdown-header" onclick="toggleSectionDropdown(this)">
-        Profile Statement ▾
-    </button>
-
-    <div class="dropdown-body">
-
-        <!-- Profile Statement -->
-        <section>
-            
-            <p class="profile-statement">
-                As the professional landscape transmutes into a dynamic field of complex operational systems, businesses require a high-fidelity, adaptive approach to maintain an edge.
-                My background sits at the intersection of these shifts, blending Operational Security and Digital Architecture to provide full-scale productivity implementation, robust maintenance, and developmental continuity.
-                Navigating how to design systems that evolve with their environments, ensuring coherence, resilience, and emergent intelligence across every operational layers is an ongoing commitment.
-            </p>
-        </section>
-
-        <!-- Digital Intelligence -->
-        <section class="grid-2">
-            <div class="card">
-                <h3>Digital Intelligence</h3>
-                <p style="font-size: 0.9rem; text-align: justify;">
-                    Recently graduated with a 2025 Diploma in Digital Technology, my experience spans IT Networks and Technical Support,
-                    Website Design and Architecture, UX/UI, AI Engine development, and Database Systems.
-                    I am currently architecting a novel form of code intelligence engine designed to confront and stabilize the phenomena
-                    of hallucination and cognitive drift.
-                </p>
-            </div>
-
-            <!-- Site Security Ops Specialist -->
-            <div class="card">
-                <h3>Site Security Ops Specialist</h3>
-                <ul>
-                    <li>Forming full-scale site security operations</li>
-                    <li>Design & build of operational security workstations</li>
-                    <li>Access Management, Surveillance & Data-storage Systems</li>
-                    <li>Security Administration, Field Operations & Solutions</li>
-                    <li>OHS, risk procedures, and protocol compliance training</li>
-                </ul>
-            </div>
-        </section>
-
-    </div>
+    <button class="dropdown-header" onclick="openPanel('profile')">Profile Statement</button>
 </div>
+
+<!-- Hidden content for overlay panel -->
+<div id="profile" class="panel-content" style="display:none;">
+
+    <!-- Profile Statement -->
+    <section>
+        <p class="profile-statement">
+            As the professional landscape transmutes into a dynamic field of complex operational systems, businesses require a high-fidelity, adaptive approach to maintain an edge.
+            My background sits at the intersection of these shifts, blending Operational Security and Digital Architecture to provide full-scale productivity implementation, robust maintenance, and developmental continuity.
+            Navigating how to design systems that evolve with their environments, ensuring coherence, resilience, and emergent intelligence across every operational layers is an ongoing commitment.
+        </p>
+    </section>
+
+    <!-- Digital Intelligence -->
+    <section class="grid-2">
+        <div class="card">
+            <h3>Digital Intelligence</h3>
+            <p style="font-size: 0.9rem; text-align: justify;">
+                Recently graduated with a 2025 Diploma in Digital Technology, my experience spans IT Networks and Technical Support,
+                Website Design and Architecture, UX/UI, AI Engine development, and Database Systems.
+                I am currently architecting a novel form of code intelligence engine designed to confront and stabilize the phenomena
+                of hallucination and cognitive drift.
+            </p>
+        </div>
+
+        <!-- Site Security Ops Specialist -->
+        <div class="card">
+            <h3>Site Security Ops Specialist</h3>
+            <ul>
+                <li>Forming full-scale site security operations</li>
+                <li>Design & build of operational security workstations</li>
+                <li>Access Management, Surveillance & Data-storage Systems</li>
+                <li>Security Administration, Field Operations & Solutions</li>
+                <li>OHS, risk procedures, and protocol compliance training</li>
+            </ul>
+        </div>
+    </section>
+
+</div>
+
 
 
 <div class="dropdown-block">
@@ -1672,12 +1755,13 @@ footer {
                 <p><strong>Email:</strong> <a href="mailto:John.Vaafuti@gmail.com">John.Vaafuti@gmail.com</a></p>
                 <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/john-va-afuti-096233294" target="_blank">View Profile</a></p>
 
+    <footer>
+        Thank you for thoroghly reading this through, your time is much appreciated.<p>References, qualifications, and project demonstrations can be provided during an interview session.</p>
+    </footer>
     </div>
 </div>
 
-    <footer>
-        Thank you for taking the time to read this document. References, qualifications, and project demonstrations can be provided during an interview session.
-    </footer>
+
 </div>
 </div>
 
@@ -1887,9 +1971,43 @@ function toggleTrait(button) {
     body.classList.toggle('open');
     button.classList.toggle('open');
 }
-
-
 </script>
+
+<script>
+let currentPanel = null; // track which panel is open
+
+function openPanel(id) {
+    const panel = document.getElementById("overlay-panel");
+
+    // CASE 1: Panel is open AND user clicked the same header → close it
+    if (currentPanel === id && panel.style.display === "block") {
+        panel.style.display = "none";
+        currentPanel = null;
+        return;
+    }
+
+    // CASE 2: Panel is open AND user clicked a different header → close then reopen
+    if (panel.style.display === "block" && currentPanel !== id) {
+        panel.style.display = "none";
+    }
+
+    // Load new content
+    const content = document.getElementById(id).innerHTML;
+    panel.innerHTML = content;
+
+    // Show panel
+    panel.style.display = "block";
+
+    // Reset animation so it plays every time
+    panel.style.animation = "none";
+    void panel.offsetWidth; // force reflow
+    panel.style.animation = "fadeGlideRight 0.45s ease forwards";
+
+    // Track which panel is open
+    currentPanel = id;
+}
+</script>
+
 
 </body>
 </html>
