@@ -731,16 +731,19 @@ footer {
 
 .trait-header {
     width: 100%;
-    background: #1e293b;
-    color: #fff;
-    padding: 10px 14px;
-    border: none;
     text-align: left;
+    background: rgba(30, 41, 59, 0.55);
+    color: #38bdf8;
     font-family: 'Exo 2', sans-serif;
     font-size: 1rem;
+
+    padding: 8px 12px;        /* thinner */
+    margin-bottom: 6px;       /* tighter spacing */
+    border-radius: 6px;       /* slightly smaller */
+    border: 1px solid rgba(56, 189, 248, 0.25); /* thinner border */
+
     cursor: pointer;
-    border-radius: 6px;
-    transition: background 0.2s;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 .trait-header:hover {
