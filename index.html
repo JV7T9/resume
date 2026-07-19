@@ -715,8 +715,46 @@ footer {
     text-justify: auto;
 }
 
+/* ==========================================================================
+   KEY TRAITS ACCORDIAN & CONTENT STYLING
+   ========================================================================== */        
 .dropdown-open .dropdown-body {
     display: block;
+}
+
+.traits-accordion {
+    margin-top: 10px;
+}
+
+.trait-item {
+    margin-bottom: 8px;
+}
+
+.trait-header {
+    width: 100%;
+    background: #1e293b;
+    color: #fff;
+    padding: 10px 14px;
+    border: none;
+    text-align: left;
+    font-family: 'Exo 2', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.trait-header:hover {
+    background: #334155;
+}
+
+.trait-body {
+    display: none;
+    padding: 10px 14px;
+    background: #0f172a;
+    border-left: 3px solid #38bdf8;
+    border-radius: 0 0 6px 6px;
+    margin-top: 4px;
 }
 
     </style>
@@ -801,16 +839,72 @@ footer {
     <div class="dropdown-body">
 
         <section>
+<div class="traits-accordion">
 
-            <div class="tag-container">
-                <span class="tag">Digital Technology / Software & Hardware</span>
-                <span class="tag">Site Security Operations & Management</span>
-                <span class="tag">Systems Administration & Database</span>
-                <span class="tag">Risk Management, Assessment & Solutions</span>
-                <span class="tag">Access Management & Systems Surveillance Technology</span>
-                <span class="tag">Interpersonal Interaction & Communication</span>
-                <span class="tag">Infrastructure Works / Construction & Design</span>
-            </div>
+    <div class="trait-item">
+        <button class="trait-header" onclick="toggleTrait(this)">
+            Digital Technology / Software & Hardware ▾
+        </button>
+        <div class="trait-body">
+            <p>Content coming soon...</p>
+        </div>
+    </div>
+
+    <div class="trait-item">
+        <button class="trait-header" onclick="toggleTrait(this)">
+            Site Security Operations & Management ▾
+        </button>
+        <div class="trait-body">
+            <p>Content coming soon...</p>
+        </div>
+    </div>
+
+    <div class="trait-item">
+        <button class="trait-header" onclick="toggleTrait(this)">
+            Systems Administration & Database ▾
+        </button>
+        <div class="trait-body">
+            <p>Content coming soon...</p>
+        </div>
+    </div>
+
+    <div class="trait-item">
+        <button class="trait-header" onclick="toggleTrait(this)">
+            Risk Management, Assessment & Solutions ▾
+        </button>
+        <div class="trait-body">
+            <p>Content coming soon...</p>
+        </div>
+    </div>
+
+    <div class="trait-item">
+        <button class="trait-header" onclick="toggleTrait(this)">
+            Access Management & Systems Surveillance Technology ▾
+        </button>
+        <div class="trait-body">
+            <p>Content coming soon...</p>
+        </div>
+    </div>
+
+    <div class="trait-item">
+        <button class="trait-header" onclick="toggleTrait(this)">
+            Interpersonal Interaction & Communication ▾
+        </button>
+        <div class="trait-body">
+            <p>Content coming soon...</p>
+        </div>
+    </div>
+
+    <div class="trait-item">
+        <button class="trait-header" onclick="toggleTrait(this)">
+            Infrastructure Works / Construction & Design ▾
+        </button>
+        <div class="trait-body">
+            <p>Content coming soon...</p>
+        </div>
+    </div>
+
+</div>
         </section>
 
     </div>
@@ -1242,7 +1336,26 @@ window.onclick = function(event) {
     }
 }
 </script>
+    
+<script>
+// ===============================
+// KEY TRAITS ACCORDIAN
+// ===============================
+function toggleTrait(btn) {
+    const item = btn.parentElement;
+    const body = item.querySelector('.trait-body');
 
+    // Auto-close other trait dropdowns
+    document.querySelectorAll('.trait-body').forEach(other => {
+        if (other !== body) {
+            other.style.display = 'none';
+        }
+    });
+
+    // Toggle this one
+    body.style.display = (body.style.display === 'block') ? 'none' : 'block';
+}
+</script>
 
 </body>
 </html>
