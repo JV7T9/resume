@@ -36,16 +36,38 @@ body {
 }
 
 .container {
+    position: relative;
+    overflow: hidden;
     max-width: 900px;
-    margin: -25px auto;
-    margin-bottom: 10px;
-    background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), 
-                url('assets/RSG.jpg');
-    
-    padding: 30px 30px; 
+    margin: -25px auto 10px auto;
+    padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+    box-shadow: 
+        0 20px 25px -5px rgba(0, 0, 0, 0.3),
+        0 10px 10px -5px rgba(0, 0, 0, 0.2);
 }
+
+/* Video background */
+.container-video {
+    position: absolute;
+    top: 0;
+    right: 0; /* aligns video to the right side */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.25; /* subtle visibility */
+    z-index: -1; /* behind content */
+}
+
+/* Gradient overlay */
+.container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85));
+    z-index: -1;
+}
+
 
 .sub-header-wrapper {
     display: flex;
@@ -777,6 +799,9 @@ footer {
 <body>
 
 <div class="container">
+    <video autoplay muted loop playsinline class="container-video">
+        <source src="assets/Cube.mp4" type="video/mp4">
+    </video>
     <!-- Main Title Box -->
     <header class="glass-header">
         <h1 id="dynamic-header" class="font-pro-trait"></h1>
