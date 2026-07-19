@@ -54,7 +54,7 @@ body {
     position: absolute;
     top: 0;
     right: 0; /* aligns video to the right side */
-    width: 125%;
+    width: 115%;
     height: 115%;
     object-fit: cover;
     opacity: 1.00; /* subtle visibility */
@@ -857,6 +857,21 @@ footer {
     --footer-height: 50px;      /* adjust to match your footer height */
 }
 
+.dropdown-header {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* space between text and chevron */
+    cursor: pointer;
+}
+
+.dropdown-header .chevron {
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.dropdown-header.active .chevron {
+    transform: rotate(-90deg); /* points right */
+}
 
 @media (min-width: 900px) {
     #overlay-panel {
@@ -924,7 +939,6 @@ footer {
         <source src="assets/Cube04.mp4" type="video/mp4">
     </video>
 
-
     <!-- Main Title Box -->
     <header class="glass-header">
         <h1 id="dynamic-header" class="font-pro-trait"></h1>
@@ -945,9 +959,10 @@ footer {
 
 
 
-<div class="dropdown-block">
-    <button class="dropdown-header" onclick="openPanel('profile')">Profile Statement</button>
-</div>
+<button class="dropdown-header" onclick="openPanel('profile', this)">
+    <span class="title">Profile Statement</span>
+    <span class="chevron">▾</span>
+</button>
 
 <!-- Hidden content for overlay panel -->
 <div id="profile" class="panel-content" style="display:none;">
@@ -1973,22 +1988,38 @@ function toggleTrait(button) {
 }
 </script>
 
+// ===============================
+// NEW PANELS LOGIC
+// ===============================
 <script>
-let currentPanel = null; // track which panel is open
+let currentPanel = null;
+let currentHeader = null;
 
-function openPanel(id) {
+function openPanel(id, headerBtn) {
     const panel = document.getElementById("overlay-panel");
 
-    // CASE 1: Panel is open AND user clicked the same header → close it
+    // CASE 1: Same header clicked → close panel
     if (currentPanel === id && panel.style.display === "block") {
         panel.style.display = "none";
+
+        // Reset chevron
+        if (currentHeader) {
+            currentHeader.classList.remove("active");
+        }
+
         currentPanel = null;
+        currentHeader = null;
         return;
     }
 
-    // CASE 2: Panel is open AND user clicked a different header → close then reopen
+    // CASE 2: Different header clicked → close old panel
     if (panel.style.display === "block" && currentPanel !== id) {
         panel.style.display = "none";
+
+        // Reset previous chevron
+        if (currentHeader) {
+            currentHeader.classList.remove("active");
+        }
     }
 
     // Load new content
@@ -1998,15 +2029,20 @@ function openPanel(id) {
     // Show panel
     panel.style.display = "block";
 
-    // Reset animation so it plays every time
+    // Animation replay
     panel.style.animation = "none";
-    void panel.offsetWidth; // force reflow
+    void panel.offsetWidth;
     panel.style.animation = "fadeGlideRight 0.45s ease forwards";
 
-    // Track which panel is open
+    // Activate new chevron
+    headerBtn.classList.add("active");
+
+    // Track active panel + header
     currentPanel = id;
+    currentHeader = headerBtn;
 }
 </script>
+
 
 
 </body>
