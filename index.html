@@ -711,7 +711,7 @@ footer {
     </header>
 
         <div class="dropdown">
-            <button class="dropbtn" onclick="toggleDropdown()">Contact ▾</button>
+            <button class="dropbtn" onclick="toggleContactDropdown(event)">Contact ▾</button>
             <div id="contactDropdown" class="dropdown-content">
                 <p><strong>Mobile:</strong> 021 293 2877</p>
                 <p><strong>Email:</strong> <a href="mailto:John.Vaafuti@gmail.com">John.Vaafuti@gmail.com</a></p>
@@ -1206,7 +1206,8 @@ setInterval(rotateHeader, 2000);
 // ===============================
 // CONTACT DROPDOWN (SEPARATE LOGIC)
 // ===============================
-function toggleContactDropdown() {
+function toggleContactDropdown(event) {
+    event.stopPropagation(); // prevents window.onclick from firing
     document.getElementById("contactDropdown").classList.toggle("show");
 }
 
