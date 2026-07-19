@@ -39,8 +39,8 @@ body {
     max-width: 900px;
     margin: -25px auto;
     margin-bottom: 10px;
-    background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)),
-            url('assets/RSG.jpg');
+    background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), 
+                url('RSG.jpg');
     
     padding: 30px 30px; 
     border-radius: 12px;
@@ -66,13 +66,13 @@ body {
     background: linear-gradient(
         rgba(15, 23, 42, 0.88),
         rgba(15, 23, 42, 0.88)
-    ), url('assets/Image_tech.png');
+    ), url('Image_tech.png');
 
     background-size: cover;
     background-position: center;
 
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(45, 212, 191, 0.35);
+    border: 0px solid rgba(45, 212, 191, 0.35);
 
     display: flex;
     justify-content: center;
@@ -107,22 +107,7 @@ body {
 
     animation: pulse-glow 3s infinite ease-in-out;
 }
-        
-/* INDUSTRIAL — PRO-TRAIT STACK */
-.font-industrial { 
-    font-family: 'Michroma', sans-serif; 
-    font-size: 2rem; /* adjust this */
-    text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
-}
 
-/* DIGITAL — DIGITAL ARCHITECT */
-.font-digital { 
-    font-family: 'Orbitron', sans-serif; 
-    font-size: 2rem; /* adjust this */
-    text-shadow: 
-        0 0 10px rgba(45, 212, 191, 0.6),
-        0 0 20px rgba(45, 212, 191, 0.3);
-}
 
 /* ==========================================================================
    FONT CLASSES (UPDATED SIZES)
@@ -153,6 +138,21 @@ body {
         0 0 22px rgba(37, 99, 235, 0.55);
 }
 
+@keyframes pulse-glow {
+    0%, 100% { text-shadow: 0 0 10px rgba(56, 189, 248, 0.5); }
+    50% { text-shadow: 0 0 20px rgba(56, 189, 248, 0.8); }
+}
+
+
+/* Left Side: Primary Brand Title */
+.header-brand {
+    flex-direction: grid;
+    flex: 1;
+    text-align: left;
+    margin-top: -50px;
+    z-index: 10;
+}
+
 /* Left Side: Primary Brand Title */
 .header-brand h1 {
     font-family: 'Biome', sans-serif;
@@ -164,28 +164,31 @@ body {
     text-transform: uppercase;
 }
 
-/* Center Section: Your Identity */
+/* ==========================================================================
+   IDENTITY HEADER BLOCK (UPDATED FOR ROTATING HEADER + TAGLINE)
+   ========================================================================== */
 .header-identity { 
     text-align: left;
-    margin-top: -100px;
-    margin-bottom: 35px;
+    margin-top: -20px; 
+    margin-bottom: 45px;
+    padding-left: 4px;
 }
 
-/* Elevate the name size */
+/* Main rotating header (dynamic-header) */
 .header-identity h2 {
-    text-align: left;
-    font-size: 2.2rem;
-    font-family: 'Exo 2', sans-serif; 
+    font-size: 2.4rem;
+    font-family: 'Exo 2', sans-serif;
     color: #ffffff;
-    margin: 5px;
-    letter-spacing: 0.5px;
+    margin: 0;
+    letter-spacing: 1px;
+    transition: opacity 0.1s ease;
 }
 
+/* Remove unwanted inherited styles */
 .header-identity h2 {
-    text-align: left;
     border-bottom: none !important;
     padding-bottom: 0 !important;
-    margin-bottom: 0 !important;
+    margin-bottom: 4px !important;
 }
 
 .header-identity .tagline {
@@ -202,70 +205,10 @@ body {
     text-shadow: 0 0 14px rgba(56, 189, 248, 0.65);
 }
 
-/* ==========================================================================
-   CONTACT DROPDOWN CONTAINER
-   ========================================================================== */
-/* Right Side: Contact Information */
-.header-contact {
-    flex: 0 0 auto;
-    text-align: left;
-}
-
-.header-contact p {
-    margin: 4px 0;
-    font-size: 0.95rem;
-    color: #cbd5e1; /* Soft light grey text */
-    
-}
-.header-contact a {
-    color: var(--accent-color);
-    text-decoration: none;
-}
-.header-contact a:hover {
-    text-decoration: underline;
-}
-
-/* Dropdown styling to match the Glass theme */
-.dropdown { 
-    position: relative; 
-    flex: 0 0 auto;
-    text-align: right;
-    font-family: 'Exo 2', sans-serif; 
-    font-size: 0.85rem;
-}
-
-.dropbtn {
-    margin-bottom: 60px;
-    background: rgba(45, 212, 191, 0.1);
-    color: #38bdf8;
-    border: 0px solid rgba(45, 212, 191, 0.4);
-    padding: 8px 25px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-family: 'Share Tech Mono', sans-serif;
-    height: 30px; /* Changed from 50px */
-    line-height: 0px; /* Ensure text is centered vertically */
-    z-index: 10;
-}
-
-.dropdown-content {
-    display: none; /* Hidden by default */
-    position: absolute;
-    right: 0;
-    top: 100%;
-    background: #0f172a;
-    padding: 10px;
-    border-radius: 8px;
-    border: 0px solid rgba(45, 212, 191, 0.4);
-    min-width: 250px;
-    z-index: 10;
-    margin-top: -55px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-}
-
-/* This class is added by JS to show the menu */
-.dropdown-content.show {
-    display: block;
+/* Optional: subtle glow when rotating */
+.header-identity h2.glow,
+.header-identity .tagline.glow {
+    text-shadow: 0 0 8px rgba(56, 189, 248, 0.35);
 }
 
 
@@ -711,17 +654,17 @@ footer {
    SECTION DROPDOWNS STYLING
    ========================================================================== */
 .dropdown-block {
-    margin: 15px 0;
-    border: 1px solid #333;
+    margin: 0px 0;
+    border: 0px solid #333;
     border-radius: 6px;
-    background: rgba(20, 20, 20, 0.6);
+    background: transparent;
     backdrop-filter: blur(6px);
 }
 
 .dropdown-header {
     width: 100%;
     padding: 10px 10px;
-    background: var(--primary-color);
+    background: transparent;
     color: #fff;
     font-size: 1.1rem;
     text-align: left;
@@ -735,7 +678,7 @@ footer {
 .dropdown-body {
     display: none;
     padding: 15px 20px;
-    background: rgba(10, 10, 10, 0.7);
+    background: transparent;
     border-top: 1px solid #444;
     text-align: left;
     text-justify: auto;
@@ -839,22 +782,17 @@ footer {
         <h1 id="dynamic-header" class="font-pro-trait"></h1>
     </header>
 
-        <div class="dropdown">
-            <button class="dropbtn" onclick="toggleContactDropdown(event)">Contact ▾</button>
-            <div id="contactDropdown" class="dropdown-content">
-                <p><strong>Mobile:</strong> 021 293 2877</p>
-                <p><strong>Email:</strong> <a href="mailto:John.Vaafuti@gmail.com">John.Vaafuti@gmail.com</a></p>
-                <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/john-va-afuti-096233294" target="_blank">View Profile</a></p>
-            </div>
-        </div>
+<!-- Sub-Header Alignment Wrapper -->
+<div class="sub-header-wrapper">
+    <div class="header-identity">
+        <h2>John Va'afuti</h2>
 
-    <!-- Sub-Header Alignment Wrapper -->
-    <div class="sub-header-wrapper">
-        <div class="header-identity">
-            <h2>John Va'afuti</h2>
-            <span class="tagline">Digital Architecture | Site Security Ops | Engineering</span>
-        </div>
+        <p class="tagline">
+            <span id="tagline-rotate">Digital Architecture</span>
+        </p>
     </div>
+</div>
+
 
 
 <div class="dropdown-block">
@@ -1637,6 +1575,40 @@ footer {
 </div>
 
 
+<!-- Projects & Development -->
+<div class="dropdown-block">
+    <button class="dropdown-header" onclick="toggleSectionDropdown(this)">
+        Projects & Development ▾
+    </button>
+
+    <div class="dropdown-body">
+        <ul>
+            <li>ARC — AI-Native Cognitive Architecture</li>
+            <li>DTSIM — Investigative Simulation Engine</li>
+            <li>Cognition Flex — Adaptive Cognitive Pipeline</li>
+            <li>Horizons — Multi-Vector Conceptual Framework</li>
+            <li>QMLI — Quantum-Mapped Logic Interface</li>
+            <li>NeuroSync Nexus — Multi-Emergent Resonance System</li>
+            <li>Fabrication Projects — Workstation Builds & Structural Mounts</li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- Contact -->
+<div class="dropdown-block">
+    <button class="dropdown-header" onclick="toggleSectionDropdown(this)">
+        Contact ▾
+    </button>
+
+    <div class="dropdown-body">
+                <p><strong>Mobile:</strong> 021 293 2877</p>
+                <p><strong>Email:</strong> <a href="mailto:John.Vaafuti@gmail.com">John.Vaafuti@gmail.com</a></p>
+                <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/john-va-afuti-096233294" target="_blank">View Profile</a></p>
+
+    </div>
+</div>
+
     <footer>
         Thank you for taking the time to read this document. References, qualifications, and project demonstrations can be provided during an interview session.
     </footer>
@@ -1728,36 +1700,78 @@ function unlockSection(event, gateId, contentId, subjectText) {
 
 <script>
 // ===============================
-// ROTATING HEADER TEXT
+// ROTATING MAIN HEADER TEXT
 // ===============================
 const header = document.getElementById('dynamic-header');
-const states = [
+const mainStates = [
     { text: "PRO-TRAIT STACK", class: "font-industrial"},
-    { text: "DIGITAL ARCHITECT", class: "font-digital" },
-    { text: "Site Security OPS Specialist", class: "font-security" }
+    { text: "CURRICULUM VITAE", class: "font-digital" },
+    { text: "PORT-FOLIO", class: "font-security" }
 ];
 
-let i = 0;
+let mainIndex = 0;
 
-function rotateHeader() {
+function rotateMainHeader() {
     header.style.opacity = 0;
 
     setTimeout(() => {
-        i = (i + 1) % states.length;
-        header.innerText = states[i].text;
-        header.className = states[i].class;
+        mainIndex = (mainIndex + 1) % mainStates.length;
+        header.innerText = mainStates[mainIndex].text;
+        header.className = mainStates[mainIndex].class;
         header.style.opacity = 1;
     }, 500);
 }
 
 // Initial state
-header.innerText = states[0].text;
-header.className = states[0].class;
+header.innerText = mainStates[0].text;
+header.className = mainStates[0].class;
 header.style.opacity = 1;
 
 // Start rotation
-setInterval(rotateHeader, 2000);
+setInterval(rotateMainHeader, 2500);
 </script>
+
+<script>
+// ===============================
+// ROTATING TAGLINE TEXT
+// ===============================
+const tagline = document.getElementById('tagline-rotate');
+const taglineStates = [
+    "Digital Architecture",
+    "Site Security Ops",
+    "Engineering"
+];
+
+let taglineIndex = 0;
+
+function rotateTagline() {
+    // Fade out
+    tagline.style.opacity = 0;
+
+    setTimeout(() => {
+        // Update text
+        taglineIndex = (taglineIndex + 1) % taglineStates.length;
+        tagline.innerText = taglineStates[taglineIndex];
+
+        // Fade in
+        tagline.style.opacity = 1;
+
+        // Glow pulse
+        tagline.classList.add("glow");
+        setTimeout(() => tagline.classList.remove("glow"), 500);
+
+    }, 500);
+}
+
+// Initial state
+tagline.innerText = taglineStates[0];
+tagline.style.opacity = 1;
+
+// Start rotation
+setInterval(rotateTagline, 3000);
+</script>
+
+
 
 <script>
 // ===============================
@@ -1807,7 +1821,9 @@ function toggleTrait(button) {
     body.classList.toggle('open');
     button.classList.toggle('open');
 }
+
+
 </script>
-    
+
 </body>
 </html>
