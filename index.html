@@ -31,7 +31,8 @@ body {
     color: #e2e8f0; /* Crisp slate white for excellent readability on dark backgrounds */
     background-color: #1e293c; /* Sleek gunmetal base */
     padding: 40px 20px;
-    overflow-y: auto; 
+    overflow-y: auto;
+    overflow-x: hidden; 
     height: 100vh;
 }
 
@@ -39,7 +40,7 @@ body {
     position: relative;
     overflow: hidden;
     max-width: 900px;
-    margin: -25px auto 10px auto;
+    margin: -15px auto 10px auto;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 
@@ -88,7 +89,7 @@ body {
     background: linear-gradient(
         rgba(15, 23, 42, 0.88),
         rgba(15, 23, 42, 0.88)
-    ), url('assets/Image_tech.png');
+    ), url('Image_tech.png');
 
     background-size: cover;
     background-position: center;
@@ -141,6 +142,11 @@ body {
 /* ==========================================================================
    FONT CLASSES (UPDATED SIZES)
    ========================================================================== */
+.font-industrial,
+.font-digital,
+.font-security {
+    line-height: 1;
+}
 
 /* INDUSTRIAL — PRO-TRAIT STACK */
 .font-industrial { 
@@ -692,17 +698,22 @@ footer {
 
 .dropdown-header {
     width: 100%;
-    padding: 10px 10px;
-    background: transparent;
-    color: #fff;
-    font-size: 1.1rem;
     text-align: left;
+    background: transparent;
+    color: #38bdf8;
+    font-family: 'Exo 2', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 2.5px;
+
+    padding: 8px 12px;        /* thinner */
+    margin-bottom: 6px;       /* tighter spacing */
+    border-radius: 6px;       /* slightly smaller */
+    border: 0px solid rgba(56, 189, 248, 0.25); /* thinner border */
+
     cursor: pointer;
-    border: none;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 600; /* optional: gives it a strong header feel */
-    letter-spacing: 1px; /* optional: matches your PRO-TRAIT aesthetic */
+    transition: background 0.3s ease, color 0.3s ease;
 }
+
 
 .dropdown-body {
     display: none;
@@ -711,12 +722,25 @@ footer {
     border-top: 1px solid #444;
     text-align: left;
     text-justify: auto;
+    opacity: 0;
+    animation: dropdownFadeIn 0.45s ease forwards;
 }
 
 .dropdown-open .dropdown-body {
     display: block;
 }
 
+/* Fade + glide animation */
+@keyframes dropdownFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 /* ==========================================================================
    KEY TRAITS ACCORDIAN & CONTENT STYLING
@@ -809,9 +833,11 @@ footer {
 <body>
 
 <div class="container">
+
     <video autoplay muted loop playsinline class="container-video">
-        <source src="assets/Cube.mp4" type="video/mp4">
+        <source src="Cube.mp4" type="video/mp4">
     </video>
+
     <!-- Main Title Box -->
     <header class="glass-header">
         <h1 id="dynamic-header" class="font-pro-trait"></h1>
