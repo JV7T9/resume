@@ -252,8 +252,11 @@ h2 {
 
 p.profile-statement {
     font-size: 1rem;
-    text-align: justify;
+    text-align: left;      /* ← FIX */
+    text-justify: auto;    /* ← prevents any leftover justification behavior */
     margin-bottom: 12px;
+    font-family: 'Exo 2', sans-serif; /* optional if you want Exo2 */
+    line-height: 1.5;
 }
 
 /* Grid Frameworks (Your side-by-side columns) */
