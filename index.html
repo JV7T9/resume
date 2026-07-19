@@ -195,7 +195,7 @@ body {
     flex: 0 0 auto;
     text-align: right;
     font-family: 'Exo 2', sans-serif; 
-    font-size: 0.95rem;
+    font-size: 0.85rem;
 }
 
 .dropbtn {
@@ -209,7 +209,7 @@ body {
     font-family: 'Share Tech Mono', sans-serif;
     height: 30px; /* Changed from 50px */
     line-height: 0px; /* Ensure text is centered vertically */
-    z-index: 0;
+    z-index: 10;
 }
 
 .dropdown-content {
@@ -252,12 +252,13 @@ h2 {
 
 p.profile-statement {
     font-size: 1rem;
-    text-align: left;      
-    text-justify: auto;    
+    text-align: left;      /* ← FIX */
+    text-justify: auto;    /* ← prevents any leftover justification behavior */
     margin-bottom: 12px;
     font-family: 'Exo 2', sans-serif; /* optional if you want Exo2 */
     line-height: 1.5;
 }
+
 
 /* Grid Frameworks (Your side-by-side columns) */
 .grid-2 {
@@ -674,7 +675,7 @@ footer {
    SECTION DROPDOWNS STYLING
    ========================================================================== */
 .dropdown-block {
-    margin: 20px 0;
+    margin: 15px 0;
     border: 1px solid #333;
     border-radius: 6px;
     background: rgba(20, 20, 20, 0.6);
@@ -683,13 +684,16 @@ footer {
 
 .dropdown-header {
     width: 100%;
-    padding: 12px 16px;
+    padding: 10px 10px;
     background: var(--primary-color);
     color: #fff;
     font-size: 1.1rem;
     text-align: left;
     cursor: pointer;
     border: none;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600; /* optional: gives it a strong header feel */
+    letter-spacing: 1px; /* optional: matches your PRO-TRAIT aesthetic */
 }
 
 .dropdown-body {
@@ -742,7 +746,7 @@ footer {
 
         <!-- Profile Statement -->
         <section>
-            <h2>Profile Statement</h2>
+            
             <p class="profile-statement">
                 As the professional landscape transmutes into a dynamic field of complex operational systems, businesses require a high-fidelity, adaptive approach to maintain an edge.
                 My background sits at the intersection of these shifts, blending Operational Security and Digital Architecture to provide full-scale productivity implementation, robust maintenance, and developmental continuity.
@@ -787,7 +791,6 @@ footer {
     <div class="dropdown-body">
 
         <section>
-            <h2>Key Traits</h2>
 
             <div class="tag-container">
                 <span class="tag">Digital Technology / Software & Hardware</span>
@@ -812,7 +815,6 @@ footer {
     <div class="dropdown-body">
 
         <section>
-            <h2>Training & Education</h2>
 
             <div class="grid-2" style="margin-bottom: 20px;">
                 <div class="card" style="border-left-color: var(--primary-color);">
@@ -923,7 +925,7 @@ footer {
 
         <!-- EMPLOYMENT HISTORY -->
         <section>
-            <h2>Employment History</h2>
+            <h3>Employment History</h3>
 
             <div class="privacy-gate" id="historyGate">
                 <p class="gate-instructions">
@@ -1032,7 +1034,7 @@ footer {
 
         <!-- PROFESSIONAL REFERENCES -->
         <section>
-            <h2>Professional References</h2>
+            <h3>Professional References</h3>
 
             <div class="privacy-gate" id="privacyGate">
                 <p class="gate-instructions">
@@ -1215,6 +1217,7 @@ function toggleContactDropdown(event) {
     event.stopPropagation(); // prevents window.onclick from firing
     document.getElementById("contactDropdown").classList.toggle("show");
 }
+
 
 // Close contact dropdown when clicking outside
 window.onclick = function(event) {
