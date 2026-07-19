@@ -56,42 +56,58 @@ body {
     gap: 20px;               /* Add space between text and button */
 }
 /* ==========================================================================
-   GLOWING MIRROR HEADER BOX 
+   GLOWING MIRROR HEADER BOX (UPDATED)
    ========================================================================== */
 .glass-header {
-    padding: 25px 30px;
-    margin-bottom: 20px; /* Space between title box and name */
-    border-radius: 12px;
-    background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)),
-            url('assets/Image_tech.png');
-    backdrop-filter: blur(10px);
-    border: 0px solid rgba(45, 212, 191, 0.4);
+    padding: 28px 32px;
+    margin-bottom: 30px;
+    border-radius: 14px;
+
+    background: linear-gradient(
+        rgba(15, 23, 42, 0.88),
+        rgba(15, 23, 42, 0.88)
+    ), url('assets/Image_tech.png');
+
+    background-size: cover;
+    background-position: center;
+
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(45, 212, 191, 0.35);
+
     display: flex;
-    text-shadow: 0 0 10px rgba(56, 189, 248, 0.5); /* Soft blue glow */
-    justify-content: center; /* Centers the dynamic header in its box */
+    justify-content: center;
+    align-items: center;
+
+    text-shadow: 0 0 12px rgba(56, 189, 248, 0.55);
 }
 
+/* Container for header + tagline */
 .header-main-content {
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* This pushes the contact button to the far right */
-    gap: 8px;
+    gap: 10px;
+    width: 100%;
+    text-align: center;
 }
 
-/* Dynamic Header Title */
+/* ==========================================================================
+   MAIN ROTATING HEADER (dynamic-header)
+   ========================================================================== */
 #dynamic-header {
     font-weight: 600;
     color: #38bdf8;
     margin: 0;
-    letter-spacing: 2px; /* Wider spacing makes it look longer */
+    letter-spacing: 2.5px;
     text-transform: uppercase;
-    transition: opacity 0.5s ease-in-out, font-family 0.3s;
-    cursor: pointer;
+
+    transition: opacity 0.5s ease-in-out, font-family 0.3s ease;
+
     display: inline-block;
     min-height: 3rem;
+
     animation: pulse-glow 3s infinite ease-in-out;
 }
-
+        
 /* INDUSTRIAL — PRO-TRAIT STACK */
 .font-industrial { 
     font-family: 'Michroma', sans-serif; 
@@ -108,28 +124,33 @@ body {
         0 0 20px rgba(45, 212, 191, 0.3);
 }
 
-/* SECURITY — SITE SECURITY OPS SPECIALIST */
+/* ==========================================================================
+   FONT CLASSES (UPDATED SIZES)
+   ========================================================================== */
+
+/* INDUSTRIAL — PRO-TRAIT STACK */
+.font-industrial { 
+    font-family: 'Michroma', sans-serif; 
+    font-size: 2.4rem;
+    text-shadow: 0 0 12px rgba(56, 189, 248, 0.55);
+}
+
+/* DIGITAL — CURRICULUM VITAE */
+.font-digital { 
+    font-family: 'Orbitron', sans-serif; 
+    font-size: 2.4rem;
+    text-shadow:
+        0 0 12px rgba(45, 212, 191, 0.65),
+        0 0 22px rgba(45, 212, 191, 0.35);
+}
+
+/* SECURITY — PORT-FOLIO */
 .font-security { 
     font-family: 'Rajdhani', sans-serif;
-    font-size: 2rem; /* adjust this */
-    text-shadow: 
-        0 0 10px rgba(255, 255, 255, 0.4),
-        0 0 20px rgba(37, 99, 235, 0.5);
-}
-
-@keyframes pulse-glow {
-    0%, 100% { text-shadow: 0 0 10px rgba(56, 189, 248, 0.5); }
-    50% { text-shadow: 0 0 20px rgba(56, 189, 248, 0.8); }
-}
-
-
-/* Left Side: Primary Brand Title */
-.header-brand {
-    flex-direction: grid;
-    flex: 1;
-    text-align: left;
-    margin-top: -50px;
-    z-index: 10;
+    font-size: 2.4rem;
+    text-shadow:
+        0 0 12px rgba(255, 255, 255, 0.45),
+        0 0 22px rgba(37, 99, 235, 0.55);
 }
 
 /* Left Side: Primary Brand Title */
@@ -167,13 +188,18 @@ body {
     margin-bottom: 0 !important;
 }
 
-/* Adjust the tagline */
 .header-identity .tagline {
-    font-size: 0.95rem; /* Slightly larger for readability */
+    font-size: 1.05rem;
     color: #94a3b8;
-    font-family: 'Michroma', sans-serif;  
+    font-family: 'Michroma', sans-serif;
     margin: 0;
-    text-align: left;
+    letter-spacing: 0.8px;
+    transition: opacity 0.4s ease;
+}
+
+/* Glow pulse class used by JS */
+.glow {
+    text-shadow: 0 0 14px rgba(56, 189, 248, 0.65);
 }
 
 /* ==========================================================================
