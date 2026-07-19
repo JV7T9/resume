@@ -29,7 +29,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #e2e8f0; /* Crisp slate white for excellent readability on dark backgrounds */
-    background-color: #1e293b; /* Sleek gunmetal base */
+    background-color: #1e293c; /* Sleek gunmetal base */
     padding: 40px 20px;
     overflow-y: auto; 
     height: 100vh;
@@ -40,7 +40,7 @@ body {
     margin: -25px auto;
     margin-bottom: 10px;
     background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), 
-                url('assets/RSG.jpg');
+                url('RSG.jpg');
     
     padding: 30px 30px; 
     border-radius: 12px;
@@ -56,17 +56,17 @@ body {
     gap: 20px;               /* Add space between text and button */
 }
 /* ==========================================================================
-   GLOWING MIRROR HEADER BOX
+   GLOWING MIRROR HEADER BOX 
    ========================================================================== */
 .glass-header {
     padding: 25px 30px;
     margin-bottom: 20px; /* Space between title box and name */
     border-radius: 12px;
-        background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), 
-                url('assets/Image_tech.png');
+    background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('Image_tech.png');
     backdrop-filter: blur(10px);
     border: 1px solid rgba(45, 212, 191, 0.4);
     display: flex;
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.5); /* Soft blue glow */
     justify-content: center; /* Centers the dynamic header in its box */
 }
 
@@ -103,7 +103,7 @@ body {
 }
 
 .font-security { 
-    font-family: 'Rajdhani', sans-serif;
+    font-family: 'Rajdhani', sans-serif;,
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 20px rgba(37, 99, 235, 0.5); /* White and blue futuristic glow */
 }
 
@@ -112,11 +112,16 @@ body {
     50% { text-shadow: 0 0 20px rgba(56, 189, 248, 0.8); }
 }
 
+
 /* Left Side: Primary Brand Title */
 .header-brand {
+    flex-direction: grid;
     flex: 1;
     text-align: left;
+    margin-top: -50px;
+    z-index: 10;
 }
+
 /* Left Side: Primary Brand Title */
 .header-brand h1 {
     font-family: 'Biome', sans-serif;
@@ -154,7 +159,7 @@ body {
 
 /* Adjust the tagline */
 .header-identity .tagline {
-    font-size: 1rem; /* Slightly larger for readability */
+    font-size: 0.95rem; /* Slightly larger for readability */
     color: #94a3b8;
     font-family: 'jura', sans-serif;  
     margin: 0;
@@ -168,9 +173,8 @@ body {
 .header-contact {
     flex: 0 0 auto;
     text-align: left;
-    margin-left: 50px;
-    
 }
+
 .header-contact p {
     margin: 4px 0;
     font-size: 0.95rem;
@@ -193,6 +197,7 @@ body {
     font-family: 'Exo 2', sans-serif; 
     font-size: 0.95rem;
 }
+
 .dropbtn {
     margin-bottom: 60px;
     background: rgba(45, 212, 191, 0.1);
@@ -206,6 +211,7 @@ body {
     line-height: 0px; /* Ensure text is centered vertically */
     z-index: 0;
 }
+
 .dropdown-content {
     display: none; /* Hidden by default */
     position: absolute;
@@ -661,6 +667,39 @@ footer {
     vertical-align: middle;
 }
 
+/* ==========================================================================
+   SECTION DROPDOWNS STYLING
+   ========================================================================== */
+.dropdown-block {
+    margin: 20px 0;
+    border: 1px solid #333;
+    border-radius: 6px;
+    background: rgba(20, 20, 20, 0.6);
+    backdrop-filter: blur(6px);
+}
+
+.dropdown-header {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--primary-color);
+    color: #fff;
+    font-size: 1.1rem;
+    text-align: left;
+    cursor: pointer;
+    border: none;
+}
+
+.dropdown-body {
+    display: none;
+    padding: 15px 20px;
+    background: rgba(10, 10, 10, 0.7);
+    border-top: 1px solid #444;
+}
+
+.dropdown-open .dropdown-body {
+    display: block;
+}
+
     </style>
 </head>
 <body>
@@ -670,16 +709,16 @@ footer {
     <header class="glass-header">
         <h1 id="dynamic-header" class="font-pro-trait"></h1>
     </header>
-    
-    <div class="dropdown">
-       <button class="dropbtn" onclick="toggleDropdown()">Contact ▾</button>
-          <div id="contactDropdown" class="dropdown-content">
+
+        <div class="dropdown">
+            <button class="dropbtn" onclick="toggleDropdown()">Contact ▾</button>
+            <div id="contactDropdown" class="dropdown-content">
                 <p><strong>Mobile:</strong> 021 293 2877</p>
                 <p><strong>Email:</strong> <a href="mailto:John.Vaafuti@gmail.com">John.Vaafuti@gmail.com</a></p>
                 <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/john-va-afuti-096233294" target="_blank">View Profile</a></p>
-          </div>
-    </div>
-    
+            </div>
+        </div>
+
     <!-- Sub-Header Alignment Wrapper -->
     <div class="sub-header-wrapper">
         <div class="header-identity">
@@ -687,282 +726,399 @@ footer {
             <p class="tagline">Digital Architect & Site Security Ops Specialist</p>
         </div>
     </div>
-    
-    <section>
-        <h2>Profile Statement</h2>
-        <p class="profile-statement">As the professional landscape transmutes into a dynamic field of complex operational systems, businesses require a high-fidelity, adaptive approach to maintain an edge. My background sits at the intersection of these shifts, blending Operational Security and Digital Architecture to provide full-scale productivity implementation, robust maintenance, and developmental continuity. Navigating how to design systems that evolve with their environments, ensuring coherence, resilience, and emergent intelligence across every operational layers is an ongoing commitment.</p>
-    </section>
 
-    <section class="grid-2">
-        <div class="card">
-            <h3>Digital Intelligence</h3>
-            <p style="font-size: 0.9rem; text-align: justify;">Recently graduated with a 2025 Diploma in Digital Technology, my experience spans IT Networks and Technical Support, Website Design and Architecture, UX/UI, AI Engine development, and Database Systems. I am currently architecting a novel form of code intelligence engine designed to confront and stabilize the phenomena of hallucination and cognitive drift.</p>
-        </div>
-        <div class="card">
-            <h3>Site Security Ops Specialist</h3>
-            <ul>
-                <li>Forming full-scale site security operations</li>
-                <li>Design & build of operational security workstations</li>
-                <li>Access Management, Surveillance & Data-storage Systems</li>
-                <li>Security Administration, Field Operations & Solutions</li>
-                <li>OHS, risk procedures, and protocol compliance training</li>
-            </ul>
-        </div>
-    </section>
 
-    <section>
-        <h2>Key Traits</h2>
-        <div class="tag-container">
-            <span class="tag">Digital Technology / Software & Hardware</span>
-            <span class="tag">Site Security Operations & Management</span>
-            <span class="tag">Systems Administration & Database</span>
-            <span class="tag">Risk Management, Assessment & Solutions</span>
-            <span class="tag">Access Management & Systems Surveillance Technology</span>
-            <span class="tag">Interpersonal Interaction & Communication</span>
-            <span class="tag">Infrastructure Works / Construction & Design</span>
-        </div>
-    </section>
+<div class="dropdown-block">
+    <button class="dropdown-header" onclick="toggleSectionDropdown(this)">
+        Profile Statement ▾
+    </button>
 
-    <section>
-        <h2>Training & Education</h2>
-        <div class="grid-2" style="margin-bottom: 20px;">
-            <div class="card" style="border-left-color: var(--primary-color);">
-                <h3>Diploma Studies Focus</h3>
-                <p style="font-size: 0.85rem; line-height: 1.5;">Fundamentals of Programming & Problem Solving | Hardware Servicing | IT Systems Overview | Professional Practice | Database Administration | Implementing Networks | IT Technical Support | Server Management</p>
-            </div>
-            <div class="card" style="border-left-color: var(--primary-color);">
-                <h3>Security Engagements</h3>
-                <p style="font-size: 0.85rem; line-height: 1.5;">Site Security & Control Room Operations | Private Investigator | Close Protection Agent | Static Guarding | Digital Site Mapping | Corporate & Covert Security | Loss Prevention | Access Control</p>
-            </div>
-        </div>
+    <div class="dropdown-body">
 
-        <div class="accordion-container">
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span class="accordion-title">Manukau Institute of Technology</span>
-                    <span class="accordion-year">2025</span>
-                    <span class="accordion-icon">▼</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="accordion-body">
-                        <div><strong>Field of Study:</strong> Digital Technology – IT Technical Support</div>
-                        <div><strong>Qualification:</strong> New Zealand Diploma</div>
-                    </div>
-                </div>
+        <!-- Profile Statement -->
+        <section>
+            <h2>Profile Statement</h2>
+            <p class="profile-statement">
+                As the professional landscape transmutes into a dynamic field of complex operational systems, businesses require a high-fidelity, adaptive approach to maintain an edge.
+                My background sits at the intersection of these shifts, blending Operational Security and Digital Architecture to provide full-scale productivity implementation, robust maintenance, and developmental continuity.
+                Navigating how to design systems that evolve with their environments, ensuring coherence, resilience, and emergent intelligence across every operational layers is an ongoing commitment.
+            </p>
+        </section>
+
+        <!-- Digital Intelligence -->
+        <section class="grid-2">
+            <div class="card">
+                <h3>Digital Intelligence</h3>
+                <p style="font-size: 0.9rem; text-align: justify;">
+                    Recently graduated with a 2025 Diploma in Digital Technology, my experience spans IT Networks and Technical Support,
+                    Website Design and Architecture, UX/UI, AI Engine development, and Database Systems.
+                    I am currently architecting a novel form of code intelligence engine designed to confront and stabilize the phenomena
+                    of hallucination and cognitive drift.
+                </p>
             </div>
 
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span class="accordion-title">Downer Civils & Infrastructure Program</span>
-                    <span class="accordion-year">2014</span>
-                    <span class="accordion-icon">▼</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="accordion-body">
-                        <div><strong>Field of Study:</strong> Civil Works & Infrastructure</div>
-                        <div><strong>Qualification:</strong> NZQA Accredited</div>
-                    </div>
-                </div>
+            <!-- Site Security Ops Specialist -->
+            <div class="card">
+                <h3>Site Security Ops Specialist</h3>
+                <ul>
+                    <li>Forming full-scale site security operations</li>
+                    <li>Design & build of operational security workstations</li>
+                    <li>Access Management, Surveillance & Data-storage Systems</li>
+                    <li>Security Administration, Field Operations & Solutions</li>
+                    <li>OHS, risk procedures, and protocol compliance training</li>
+                </ul>
             </div>
+        </section>
 
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span class="accordion-title">Best Pacific Institute of Education</span>
-                    <span class="accordion-year">2008</span>
-                    <span class="accordion-icon">▼</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="accordion-body">
-                        <div><strong>Field of Study:</strong> Freight Operations</div>
-                        <div><strong>Qualification:</strong> National Certificate</div>
-                    </div>
-                </div>
+    </div>
+</div>
+
+
+<div class="dropdown-block">
+    <button class="dropdown-header" onclick="toggleSectionDropdown(this)">
+        Key Traits ▾
+    </button>
+
+    <div class="dropdown-body">
+
+        <section>
+            <h2>Key Traits</h2>
+
+            <div class="tag-container">
+                <span class="tag">Digital Technology / Software & Hardware</span>
+                <span class="tag">Site Security Operations & Management</span>
+                <span class="tag">Systems Administration & Database</span>
+                <span class="tag">Risk Management, Assessment & Solutions</span>
+                <span class="tag">Access Management & Systems Surveillance Technology</span>
+                <span class="tag">Interpersonal Interaction & Communication</span>
+                <span class="tag">Infrastructure Works / Construction & Design</span>
             </div>
+        </section>
 
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span class="accordion-title">Connect Training Services – NSW</span>
-                    <span class="accordion-year">2000</span>
-                    <span class="accordion-icon">▼</span>
+    </div>
+</div>
+
+
+<div class="dropdown-block">
+    <button class="dropdown-header" onclick="toggleSectionDropdown(this)">
+        Training & Education ▾
+    </button>
+
+    <div class="dropdown-body">
+
+        <section>
+            <h2>Training & Education</h2>
+
+            <div class="grid-2" style="margin-bottom: 20px;">
+                <div class="card" style="border-left-color: var(--primary-color);">
+                    <h3>Diploma Studies Focus</h3>
+                    <p style="font-size: 0.85rem; line-height: 1.5;">
+                        Fundamentals of Programming & Problem Solving | Hardware Servicing | IT Systems Overview |
+                        Professional Practice | Database Administration | Implementing Networks | IT Technical Support |
+                        Server Management
+                    </p>
                 </div>
-                <div class="accordion-content">
-                    <div class="accordion-body">
-                        <div><strong>Field of Study:</strong> Security</div>
-                        <div><strong>Qualification:</strong> National Certificate</div>
-                    </div>
+
+                <div class="card" style="border-left-color: var(--primary-color);">
+                    <h3>Security Engagements</h3>
+                    <p style="font-size: 0.85rem; line-height: 1.5;">
+                        Site Security & Control Room Operations | Private Investigator | Close Protection Agent |
+                        Static Guarding | Digital Site Mapping | Corporate & Covert Security | Loss Prevention |
+                        Access Control
+                    </p>
                 </div>
             </div>
 
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span class="accordion-title">Manukau Institute of Technology</span>
-                    <span class="accordion-year">1997</span>
-                    <span class="accordion-icon">▼</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="accordion-body">
-                        <div><strong>Field of Study:</strong> Light Fabrication Engineering</div>
-                        <div><strong>Qualification:</strong> National Certificate</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+            <div class="accordion-container">
 
-<section>
-        <h2>Employment History</h2>
-        <div class="privacy-gate" id="historyGate">
-           <p class="gate-instructions">
-    <span class="glow-glyph">𖦤</span> To protect work history privacy, entering your professional email address will unlock this section.
-</p>
-            
-            <form class="gate-form" onsubmit="unlockSection(event, 'historyGate', 'historyContent', 'Employment History Verification')">
-                <input type="hidden" name="form-name" value="Employment History Gate">
-                <input type="email" name="email" class="gate-input" placeholder="name@company.com" required>
-                <button type="submit" class="gate-btn">Unlock History</button>
-            </form>
-            <div class="error-msg" id="historyGate-error">Verification failed. Please check your internet connection or use a valid email format.</div>
-        </div>
-
-        <div class="hidden-content" id="historyContent">
-            <div class="accordion-container" style="margin-top: 15px;">
-                
                 <div class="accordion-item">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span class="accordion-title" style="color: var(--accent-color);">💼 Professional Occupations</span>
+                        <span class="accordion-title">Manukau Institute of Technology</span>
+                        <span class="accordion-year">2025</span>
                         <span class="accordion-icon">▼</span>
                     </div>
                     <div class="accordion-content">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th class="year-col">Year</th>
-                                    <th class="pos-col">Position</th>
-                                    <th class="comp-col">Company / Location</th>
-                                    <th class="desc-col">Job Brief</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>2023</td><td><strong>Consultant & Advisor</strong></td><td>Independent Contractor</td><td>Site Security Services & Technology</td></tr>
-                                <tr><td>2014</td><td><strong>Security Specialist</strong></td><td>Downer NZ Ltd</td><td>Site Security Operations</td></tr>
-                                <tr><td>2013</td><td><strong>Private Security Contractor</strong></td><td>Executive Security Group Ltd (NT)</td><td>Corporate Security, Close Protection, Private Investigations</td></tr>
-                                <tr><td>2012</td><td><strong>Operations Supervisor / Admin</strong></td><td>Simply Security - Auckland</td><td>Oversee guards for UoA Campuses, ASB, and Westpac branches</td></tr>
-                                <tr><td>2010</td><td><strong>Control Room / Security Liaison</strong></td><td>Icon Group Security (Now Global)</td><td>ASB Cash Processing Centre / Dominion Rd Business Assoc.</td></tr>
-                                <tr><td>2008</td><td><strong>Contractor</strong></td><td>EcoWorx</td><td>Environmental Services, Heavy Machinery, Project Designer</td></tr>
-                                <tr><td>2006</td><td><strong>Professional Labourer</strong></td><td>Action Labour / Recruitment Agency</td><td>Building, Concrete, Tiling, Roofing, Plastering, Electrical, Plumbing</td></tr>
-                                <tr><td>2005</td><td><strong>Painter & Decor</strong></td><td>Golden Touch Service</td><td>Internal & External House Restorations</td></tr>
-                                <tr><td>2003</td><td><strong>Gatehouse / Site Security</strong></td><td>Chubb Security (Onehunga-Otahuhu)</td><td>Inquiries, Alarm Response, CCTV Monitoring, Patrols, Admin</td></tr>
-                                <tr><td>2002</td><td><strong>Furnace Man & Die Caster</strong></td><td>Cheviot Alloy Wheels (Onehunga)</td><td>Die Setter, Heat Treatment, Foundry Operations</td></tr>
-                            </tbody>
-                        </table>
+                        <div class="accordion-body">
+                            <div><strong>Field of Study:</strong> Digital Technology – IT Technical Support</div>
+                            <div><strong>Qualification:</strong> New Zealand Diploma</div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="accordion-item">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span class="accordion-title" style="color: var(--accent-color);">🛡️ Entry Level Occupations</span>
+                        <span class="accordion-title">Downer Civils & Infrastructure Program</span>
+                        <span class="accordion-year">2014</span>
                         <span class="accordion-icon">▼</span>
                     </div>
                     <div class="accordion-content">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th class="year-col">Year</th>
-                                    <th class="pos-col">Position</th>
-                                    <th class="comp-col">Company / Location</th>
-                                    <th class="desc-col">Job Brief</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>2000</td><td><strong>Security Officer</strong></td><td>Group 4 Securitas (Sydney, NSW)</td><td>Security Field Work across multiple Sydney CBD sites</td></tr>
-                                <tr><td>1999</td><td><strong>Fabrication & Welding</strong></td><td>Premier Stainless Steel Ltd (NSW)</td><td>Aluminium & Stainless-Steel Projects</td></tr>
-                                <tr><td>1998</td><td><strong>Trainee Maintenance Tech</strong></td><td>Autodor Services Ltd (Onehunga)</td><td>General Maintenance & Automatic Sliding Door Installations</td></tr>
-                            </tbody>
-                        </table>
+                        <div class="accordion-body">
+                            <div><strong>Field of Study:</strong> Civil Works & Infrastructure</div>
+                            <div><strong>Qualification:</strong> NZQA Accredited</div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="accordion-item">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span class="accordion-title" style="color: var(--accent-color);">🎓 College & Tertiary Years</span>
+                        <span class="accordion-title">Best Pacific Institute of Education</span>
+                        <span class="accordion-year">2008</span>
                         <span class="accordion-icon">▼</span>
                     </div>
                     <div class="accordion-content">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th class="year-col">Year</th>
-                                    <th class="pos-col">Position</th>
-                                    <th class="comp-col">Company / Location</th>
-                                    <th class="desc-col">Job Brief</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>1996</td><td><strong>Crew Staff & Trainer</strong></td><td>McDonalds / Fun Station (Panmure)</td><td>Kitchen Duties, Customer Service, Maintenance</td></tr>
-                                <tr><td>1995</td><td><strong>Kitchen Hand</strong></td><td>Ashby Takeaways Restaurant</td><td>Prep & Cook Assistant, Cleaning & Maintenance</td></tr>
-                                <tr><td>1994</td><td><strong>Produce Worker</strong></td><td>3 Guys Supermarket (Glen Innes)</td><td>Handling fresh produce, Department Floor Setup, Customer Service</td></tr>
-                            </tbody>
-                        </table>
+                        <div class="accordion-body">
+                            <div><strong>Field of Study:</strong> Freight Operations</div>
+                            <div><strong>Qualification:</strong> National Certificate</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="accordion-title">Connect Training Services – NSW</span>
+                        <span class="accordion-year">2000</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <div><strong>Field of Study:</strong> Security</div>
+                            <div><strong>Qualification:</strong> National Certificate</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="accordion-title">Manukau Institute of Technology</span>
+                        <span class="accordion-year">1997</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <div><strong>Field of Study:</strong> Light Fabrication Engineering</div>
+                            <div><strong>Qualification:</strong> National Certificate</div>
+                        </div>
                     </div>
                 </div>
 
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section>
-        <h2>Professional References</h2>
-        
-        <div class="privacy-gate" id="privacyGate">
-            <p class="gate-instructions">
-    <span class="glow-glyph">𖦤</span> To protect referee privacy, entering your professional email address will unlock this section.
-</p>
-            <form class="gate-form" onsubmit="unlockSection(event, 'privacyGate', 'referencesContent', 'Professional References Verification')">
-                <input type="hidden" name="form-name" value="Professional References Gate">
-                <input type="email" name="email" class="gate-input" placeholder="name@company.com" required>
-                <button type="submit" class="gate-btn">Unlock References</button>
-            </form>
-            <div class="error-msg" id="privacyGate-error">Verification failed. Please check your internet connection or use a valid email format.</div>
-        </div>
+    </div>
+</div>
 
-        <div class="hidden-content" id="referencesContent">
-            <div class="references-grid">
-                <div class="ref-card">
-                    <h4>Kourosh Ahmadi</h4>
-                    <p><em>Lecturer</em></p>
-                    <p>Manukau Institute of Technology</p>
-                    <p>Mob: 021 0827 5090</p>
-                    <p>Email: Kourosh.ahmadi@gmail.com</p>
-                </div>
-                <div class="ref-card">
-                    <h4>Gary Holmes</h4>
-                    <p><em>Manager / Local Board Member</em></p>
-                    <p>Campaigns Ltd / Akld City Council</p>
-                    <p>Mob: 027 496 6283</p>
-                    <p>Email: gary@campaignz.co.nz</p>
-                </div>
-                <div class="ref-card">
-                    <h4>Adam De Beer</h4>
-                    <p><em>Owner</em></p>
-                    <p>Integris Group Ltd NZ</p>
-                    <p>Mob: 022 632 9790</p>
-                    <p>Email: adam@integrisgl.com</p>
+
+
+<div class="dropdown-block">
+    <button class="dropdown-header" onclick="toggleSectionDropdown(this)">
+        Employment Details ▾
+    </button>
+
+    <div class="dropdown-body">
+
+        <!-- EMPLOYMENT HISTORY -->
+        <section>
+            <h2>Employment History</h2>
+
+            <div class="privacy-gate" id="historyGate">
+                <p class="gate-instructions">
+                    <span class="glow-glyph">𖦤</span> To protect work history privacy, entering your professional email address will unlock this section.
+                </p>
+
+                <form class="gate-form" onsubmit="unlockSection(event, 'historyGate', 'historyContent', 'Employment History Verification')">
+                    <input type="hidden" name="form-name" value="Employment History Gate">
+                    <input type="email" name="email" class="gate-input" placeholder="name@company.com" required>
+                    <button type="submit" class="gate-btn">Unlock History</button>
+                </form>
+
+                <div class="error-msg" id="historyGate-error">
+                    Verification failed. Please check your internet connection or use a valid email format.
                 </div>
             </div>
-        </div>
-    </section>
+
+            <div class="hidden-content" id="historyContent">
+                <div class="accordion-container" style="margin-top: 15px;">
+
+                    <!-- Professional Occupations -->
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span class="accordion-title" style="color: var(--accent-color);">💼 Professional Occupations</span>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="year-col">Year</th>
+                                        <th class="pos-col">Position</th>
+                                        <th class="comp-col">Company / Location</th>
+                                        <th class="desc-col">Job Brief</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>2023</td><td><strong>Consultant & Advisor</strong></td><td>Independent Contractor</td><td>Site Security Services & Technology</td></tr>
+                                    <tr><td>2014</td><td><strong>Security Specialist</strong></td><td>Downer NZ Ltd</td><td>Site Security Operations</td></tr>
+                                    <tr><td>2013</td><td><strong>Private Security Contractor</strong></td><td>Executive Security Group Ltd (NT)</td><td>Corporate Security, Close Protection, Private Investigations</td></tr>
+                                    <tr><td>2012</td><td><strong>Operations Supervisor / Admin</strong></td><td>Simply Security - Auckland</td><td>Oversee guards for UoA Campuses, ASB, and Westpac branches</td></tr>
+                                    <tr><td>2010</td><td><strong>Control Room / Security Liaison</strong></td><td>Icon Group Security (Now Global)</td><td>ASB Cash Processing Centre / Dominion Rd Business Assoc.</td></tr>
+                                    <tr><td>2008</td><td><strong>Contractor</strong></td><td>EcoWorx</td><td>Environmental Services, Heavy Machinery, Project Designer</td></tr>
+                                    <tr><td>2006</td><td><strong>Professional Labourer</strong></td><td>Action Labour / Recruitment Agency</td><td>Building, Concrete, Tiling, Roofing, Plastering, Electrical, Plumbing</td></tr>
+                                    <tr><td>2005</td><td><strong>Painter & Decor</strong></td><td>Golden Touch Service</td><td>Internal & External House Restorations</td></tr>
+                                    <tr><td>2003</td><td><strong>Gatehouse / Site Security</strong></td><td>Chubb Security (Onehunga-Otahuhu)</td><td>Inquiries, Alarm Response, CCTV Monitoring, Patrols, Admin</td></tr>
+                                    <tr><td>2002</td><td><strong>Furnace Man & Die Caster</strong></td><td>Cheviot Alloy Wheels (Onehunga)</td><td>Die Setter, Heat Treatment, Foundry Operations</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Entry Level Occupations -->
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span class="accordion-title" style="color: var(--accent-color);">🛡️ Entry Level Occupations</span>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="year-col">Year</th>
+                                        <th class="pos-col">Position</th>
+                                        <th class="comp-col">Company / Location</th>
+                                        <th class="desc-col">Job Brief</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>2000</td><td><strong>Security Officer</strong></td><td>Group 4 Securitas (Sydney, NSW)</td><td>Security Field Work across multiple Sydney CBD sites</td></tr>
+                                    <tr><td>1999</td><td><strong>Fabrication & Welding</strong></td><td>Premier Stainless Steel Ltd (NSW)</td><td>Aluminium & Stainless-Steel Projects</td></tr>
+                                    <tr><td>1998</td><td><strong>Trainee Maintenance Tech</strong></td><td>Autodor Services Ltd (Onehunga)</td><td>General Maintenance & Automatic Sliding Door Installations</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- College & Tertiary Years -->
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span class="accordion-title" style="color: var(--accent-color);">🎓 College & Tertiary Years</span>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="year-col">Year</th>
+                                        <th class="pos-col">Position</th>
+                                        <th class="comp-col">Company / Location</th>
+                                        <th class="desc-col">Job Brief</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>1996</td><td><strong>Crew Staff & Trainer</strong></td><td>McDonalds / Fun Station (Panmure)</td><td>Kitchen Duties, Customer Service, Maintenance</td></tr>
+                                    <tr><td>1995</td><td><strong>Kitchen Hand</strong></td><td>Ashby Takeaways Restaurant</td><td>Prep & Cook Assistant, Cleaning & Maintenance</td></tr>
+                                    <tr><td>1994</td><td><strong>Produce Worker</strong></td><td>3 Guys Supermarket (Glen Innes)</td><td>Handling fresh produce, Department Floor Setup, Customer Service</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFESSIONAL REFERENCES -->
+        <section>
+            <h2>Professional References</h2>
+
+            <div class="privacy-gate" id="privacyGate">
+                <p class="gate-instructions">
+                    <span class="glow-glyph">𖦤</span> To protect referee privacy, entering your professional email address will unlock this section.
+                </p>
+
+                <form class="gate-form" onsubmit="unlockSection(event, 'privacyGate', 'referencesContent', 'Professional References Verification')">
+                    <input type="hidden" name="form-name" value="Professional References Gate">
+                    <input type="email" name="email" class="gate-input" placeholder="name@company.com" required>
+                    <button type="submit" class="gate-btn">Unlock References</button>
+                </form>
+
+                <div class="error-msg" id="privacyGate-error">
+                    Verification failed. Please check your internet connection or use a valid email format.
+                </div>
+            </div>
+
+            <div class="hidden-content" id="referencesContent">
+                <div class="references-grid">
+
+                    <div class="ref-card">
+                        <h4>Kourosh Ahmadi</h4>
+                        <p><em>Lecturer</em></p>
+                        <p>Manukau Institute of Technology</p>
+                        <p>Mob: 021 0827 5090</p>
+                        <p>Email: Kourosh.ahmadi@gmail.com</p>
+                    </div>
+
+                    <div class="ref-card">
+                        <h4>Gary Holmes</h4>
+                        <p><em>Manager / Local Board Member</em></p>
+                        <p>Campaigns Ltd / Akld City Council</p>
+                        <p>Mob: 027 496 6283</p>
+                        <p>Email: gary@campaignz.co.nz</p>
+                    </div>
+
+                    <div class="ref-card">
+                        <h4>Adam De Beer</h4>
+                        <p><em>Owner</em></p>
+                        <p>Integris Group Ltd NZ</p>
+                        <p>Mob: 022 632 9790</p>
+                        <p>Email: adam@integrisgl.com</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+
 
     <footer>
         Thank you for taking the time to read this document. References, qualifications, and project demonstrations can be provided during an interview session.
     </footer>
 </div>
 </div>
-<script>
-    function toggleAccordion(element) {
-        const item = element.parentElement;
-        item.classList.toggle('active');
-    }
 
+<script>
+// ===============================
+// SECTION DROPDOWNS (AUTO-CLOSE)
+// ===============================
+function toggleSectionDropdown(btn) {
+    const block = btn.parentElement;
+
+    // Close all other dropdowns
+    document.querySelectorAll('.dropdown-block').forEach(other => {
+        if (other !== block) {
+            other.classList.remove('dropdown-open');
+        }
+    });
+
+    // Toggle the clicked dropdown
+    block.classList.toggle("dropdown-open");
+}
+</script>
+
+<script>
+// ===============================
+// ACCORDION LOGIC
+// ===============================
+function toggleAccordion(element) {
+    const item = element.parentElement;
+    item.classList.toggle('active');
+}
+</script>
+
+<script>
+// ===============================
+// PRIVACY GATE / EMAIL VERIFICATION
+// ===============================
 function unlockSection(event, gateId, contentId, subjectText) {
     event.preventDefault();
     
@@ -1014,6 +1170,9 @@ function unlockSection(event, gateId, contentId, subjectText) {
 </script>
 
 <script>
+// ===============================
+// ROTATING HEADER TEXT
+// ===============================
 const header = document.getElementById('dynamic-header');
 const states = [
     { text: "PRO-TRAIT STACK", class: "font-industrial"},
@@ -1034,34 +1193,37 @@ function rotateHeader() {
     }, 500);
 }
 
-// 1. Set the initial state immediately
+// Initial state
 header.innerText = states[0].text;
 header.className = states[0].class;
 header.style.opacity = 1;
 
-// 2. Start the rotation
+// Start rotation
 setInterval(rotateHeader, 2000);
 </script>
 
 <script>
-// Corrected: Matches the id="contactDropdown" in your HTML
-function toggleDropdown() {
+// ===============================
+// CONTACT DROPDOWN (SEPARATE LOGIC)
+// ===============================
+function toggleContactDropdown() {
     document.getElementById("contactDropdown").classList.toggle("show");
 }
 
-// Close the dropdown if the user clicks outside of it
+// Close contact dropdown when clicking outside
 window.onclick = function(event) {
-  if (!event.target.closest('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    for (var i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
+    if (!event.target.closest('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        for (var i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
     }
-  }
 }
 </script>
+
 
 </body>
 </html>
