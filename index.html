@@ -957,14 +957,57 @@ footer {
     </div>
 </div>
 
+<div class="dropdown-block">
+
+    <!-- HEADER BUTTON (dual‑mode trigger) -->
+    <button class="dropdown-header" onclick="handleDropdownClick('profile', this)">
+        <span class="title">Profile Statement</span>
+        <span class="chevron">▾</span>
+    </button>
+
+    <!-- MOBILE DROPDOWN BODY -->
+    <div class="dropdown-body">
+
+        <!-- Profile Statement -->
+        <section>
+            <p class="profile-statement">
+                As the professional landscape transmutes into a dynamic field of complex operational systems, businesses require a high-fidelity, adaptive approach to maintain an edge.
+                My background sits at the intersection of these shifts, blending Operational Security and Digital Architecture to provide full-scale productivity implementation, robust maintenance, and developmental continuity.
+                Navigating how to design systems that evolve with their environments, ensuring coherence, resilience, and emergent intelligence across every operational layers is an ongoing commitment.
+            </p>
+        </section>
+
+        <!-- Digital Intelligence -->
+        <section class="grid-2">
+            <div class="card">
+                <h3>Digital Intelligence</h3>
+                <p style="font-size: 0.9rem; text-align: justify;">
+                    Recently graduated with a 2025 Diploma in Digital Technology, my experience spans IT Networks and Technical Support,
+                    Website Design and Architecture, UX/UI, AI Engine development, and Database Systems.
+                    I am currently architecting a novel form of code intelligence engine designed to confront and stabilize the phenomena
+                    of hallucination and cognitive drift.
+                </p>
+            </div>
+
+            <!-- Site Security Ops Specialist -->
+            <div class="card">
+                <h3>Site Security Ops Specialist</h3>
+                <ul>
+                    <li>Forming full-scale site security operations</li>
+                    <li>Design & build of operational security workstations</li>
+                    <li>Access Management, Surveillance & Data-storage Systems</li>
+                    <li>Security Administration, Field Operations & Solutions</li>
+                    <li>OHS, risk procedures, and protocol compliance training</li>
+                </ul>
+            </div>
+        </section>
+
+    </div><!-- end mobile dropdown-body -->
+
+</div><!-- end dropdown-block -->
 
 
-<button class="dropdown-header" onclick="openPanel('profile', this)">
-    <span class="title">Profile Statement</span>
-    <span class="chevron">▾</span>
-</button>
-
-<!-- Hidden content for overlay panel -->
+<!-- DESKTOP OVERLAY VERSION (hidden) -->
 <div id="profile" class="panel-content" style="display:none;">
 
     <!-- Profile Statement -->
@@ -1001,7 +1044,8 @@ footer {
         </div>
     </section>
 
-</div>
+</div><!-- end desktop overlay panel-content -->
+
 
 
 
@@ -1990,6 +2034,23 @@ function toggleTrait(button) {
 
 
 <script>
+// ===============================
+// DESKTOP / MOBILE MODE HANDLER
+// ===============================
+function handleDropdownClick(id, headerBtn) {
+    if (window.innerWidth < 900) {
+        toggleSectionDropdown(headerBtn);
+        return;
+    }
+
+    openPanel(id, headerBtn);
+}
+</script>
+
+<script>
+// ===============================
+// OVERLAY PANEL LOGIC (DESKTOP)
+// ===============================
 let currentPanel = null;
 let currentHeader = null;
 
@@ -2040,8 +2101,6 @@ function openPanel(id, headerBtn) {
     currentHeader = headerBtn;
 }
 </script>
-
-
 
 </body>
 </html>
