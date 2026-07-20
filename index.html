@@ -320,6 +320,15 @@ p.profile-statement {
     letter-spacing: 1px;
 }
 
+/* ============================
+   DI & SSO DROPDOWN STYLING
+============================ */
+.stacked-traits {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+        
 /* Grid Frameworks (Your side-by-side columns) */
 .grid-2 {
     display: grid;
@@ -1072,6 +1081,7 @@ footer {
 </div><!-- end dropdown-block -->
 
 
+    
 <!-- DESKTOP OVERLAY VERSION (hidden) -->
 <div id="profile" class="panel-content" style="display:none;">
 
@@ -1084,33 +1094,45 @@ footer {
         </p>
     </section>
 
-    <!-- Digital Intelligence -->
-    <section class="grid-2">
-        <div class="card">
-            <h3>Digital Intelligence</h3>
-            <p style="font-size: 0.9rem; text-align: justify;">
-                Recently graduated with a 2025 Diploma in Digital Technology, my experience spans IT Networks and Technical Support,
-                Website Design and Architecture, UX/UI, AI Engine development, and Database Systems.
-                I am currently architecting a novel form of code intelligence engine designed to confront and stabilize the phenomena
-                of hallucination and cognitive drift.
-            </p>
+    <!-- STACKED DROPDOWNS CONTAINER -->
+    <section class="stacked-traits">
+
+        <!-- Digital Intelligence (Dropdown) -->
+        <div class="dropdown-block">
+            <button class="dropdown-header" onclick="toggleDropdown(this)">
+                Digital Intelligence <span class="chevron">◂</span>
+            </button>
+
+            <div class="dropdown-body">
+                <p style="font-size: 0.9rem; text-align: justify;">
+                    Recently graduated with a 2025 Diploma in Digital Technology, my experience spans IT Networks and Technical Support,
+                    Website Design and Architecture, UX/UI, AI Engine development, and Database Systems.
+                    I am currently architecting a novel form of code intelligence engine designed to confront and stabilize the phenomena
+                    of hallucination and cognitive drift.
+                </p>
+            </div>
         </div>
 
-        <!-- Site Security Ops Specialist -->
-        <div class="card">
-            <h3>Site Security Ops Specialist</h3>
-            <ul>
-                <li>Forming full-scale site security operations</li>
-                <li>Design & build of operational security workstations</li>
-                <li>Access Management, Surveillance & Data-storage Systems</li>
-                <li>Security Administration, Field Operations & Solutions</li>
-                <li>OHS, risk procedures, and protocol compliance training</li>
-            </ul>
+        <!-- Site Security Ops Specialist (Dropdown) -->
+        <div class="dropdown-block">
+            <button class="dropdown-header" onclick="toggleDropdown(this)">
+                Site Security Ops Specialist <span class="chevron">◂</span>
+            </button>
+
+            <div class="dropdown-body">
+                <ul>
+                    <li>Forming full-scale site security operations</li>
+                    <li>Design & build of operational security workstations</li>
+                    <li>Access Management, Surveillance & Data-storage Systems</li>
+                    <li>Security Administration, Field Operations & Solutions</li>
+                    <li>OHS, risk procedures, and protocol compliance training</li>
+                </ul>
+            </div>
         </div>
+
     </section>
 
 </div><!-- end desktop overlay panel-content -->
-
 
 
 
@@ -2143,5 +2165,32 @@ function openPanel(id, headerBtn) {
 }
 </script>
 
+<script>
+// ===============================
+// DI & SSO DROPDOWN LOGIC
+// ===============================
+function toggleDropdown(btn) {
+    const block = btn.parentElement;
+    const body = block.querySelector(".dropdown-body");
+
+    // Close all other dropdowns
+    document.querySelectorAll(".dropdown-block .dropdown-body").forEach(b => {
+        if (b !== body) {
+            b.style.maxHeight = null;
+            b.parentElement.querySelector(".dropdown-header").classList.remove("active");
+        }
+    });
+
+    // Toggle this one
+    if (body.style.maxHeight) {
+        body.style.maxHeight = null;
+        btn.classList.remove("active");
+    } else {
+        body.style.maxHeight = body.scrollHeight + "px";
+        btn.classList.add("active");
+    }
+}
+</script>
+    
 </body>
 </html>
