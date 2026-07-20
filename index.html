@@ -22,15 +22,27 @@
 
 body {
     margin: 0;
-    padding: 0;
+    padding: 0; /* Removed padding so the background image covers edge-to-edge */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    color: #e2e8f0; /* Crisp slate white for excellent readability on dark backgrounds */
-    background-color: #1e293c; /* Sleek gunmetal base */
-    padding: 25px 10px;
+    color: #e2e8f0; 
+    
+    /* Background Image Settings */
+    background-image: url('assets/RSG.jpg');
+    background-color: #1e293c; /* Fallback color if the image fails to load */
+    background-size: cover;    /* Scales the image to cover the entire viewport */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Keeps the background static while scrolling */
+
+    height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
-    height: 100vh;
+}
+
+/* Wrap your existing HTML content inside this container to keep your 25px/10px spacing */
+.page-content {
+    padding: 25px 10px;
 }
 
 .container {
@@ -75,7 +87,7 @@ body {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(rgba(15, 23, 42, 0.35), rgba(15, 23, 42, 0.35));
+    background: transparent;
 }
 
 .sub-header-wrapper {
