@@ -28,7 +28,7 @@ body {
     color: #e2e8f0; 
     
     /* Background Image Settings */
-    background-image: url('assets/Cube6.png');
+    background-image: url('Cube6.png');
     background-color: #1e293c; /* Fallback color if the image fails to load */
     background-size: cover;    /* Scales the image to cover the entire viewport */
     background-position: center; /* Centers the image */
@@ -60,6 +60,11 @@ body {
 
 /* ==========================================================================
    VIDEO BACKGROUND
+   FIX: previously the video was sized as a % of .container itself, and
+   .container grows taller every time an accordion/dropdown opens — so the
+   video kept "expanding" along with it. It's now wrapped in .hero-bg, a
+   fixed-height layer pinned to the top of the card, so its size is locked
+   regardless of how much content below it expands.
    ========================================================================== */
 .hero-bg {
     position: absolute;
@@ -97,6 +102,87 @@ body {
     padding: 0 10px;
     width: 100%;
     gap: 20px;
+}
+
+/* ==========================================================================
+   MASTER NAVIGATION TOGGLE
+   Single arrow trigger for all section dropdowns. Click plays two stages:
+   1) the shaft extends outward from the arrowhead (.extending)
+   2) the arrowhead rotates to point down and the panel drops open (.open)
+   Reverse order on close — see toggleMasterPanel JS.
+   ========================================================================== */
+.master-nav {
+    padding: 0 6px;
+    margin-bottom: 10px;
+    margin-top: -50px;
+}
+
+.master-toggle {
+    display: inline-flex;
+    align-items: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px 6px;
+    color: #38bdf8;
+}
+
+.master-toggle .arrow-shaft {
+    display: inline-block;
+    height: 5px;
+    width: 0;
+    background: transparent; /* shaft is transparent */
+    border-bottom: 2px solid #38bdf8; /* neon line */
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.6); /* glow */
+    transition: width 0.35s ease;
+}
+
+.master-toggle .arrow-head {
+    display: inline-block;
+    font-size: 2.5rem;
+    line-height: 1;
+
+    /* Neon cyan to match the shaft border */
+    color: #38bdf8;
+
+    /* Stronger glow to match the shaft’s border glow */
+    text-shadow:
+        0 0 6px rgba(56, 189, 248, 0.75),
+        0 0 12px rgba(56, 189, 248, 0.55),
+        0 0 18px rgba(56, 189, 248, 0.35);
+
+    transition: transform 0.35s ease, color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.master-toggle:hover .arrow-head {
+    color: #7dd3fc;
+    text-shadow:
+        0 0 8px rgba(125, 211, 252, 0.85),
+        0 0 16px rgba(56, 189, 248, 0.65),
+        0 0 24px rgba(56, 189, 248, 0.45);
+}
+
+
+/* Stage 1: shaft extends as soon as the button is clicked */
+.master-toggle.extending .arrow-shaft {
+    width: 258px;
+}
+
+/* Stage 2: once the panel is open, the arrowhead rotates to point down */
+.master-toggle.open .arrow-head {
+    transform: rotate(180deg);
+}
+
+.master-panel {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.4s ease;
+}
+
+.master-panel.open {
+    max-height: 6000px; /* generously large so the tallest section always fits */
+    opacity: 1;
 }
 
 /* ==========================================================================
@@ -179,11 +265,11 @@ body {
 }
 
 .header-identity .tagline {
-    font-size: 1.05rem;
+    font-size: 0.85rem;
     color: #94a3b8;
     font-family: 'Michroma', sans-serif;
     margin: 0;
-    letter-spacing: 0.8px;
+    letter-spacing: 3px;
     transition: opacity 0.4s ease;
 }
 
@@ -215,16 +301,6 @@ h3 {
     color: #f8fafc;
 }
 
-p.profile-statement {
-    font-size: 1rem;
-    text-align: left;
-    text-justify: auto;
-    margin-bottom: 12px;
-    font-family: 'Rajdhani', sans-serif;
-    line-height: 1.5;
-    letter-spacing: 1px;
-}
-
 /* Grid Frameworks (side-by-side columns) */
 .grid-2 {
     display: grid;
@@ -233,7 +309,7 @@ p.profile-statement {
 }
 
 .card {
-    background: #1e293b;
+    background: transparent;
     padding: 20px;
     border-radius: 8px;
     border-left: 4px solid #38bdf8;
@@ -273,7 +349,8 @@ p.profile-statement {
 }
 
 /* ==========================================================================
-   DROPDOWN HEADERS / BODIES 
+   DROPDOWN HEADERS / BODIES (consolidated — was previously split across
+   three separate blocks with overlapping rules)
    ========================================================================== */
 .dropdown-block {
     margin: 0px 0;
@@ -284,8 +361,8 @@ p.profile-statement {
 .dropdown-header {
     display: inline-flex;
     align-items: center;
-    justify-content: flex-start;   /* ← FIX */
-    gap: 8px;                      /* spacing between title + chevron */
+    justify-content: flex-start; 
+    gap: 8px;
     width: 100%;
     text-align: left;
     background: transparent;
@@ -300,7 +377,6 @@ p.profile-statement {
     cursor: pointer;
     transition: background 0.3s ease, color 0.3s ease;
 }
-
 
 .dropdown-header:hover {
     color: #7dd3fc;
@@ -349,12 +425,25 @@ p.profile-statement {
 
 /* ==========================================================================
    PROFILE STATEMENT — INTERNAL MINI-DROPDOWNS
-   (Profile Statement / Digital Intelligence / Site Security). 
+   One shared source (Profile Statement / Digital Intelligence / Site
+   Security). On mobile it's shown flat and fully open — there's no real
+   estate to justify collapsing it further. When cloned into the desktop
+   overlay panel, the same markup becomes 3 individually collapsible
+   dropdowns, closed by default, with only one open at a time.
    ========================================================================== */
+p.profile-statement {
+    font-size: 1.1rem;
+    text-align: left;
+    text-justify: auto;
+    margin-bottom: 12px;
+    font-family: 'Rajdhani', sans-serif;
+    line-height: 1.5;
+    letter-spacing: 1px;
+}
+
 .mini-dropdown {
     margin-bottom: 12px;
-    background: rgba(30, 41, 59, 0.55);
-    color: #38bdf8;
+    background: transparent;
     border-radius: 8px;
     border-left: 1px solid #38bdf8;
     overflow: hidden;
@@ -368,9 +457,9 @@ p.profile-statement {
     background: transparent;
     border: none;
     color: #f8fafc;
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-family: 'Michroma', sans-serif;
+    font-size: 1rem;
+    font-weight: 200;
     letter-spacing: 0.5px;
     padding: 14px 18px;
     cursor: default; /* inert on mobile — content is already open */
@@ -387,9 +476,15 @@ p.profile-statement {
     overflow: visible;
     padding: 0 18px 16px 18px;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: #cbd5e1;
     transition: max-height 0.35s ease, opacity 0.3s ease;
+}
+
+.mini-body {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(15px);
+    background: rgba(15, 23, 42, 0.35); /* subtle dark glass */
 }
 
 /* Desktop overlay: collapsed by default, clickable, one open at a time */
@@ -424,7 +519,7 @@ p.profile-statement {
     border-radius: 6px;
     margin-bottom: 10px;
     overflow: hidden;
-    background: #1e293b;
+    background: transparent;
 }
 
 .accordion-header {
@@ -641,18 +736,6 @@ footer {
     padding-top: 20px;
 }
 
-        .dropdown-body a {
-    text-decoration: none;
-    font-family: 'Orbitron', sans-serif;
-    letter-spacing: 1px;
-    color: #38bdf8;
-}
-
-.dropdown-body a:hover {
-    color: #7dd3fc;
-    text-shadow: 0 0 6px #7dd3fc, 0 0 12px #38bdf8;
-}
-
 .glow-glyph {
     color: #3182ce;
     text-shadow: 0 0 8px rgba(49, 130, 206, 0.8),
@@ -677,30 +760,35 @@ footer {
 .trait-header {
     width: 100%;
     text-align: left;
-    background: rgba(30, 41, 59, 0.55);
-    color: #38bdf8;
-    font-family: 'Exo 2', sans-serif;
-    font-size: 1.1rem;
-    padding: 10px 14px;
+    background: transparent;
+    color: #f8fafc;
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.95rem;
+    padding: 10px 20px;
     margin-bottom: 6px;
     border-radius: 6px;
-    border: 0px solid rgba(56, 189, 248, 0.25);
+    border-top: 0px solid rgba(56, 189, 248, 0.25);
+    border-bottom: 0px;
     cursor: pointer;
     transition: background 0.3s ease, color 0.3s ease;
 }
 
 .trait-header:hover {
+    opacity: 0.55;
     background: #334155;
 }
 
 .trait-body {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 1px;
     max-height: 0;
     overflow: hidden;
     opacity: 0;
     transition: max-height 0.45s ease, opacity 0.35s ease;
     padding: 0 14px;
-    background: #0f172a;
-    border-left: 3px solid #38bdf8;
+    background: transparent;
+    border-left: 1px solid #f8fafc;;
     border-radius: 0 0 6px 6px;
     margin-top: 4px;
     overflow-y: auto;
@@ -708,8 +796,14 @@ footer {
     scrollbar-color: #38bdf8 #0f172a;
 }
 
+.trait-body {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(15px);
+    background: rgba(15, 23, 42, 0.35); /* subtle dark glass */
+}
+
 .trait-body::-webkit-scrollbar {
-    width: 6px;
+    width: 1px;
 }
 
 .trait-body::-webkit-scrollbar-track {
@@ -718,7 +812,7 @@ footer {
 
 .trait-body::-webkit-scrollbar-thumb {
     background-color: #38bdf8;
-    border-radius: 10px;
+    border-radius: 1px;
 }
 
 .trait-body.open {
@@ -806,6 +900,25 @@ footer {
 #overlay-panel::-webkit-scrollbar-thumb:hover {
     background: rgba(56, 189, 248, 0.35);
     box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+}
+
+/* The overlay panel is ~60% of the card's width — narrower than mobile's
+   full-width flow — so multi-column grids get a single-column layout here
+   to avoid cramped/overlapping content. */
+#overlay-panel .grid-2,
+#overlay-panel .references-grid,
+#overlay-panel .accordion-body {
+    grid-template-columns: 1fr;
+}
+
+/* Employment tables have 4 fixed-width columns — let them scroll
+   horizontally in the narrower panel rather than squeeze/wrap awkwardly. */
+#overlay-panel .accordion-content {
+    overflow-x: auto;
+}
+
+#overlay-panel table {
+    min-width: 480px;
 }
 
 /* ==========================================================================
@@ -906,6 +1019,16 @@ footer {
         page-break-inside: avoid;
     }
 }
+
+.indent li {
+    padding-left: 1.5rem;
+}
+.indent {
+    padding-left: 40px; /* Adjust this number to move them further right */
+}
+
+
+
     </style>
 </head>
 <body>
@@ -914,7 +1037,7 @@ footer {
 
     <div class="hero-bg">
         <video autoplay muted loop playsinline class="container-video">
-            <source src="assets/Cube04.mp4" type="video/mp4">
+            <source src="Cube04.mp4" type="video/mp4">
         </video>
     </div>
 
@@ -945,12 +1068,27 @@ footer {
     <!-- Sub-Header Alignment Wrapper -->
     <div class="sub-header-wrapper">
         <div class="header-identity">
-            <h2>John Va'afuti</h2>
+            <h2>John◈Va'afuti</h2>
             <p class="tagline">
                 <span id="tagline-rotate">Digital Architecture</span>
             </p>
         </div>
     </div>
+
+    <!-- ==========================================================
+         MASTER NAVIGATION TOGGLE
+         Single trigger for all section dropdowns below. Click plays a
+         two-stage animation: the arrow shaft extends first, then the
+         panel drops open (see toggleMasterPanel JS).
+         ========================================================== -->
+    <div class="master-nav">
+        <button class="master-toggle" id="masterToggle" onclick="toggleMasterPanel()" aria-label="Show sections">
+            <span class="arrow-shaft"></span>
+            <span class="arrow-head">➣</span>
+        </button>
+    </div>
+
+    <div class="master-panel" id="masterPanel">
 
     <!-- ==========================================================
          PROFILE STATEMENT / DIGITAL INTELLIGENCE / SITE SECURITY
@@ -1002,7 +1140,7 @@ footer {
                 </button>
                 <div class="mini-body">
                     <ul>
-                        <li>Forming full-scale site security operations</li>
+                        <li>Construction of full-scale site security operations</li>
                         <li>Design & build of operational security workstations</li>
                         <li>Access Management, Surveillance & Data-storage Systems</li>
                         <li>Security Administration, Field Operations & Solutions</li>
@@ -1448,12 +1586,12 @@ footer {
 
     <!-- Training & Education -->
     <div class="dropdown-block">
-        <button class="dropdown-header" onclick="toggleSectionDropdown(this)">
+        <button class="dropdown-header" onclick="handleDropdownClick('trainingContent', this)">
             <span class="title">Training & Education</span>
             <span class="chevron">▾</span>
         </button>
 
-        <div class="dropdown-body">
+        <div class="dropdown-body" id="trainingContent">
             <section>
                 <div class="grid-2" style="margin-bottom: 20px;">
                     <div class="card">
@@ -1555,18 +1693,18 @@ footer {
 
     <!-- Employment Details -->
     <div class="dropdown-block">
-        <button class="dropdown-header" onclick="toggleSectionDropdown(this)">
+        <button class="dropdown-header" onclick="handleDropdownClick('employmentContent', this)">
             <span class="title">Employment Details</span>
             <span class="chevron">▾</span>
         </button>
 
-        <div class="dropdown-body">
+        <div class="dropdown-body" id="employmentContent">
 
             <!-- EMPLOYMENT HISTORY -->
             <section>
                 <h3>Employment History</h3>
 
-                <div class="privacy-gate" id="historyGate">
+                <div class="privacy-gate" data-gate="historyGate">
                     <p class="gate-instructions">
                         <span class="glow-glyph">𖦤</span> To protect work history privacy, entering your professional email address will unlock this section.
                     </p>
@@ -1577,12 +1715,12 @@ footer {
                         <button type="submit" class="gate-btn">Unlock History</button>
                     </form>
 
-                    <div class="error-msg" id="historyGate-error">
+                    <div class="error-msg">
                         Verification failed. Please check your internet connection or use a valid email format.
                     </div>
                 </div>
 
-                <div class="hidden-content" id="historyContent">
+                <div class="hidden-content" data-content="historyContent">
                     <div class="accordion-container" style="margin-top: 15px;">
 
                         <!-- Professional Occupations -->
@@ -1675,7 +1813,7 @@ footer {
             <section>
                 <h3>Professional References</h3>
 
-                <div class="privacy-gate" id="privacyGate">
+                <div class="privacy-gate" data-gate="privacyGate">
                     <p class="gate-instructions">
                         <span class="glow-glyph">𖦤</span> To protect referee privacy, entering your professional email address will unlock this section.
                     </p>
@@ -1686,12 +1824,12 @@ footer {
                         <button type="submit" class="gate-btn">Unlock References</button>
                     </form>
 
-                    <div class="error-msg" id="privacyGate-error">
+                    <div class="error-msg">
                         Verification failed. Please check your internet connection or use a valid email format.
                     </div>
                 </div>
 
-                <div class="hidden-content" id="referencesContent">
+                <div class="hidden-content" data-content="referencesContent">
                     <div class="references-grid">
 
                         <div class="ref-card">
@@ -1728,33 +1866,34 @@ footer {
 
     <!-- Projects & Development -->
     <div class="dropdown-block">
-        <button class="dropdown-header" onclick="toggleSectionDropdown(this)">
+        <button class="dropdown-header" onclick="handleDropdownClick('projectsContent', this)">
             <span class="title">Projects & Development</span>
             <span class="chevron">▾</span>
         </button>
 
-        <div class="dropdown-body">
-            <ul>
-                <li>ARC — AI-Native Cognitive Architecture</li>
-                <li>DTSIM — Investigative Simulation Engine</li>
-                <li>Cognition Flex — Adaptive Cognitive Pipeline</li>
-                <li>Horizons — Multi-Vector Conceptual Framework</li>
-                <li>QMLI — Quantum-Mapped Logic Interface</li>
-                <li>NeuroSync Nexus — Multi-Emergent Resonance System</li>
-                <li>Fabrication Projects — Workstation Builds & Structural Mounts</li>
-            </ul>
+        <div class="dropdown-body" id="projectsContent">
+            <ul class="indent">
+    		<li>ARC — AI-Native Cognitive Architecture</li>
+    		<li>DTSIM — Investigative Simulation Engine</li>
+    		<li>Cognition Flex — Adaptive Cognitive Pipeline</li>
+    		<li>Horizons — Multi-Vector Conceptual Framework</li>
+    		<li>QMLI — Quantum-Mapped Logic Interface</li>
+    		<li>NeuroSync Nexus — Multi-Emergent Resonance System</li>
+    		<li>Fabrication Projects — Workstation Builds & Structural Mounts</li>
+	    </ul>
+
         </div>
     </div>
 
 
     <!-- Contact -->
     <div class="dropdown-block">
-        <button class="dropdown-header" onclick="toggleSectionDropdown(this)">
+        <button class="dropdown-header" onclick="handleDropdownClick('contactContent', this)">
             <span class="title">Contact</span>
             <span class="chevron">▾</span>
         </button>
 
-        <div class="dropdown-body contact-font">
+        <div class="dropdown-body contact-font" id="contactContent">
             <p><strong>Mobile:</strong> 021 293 2877</p>
             <p><strong>Email:</strong> <a href="mailto:John.Vaafuti@gmail.com">John.Vaafuti@gmail.com</a></p>
             <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/john-va-afuti-096233294" target="_blank">View Profile</a></p>
@@ -1765,6 +1904,8 @@ footer {
             </footer>
         </div>
     </div>
+
+    </div><!-- end .master-panel -->
 
 </div><!-- end .container -->
 
@@ -1790,6 +1931,74 @@ function toggleSectionDropdown(btn) {
 
 <script>
 // ===============================
+// MASTER NAVIGATION TOGGLE
+// Stage 1: the arrow shaft extends. Stage 2 (after that finishes): the
+// arrowhead rotates down and the panel drops open. Closing reverses the
+// order — panel collapses first, then the arrow retracts.
+// ===============================
+let masterOpen = false;
+let masterAnimating = false;
+
+function toggleMasterPanel() {
+    if (masterAnimating) return;
+
+    const toggleBtn = document.getElementById('masterToggle');
+    const panel = document.getElementById('masterPanel');
+
+    masterAnimating = true;
+
+    if (!masterOpen) {
+        // Stage 1: shaft extends outward
+        toggleBtn.classList.add('extending');
+
+        setTimeout(() => {
+            // Stage 2: arrowhead rotates down, panel drops open
+            toggleBtn.classList.add('open');
+            panel.classList.add('open');
+            masterOpen = true;
+            masterAnimating = false;
+        }, 350); // matches .arrow-shaft width transition duration
+    } else {
+        // Stage 1: panel collapses first
+        panel.classList.remove('open');
+        toggleBtn.classList.remove('open');
+        closeAllSubDropdowns();
+
+        setTimeout(() => {
+            // Stage 2: arrow retracts back in
+            toggleBtn.classList.remove('extending');
+            masterOpen = false;
+            masterAnimating = false;
+        }, 500); // matches .master-panel max-height transition duration
+    }
+}
+
+// Tidy up any section left open inside the panel (mobile inline dropdown,
+// or the desktop overlay clone) whenever the master panel closes, so it
+// reopens fresh next time rather than mid-state.
+function closeAllSubDropdowns() {
+    document.querySelectorAll('#masterPanel .dropdown-block').forEach(block => {
+        block.classList.remove('dropdown-open');
+    });
+
+    const overlay = document.getElementById('overlay-panel');
+    if (overlay) {
+        overlay.style.display = 'none';
+        overlay.innerHTML = '';
+        overlay.style.animation = 'none';
+    }
+
+    document.querySelectorAll('#masterPanel .dropdown-header.active').forEach(header => {
+        header.classList.remove('active');
+    });
+
+    currentPanel = null;
+    currentHeader = null;
+}
+</script>
+
+<script>
+// ===============================
 // ACCORDION LOGIC (Training / Employment tables)
 // ===============================
 function toggleAccordion(element) {
@@ -1801,14 +2010,23 @@ function toggleAccordion(element) {
 <script>
 // ===============================
 // PRIVACY GATE / EMAIL VERIFICATION
+// gateKey/contentKey identify the gate via data-gate/data-content attributes
+// rather than unique element IDs. This matters because the desktop overlay
+// clones this same markup into #overlay-panel — with real IDs that would
+// create duplicates on the page and break getElementById lookups. Using
+// data-attributes + querySelectorAll lets this safely target every matching
+// instance currently in the DOM (the mobile copy, and the desktop clone if
+// it's open), so unlocking from either view unlocks both, now and on any
+// future re-open of the overlay.
 // ===============================
-function unlockSection(event, gateId, contentId, subjectText) {
+function unlockSection(event, gateKey, contentKey, subjectText) {
     event.preventDefault();
 
     const form = event.target;
+    const gate = form.closest('.privacy-gate');
     const emailInput = form.querySelector('input[type="email"]');
     const button = form.querySelector('button');
-    const errorDiv = document.getElementById(gateId + '-error');
+    const errorDiv = gate.querySelector('.error-msg');
 
     if (!emailInput) return;
     const typedEmail = emailInput.value.trim();
@@ -1828,7 +2046,7 @@ function unlockSection(event, gateId, contentId, subjectText) {
     formData.append("apiKey", "sf_cd80daefea1cfd2b21a86e62");
     formData.append("subject", subjectText);
     formData.append("email", typedEmail);
-    formData.append("message", `Employer content token unlock.\nTarget Section: ${contentId}\nVerified Contact: ${typedEmail}\nTimestamp: ${new Date().toLocaleString()}`);
+    formData.append("message", `Employer content token unlock.\nTarget Section: ${contentKey}\nVerified Contact: ${typedEmail}\nTimestamp: ${new Date().toLocaleString()}`);
 
     fetch("https://api.staticforms.dev/submit", {
         method: "POST",
@@ -1836,8 +2054,12 @@ function unlockSection(event, gateId, contentId, subjectText) {
     })
     .then(response => {
         if (response.ok) {
-            document.getElementById(gateId).style.display = 'none';
-            document.getElementById(contentId).style.display = 'block';
+            document.querySelectorAll('.privacy-gate[data-gate="' + gateKey + '"]').forEach(g => {
+                g.style.display = 'none';
+            });
+            document.querySelectorAll('.hidden-content[data-content="' + contentKey + '"]').forEach(c => {
+                c.style.display = 'block';
+            });
         } else {
             throw new Error("Network submission rejected");
         }
@@ -1891,14 +2113,17 @@ setInterval(rotateTagline, 3000);
 // ===============================
 function toggleTrait(button) {
     const body = button.nextElementSibling;
+    // Scope to this specific traits-accordion instance (mobile copy or the
+    // desktop overlay's cloned copy) so opening one never affects the other.
+    const scope = button.closest('.traits-accordion') || document;
 
-    document.querySelectorAll('.trait-body').forEach(section => {
+    scope.querySelectorAll('.trait-body').forEach(section => {
         if (section !== body) {
             section.classList.remove('open');
         }
     });
 
-    document.querySelectorAll('.trait-header').forEach(header => {
+    scope.querySelectorAll('.trait-header').forEach(header => {
         if (header !== button) {
             header.classList.remove('open');
         }
@@ -1957,16 +2182,26 @@ function handleDropdownClick(id, headerBtn) {
 // ===============================
 let currentPanel = null;
 let currentHeader = null;
+let panelHideTimeout = null; // tracks the pending "hide" from a close animation
 
 function openPanel(id, headerBtn) {
     const panel = document.getElementById("overlay-panel");
 
-    // CASE 1: Same header clicked → close panel
+    // Cancel any pending hide left over from a previous close/switch —
+    // this is what was causing a freshly opened panel to vanish ~350ms
+    // later: the old timeout kept running even after new content loaded.
+    if (panelHideTimeout) {
+        clearTimeout(panelHideTimeout);
+        panelHideTimeout = null;
+    }
+
+    // Same header clicked again while its panel is open → close it
     if (currentPanel === id && panel.style.display === "block") {
         panel.style.animation = "slideOutToRight 0.35s ease forwards";
 
-        setTimeout(() => {
+        panelHideTimeout = setTimeout(() => {
             panel.style.display = "none";
+            panelHideTimeout = null;
         }, 350);
 
         if (currentHeader) {
@@ -1978,20 +2213,13 @@ function openPanel(id, headerBtn) {
         return;
     }
 
-    // CASE 2: Different header clicked → close old panel first
-    if (panel.style.display === "block" && currentPanel !== id) {
-        panel.style.animation = "slideOutToRight 0.35s ease forwards";
-
-        setTimeout(() => {
-            panel.style.display = "none";
-        }, 350);
-
-        if (currentHeader) {
-            currentHeader.classList.remove("active");
-        }
+    // Switching to a different section (or opening fresh) — just swap the
+    // content in place and slide it in. No separate close step needed:
+    // the content underneath is being replaced anyway.
+    if (currentHeader && currentHeader !== headerBtn) {
+        currentHeader.classList.remove("active");
     }
 
-    // Load new content (cloned from the single source element on the page)
     const content = document.getElementById(id).innerHTML;
     panel.innerHTML = content;
 
