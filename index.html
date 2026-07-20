@@ -978,30 +978,31 @@ footer {
     gap: 1rem;
 }
 
-/* PANEL DROPDOWN FIX — REQUIRED */
+/* FORCE PANEL DROPDOWN TO BE VISIBLE */
 .panel-content .dropdown-body {
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.35s ease;
-    padding: 0 0.75rem;
+    overflow: hidden !important;
+    max-height: 0 !important;
+    transition: max-height 0.35s ease !important;
+    padding: 0 0.75rem !important;
+    display: block !important;
     color: #fff;
-    display: block; /* CRITICAL */
 }
 
-/* When open */
+/* WHEN OPEN */
 .panel-content .dropdown-header.active + .dropdown-body {
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
+    max-height: 1000px !important; /* forces expansion */
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
 }
 
-/* Glassy dropdown container */
+/* GLASSY PANEL */
 .panel-content .dropdown-block {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 10px;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 10px !important;
+    padding: 0.75rem !important;
+    margin-bottom: 1rem !important;
 }
 
 /* Chevron rotation */
