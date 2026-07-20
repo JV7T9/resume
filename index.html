@@ -320,22 +320,6 @@ p.profile-statement {
     letter-spacing: 1px;
 }
 
-/* ============================
-   DI & SSO DROPDOWN STYLING
-============================ */
-.stacked-traits {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-        
-/* Grid Frameworks (Your side-by-side columns) */
-.grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
 .card {
     background: #1e293b; 
     padding: 20px;
@@ -985,6 +969,55 @@ footer {
     box-shadow: 0 0 8px rgba(56, 189, 248, 0.6); /* neon glow */
 }
 
+/* ============================
+   DI & SSO DROPDOWN STYLING
+   ========================= */
+.stacked-traits {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* PANEL DROPDOWN FIX — REQUIRED */
+.panel-content .dropdown-body {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.35s ease;
+    padding: 0 0.75rem;
+    color: #fff;
+    display: block; /* CRITICAL */
+}
+
+/* When open */
+.panel-content .dropdown-header.active + .dropdown-body {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+/* Glassy dropdown container */
+.panel-content .dropdown-block {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+/* Chevron rotation */
+.panel-content .dropdown-header.active .chevron {
+    transform: rotate(90deg);
+}
+
+.panel-content .chevron {
+    transition: transform 0.3s ease;
+}
+
+/* List padding */
+.panel-content .dropdown-body ul {
+    padding-left: 1rem;
+}
+        
     </style>
 </head>
 <body>
@@ -1085,40 +1118,39 @@ footer {
 <!-- DESKTOP OVERLAY VERSION (hidden) -->
 <div id="profile" class="panel-content" style="display:none;">
 
-    <!-- Profile Statement -->
-    <section>
-        <p class="profile-statement">
-            As the professional landscape transmutes into a dynamic field of complex operational systems, businesses require a high-fidelity, adaptive approach to maintain an edge.
-            My background sits at the intersection of these shifts, blending Operational Security, Digital Architecture and Engineering to provide full-scale productivity implementation, robust maintenance, and developmental continuity.
-            Navigating how to design systems that evolve with their environments, ensuring coherence, resilience, and emergent intelligence across every operational layers is an ongoing commitment.
-        </p>
-    </section>
-
-    <!-- STACKED DROPDOWNS CONTAINER -->
     <section class="stacked-traits">
 
-        <!-- Digital Intelligence (Dropdown) -->
+        <!-- Profile Statement Dropdown -->
         <div class="dropdown-block">
             <button class="dropdown-header" onclick="toggleDropdown(this)">
-                Digital Intelligence <span class="chevron">◂</span>
+                Professional Statement <span class="chevron">◂</span>
             </button>
-
             <div class="dropdown-body">
-                <p style="font-size: 0.9rem; text-align: justify;">
-                    Recently graduated with a 2025 Diploma in Digital Technology, my experience spans IT Networks and Technical Support,
-                    Website Design and Architecture, UX/UI, AI Engine development, and Database Systems.
-                    I am currently architecting a novel form of code intelligence engine designed to confront and stabilize the phenomena
-                    of hallucination and cognitive drift.
+                <p class="profile-statement">
+                    As the professional landscape transmutes into a dynamic field of complex operational systems, businesses require a high-fidelity, adaptive approach to maintain an edge.
+                    My background sits at the intersection of these shifts, blending Operational Security, Digital Architecture and Engineering to provide full-scale productivity implementation, robust maintenance, and developmental continuity.
+                    Navigating how to design systems that evolve with their environments, ensuring coherence, resilience, and emergent intelligence across every operational layers is an ongoing commitment.
                 </p>
             </div>
         </div>
 
-        <!-- Site Security Ops Specialist (Dropdown) -->
+        <!-- Digital Intelligence Dropdown -->
         <div class="dropdown-block">
             <button class="dropdown-header" onclick="toggleDropdown(this)">
-                Site Security Ops Specialist <span class="chevron">◂</span>
+                Digital Intelligence <span class="chevron">◂</span>
             </button>
+            <div class="dropdown-body">
+                <p style="font-size: 0.9rem; text-align: justify;">
+                    Recently graduated with a 2025 Diploma in Digital Technology, my experience spans IT Networks and   		    Technical Support, Website Design and Architecture, UX/UI, AI Engine development, and Database 		    Systems. I am currently architecting a novel form of code intelligence engine designed to confront 		    and stabilize the phenomena of hallucination and cognitive drift.
+                </p>
+            </div>
+        </div>
 
+        <!-- Site Security Ops Specialist Dropdown -->
+        <div class="dropdown-block">
+            <button class="dropdown-header" onclick="toggleDropdown(this)">
+                Site Security Operations <span class="chevron">◂</span>
+            </button>
             <div class="dropdown-body">
                 <ul>
                     <li>Forming full-scale site security operations</li>
@@ -1132,7 +1164,7 @@ footer {
 
     </section>
 
-</div><!-- end desktop overlay panel-content -->
+</div>
 
 
 
