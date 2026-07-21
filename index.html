@@ -28,7 +28,7 @@ body {
     color: #e2e8f0; 
     
     /* Background Image Settings */
-    background-image: url('assets/Cube6.png');
+    background-image: url('Cube6.png');
     background-color: #1e293c; /* Fallback color if the image fails to load */
     background-size: cover;    /* Scales the image to cover the entire viewport */
     background-position: center; /* Centers the image */
@@ -60,6 +60,11 @@ body {
 
 /* ==========================================================================
    VIDEO BACKGROUND
+   FIX: previously the video was sized as a % of .container itself, and
+   .container grows taller every time an accordion/dropdown opens — so the
+   video kept "expanding" along with it. It's now wrapped in .hero-bg, a
+   fixed-height layer pinned to the top of the card, so its size is locked
+   regardless of how much content below it expands.
    ========================================================================== */
 .hero-bg {
     position: absolute;
@@ -120,7 +125,6 @@ body {
     cursor: pointer;
     padding: 10px 6px;
     color: #38bdf8;
-	-webkit-tap-highlight-color: transparent;
 }
 
 /* Base styles for both shafts */
@@ -158,6 +162,14 @@ body {
         0 0 18px rgba(56, 189, 248, 0.35);
 
     transition: transform 0.35s ease, color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.master-toggle:hover .arrow-head {
+    color: #7dd3fc;
+    text-shadow:
+        0 0 8px rgba(125, 211, 252, 0.85),
+        0 0 16px rgba(56, 189, 248, 0.65),
+        0 0 24px rgba(56, 189, 248, 0.45);
 }
 
 /* Stage 1: Left shaft extends out, right shaft compresses away */
@@ -221,6 +233,7 @@ body {
     transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
+
 /* ==========================================================================
    INTRO BOX
    ========================================================================== */
@@ -254,7 +267,7 @@ body {
 
 .intro-title {
     font-family: 'Michroma', sans-serif;
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: #38bdf8;
     letter-spacing: 1px;
     margin-bottom: 8px;
@@ -268,6 +281,7 @@ body {
     color: #94a3b8;
     letter-spacing: 0.5px;
     text-align: left;
+    margin-left: 0px;
 }
 
 /* ==========================================================================
@@ -331,13 +345,14 @@ body {
    Section Layouts & General Typography
    ========================================================================== */
 .header-identity {
-    text-align: left;
+    text-align: center;
     margin-top: 0px;
     margin-bottom: 45px;
     padding-left: 4px;
 }
 
 .header-identity h2 {
+    text-align: auto;
     font-size: 2.4rem;
     font-family: 'Exo 2', sans-serif;
     color: #ffffff;
@@ -351,6 +366,7 @@ body {
 
 .header-identity .tagline {
     font-size: 0.85rem;
+    text-align: center;
     color: #94a3b8;
     font-family: 'Michroma', sans-serif;
     margin: 0;
@@ -521,9 +537,10 @@ h3 {
     100% { opacity: 1; transform: translateY(0); }
 }
 
+
 /* ==========================================================================
    PROFILE STATEMENT — INTERNAL MINI-DROPDOWNS
-   (Profile Statement / Digital Intelligence / Site Security OPS). 
+   One shared source (Profile Statement / Digital Intelligence / Site Security).
    ========================================================================== */
 p.profile-statement {
     font-size: 1.1rem;
@@ -545,7 +562,7 @@ p.profile-statement {
 
 .mini-header {
     display: flex;
-    align-items: center;
+    align-items: left;
     justify-content: space-between;
     width: 100%;
     background: transparent;
@@ -600,6 +617,7 @@ p.profile-statement {
    Interactive Accordion Styles 
    (Training / Employment History tables)
    ========================================================================== */
+
 .accordion-item {
     border: 1px solid rgba(56, 189, 248, 0.15);
     border-radius: 6px;
@@ -839,7 +857,7 @@ td em, td i {
    KEY TRAITS ACCORDION STYLING
    ========================================================================== */
 .traits-accordion {
-    margin-top: 10px;
+    margin-top: 0px;
 }
 
 .trait-item {
@@ -1015,6 +1033,23 @@ footer {
 }
 
 /* ==========================================================================
+   PROJECTS |R&D SECTION 
+   ========================================================================== */
+/* Apply Orbitron specifically to the Projects header title */
+#projectsContent ~ .dropdown-header .title, /* (Depending on your HTML nesting) */
+.dropdown-block:has(#projectsContent) .dropdown-header {
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+}
+
+/* Optional: If you also want the list items inside to have the Orbitron tech feel */
+#projectsContent ul.indent li {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
    DESKTOP OVERLAY PANEL
    ========================================================================== */
 :root {
@@ -1093,12 +1128,21 @@ footer {
     min-width: 480px;
 }
 
+
+/* Project & Development Table */
+.indent li {
+    padding-left: 1.5rem;
+}
+.indent {
+    padding-left: 40px; /* Adjust this number to move them further right */
+}
+
 /* ==========================================================================
    CONSOLIDATED MOBILE SNAP LAYOUT (For screens under 768px)
    ========================================================================== */
 @media (max-width: 768px) {
     body, .container, main {
-        padding: 15px !important;
+        padding: 15px 8px !important;
         margin: 0 !important;
         width: 100% !important;
         box-sizing: border-box;
@@ -1153,7 +1197,7 @@ footer {
         min-height: 44px; /* comfortable tap target on mobile */
     }
 
-	.grid-2, .references-grid, .accordion-body, [style*="display: flex"] {
+    .grid-2, .references-grid, .accordion-body, [style*="display: flex"] {
         display: flex !important;
         flex-direction: column !important;
         width: 100% !important;
@@ -1165,7 +1209,7 @@ footer {
         margin-bottom: 10px;
     }
 
-	/* Enable horizontal scrolling for employment history tables on mobile */
+    /* Enable horizontal scrolling for employment history tables on mobile */
     .accordion-content {
         overflow-x: auto !important;
         -webkit-overflow-scrolling: touch; /* Smooth momentum scrolling for iOS */
@@ -1215,12 +1259,7 @@ footer {
     }
 }
 
-.indent li {
-    padding-left: 1.5rem;
-}
-.indent {
-    padding-left: 40px; /* Adjust this number to move them further right */
-}
+
 
 
 
@@ -1232,7 +1271,7 @@ footer {
 
     <div class="hero-bg">
         <video autoplay muted loop playsinline class="container-video">
-            <source src="assets/Cube04.mp4" type="video/mp4">
+            <source src="Cube04.mp4" type="video/mp4">
         </video>
     </div>
 
@@ -1288,7 +1327,7 @@ footer {
     <p class="intro-title">𖤲 Custom-Digital Resume</p>
     <p class="intro-action">Click the chevron to access content</p>
 </div>
-	
+
     <div class="master-panel" id="masterPanel">
 
     <!-- ==========================================================
@@ -2104,23 +2143,23 @@ footer {
                 <p><strong>Email:</strong>&emsp; <a href="mailto:John.Vaafuti@gmail.com">John.Vaafuti@gmail.com</a></p>
                 <br>
 
-                <!-- Floating Social Bar (Inline Footer Style) -->
-                <div class="floating-social-bar" id="socialBar">
-                    <!-- LinkedIn Icon -->
-                    <a href="https://linkedin.com/in/john-va-afuti-096233294" target="_blank" class="social-icon-btn" title="LinkedIn">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                    </a>
+<!-- Floating Social Bar (Inline Footer Style) -->
+<div class="floating-social-bar" id="socialBar">
+    <!-- LinkedIn Icon -->
+    <a href="https://linkedin.com/in/john-va-afuti-096233294" target="_blank" class="social-icon-btn" title="LinkedIn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+    </a>
     
-                    <!-- Quora Icon -->
-                    <a href="https://sharingltdknowledge.quora.com/?ch=10&oid=6780182&share=396067ef&srid=3UG1ll&target_type=tribe" target="_blank" class="social-icon-btn" title="Quora">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.15 15.32a6.38 6.38 0 0 0 1.25-3.85C19.4 7.6 15.8 4 11.4 4S3.4 7.6 3.4 11.47c0 3.86 3.6 7.46 8 7.46 1.15 0 2.25-.26 3.23-.74l3.15 1.57-.63-3.94c.3-.49.57-1.02.8-1.5zM11.4 14.8c-1.85 0-3.33-1.48-3.33-3.33s1.48-3.33 3.33-3.33 3.33 1.48 3.33 3.33-1.48 3.33-3.33 3.33z"/></svg>
-                    </a>
+    <!-- Quora Icon -->
+    <a href="https://sharingltdknowledge.quora.com/?ch=10&oid=6780182&share=396067ef&srid=3UG1ll&target_type=tribe" target="_blank" class="social-icon-btn" title="Quora">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.15 15.32a6.38 6.38 0 0 0 1.25-3.85C19.4 7.6 15.8 4 11.4 4S3.4 7.6 3.4 11.47c0 3.86 3.6 7.46 8 7.46 1.15 0 2.25-.26 3.23-.74l3.15 1.57-.63-3.94c.3-.49.57-1.02.8-1.5zM11.4 14.8c-1.85 0-3.33-1.48-3.33-3.33s1.48-3.33 3.33-3.33 3.33 1.48 3.33 3.33-1.48 3.33-3.33 3.33z"/></svg>
+    </a>
 
-                    <!-- Facebook Icon -->
-                    <a href="https://www.facebook.com/profile.php?id=61552047390676" target="_blank" class="social-icon-btn" title="Facebook">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3.8l.2-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-                    </a>
-                </div>
+    <!-- Facebook Icon -->
+    <a href="https://www.facebook.com/profile.php?id=61552047390676" target="_blank" class="social-icon-btn" title="Facebook">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3.8l.2-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+    </a>
+</div>
             </footer>
         </div>
     </div>
@@ -2240,7 +2279,7 @@ function closeAllSubDropdowns() {
     currentHeader = null;
 }
 </script>
-	
+
 <script>
 // ===============================
 // ACCORDION LOGIC (Training / Employment tables)
@@ -2478,6 +2517,7 @@ function openPanel(id, headerBtn) {
     currentHeader = headerBtn;
 }
 </script>
-	
+
+
 </body>
 </html>
