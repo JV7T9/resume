@@ -511,33 +511,45 @@ p.profile-statement {
 }
 
 .accordion-header {
-    background-color: var(--dropdown-highlight);
-    padding: 15px 20px;
+    background: rgba(30, 41, 59, 0.5); /* Semi-transparent dark slate */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 16px 22px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
     user-select: none;
-    transition: background-color 0.2s ease;
+    border-radius: 6px;
+    border: 1px solid rgba(56, 189, 248, 0.2); /* Subtle cyan neon border */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
 }
 
 .accordion-header:hover {
-    background-color: var(--dropdown-highlight-hover);
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(56, 189, 248, 0.5); /* Brighter cyan on hover */
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
 }
 
 .accordion-title {
-    font-weight: 600;
+    font-family: 'Michroma', sans-serif;
+    font-weight: 400;
     color: #f8fafc;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
 }
 
 .accordion-year {
-    background: var(--primary-color);
-    color: white;
-    padding: 2px 10px;
-    border-radius: 12px;
+    background: rgba(56, 189, 248, 0.15); /* Glass-pill style */
+    color: #38bdf8;
+    padding: 4px 12px;
+    border-radius: 20px;
     font-size: 0.8rem;
-    font-weight: bold;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border: 1px solid rgba(56, 189, 248, 0.3);
     margin-left: auto;
     margin-right: 20px;
 }
@@ -545,7 +557,7 @@ p.profile-statement {
 .accordion-icon {
     font-size: 0.8rem;
     transition: transform 0.3s ease;
-    color: #94a3b8;
+    color: #38bdf8;
 }
 
 .accordion-content {
@@ -967,6 +979,18 @@ footer {
     .gate-input, .gate-btn {
         width: 100% !important;
         min-height: 44px; /* comfortable tap target on mobile */
+    }
+
+	.grid-2, .references-grid, .accordion-body, [style*="display: flex"] {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 15px !important;
+    }
+    
+    .card, .ref-card {
+        width: 100% !important;
+        margin-bottom: 10px;
     }
 }
 
