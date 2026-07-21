@@ -60,11 +60,6 @@ body {
 
 /* ==========================================================================
    VIDEO BACKGROUND
-   FIX: previously the video was sized as a % of .container itself, and
-   .container grows taller every time an accordion/dropdown opens — so the
-   video kept "expanding" along with it. It's now wrapped in .hero-bg, a
-   fixed-height layer pinned to the top of the card, so its size is locked
-   regardless of how much content below it expands.
    ========================================================================== */
 .hero-bg {
     position: absolute;
@@ -425,10 +420,7 @@ h3 {
 
 /* ==========================================================================
    PROFILE STATEMENT — INTERNAL MINI-DROPDOWNS
-   One shared source (Profile Statement / Digital Intelligence / Site
-   Security). Collapsed by default and click-to-expand on both mobile and
-   desktop, with only one open at a time — same behavior in the inline
-   mobile copy and the version cloned into the desktop overlay panel.
+   (Profile Statement / Digital Intelligence / Site Security OPS). 
    ========================================================================== */
 p.profile-statement {
     font-size: 1.1rem;
@@ -708,7 +700,7 @@ td em, td i {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    background: #1e293b;
+    background: transparent;
     padding: 20px;
     border-radius: 8px;
     border: 1px solid rgba(56, 189, 248, 0.1);
