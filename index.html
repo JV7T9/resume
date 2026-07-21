@@ -503,11 +503,6 @@ h3 {
     100% { opacity: 1; transform: translateY(0); }
 }
 
-.contact-font {
-    font-family: 'Orbitron', sans-serif;
-    letter-spacing: 1px;
-}
-
 /* ==========================================================================
    PROFILE STATEMENT — INTERNAL MINI-DROPDOWNS
    (Profile Statement / Digital Intelligence / Site Security OPS). 
@@ -812,18 +807,6 @@ td em, td i {
     color: #cbd5e1;
 }
 
-footer {
-    margin-top: 0px;
-    text-align: left;
-    font-size: 0.80rem;
-    font-family: 'Michroma', sans-serif;
-    border-top: none; /* Removes the top border line */
-    padding-top: 20px;
-    border-bottom: 1px solid rgba(56, 189, 248, 0.4); /* Adds a sleek neon cyan line to the bottom */
-    padding-bottom: 20px; /* Adds breathing room below the text */
-    box-shadow: 0 10px 15px -5px rgba(56, 189, 248, 0.15); /* Optional: adds a soft cyber glow underneath */
-}
-
 .glow-glyph {
     color: #3182ce;
     text-shadow: 0 0 8px rgba(49, 130, 206, 0.8),
@@ -928,6 +911,89 @@ footer {
     .trait-body.open {
         max-height: 400px; /* scroll inside dropdown */
     }
+}
+
+/* ==========================================================================
+   CONTACTS SECTION - Footer & COntact Details
+   ========================================================================== */
+.contact-font {
+    font-family: 'Michroma', sans-serif;
+    letter-spacing: 2px;
+}
+
+.contact-font,
+.contact-font p,
+.contact-font strong,
+.contact-font a {
+    font-family: 'Michroma', sans-serif;
+    letter-spacing: 1px;
+}
+
+footer {
+    margin-top: 00px;
+    text-align: left;
+    font-size: 0.80rem;
+    font-family: 'Michroma', sans-serif;
+    border-top: none; /* Removes the top border line */
+    padding-top: 20px;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.4); /* Adds a sleek neon cyan line to the bottom */
+    padding-bottom: 40px; /* Adds breathing room below the text */
+}
+
+/* ==========================================================================
+   SOCIAL MEDIA
+   ========================================================================== */
+
+.floating-social-bar {
+    position: relative; /* Keeps it inside the footer flow */
+    margin-top: 100px;          /* Optional vertical spacing */
+    left: 0;
+    display: flex;
+    gap: 16px;          /* Slightly increased gap for larger buttons */
+    z-index: 10;
+    
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    transform: translateY(0);
+}
+
+.floating-social-bar.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    pointer-events: none;
+}
+
+/* Individual Icon Buttons */
+.social-icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;          /* Increased size from 42px to 52px */
+    height: 52px;         /* Increased size from 42px to 52px */
+    background: rgba(15, 23, 42, 0.85); 
+    border: 1.5px solid rgba(56, 189, 248, 0.5); /* Slightly thicker cyber border */
+    border-radius: 50%;
+    color: #38bdf8; 
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.2); /* Ambient base glow */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enlarged SVG inside to match the bigger button */
+.social-icon-btn svg {
+    width: 22px;          /* Scaled up from 18px */
+    height: 22px;         /* Scaled up from 18px */
+    transition: transform 0.3s ease;
+}
+
+/* Hover State: Expand, Brighten, and Heavy Neon Glow */
+.social-icon-btn:hover {
+    background: rgba(56, 189, 248, 0.2); 
+    border-color: #38bdf8;
+    color: #ffffff;
+    transform: scale(1.15) translateY(-3px); /* Expands/grows and lifts up */
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.8), inset 0 0 10px rgba(56, 189, 248, 0.4); /* Intense double-layer neon glow */
 }
 
 /* ==========================================================================
@@ -1138,39 +1204,6 @@ footer {
     padding-left: 40px; /* Adjust this number to move them further right */
 }
 
-/* ==========================================================================
-   SOCIAL MEDIA
-   ========================================================================== */
-.floating-social-bar {
-    position: fixed;
-    bottom: 20px;
-    left: 40px; 
-    display: flex;
-    gap: 12px;
-    z-index: 1000; /* Keeps it floating above all content */
-}
-
-.social-icon-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 42px;
-    background: rgba(15, 23, 42, 0.85); /* Deep dark background matching your resume card */
-    border: 1px solid rgba(56, 189, 248, 0.4); /* Cyan neon border */
-    border-radius: 50%;
-    color: #38bdf8; /* Cyan icon color */
-    box-shadow: 0 0 10px rgba(56, 189, 248, 0.15); /* Soft ambient glow */
-    transition: all 0.3s ease;
-}
-
-.social-icon-btn:hover {
-    background: rgba(56, 189, 248, 0.15); /* Brighter fill on hover */
-    border-color: #38bdf8;
-    color: #ffffff;
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.6); /* Punchy neon pulse on hover */
-    transform: translateY(-3px); /* Subtle lift effect */
-}
 
 
     </style>
@@ -2036,7 +2069,7 @@ footer {
     </div>
 
 
-    <!-- Contact -->
+<!-- Contact -->
     <div class="dropdown-block">
         <button class="dropdown-header" onclick="handleDropdownClick('contactContent', this)">
             <span class="title">Contact</span>
@@ -2045,12 +2078,26 @@ footer {
 
         <div class="dropdown-body contact-font" id="contactContent">
             <footer>
-                Thank you for your time and consideration.<p>I welcome the opportunity to discuss how my background aligns with your interests, and I am available to provide references, qualifications, and project demonstrations upon request.</p><br>
-</br>
-            <p><strong>Mobile:</strong> &emsp;021 293 2877</p>
-            <p><strong>Email:</strong> &emsp;<a href="mailto:John.Vaafuti@gmail.com">John.Vaafuti@gmail.com</a></p>
-            <p><strong>LinkedIn:</strong> &emsp;<a href="https://linkedin.com/in/john-va-afuti-096233294" target="_blank">View Profile</a></p>
+                <p>Thank you for your time and consideration.</p>
+                <p>I welcome the opportunity to discuss how my background aligns with your interests, and I am available to provide references, qualifications, and project demonstrations upon request.</p>
+                <br>
 
+                <p><strong>Mobile:</strong>&emsp; 021 293 2877</p>
+                <p><strong>Email:</strong>&emsp; <a href="mailto:John.Vaafuti@gmail.com">John.Vaafuti@gmail.com</a></p>
+                <br>
+
+                <!-- Floating Social Bar (Inline Footer Style) -->
+                <div class="floating-social-bar" id="socialBar">
+                    <!-- LinkedIn Icon -->
+                    <a href="https://linkedin.com/in/john-va-afuti-096233294" target="_blank" class="social-icon-btn" title="LinkedIn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    </a>
+                    
+                    <!-- Facebook Icon -->
+                    <a href="https://www.facebook.com/profile.php?id=61552047390676" target="_blank" class="social-icon-btn" title="Facebook">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3.8l.2-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    </a>
+                </div>
             </footer>
         </div>
     </div>
