@@ -455,17 +455,35 @@ h3 {
     font-family: 'Orbitron', sans-serif;
     font-size: 0.90rem;
     letter-spacing: 2.5px;
-    padding: 8px 12px;
+    padding: 10px 12px;
     margin-bottom: 6px;
     border-radius: 6px;
-    border: none;
+    border: 0px solid transparent; /* Keeps border rendering smooth during shifts */
     cursor: pointer;
-    transition: background 0.3s ease, color 0.3s ease;
+    
+    /* Consolidated transition properties for motion and glow */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                background 0.3s ease, 
+                color 0.3s ease, 
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+    transform: translateX(0);
 }
 
 .dropdown-header:hover {
     color: #7dd3fc;
     text-shadow: 0 0 6px #7dd3fc, 0 0 12px #38bdf8;
+    transform: translateX(8px); /* Lifts/pushes forward on hover (~1.5 to 2mm visual shift) */
+    border-color: transparent;
+    background-color: transparent;
+}
+
+/* Persistent Active State (stays forward and accented while open) */
+.dropdown-header.is-active-state {
+    transform: translateX(12px); /* Pushes out just a fraction more than hover */
+    border-color: #38bdf8;
+    background-color: rgba(56, 189, 248, 0.12);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
 }
 
 .dropdown-header .chevron {
@@ -2118,16 +2136,30 @@ footer {
 // ===============================
 function toggleSectionDropdown(btn) {
     const block = btn.parentElement;
+    const isOpen = block.classList.contains('dropdown-open');
 
-    // Close all other dropdowns
+    // Close all other dropdowns and remove their active header states
     document.querySelectorAll('.dropdown-block').forEach(other => {
         if (other !== block) {
             other.classList.remove('dropdown-open');
+            const otherHeader = other.querySelector('.dropdown-header');
+            if (otherHeader) otherHeader.classList.remove('is-active-state');
         }
     });
 
-    // Toggle the clicked dropdown
-    block.classList.toggle('dropdown-open');
+    // Toggle the clicked dropdown and its persistent forward state
+    if (!isOpen) {
+        block.classList.add('dropdown-open');
+        btn.classList.add('is-active-state');
+    } else {
+        block.classList.remove('dropdown-open');
+        btn.classList.remove('is-active-state');
+    }
+
+    // Update social bar visibility if you're using that global check
+    if (typeof updateSocialBarVisibility === 'function') {
+        updateSocialBarVisibility();
+    }
 }
 </script>
 
