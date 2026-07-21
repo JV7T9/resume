@@ -1903,7 +1903,7 @@ footer {
 
                         <div class="ref-card">
                             <h4>Kourosh Ahmadi</h4>
-                            <p><em>Lecturer</em></p>
+                            <p><em>Lecturer / Professor</em></p>
                             <p>Manukau Institute of Technology</p>
                             <p>Mob: 021 0827 5090</p>
                             <p>Email: Kourosh.ahmadi@gmail.com</p>
@@ -1919,7 +1919,7 @@ footer {
 
                         <div class="ref-card">
                             <h4>Adam De Beer</h4>
-                            <p><em>Owner</em></p>
+                            <p><em>Owner / Managing Director</em></p>
                             <p>Integris Group Ltd NZ</p>
                             <p>Mob: 022 632 9790</p>
                             <p>Email: adam@integrisgl.com</p>
@@ -1999,12 +1999,6 @@ function toggleSectionDropdown(btn) {
 </script>
 
 <script>
-// ===============================
-// MASTER NAVIGATION TOGGLE
-// Stage 1: the arrow shaft extends. Stage 2 (after that finishes): the
-// arrowhead rotates down and the panel drops open. Closing reverses the
-// order — panel collapses first, then the arrow retracts.
-// ===============================
 let masterOpen = false;
 let masterAnimating = false;
 
@@ -2020,21 +2014,51 @@ function toggleMasterPanel() {
         setTimeout(() => {
             masterPanel.classList.add('open');
             toggleBtn.classList.add('open');
-        }, 350); // Matches shaft extension duration
+        }, 350); 
     } else {
         // CLOSING SEQUENCE: Close panel first, let it slide back, then rotate/retract shaft
         masterPanel.classList.remove('open');
         toggleBtn.classList.remove('open'); // Triggers the delayed arrow spin back
 
         setTimeout(() => {
-            toggleBtn.classList.remove('extending'); // Retracts the shaft last
-        }, 50); // Matches panel close duration
+            toggleBtn.classList.remove('extending'); // Retracts the shaft last (fixed to 50ms)
+        }, 50); 
+
+        // --- GLOBAL RESET / CLOSE ALL OPEN CONTENT ---
+        
+        // Call your dedicated sub-dropdown cleanup helper
+        closeAllSubDropdowns();
+
+        // 1. Close any open main dropdown blocks inside the master panel
+        document.querySelectorAll('.dropdown-block.dropdown-open').forEach(block => {
+            block.classList.remove('dropdown-open');
+        });
+
+        // 2. Close any open Employment History accordions
+        document.querySelectorAll('.accordion-item.active').forEach(item => {
+            item.classList.remove('active');
+        });
+
+        // 3. Close any open mini-dropdowns (like Profile Statement sections)
+        document.querySelectorAll('.mini-header.open').forEach(header => {
+            header.classList.remove('open');
+            const body = header.nextElementSibling;
+            if (body && body.classList.contains('mini-body')) {
+                body.classList.remove('open');
+            }
+        });
+
+        // 4. Close any open Key Traits accordions
+        document.querySelectorAll('.trait-header.open').forEach(traitHeader => {
+            traitHeader.classList.remove('open');
+            const traitBody = traitHeader.nextElementSibling;
+            if (traitBody && traitBody.classList.contains('trait-body')) {
+                traitBody.classList.remove('open');
+            }
+        });
     }
 }
 
-// Tidy up any section left open inside the panel (mobile inline dropdown,
-// or the desktop overlay clone) whenever the master panel closes, so it
-// reopens fresh next time rather than mid-state.
 function closeAllSubDropdowns() {
     document.querySelectorAll('#masterPanel .dropdown-block').forEach(block => {
         block.classList.remove('dropdown-open');
@@ -2055,7 +2079,7 @@ function closeAllSubDropdowns() {
     currentHeader = null;
 }
 </script>
-
+	
 <script>
 // ===============================
 // ACCORDION LOGIC (Training / Employment tables)
