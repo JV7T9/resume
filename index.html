@@ -223,6 +223,7 @@ body {
     transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
+
 /* ==========================================================================
    GLOWING MIRROR HEADER BOX
    ========================================================================== */
@@ -1152,6 +1153,12 @@ footer {
         <span class="arrow-shaft-right"></span>
     </button>
 </div>
+
+<div class="intro-block" id="introBlock">
+    <p class="intro-title">Welcome to my digital resume.</p>
+    <p class="intro-action">Click the chevron to explore resume contents.</p>
+</div>
+	
     <div class="master-panel" id="masterPanel">
 
     <!-- ==========================================================
@@ -2000,41 +2007,40 @@ let masterAnimating = false;
 function toggleMasterPanel() {
     const toggleBtn = document.getElementById('masterToggle');
     const masterPanel = document.getElementById('masterPanel');
+    const introBlock = document.getElementById('introBlock'); // Grab the intro block
     
     const isOpen = masterPanel.classList.contains('open');
 
     if (!isOpen) {
-        // OPENING SEQUENCE: Extend shaft first, then drop panel open
+        // OPENING SEQUENCE: Hide intro text immediately, extend shaft, then drop panel open
+        if (introBlock) introBlock.classList.add('hidden');
+        
         toggleBtn.classList.add('extending');
         setTimeout(() => {
             masterPanel.classList.add('open');
             toggleBtn.classList.add('open');
         }, 350); 
     } else {
-        // CLOSING SEQUENCE: Close panel first, let it slide back, then rotate/retract shaft
+        // CLOSING SEQUENCE: Close panel first, let it slide back, then rotate/retract shaft & bring intro back
         masterPanel.classList.remove('open');
-        toggleBtn.classList.remove('open'); // Triggers the delayed arrow spin back
+        toggleBtn.classList.remove('open'); 
 
         setTimeout(() => {
-            toggleBtn.classList.remove('extending'); // Retracts the shaft last (fixed to 50ms)
-        }, 50); 
+            toggleBtn.classList.remove('extending'); 
+            if (introBlock) introBlock.classList.remove('hidden'); // Bring intro text back after closing finishes
+        }, 350); 
 
         // --- GLOBAL RESET / CLOSE ALL OPEN CONTENT ---
-        
-        // Call your dedicated sub-dropdown cleanup helper
         closeAllSubDropdowns();
 
-        // 1. Close any open main dropdown blocks inside the master panel
         document.querySelectorAll('.dropdown-block.dropdown-open').forEach(block => {
             block.classList.remove('dropdown-open');
         });
 
-        // 2. Close any open Employment History accordions
         document.querySelectorAll('.accordion-item.active').forEach(item => {
             item.classList.remove('active');
         });
 
-        // 3. Close any open mini-dropdowns (like Profile Statement sections)
         document.querySelectorAll('.mini-header.open').forEach(header => {
             header.classList.remove('open');
             const body = header.nextElementSibling;
@@ -2043,7 +2049,6 @@ function toggleMasterPanel() {
             }
         });
 
-        // 4. Close any open Key Traits accordions
         document.querySelectorAll('.trait-header.open').forEach(traitHeader => {
             traitHeader.classList.remove('open');
             const traitBody = traitHeader.nextElementSibling;
