@@ -987,6 +987,17 @@ footer {
         width: 100% !important;
         margin-bottom: 10px;
     }
+
+	/* Enable horizontal scrolling for employment history tables on mobile */
+    .accordion-content {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch; /* Smooth momentum scrolling for iOS */
+    }
+
+    /* Ensure the table doesn't get squashed and maintains readable minimum width */
+    .accordion-content table {
+        min-width: 480px; 
+    }
 }
 
 /* ==========================================================================
