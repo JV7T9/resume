@@ -101,10 +101,10 @@ body {
 
 /* ==========================================================================
    MASTER NAVIGATION TOGGLE
-   Single arrow trigger for all section dropdowns. Click plays two stages:
-   1) the shaft extends outward from the arrowhead (.extending)
+   Dual-shaft sliding mechanical effect. Click plays two stages:
+   1) left shaft extends outward while right shaft compresses away (.extending)
    2) the arrowhead rotates to point down and the panel drops open (.open)
-   Reverse order on close — see toggleMasterPanel JS.
+   Reverse order on close.
    ========================================================================== */
 .master-nav {
     padding: 0 6px;
@@ -122,14 +122,24 @@ body {
     color: #38bdf8;
 }
 
-.master-toggle .arrow-shaft {
+/* Base styles for both shafts */
+.master-toggle .arrow-shaft,
+.master-toggle .arrow-shaft-right {
     display: inline-block;
     height: 5px;
-    width: 0;
-    background: transparent; /* shaft is transparent */
+    background: transparent;
     border-bottom: 2px solid #38bdf8; /* neon line */
     box-shadow: 0 0 8px rgba(56, 189, 248, 0.6); /* glow */
     transition: width 0.35s ease;
+}
+
+/* Left shaft starts closed, right shaft starts fully open */
+.master-toggle .arrow-shaft {
+    width: 0;
+}
+
+.master-toggle .arrow-shaft-right {
+    width: 258px;
 }
 
 .master-toggle .arrow-head {
@@ -157,15 +167,24 @@ body {
         0 0 24px rgba(56, 189, 248, 0.45);
 }
 
-
-/* Stage 1: shaft extends as soon as the button is clicked */
+/* Stage 1: Left shaft extends out, right shaft compresses away */
 .master-toggle.extending .arrow-shaft {
     width: 258px;
+}
+
+.master-toggle.extending .arrow-shaft-right {
+    width: 0;
 }
 
 /* Stage 2: once the panel is open, the arrowhead rotates to point down */
 .master-toggle.open .arrow-head {
     transform: rotate(180deg);
+}
+
+/* Reverse close sequence: hold rotation until the panel slides back, then spin back */
+.master-toggle:not(.open) .arrow-head {
+    transition: transform 0.25s ease 0.35s, color 0.3s ease; 
+    transform: rotate(0deg);
 }
 
 .master-panel {
@@ -178,6 +197,35 @@ body {
 .master-panel.open {
     max-height: 6000px; /* generously large so the tallest section always fits */
     opacity: 1;
+}
+
+/* Base state for dropdown blocks inside the master panel */
+.master-panel .dropdown-block {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition-delay: 0s;
+}
+
+/* When the master panel opens, cascade them downward one after another */
+.master-panel.open .dropdown-block {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger each dropdown block sequentially (adjust the time steps as desired) */
+.master-panel.open .dropdown-block:nth-child(1) { transition-delay: 0.1s; }
+.master-panel.open .dropdown-block:nth-child(2) { transition-delay: 0.2s; }
+.master-panel.open .dropdown-block:nth-child(3) { transition-delay: 0.3s; }
+.master-panel.open .dropdown-block:nth-child(4) { transition-delay: 0.4s; }
+.master-panel.open .dropdown-block:nth-child(5) { transition-delay: 0.5s; }
+.master-panel.open .dropdown-block:nth-child(6) { transition-delay: 0.6s; }
+
+/* When closing, reverse the cascade or make them snap shut smoothly upward */
+.master-panel:not(.open) .dropdown-block {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 /* ==========================================================================
@@ -1099,13 +1147,13 @@ footer {
          two-stage animation: the arrow shaft extends first, then the
          panel drops open (see toggleMasterPanel JS).
          ========================================================== -->
-    <div class="master-nav">
-        <button class="master-toggle" id="masterToggle" onclick="toggleMasterPanel()" aria-label="Show sections">
-            <span class="arrow-shaft"></span>
-            <span class="arrow-head">➣</span>
-        </button>
-    </div>
-
+<div class="master-nav">
+    <button class="master-toggle" id="masterToggle" onclick="toggleMasterPanel()" aria-label="Show sections">
+        <span class="arrow-shaft"></span>
+        <span class="arrow-head">➣</span>
+        <span class="arrow-shaft-right"></span>
+    </button>
+</div>
     <div class="master-panel" id="masterPanel">
 
     <!-- ==========================================================
@@ -1958,36 +2006,26 @@ let masterOpen = false;
 let masterAnimating = false;
 
 function toggleMasterPanel() {
-    if (masterAnimating) return;
-
     const toggleBtn = document.getElementById('masterToggle');
-    const panel = document.getElementById('masterPanel');
+    const masterPanel = document.getElementById('masterPanel');
+    
+    const isOpen = masterPanel.classList.contains('open');
 
-    masterAnimating = true;
-
-    if (!masterOpen) {
-        // Stage 1: shaft extends outward
+    if (!isOpen) {
+        // OPENING SEQUENCE: Extend shaft first, then drop panel open
         toggleBtn.classList.add('extending');
-
         setTimeout(() => {
-            // Stage 2: arrowhead rotates down, panel drops open
+            masterPanel.classList.add('open');
             toggleBtn.classList.add('open');
-            panel.classList.add('open');
-            masterOpen = true;
-            masterAnimating = false;
-        }, 350); // matches .arrow-shaft width transition duration
+        }, 350); // Matches shaft extension duration
     } else {
-        // Stage 1: panel collapses first
-        panel.classList.remove('open');
-        toggleBtn.classList.remove('open');
-        closeAllSubDropdowns();
+        // CLOSING SEQUENCE: Close panel first, let it slide back, then rotate/retract shaft
+        masterPanel.classList.remove('open');
+        toggleBtn.classList.remove('open'); // Triggers the delayed arrow spin back
 
         setTimeout(() => {
-            // Stage 2: arrow retracts back in
-            toggleBtn.classList.remove('extending');
-            masterOpen = false;
-            masterAnimating = false;
-        }, 500); // matches .master-panel max-height transition duration
+            toggleBtn.classList.remove('extending'); // Retracts the shaft last
+        }, 50); // Matches panel close duration
     }
 }
 
