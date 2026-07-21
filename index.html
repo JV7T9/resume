@@ -771,12 +771,15 @@ td em, td i {
 }
 
 footer {
-    margin-top: 40px;
+    margin-top: 20px;
     text-align: left;
     font-size: 0.80rem;
     font-family: 'Michroma', sans-serif;
-    border-top: 1px solid var(--border-color);
+    border-top: none; /* Removes the top border line */
     padding-top: 20px;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.4); /* Adds a sleek neon cyan line to the bottom */
+    padding-bottom: 20px; /* Adds breathing room below the text */
+    box-shadow: 0 10px 15px -5px rgba(56, 189, 248, 0.15); /* Optional: adds a soft cyber glow underneath */
 }
 
 .glow-glyph {
