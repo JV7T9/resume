@@ -618,6 +618,103 @@ p.profile-statement {
 }
 
 /* ==========================================================================
+   KEY TRAITS ACCORDION STYLING
+========================================================================== */
+.traits-accordion {
+    margin-top: 0px;
+}
+
+.trait-item {
+    margin-bottom: 8px;
+}
+
+.trait-header {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    color: #f8fafc;
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.95rem;
+    padding: 10px 20px;
+    margin-bottom: 6px;
+    border-radius: 6px;
+    border-top: 0px solid rgba(56, 189, 248, 0.25);
+    border-bottom: 0px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.trait-header:hover {
+    opacity: 0.55;
+    background: #334155;
+}
+
+.trait-body {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.80rem;
+    letter-spacing: 1px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.45s ease, opacity 0.35s ease;
+    padding: 0 14px;
+    background: transparent;
+    border-left: 1px solid #f8fafc;;
+    border-radius: 0 0 6px 6px;
+	border-right: 0px;
+    margin-top: 4px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #38bdf8 #0f172a;
+}
+
+.trait-body {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(15px);
+    background: rgba(15, 23, 42, 0.35); /* subtle dark glass */
+}
+
+.trait-body::-webkit-scrollbar {
+    width: 1px;
+}
+
+.trait-body::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+
+.trait-body::-webkit-scrollbar-thumb {
+    background-color: #38bdf8;
+    border-radius: 1px;
+}
+
+.trait-body.open {
+    max-height: 2000px;
+    opacity: 1;
+    padding: 10px 14px;
+}
+
+.trait-header::after {
+    content: "▾";
+    float: right;
+    transition: transform 0.3s ease;
+}
+
+.trait-header.open::after {
+    transform: rotate(180deg);
+}
+
+.trait-body ul {
+    margin-left: 28px;
+    padding-left: 12px;
+}
+
+@media (max-width: 768px) {
+    .trait-body.open {
+        max-height: 400px; /* scroll inside dropdown */
+    }
+}
+		
+/* ==========================================================================
    Interactive Accordion Styles 
    (Training / Employment History tables)
    ========================================================================== */
@@ -878,104 +975,84 @@ td em, td i {
     display: inline-block;
     vertical-align: middle;
 }
-
+		
 /* ==========================================================================
-   KEY TRAITS ACCORDION STYLING
+   PROJECTS & R&D PANEL STYLING
    ========================================================================== */
-.traits-accordion {
-    margin-top: 0px;
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-top: 10px;
 }
 
-.trait-item {
-    margin-bottom: 8px;
-}
-
-.trait-header {
-    width: 100%;
-    text-align: left;
-    background: transparent;
-    color: #f8fafc;
-    font-family: 'Michroma', sans-serif;
-    font-size: 0.95rem;
-    padding: 10px 20px;
-    margin-bottom: 6px;
-    border-radius: 6px;
-    border-top: 0px solid rgba(56, 189, 248, 0.25);
-    border-bottom: 0px;
-    cursor: pointer;
-    transition: background 0.3s ease, color 0.3s ease;
-}
-
-.trait-header:hover {
-    opacity: 0.55;
-    background: #334155;
-}
-
-.trait-body {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 0.80rem;
-    letter-spacing: 1px;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.45s ease, opacity 0.35s ease;
-    padding: 0 14px;
-    background: transparent;
-    border-left: 1px solid #f8fafc;;
-    border-radius: 0 0 6px 6px;
-	border-right: 0px;
-    margin-top: 4px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #38bdf8 #0f172a;
-}
-
-.trait-body {
+.project-card {
+    background: rgba(15, 23, 42, 0.45);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(15px);
-    background: rgba(15, 23, 42, 0.35); /* subtle dark glass */
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-left: 4px solid #38bdf8;
+    border-radius: 8px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), 0 0 15px rgba(56, 189, 248, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-.trait-body::-webkit-scrollbar {
-    width: 1px;
+.project-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(56, 189, 248, 0.5);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25), 0 0 20px rgba(56, 189, 248, 0.15);
 }
 
-.trait-body::-webkit-scrollbar-track {
-    background: #0f172a;
+.project-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    color: #f8fafc;
+    letter-spacing: 0.5px;
+    margin: 0;
 }
 
-.trait-body::-webkit-scrollbar-thumb {
-    background-color: #38bdf8;
-    border-radius: 1px;
+.project-desc {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.9rem;
+    color: #94a3b8;
+    margin: 0;
 }
 
-.trait-body.open {
-    max-height: 2000px;
-    opacity: 1;
-    padding: 10px 14px;
+/* Dedicated wrapper & video sizing to completely avoid hero-bg inheritance conflicts */
+.project-video-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 6px;
+    background: #090d16;
+    border: 1px solid rgba(56, 189, 248, 0.15);
 }
 
-.trait-header::after {
-    content: "▾";
-    float: right;
-    transition: transform 0.3s ease;
+.project-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.95;
+    transition: opacity 0.3s ease;
 }
 
-.trait-header.open::after {
-    transform: rotate(180deg);
+.project-card:hover .project-video {
+    opacity: 1.0;
 }
 
-.trait-body ul {
-    margin-left: 28px;
-    padding-left: 12px;
+/* Responsive adjustment for desktop overlay panel view */
+#overlay-panel .projects-grid {
+    grid-template-columns: 1fr;
 }
-
-@media (max-width: 768px) {
-    .trait-body.open {
-        max-height: 400px; /* scroll inside dropdown */
-    }
-}
-
+		
 /* ==========================================================================
    CONTACTS SECTION - Footer & COntact Details
    ========================================================================== */
@@ -2149,7 +2226,7 @@ footer {
         </div>
     </div>
 
-    <!-- Projects & Development -->
+<!-- Projects & Development -->
     <div class="dropdown-block">
         <button class="dropdown-header" onclick="handleDropdownClick('projectsContent', this)">
             <span class="title">Projects | R&D</span>
@@ -2157,16 +2234,42 @@ footer {
         </button>
 
         <div class="dropdown-body" id="projectsContent">
-            <ul class="indent">
-    		<li><strong>ARC</strong> — AI-Native Cognitive Architecture</li>
-    		<li><strong>DTSIM</strong> — Investigative Simulation Engine</li>
-    		<li><strong>Cognition Flex</strong> — Adaptive Cognitive Pipeline</li>
-    		<li><strong>Horizons</strong> — Multi-Vector Conceptual Framework</li>
-    		<li><strong>QMLI</strong> — Quantum-Mapped Logic Interface</li>
-    		<li><strong>NeuroSync Nexus</strong> — Multi-Emergent Resonance System</li>
-    		<li><strong>Fabrication Projects</strong> — Workstation Builds & OPS Accessories</li>
-	    </ul>
+            <div class="projects-grid">
+                
+                <!-- Project Card 1 -->
+                <div class="project-card">
+                    <h3 class="project-title">GlyphTek Projects</h3>
+                    <p class="project-desc">ARC, AI-Fusion Engine & Resonance Chamber</p>
+                    <div class="project-video-wrapper">
+                        <video autoplay muted loop playsinline class="project-video">
+                            <source src="ARC.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
 
+                <!-- Project Card 2 -->
+                <div class="project-card">
+                    <h3 class="project-title">DTSIM</h3>
+                    <p class="project-desc">Digital Transcription SIM</p>
+                    <div class="project-video-wrapper">
+                        <video autoplay muted loop playsinline class="project-video">
+                            <source src="DTSIM.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="project-card">
+                    <h3 class="project-title">Site Security OPS</h3>
+                    <p class="project-desc">Workstation Builds & OPS Accessories</p>
+                    <div class="project-video-wrapper">
+                        <video autoplay muted loop playsinline class="project-video">
+                            <source src="OPS.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 
