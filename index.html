@@ -619,6 +619,7 @@ p.profile-statement {
    ========================================================================== */
 
 .accordion-item {
+    font-family: 'Michroma', sans-serif;
     border: 1px solid rgba(56, 189, 248, 0.15);
     border-radius: 6px;
     margin-bottom: 10px;
@@ -632,6 +633,8 @@ p.profile-statement {
     -webkit-backdrop-filter: blur(15px);
     padding: 16px 22px;
     display: flex;
+    font-family: 'Michroma', sans-serif;
+    font-color: #38bdf8;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
@@ -651,7 +654,8 @@ p.profile-statement {
 .accordion-title {
     font-family: 'Michroma', sans-serif;
     font-weight: 400;
-    color: #38bdf8;
+    color: #cbd5e1;
+    text-shadow: 0 0 8px rgba(203, 213, 225, 0.6), 0 0 16px rgba(255, 255, 255, 0.3);
     font-size: 0.85rem;
     letter-spacing: 0.5px;
 }
@@ -687,7 +691,7 @@ p.profile-statement {
     padding: 20px;
     background-color: #1e293b;
     border-top: 1px solid var(--border-color);
-    font-size: 0.95rem;
+    font-size: 0.75rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
@@ -706,7 +710,7 @@ p.profile-statement {
 table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.9rem;
+    font-size: 0.75rem;
 }
 
 table tr, td {
@@ -736,13 +740,15 @@ td em, td i {
 
 /* Privacy Gate Shielding */
 .privacy-gate {
-    background: #1e293b;
-    border: 2px dashed #334155;
+    background: transparent;
+    border: 0px dashed #334155;
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.85rem;
     color: #f8fafc;
-    padding: 30px;
-    text-align: center;
+    padding: 20px;
+    text-align: left;
     border-radius: 8px;
-    margin-top: 15px;
+    margin-top: 0px;
     transition: all 0.3s ease;
 }
 
@@ -763,41 +769,57 @@ td em, td i {
 .gate-input {
     flex: 1;
     padding: 10px 15px;
-    border: 1px solid var(--border-color);
+    background: rgba(15, 23, 42, 0.45); /* Frosted dark grayish background */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(56, 189, 248, 0.3); /* Subtle cyan border */
     border-radius: 6px;
     font-size: 0.9rem;
+    color: #f8fafc;
     outline: none;
+    transition: all 0.3s ease;
+}
+
+.gate-input::placeholder {
+    color: #94a3b8; /* Soft placeholder text color */
 }
 
 .gate-input:disabled {
-    background: #e2e8f0;
+    background: rgba(15, 23, 42, 0.2);
     cursor: not-allowed;
 }
 
 .gate-input:focus {
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    border-color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
 }
 
 .gate-btn {
-    background: #38bdf8;
-    color: #0f172a;
-    border: none;
+    background: rgba(15, 23, 42, 0.45); /* Frosted dark transparent look */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(15px);
+    color: #38bdf8; /* Neon cyan text */
+    border: 1px solid rgba(56, 189, 248, 0.4); /* Matching transparent border */
     padding: 10px 20px;
     border-radius: 6px;
     font-weight: 700;
     cursor: pointer;
     font-size: 0.9rem;
+    text-shadow: 0 0 6px rgba(56, 189, 248, 0.4);
     transition: all 0.2s ease;
 }
 
 .gate-btn:hover {
-    background: #0ea5e9;
+    background: rgba(56, 189, 248, 0.15); /* Lights up slightly on hover */
+    border-color: #38bdf8;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
     transform: scale(1.02);
 }
 
 .gate-btn:disabled {
-    background: #94a3b8;
+    background: rgba(15, 23, 42, 0.2);
+    border-color: #334155;
+    color: #94a3b8;
     cursor: not-allowed;
 }
 
@@ -852,6 +874,7 @@ td em, td i {
     display: inline-block;
     vertical-align: middle;
 }
+
 
 /* ==========================================================================
    KEY TRAITS ACCORDION STYLING
