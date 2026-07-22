@@ -545,7 +545,6 @@ h3 {
 p.profile-statement {
     font-size: 1.1rem;
     text-align: left;
-    text-justify: auto;
     margin-bottom: 12px;
     font-family: 'Rajdhani', sans-serif;
     line-height: 1.5;
@@ -597,6 +596,7 @@ p.profile-statement {
     padding: 0 18px;
     font-family: 'Rajdhani', sans-serif;
     font-size: 1.2rem;
+	text-align: left;
     color: #cbd5e1;
     transition: max-height 0.35s ease, opacity 0.3s ease;
 }
@@ -1142,18 +1142,21 @@ footer {
    CONSOLIDATED MOBILE SNAP LAYOUT (For screens under 768px)
    ========================================================================== */
 @media (max-width: 768px) {
-    body, .container, main {
-        padding: 15px 8px !important;
-        margin: 0 !important;
-        width: 100% !important;
-        box-sizing: border-box;
-    }
-
-    .glass-header {
+    /* Exclude mini-headers or headers from being forced into vertical flex columns */
+    .grid-2, .accordion-body, [style*="display: flex"]:not(.mini-header) {
+        display: flex !important;
         flex-direction: column !important;
-        text-align: center !important;
-        padding: 20px !important;
-        gap: 15px;
+        width: 100% !important;
+        gap: 15px !important;
+    }
+    
+    /* Ensure the mini-header stays a proper horizontal flex row on mobile */
+    .mini-header {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        text-align: left !important;
     }
 
     .header-identity {
