@@ -876,7 +876,6 @@ td em, td i {
     vertical-align: middle;
 }
 
-
 /* ==========================================================================
    KEY TRAITS ACCORDION STYLING
    ========================================================================== */
@@ -1165,6 +1164,22 @@ footer {
 /* ==========================================================================
    CONSOLIDATED MOBILE SNAP LAYOUT (For screens under 768px)
    ========================================================================== */
+/* Disable Android Chrome's default touch highlight box */
+.master-toggle, 
+.dropdown-header, 
+.mini-header, 
+.accordion-header {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Ensure active/focus states on mobile don't default to a solid fill */
+.master-toggle:active,
+.dropdown-header:active,
+.mini-header:active,
+.accordion-header:active {
+    background-color: transparent !important;
+}
+		
 @media (max-width: 768px) {
     /* Exclude mini-headers or headers from being forced into vertical flex columns */
     .grid-2, .accordion-body, [style*="display: flex"]:not(.mini-header) {
