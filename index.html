@@ -22,25 +22,23 @@
 
 body {
     margin: 0;
-    padding: 0; /* Removed padding so the background image covers edge-to-edge */
+    padding: 0; 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #e2e8f0; 
     
-    /* Background Image Settings */
     background-image: url('assets/Cube6.png');
-    background-color: #090d16; /* Fallback color if the image fails to load */
-    background-size: cover;    /* Scales the image to cover the entire viewport */
-    background-position: center; /* Centers the image */
+    background-color: #090d16; 
+    background-size: cover;   
+    background-position: center; 
     background-repeat: no-repeat;
-    background-attachment: fixed; /* Keeps the background static while scrolling */
+    background-attachment: fixed;
 
     height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
 }
 
-/* Wrap your existing HTML content inside this container to keep your 25px/10px spacing */
 .page-content {
     padding: 25px 10px;
 }
@@ -58,20 +56,12 @@ body {
         0 10px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
-/* ==========================================================================
-   VIDEO BACKGROUND
-   FIX: previously the video was sized as a % of .container itself, and
-   .container grows taller every time an accordion/dropdown opens — so the
-   video kept "expanding" along with it. It's now wrapped in .hero-bg, a
-   fixed-height layer pinned to the top of the card, so its size is locked
-   regardless of how much content below it expands.
-   ========================================================================== */
 .hero-bg {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 700px; /* matches the card's original min-height */
+    height: 700px; 
     overflow: hidden;
     border-radius: 12px;
     z-index: -1;
@@ -80,14 +70,13 @@ body {
 .container-video {
     position: absolute;
     top: 0;
-    right: 0; /* aligns video to the right side */
+    right: 0; 
     width: 115%;
     height: 115%;
     object-fit: cover;
     opacity: 1.00;
 }
 
-/* Gradient overlay */
 .hero-bg::after {
     content: "";
     position: absolute;
@@ -104,13 +93,6 @@ body {
     gap: 20px;
 }
 
-/* ==========================================================================
-   MASTER NAVIGATION TOGGLE
-   Dual-shaft sliding mechanical effect. Click plays two stages:
-   1) left shaft extends outward while right shaft compresses away (.extending)
-   2) the arrowhead rotates to point down and the panel drops open (.open)
-   Reverse order on close.
-   ========================================================================== */
 .master-nav {
     padding: 0 6px;
     margin-bottom: 10px;
@@ -127,22 +109,20 @@ body {
     color: #38bdf8;
 }
 
-/* Base styles for both shafts */
 .master-toggle .arrow-shaft,
 .master-toggle .arrow-shaft-right {
     display: inline-block;
     height: 5px;
     background: transparent;
-    border-bottom: 2px solid #38bdf8; /* neon line */
-    box-shadow: 0 0 8px rgba(56, 189, 248, 0.6); /* glow */
+    border-bottom: 2px solid #38bdf8; 
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.6); 
     transition: width 0.35s ease;
 }
 
-/* Left shaft starts closed, right shaft starts fully open */
 .master-toggle .arrow-shaft {
     width: 0;
 }
-
+		
 .master-toggle .arrow-shaft-right {
     width: 258px;
 }
@@ -151,11 +131,7 @@ body {
     display: inline-block;
     font-size: 2.5rem;
     line-height: 1;
-
-    /* Neon cyan to match the shaft border */
     color: #38bdf8;
-
-    /* Stronger glow to match the shaft’s border glow */
     text-shadow:
         0 0 6px rgba(56, 189, 248, 0.75),
         0 0 12px rgba(56, 189, 248, 0.55),
@@ -172,7 +148,6 @@ body {
         0 0 24px rgba(56, 189, 248, 0.45);
 }
 
-/* Stage 1: Left shaft extends out, right shaft compresses away */
 .master-toggle.extending .arrow-shaft {
     width: 258px;
 }
@@ -181,12 +156,11 @@ body {
     width: 0;
 }
 
-/* Stage 2: once the panel is open, the arrowhead rotates to point down */
+
 .master-toggle.open .arrow-head {
     transform: rotate(180deg);
 }
 
-/* Reverse close sequence: hold rotation until the panel slides back, then spin back */
 .master-toggle:not(.open) .arrow-head {
     transition: transform 0.25s ease 0.35s, color 0.3s ease; 
     transform: rotate(0deg);
@@ -200,11 +174,10 @@ body {
 }
 
 .master-panel.open {
-    max-height: 6000px; /* generously large so the tallest section always fits */
+    max-height: 6000px; 
     opacity: 1;
 }
 
-/* Base state for dropdown blocks inside the master panel */
 .master-panel .dropdown-block {
     opacity: 0;
     transform: translateY(-10px);
@@ -212,13 +185,11 @@ body {
     transition-delay: 0s;
 }
 
-/* When the master panel opens, cascade them downward one after another */
 .master-panel.open .dropdown-block {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Stagger each dropdown block sequentially (adjust the time steps as desired) */
 .master-panel.open .dropdown-block:nth-child(1) { transition-delay: 0.1s; }
 .master-panel.open .dropdown-block:nth-child(2) { transition-delay: 0.2s; }
 .master-panel.open .dropdown-block:nth-child(3) { transition-delay: 0.3s; }
@@ -226,17 +197,12 @@ body {
 .master-panel.open .dropdown-block:nth-child(5) { transition-delay: 0.5s; }
 .master-panel.open .dropdown-block:nth-child(6) { transition-delay: 0.6s; }
 
-/* When closing, reverse the cascade or make them snap shut smoothly upward */
 .master-panel:not(.open) .dropdown-block {
     opacity: 0;
     transform: translateY(-10px);
     transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-
-/* ==========================================================================
-   INTRO BOX
-   ========================================================================== */
 .intro-block {
     background: transparent;
     border: 0px solid rgba(56, 189, 248, 0.3);
@@ -247,8 +213,6 @@ body {
     text-align: left;
     width: auto;
     font-family: 'Michroma', sans-serif;
-	
-    /* Smooth transition states */
     opacity: 1;
     max-height: 120px;
     overflow: hidden;
@@ -285,9 +249,6 @@ body {
     margin-left: 0px;
 }
 
-/* ==========================================================================
-   GLOWING MIRROR HEADER BOX
-   ========================================================================== */
 .glass-header {
     padding: 15px 32px;
     margin-bottom: 30px;
@@ -308,26 +269,22 @@ body {
     text-shadow: 0 0 12px rgba(56, 189, 248, 0.55);
 }
 
-/* Sliding Header Container */
-/* Sliding Header Container */
 #sliding-header {
-    width: 100%; /* Expands wider than the default container */
-    max-width: none; /* Removes any width restriction */
-    margin-left: -10%; /* Centers it if it overflows the edges */
+    width: 100%; 
+    max-width: none; 
+    margin-left: -10%; 
     overflow: hidden;
     white-space: nowrap;
     position: relative;
     padding: 2px 10px;
 }
 
-/* Sliding Track */
 .sliding-track {
     display: inline-flex;
-    gap: 60px; /* spacing between titles */
+    gap: 60px; 
     animation: slideLoop 18s linear infinite;
 }
 
-/* Header Text Style */
 .sliding-track span {
     font-size: 2rem;
     font-weight: 600;
@@ -339,15 +296,11 @@ body {
         0 0 20px rgba(56, 189, 248, 0.3);
 }
 
-/* Animation */
 @keyframes slideLoop {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
 }
 
-/* ==========================================================================
-   Section Layouts & General Typography
-   ========================================================================== */
 .header-identity {
     text-align: left;
     margin-top: 0px;
@@ -378,7 +331,6 @@ body {
     transition: opacity 0.4s ease;
 }
 
-/* Glow pulse class used by JS */
 .glow {
     text-shadow: 0 0 14px rgba(56, 189, 248, 0.65);
 }
@@ -406,7 +358,6 @@ h3 {
     color: #f8fafc;
 }
 
-/* Grid Frameworks (side-by-side columns) */
 .grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -453,10 +404,6 @@ h3 {
     margin-bottom: 5px;
 }
 
-/* ==========================================================================
-   DROPDOWN HEADERS / BODIES (consolidated — was previously split across
-   three separate blocks with overlapping rules)
-   ========================================================================== */
 .dropdown-block {
     margin: 0px 0;
     border-radius: 6px;
@@ -478,10 +425,8 @@ h3 {
     padding: 10px 12px;
     margin-bottom: 6px;
     border-radius: 6px;
-    border: 0px solid transparent; /* Keeps border rendering smooth during shifts */
+    border: 0px solid transparent; 
     cursor: pointer;
-    
-    /* Consolidated transition properties for motion and glow */
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
                 background 0.3s ease, 
                 color 0.3s ease, 
@@ -493,14 +438,13 @@ h3 {
 .dropdown-header:hover {
     color: #7dd3fc;
     text-shadow: 0 0 6px #7dd3fc, 0 0 12px #38bdf8;
-    transform: translateX(8px); /* Lifts/pushes forward on hover (~1.5 to 2mm visual shift) */
+    transform: translateX(8px); 
     border-color: transparent;
     background-color: transparent;
 }
 
-/* Persistent Active State (stays forward and accented while open) */
 .dropdown-header.is-active-state {
-    transform: translateX(12px); /* Pushes out just a fraction more than hover */
+    transform: translateX(12px); 
     border-color: #38bdf8;
     background-color: rgba(56, 189, 248, 0.12);
     box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
@@ -511,12 +455,10 @@ h3 {
     display: inline-block;
 }
 
-/* Chevron rotation when the desktop overlay panel is open (see openPanel JS) */
 .dropdown-header.active .chevron {
     transform: rotate(-90deg);
 }
 
-/* Chevron rotation for standard in-page section dropdowns */
 .dropdown-block.dropdown-open > .dropdown-header .chevron {
     transform: rotate(180deg);
 }
@@ -541,11 +483,6 @@ h3 {
     100% { opacity: 1; transform: translateY(0); }
 }
 
-
-/* ==========================================================================
-   PROFILE STATEMENT — INTERNAL MINI-DROPDOWNS
-   One shared source (Profile Statement / Digital Intelligence / Site Security).
-   ========================================================================== */
 p.profile-statement {
     font-size: 1rem;
     text-align: left;
@@ -614,12 +551,9 @@ p.profile-statement {
 .mini-body {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(15px);
-    background: rgba(15, 23, 42, 0.35); /* subtle dark glass */
+    background: rgba(15, 23, 42, 0.35); 
 }
 
-/* ==========================================================================
-   KEY TRAITS ACCORDION STYLING
-========================================================================== */
 .traits-accordion {
     margin-top: 0px;
 }
@@ -671,7 +605,7 @@ p.profile-statement {
 .trait-body {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(15px);
-    background: rgba(15, 23, 42, 0.35); /* subtle dark glass */
+    background: rgba(15, 23, 42, 0.35); 
 }
 
 .trait-body::-webkit-scrollbar {
@@ -710,15 +644,10 @@ p.profile-statement {
 
 @media (max-width: 768px) {
     .trait-body.open {
-        max-height: 400px; /* scroll inside dropdown */
+        max-height: 400px; 
     }
 }
 		
-/* ==========================================================================
-   Interactive Accordion Styles 
-   (Training / Employment History tables)
-   ========================================================================== */
-
 .accordion-item {
     font-family: 'Michroma', sans-serif;
     border: 1px solid rgba(56, 189, 248, 0.15);
@@ -729,7 +658,7 @@ p.profile-statement {
 }
 
 .accordion-header {
-    background: rgba(30, 41, 59, 0.5); /* Semi-transparent dark slate */
+    background: rgba(30, 41, 59, 0.5); 
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(15px);
     padding: 16px 22px;
@@ -741,14 +670,14 @@ p.profile-statement {
     cursor: pointer;
     user-select: none;
     border-radius: 6px;
-    border: 0px solid rgba(56, 189, 248, 0.2); /* Subtle cyan neon border */
+    border: 0px solid rgba(56, 189, 248, 0.2); 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
 }
 
 .accordion-header:hover {
     background: rgba(30, 41, 59, 0.8);
-    border-color: rgba(56, 189, 248, 0.5); /* Brighter cyan on hover */
+    border-color: rgba(56, 189, 248, 0.5);
     box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
 }
 
@@ -762,7 +691,7 @@ p.profile-statement {
 }
 
 .accordion-year {
-    background: rgba(56, 189, 248, 0.15); /* Glass-pill style */
+    background: rgba(56, 189, 248, 0.15);
     color: #38bdf8;
     padding: 4px 12px;
     border-radius: 20px;
@@ -807,7 +736,6 @@ p.profile-statement {
     max-height: 2000px;
 }
 
-/* Tables inside history dropdowns */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -839,7 +767,6 @@ td em, td i {
 .comp-col { width: 25%; }
 .desc-col { width: 35%; }
 
-/* Privacy Gate Shielding */
 .privacy-gate {
     background: transparent;
     border: 0px dashed #334155;
@@ -870,10 +797,10 @@ td em, td i {
 .gate-input {
     flex: 1;
     padding: 10px 15px;
-    background: rgba(15, 23, 42, 0.45); /* Frosted dark grayish background */
+    background: rgba(15, 23, 42, 0.45); 
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(56, 189, 248, 0.3); /* Subtle cyan border */
+    border: 1px solid rgba(56, 189, 248, 0.3); 
     border-radius: 6px;
     font-size: 0.9rem;
     color: #f8fafc;
@@ -882,7 +809,7 @@ td em, td i {
 }
 
 .gate-input::placeholder {
-    color: #94a3b8; /* Soft placeholder text color */
+    color: #94a3b8; 
 }
 
 .gate-input:disabled {
@@ -896,11 +823,11 @@ td em, td i {
 }
 
 .gate-btn {
-    background: rgba(15, 23, 42, 0.45); /* Frosted dark transparent look */
+    background: rgba(15, 23, 42, 0.45); 
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(15px);
-    color: #38bdf8; /* Neon cyan text */
-    border: 1px solid rgba(56, 189, 248, 0.4); /* Matching transparent border */
+    color: #38bdf8; 
+    border: 1px solid rgba(56, 189, 248, 0.4); 
     padding: 10px 20px;
     border-radius: 6px;
     font-weight: 700;
@@ -911,7 +838,7 @@ td em, td i {
 }
 
 .gate-btn:hover {
-    background: rgba(56, 189, 248, 0.15); /* Lights up slightly on hover */
+    background: rgba(56, 189, 248, 0.15); 
     border-color: #38bdf8;
     box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
     transform: scale(1.02);
@@ -932,7 +859,6 @@ td em, td i {
     font-weight: 500;
 }
 
-/* Hidden Blocks Framework */
 .hidden-content {
     display: none;
     animation: fadeIn 0.5s ease-in-out forwards;
@@ -976,9 +902,6 @@ td em, td i {
     vertical-align: middle;
 }
 		
-/* ==========================================================================
-   PROJECTS & R&D PANEL STYLING
-   ========================================================================== */
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -1022,7 +945,6 @@ td em, td i {
     margin: 0;
 }
 
-/* Dedicated wrapper & video sizing to completely avoid hero-bg inheritance conflicts */
 .project-video-wrapper {
     position: relative;
     width: 100%;
@@ -1048,14 +970,10 @@ td em, td i {
     opacity: 1.0;
 }
 
-/* Responsive adjustment for desktop overlay panel view */
 #overlay-panel .projects-grid {
     grid-template-columns: 1fr;
 }
 		
-/* ==========================================================================
-   CONTACTS SECTION - Footer & COntact Details
-   ========================================================================== */
 .contact-font {
     font-family: 'Michroma', sans-serif;
     letter-spacing: 2px;
@@ -1074,22 +992,18 @@ footer {
     text-align: left;
     font-size: 0.80rem;
     font-family: 'Michroma', sans-serif;
-    border-top: none; /* Removes the top border line */
+    border-top: none; 
     padding-top: 20px;
-    border-bottom: 1px solid rgba(56, 189, 248, 0.4); /* Adds a sleek neon cyan line to the bottom */
-    padding-bottom: 40px; /* Adds breathing room below the text */
+    border-bottom: 1px solid rgba(56, 189, 248, 0.4); 
+    padding-bottom: 40px; 
 }
 
-/* ==========================================================================
-   SOCIAL MEDIA
-   ========================================================================== */
-
 .floating-social-bar {
-    position: relative; /* Keeps it inside the footer flow */
-    margin-top: 100px;          /* Optional vertical spacing */
+    position: relative; 
+    margin-top: 100px;       
     left: 0;
     display: flex;
-    gap: 16px;          /* Slightly increased gap for larger buttons */
+    gap: 16px;         
     z-index: 10;
     
     opacity: 1;
@@ -1105,57 +1019,46 @@ footer {
     pointer-events: none;
 }
 
-/* Individual Icon Buttons */
 .social-icon-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 52px;          /* Increased size from 42px to 52px */
-    height: 52px;         /* Increased size from 42px to 52px */
+    width: 52px;         
+    height: 52px;        
     background: rgba(15, 23, 42, 0.85); 
-    border: 1.5px solid rgba(56, 189, 248, 0.5); /* Slightly thicker cyber border */
+    border: 1.5px solid rgba(56, 189, 248, 0.5);
     border-radius: 50%;
     color: #38bdf8; 
-    box-shadow: 0 0 12px rgba(56, 189, 248, 0.2); /* Ambient base glow */
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.2); 
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Enlarged SVG inside to match the bigger button */
 .social-icon-btn svg {
-    width: 22px;          /* Scaled up from 18px */
-    height: 22px;         /* Scaled up from 18px */
+    width: 22px;         
+    height: 22px;         
     transition: transform 0.3s ease;
 }
 
-/* Hover State: Expand, Brighten, and Heavy Neon Glow */
 .social-icon-btn:hover {
     background: rgba(56, 189, 248, 0.2); 
     border-color: #38bdf8;
     color: #ffffff;
-    transform: scale(1.15) translateY(-3px); /* Expands/grows and lifts up */
-    box-shadow: 0 0 25px rgba(56, 189, 248, 0.8), inset 0 0 10px rgba(56, 189, 248, 0.4); /* Intense double-layer neon glow */
+    transform: scale(1.15) translateY(-3px); 
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.8), inset 0 0 10px rgba(56, 189, 248, 0.4);
 }
 
-/* ==========================================================================
-   PROJECTS |R&D SECTION 
-   ========================================================================== */
-/* Apply Orbitron specifically to the Projects header title */
-#projectsContent ~ .dropdown-header .title, /* (Depending on your HTML nesting) */
+#projectsContent ~ .dropdown-header .title, 
 .dropdown-block:has(#projectsContent) .dropdown-header {
     font-family: 'Orbitron', sans-serif;
     letter-spacing: 1px;
 }
 
-/* Optional: If you also want the list items inside to have the Orbitron tech feel */
 #projectsContent ul.indent li {
     font-family: 'Orbitron', sans-serif;
     font-size: 0.9rem;
     letter-spacing: 0.5px;
 }
 
-/* ==========================================================================
-   DESKTOP OVERLAY PANEL
-   ========================================================================== */
 :root {
     --header-bottom: 120px;
     --footer-height: 50px;
@@ -1213,17 +1116,12 @@ footer {
     box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
 }
 
-/* The overlay panel is ~60% of the card's width — narrower than mobile's
-   full-width flow — so multi-column grids get a single-column layout here
-   to avoid cramped/overlapping content. */
 #overlay-panel .grid-2,
 #overlay-panel .references-grid,
 #overlay-panel .accordion-body {
     grid-template-columns: 1fr;
 }
 
-/* Employment tables have 4 fixed-width columns — let them scroll
-   horizontally in the narrower panel rather than squeeze/wrap awkwardly. */
 #overlay-panel .accordion-content {
     overflow-x: auto;
 }
@@ -1232,19 +1130,13 @@ footer {
     min-width: 480px;
 }
 
-
-/* Project & Development Table */
 .indent li {
     padding-left: 1.5rem;
 }
 .indent {
-    padding-left: 40px; /* Adjust this number to move them further right */
+    padding-left: 40px; 
 }
 
-/* ==========================================================================
-   CONSOLIDATED MOBILE SNAP LAYOUT (For screens under 768px)
-   ========================================================================== */
-/* Disable Android Chrome's default touch highlight box */
 .master-toggle, 
 .dropdown-header, 
 .mini-header, 
@@ -1252,7 +1144,6 @@ footer {
     -webkit-tap-highlight-color: transparent;
 }
 
-/* Ensure active/focus states on mobile don't default to a solid fill */
 .master-toggle:active,
 .dropdown-header:active,
 .mini-header:active,
@@ -1261,7 +1152,6 @@ footer {
 }
 		
 @media (max-width: 768px) {
-    /* Exclude mini-headers or headers from being forced into vertical flex columns */
     .grid-2, .accordion-body, [style*="display: flex"]:not(.mini-header) {
         display: flex !important;
         flex-direction: column !important;
@@ -1269,7 +1159,6 @@ footer {
         gap: 15px !important;
     }
     
-    /* Ensure the mini-header stays a proper horizontal flex row on mobile */
     .mini-header {
         display: flex !important;
         flex-direction: row !important;
@@ -1317,7 +1206,7 @@ footer {
 
     .gate-input, .gate-btn {
         width: 100% !important;
-        min-height: 44px; /* comfortable tap target on mobile */
+        min-height: 44px; 
     }
 
     .grid-2, .references-grid, .accordion-body, [style*="display: flex"] {
@@ -1332,21 +1221,16 @@ footer {
         margin-bottom: 10px;
     }
 
-    /* Enable horizontal scrolling for employment history tables on mobile */
     .accordion-content {
         overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch; /* Smooth momentum scrolling for iOS */
+        -webkit-overflow-scrolling: touch; 
     }
 
-    /* Ensure the table doesn't get squashed and maintains readable minimum width */
     .accordion-content table {
         min-width: 480px; 
     }
 }
 
-/* ==========================================================================
-   PRINT STYLES
-   ========================================================================== */
 @media print {
     body {
         background: #ffffff;
@@ -1382,10 +1266,6 @@ footer {
     }
 }
 
-
-
-
-
     </style>
 </head>
 <body>
@@ -1398,7 +1278,6 @@ footer {
         </video>
     </div>
 
-    <!-- Main Title Box -->
     <header class="glass-header">
         <div id="sliding-header">
             <div class="sliding-track">
@@ -1408,8 +1287,6 @@ footer {
                 <span>· 𖧦 ·</span>
                 <span>PORT‑FOLIO</span>
                 <span>· 𖦗 ·</span>
-
-                <!-- Repeated for seamless looping -->
                 <span>PRO‑TRAIT STACK</span>
                 <span>· 𖧫 ·</span>
                 <span>CURRICULUM𖧹VITAE</span>
@@ -1422,7 +1299,6 @@ footer {
 
     <div id="overlay-panel"></div>
 
-    <!-- Sub-Header Alignment Wrapper -->
     <div class="sub-header-wrapper">
         <div class="header-identity">
             <h2>John◈Va'afuti</h2>
@@ -1430,12 +1306,6 @@ footer {
         </div>
     </div>
 
-    <!-- ==========================================================
-         MASTER NAVIGATION TOGGLE
-         Single trigger for all section dropdowns below. Click plays a
-         two-stage animation: the arrow shaft extends first, then the
-         panel drops open (see toggleMasterPanel JS).
-         ========================================================== -->
 <div class="master-nav">
     <button class="master-toggle" id="masterToggle" onclick="toggleMasterPanel()" aria-label="Show sections">
         <span class="arrow-shaft"></span>
@@ -1453,11 +1323,6 @@ footer {
 
     <div class="master-panel" id="masterPanel">
 
-    <!-- ==========================================================
-         PROFILE STATEMENT / DIGITAL INTELLIGENCE / SITE SECURITY
-         Single source of content — used directly inline on mobile,
-         and cloned into the overlay panel on desktop (see openPanel JS).
-         ========================================================== -->
     <div class="dropdown-block">
 
         <button class="dropdown-header" onclick="handleDropdownClick('profileContent', this)">
@@ -1511,13 +1376,9 @@ footer {
                     </ul>
                 </div>
             </div>
+        </div><
+    </div>
 
-        </div><!-- end #profileContent -->
-
-    </div><!-- end dropdown-block -->
-
-
-    <!-- Key Traits -->
     <div class="dropdown-block">
         <button class="dropdown-header" onclick="handleDropdownClick('traitsContent', this)">
             <span class="title">Key Traits</span>
@@ -1940,14 +1801,11 @@ footer {
                             </ul>
                         </div>
                     </div>
-
                 </div>
             </section>
         </div>
     </div>
 
-
-    <!-- Training & Education -->
     <div class="dropdown-block">
         <button class="dropdown-header" onclick="handleDropdownClick('trainingContent', this)">
             <span class="title">Training & Education</span>
@@ -2047,14 +1905,11 @@ footer {
                             </div>
                         </div>
                     </div>
-
                 </div>
             </section>
         </div>
     </div>
 
-
-    <!-- Employment Details -->
     <div class="dropdown-block">
         <button class="dropdown-header" onclick="handleDropdownClick('employmentContent', this)">
             <span class="title">Employment Details</span>
@@ -2063,7 +1918,6 @@ footer {
 
         <div class="dropdown-body" id="employmentContent">
 
-            <!-- EMPLOYMENT HISTORY -->
             <section>
                 <h3>Employment History</h3>
 
@@ -2086,7 +1940,6 @@ footer {
                 <div class="hidden-content" data-content="historyContent">
                     <div class="accordion-container" style="margin-top: 15px;">
 
-                        <!-- Professional Occupations -->
                         <div class="accordion-item">
                             <div class="accordion-header" onclick="toggleAccordion(this)">
                                 <span class="accordion-title" style="color: var(--accent-color);">💼 Professional</span>
@@ -2118,7 +1971,6 @@ footer {
                             </div>
                         </div>
 
-                        <!-- Entry Level Occupations -->
                         <div class="accordion-item">
                             <div class="accordion-header" onclick="toggleAccordion(this)">
                                 <span class="accordion-title" style="color: var(--accent-color);">🛡️ Entry Level</span>
@@ -2143,7 +1995,6 @@ footer {
                             </div>
                         </div>
 
-                        <!-- College & Tertiary Years -->
                         <div class="accordion-item">
                             <div class="accordion-header" onclick="toggleAccordion(this)">
                                 <span class="accordion-title" style="color: var(--accent-color);">🎓 College & Tertiary</span>
@@ -2172,7 +2023,6 @@ footer {
                 </div>
             </section>
 
-            <!-- PROFESSIONAL REFERENCES -->
             <section>
                 <h3>Professional References</h3>
 
@@ -2226,7 +2076,6 @@ footer {
         </div>
     </div>
 
-<!-- Projects & Development -->
     <div class="dropdown-block">
         <button class="dropdown-header" onclick="handleDropdownClick('projectsContent', this)">
             <span class="title">Projects | R&D</span>
@@ -2236,7 +2085,6 @@ footer {
         <div class="dropdown-body" id="projectsContent">
             <div class="projects-grid">
                 
-                <!-- Project Card 1 -->
                 <div class="project-card">
                     <h3 class="project-title">GlyphTek Projects</h3>
                     <p class="project-desc">ARC, AI-Fusion Engine & Resonance Chamber</p>
@@ -2247,7 +2095,6 @@ footer {
                     </div>
                 </div>
 
-                <!-- Project Card 2 -->
                 <div class="project-card">
                     <h3 class="project-title">DTSIM</h3>
                     <p class="project-desc">Digital Transcription SIM</p>
@@ -2258,7 +2105,6 @@ footer {
                     </div>
                 </div>
 
-                <!-- Project Card 3 -->
                 <div class="project-card">
                     <h3 class="project-title">Site Security OPS</h3>
                     <p class="project-desc">Workstation Builds & OPS Accessories</p>
@@ -2273,7 +2119,6 @@ footer {
         </div>
     </div>
 
-<!-- Contact -->
     <div class="dropdown-block">
         <button class="dropdown-header" onclick="handleDropdownClick('contactContent', this)">
             <span class="title">Contact</span>
@@ -2290,19 +2135,15 @@ footer {
                 <p><strong>Email:</strong>&emsp; <a href="mailto:John.Vaafuti@gmail.com">John.Vaafuti@gmail.com</a></p>
                 <br>
 
-<!-- Floating Social Bar (Inline Footer Style) -->
 <div class="floating-social-bar" id="socialBar">
-    <!-- LinkedIn Icon -->
     <a href="https://linkedin.com/in/john-va-afuti-096233294" target="_blank" class="social-icon-btn" title="LinkedIn">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
     </a>
     
-    <!-- Quora Icon -->
     <a href="https://sharingltdknowledge.quora.com/?ch=10&oid=6780182&share=396067ef&srid=3UG1ll&target_type=tribe" target="_blank" class="social-icon-btn" title="Quora">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.15 15.32a6.38 6.38 0 0 0 1.25-3.85C19.4 7.6 15.8 4 11.4 4S3.4 7.6 3.4 11.47c0 3.86 3.6 7.46 8 7.46 1.15 0 2.25-.26 3.23-.74l3.15 1.57-.63-3.94c.3-.49.57-1.02.8-1.5zM11.4 14.8c-1.85 0-3.33-1.48-3.33-3.33s1.48-3.33 3.33-3.33 3.33 1.48 3.33 3.33-1.48 3.33-3.33 3.33z"/></svg>
     </a>
 
-    <!-- Facebook Icon -->
     <a href="https://www.facebook.com/profile.php?id=61552047390676" target="_blank" class="social-icon-btn" title="Facebook">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3.8l.2-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
     </a>
@@ -2310,21 +2151,15 @@ footer {
             </footer>
         </div>
     </div>
-
-    </div><!-- end .master-panel -->
-
-</div><!-- end .container -->
+    </div>
+</div>
 
 
 <script>
-// ===============================
-// SECTION DROPDOWNS (AUTO-CLOSE & MOBILE TOGGLE)
-// ===============================
 function toggleSectionDropdown(btn) {
     const block = btn.parentElement;
     const isOpen = block.classList.contains('dropdown-open');
 
-    // 1. First, wipe out open states and active highlights from ALL dropdowns
     document.querySelectorAll('.dropdown-block').forEach(other => {
         other.classList.remove('dropdown-open');
         const otherHeader = other.querySelector('.dropdown-header');
@@ -2333,14 +2168,11 @@ function toggleSectionDropdown(btn) {
         }
     });
 
-    // 2. If it was ALREADY open, clicking it again leaves it closed (toggles back to first state)
-    // If it was closed, we open it and apply the active state
     if (!isOpen) {
         block.classList.add('dropdown-open');
         btn.classList.add('is-active-state');
     }
 
-    // Update social bar visibility if you're using that global check
     if (typeof updateSocialBarVisibility === 'function') {
         updateSocialBarVisibility();
     }
@@ -2354,12 +2186,10 @@ let masterAnimating = false;
 function toggleMasterPanel() {
     const toggleBtn = document.getElementById('masterToggle');
     const masterPanel = document.getElementById('masterPanel');
-    const introBlock = document.getElementById('introBlock'); // Grab the intro block
-    
+    const introBlock = document.getElementById('introBlock'); 
     const isOpen = masterPanel.classList.contains('open');
 
     if (!isOpen) {
-        // OPENING SEQUENCE: Hide intro text immediately, extend shaft, then drop panel open
         if (introBlock) introBlock.classList.add('hidden');
         
         toggleBtn.classList.add('extending');
@@ -2368,16 +2198,14 @@ function toggleMasterPanel() {
             toggleBtn.classList.add('open');
         }, 350); 
     } else {
-        // CLOSING SEQUENCE: Close panel first, let it slide back, then rotate/retract shaft & bring intro back
         masterPanel.classList.remove('open');
         toggleBtn.classList.remove('open'); 
 
         setTimeout(() => {
             toggleBtn.classList.remove('extending'); 
-            if (introBlock) introBlock.classList.remove('hidden'); // Bring intro text back after closing finishes
+            if (introBlock) introBlock.classList.remove('hidden'); 
         }, 350); 
 
-        // --- GLOBAL RESET / CLOSE ALL OPEN CONTENT ---
         closeAllSubDropdowns();
 
         document.querySelectorAll('.dropdown-block.dropdown-open').forEach(block => {
@@ -2428,9 +2256,6 @@ function closeAllSubDropdowns() {
 </script>
 
 <script>
-// ===============================
-// ACCORDION LOGIC (Training / Employment tables)
-// ===============================
 function toggleAccordion(element) {
     const item = element.parentElement;
     item.classList.toggle('active');
@@ -2438,17 +2263,6 @@ function toggleAccordion(element) {
 </script>
 
 <script>
-// ===============================
-// PRIVACY GATE / EMAIL VERIFICATION
-// gateKey/contentKey identify the gate via data-gate/data-content attributes
-// rather than unique element IDs. This matters because the desktop overlay
-// clones this same markup into #overlay-panel — with real IDs that would
-// create duplicates on the page and break getElementById lookups. Using
-// data-attributes + querySelectorAll lets this safely target every matching
-// instance currently in the DOM (the mobile copy, and the desktop clone if
-// it's open), so unlocking from either view unlocks both, now and on any
-// future re-open of the overlay.
-// ===============================
 function unlockSection(event, gateKey, contentKey, subjectText) {
     event.preventDefault();
 
@@ -2505,9 +2319,6 @@ function unlockSection(event, gateKey, contentKey, subjectText) {
 </script>
 
 <script>
-// ===============================
-// ROTATING TAGLINE TEXT
-// ===============================
 const tagline = document.getElementById('tagline-rotate');
 const taglineStates = [
     "— Digital Architecture —",
@@ -2538,13 +2349,8 @@ setInterval(rotateTagline, 3000);
 </script>
 
 <script>
-// ===============================
-// KEY TRAITS ACCORDION
-// ===============================
 function toggleTrait(button) {
     const body = button.nextElementSibling;
-    // Scope to this specific traits-accordion instance (mobile copy or the
-    // desktop overlay's cloned copy) so opening one never affects the other.
     const scope = button.closest('.traits-accordion') || document;
 
     scope.querySelectorAll('.trait-body').forEach(section => {
@@ -2565,13 +2371,6 @@ function toggleTrait(button) {
 </script>
 
 <script>
-// ===============================
-// PROFILE STATEMENT — INTERNAL MINI-DROPDOWNS
-// Collapsed by default, click to expand, one open at a time — this now
-// behaves the same whether it's the mobile inline copy or the version
-// cloned into the desktop overlay panel. Scoped to whichever of those two
-// containers the click happened in, so the two copies never interfere.
-// ===============================
 function toggleMini(btn) {
     const scope = btn.closest('#profileContent, #overlay-panel') || document;
     const body = btn.nextElementSibling;
@@ -2589,9 +2388,6 @@ function toggleMini(btn) {
 </script>
 
 <script>
-// ===============================
-// DESKTOP / MOBILE MODE HANDLER
-// ===============================
 function handleDropdownClick(id, headerBtn) {
     if (window.innerWidth < 900) {
         toggleSectionDropdown(headerBtn);
@@ -2603,28 +2399,18 @@ function handleDropdownClick(id, headerBtn) {
 </script>
 
 <script>
-// ===============================
-// OVERLAY PANEL LOGIC (DESKTOP)
-// Clones the on-page content for the given section id into the
-// right-hand overlay panel, so there is only ever one copy of
-// the actual text content in the page.
-// ===============================
 let currentPanel = null;
 let currentHeader = null;
-let panelHideTimeout = null; // tracks the pending "hide" from a close animation
+let panelHideTimeout = null;
 
 function openPanel(id, headerBtn) {
     const panel = document.getElementById("overlay-panel");
 
-    // Cancel any pending hide left over from a previous close/switch —
-    // this is what was causing a freshly opened panel to vanish ~350ms
-    // later: the old timeout kept running even after new content loaded.
     if (panelHideTimeout) {
         clearTimeout(panelHideTimeout);
         panelHideTimeout = null;
     }
 
-    // Same header clicked again while its panel is open → close it
     if (currentPanel === id && panel.style.display === "block") {
         panel.style.animation = "slideOutToRight 0.35s ease forwards";
 
@@ -2642,9 +2428,6 @@ function openPanel(id, headerBtn) {
         return;
     }
 
-    // Switching to a different section (or opening fresh) — just swap the
-    // content in place and slide it in. No separate close step needed:
-    // the content underneath is being replaced anyway.
     if (currentHeader && currentHeader !== headerBtn) {
         currentHeader.classList.remove("active");
     }
@@ -2655,7 +2438,7 @@ function openPanel(id, headerBtn) {
     panel.style.display = "block";
 
     panel.style.animation = "none";
-    void panel.offsetWidth; // force reflow
+    void panel.offsetWidth; 
     panel.style.animation = "slideInFromLeft 0.45s ease forwards";
 
     headerBtn.classList.add("active");
@@ -2664,7 +2447,6 @@ function openPanel(id, headerBtn) {
     currentHeader = headerBtn;
 }
 </script>
-
 
 </body>
 </html>
