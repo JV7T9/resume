@@ -93,6 +93,77 @@ body {
     gap: 20px;
 }
 
+.name-unlock-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 0px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    color: #f8fafc;
+}
+
+.unlock-diamond {
+    display: inline-block;
+    color: #38bdf8;
+    animation: spinAndWindDown 1.6s cubic-bezier(0.15, 0.85, 0.35, 1) forwards;
+    transform-origin: center;
+    z-index: 2;
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+}
+
+@keyframes diamondDoubleSpin {
+    0% {
+        transform: rotate(0deg) scale(0.8);
+        opacity: 0.5;
+        text-shadow: 0 0 5px rgba(56, 189, 248, 0.2);
+    }
+    50% {
+        transform: rotate(180deg) scale(1);
+        opacity: 1;
+        text-shadow: 0 0 15px rgba(56, 189, 248, 0.7);
+    }
+    100% {
+        transform: rotate(540deg) scale(1);
+        opacity: 1;
+        text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+    }
+}
+
+@keyframes spinAndWindDown {
+    0% {
+        transform: rotate(0deg) scale(0.8);
+        opacity: 0.5;
+    }
+    100% {
+        transform: rotate(1080deg) scale(1);
+        opacity: 1;
+        text-shadow: 0 0 12px rgba(56, 189, 248, 0.8);
+    }
+}
+		
+.name-part {
+    opacity: 0;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+}
+
+.first-name {
+    transform: translateX(45px); 
+}
+
+.last-name {
+    transform: translateX(-45px); 
+}
+
+.name-unlock-container.unlocked .first-name {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.name-unlock-container.unlocked .last-name {
+    opacity: 1;
+    transform: translateX(0);
+}
+
 .master-nav {
     padding: 0 6px;
     margin-bottom: 10px;
@@ -1301,8 +1372,13 @@ footer {
 
     <div class="sub-header-wrapper">
         <div class="header-identity">
-            <h2>John◈Va'afuti</h2>
-			 <p class="intro-title">𖤲 Custom-Digital Resume 𖤆</p>
+            <div class="name-unlock-container">
+                <span class="name-part first-name">JOHN</span>
+                <div class="unlock-diamond" id="unlockDiamond">❖</div>
+                <span class="name-part last-name">VA'AFUTI</span>
+             </div>
+            <p class="intro-title">𖤲 Custom-Digital Resume 𖤆</p>
+
         </div>
     </div>
 
@@ -2448,5 +2524,14 @@ function openPanel(id, headerBtn) {
 }
 </script>
 
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.name-unlock-container');
+    setTimeout(() => {
+        container.classList.add('unlocked');
+    }, 50); 
+});
+</script>
+	
 </body>
 </html>
