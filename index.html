@@ -1428,7 +1428,25 @@ footer {
     background: #0f172a;
     color: #f8fafc;
 }
+		
+.track-select-btn {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: #f8fafc;
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.75rem;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: left;
+    min-width: 130px;
+    transition: all 0.2s ease;
+}
 
+.track-select-btn:hover {
+    border-color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+}
 .volume-wrapper {
     display: flex;
     align-items: center;
@@ -1570,7 +1588,6 @@ footer {
     <p class="intro-action">Click the chevron to access content</p>
     <div class="track-player-container">
         <div class="player-main-controls">
-            <!-- Play / Stop Button -->
             <button id="playStopBtn" class="player-btn" title="Play/Stop">
                 <svg id="playIcon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
                     <path d="M8 5v14l11-7z"/>
@@ -1580,7 +1597,6 @@ footer {
                 </svg>
             </button>
 
-            <!-- Custom Upward Dropdown Replacement -->
             <div class="custom-track-dropdown">
                 <button type="button" class="track-select-btn" id="trackSelectBtn">SELECT TRACK</button>
                 <div class="track-options-list" id="trackOptionsList">
@@ -1592,7 +1608,6 @@ footer {
                 </div>
             </div>
 
-            <!-- Volume Control -->
             <div class="volume-wrapper">
                 <span class="vol-icon">VOL</span>
                 <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.05" value="0.7">
