@@ -1519,6 +1519,36 @@ footer {
 
 <div class="intro-block" id="introBlock">
     <p class="intro-action">Click the chevron to access content</p>
+	<div class="track-player-container">
+    <div class="player-main-controls">
+        <button id="playStopBtn" class="player-btn" title="Play/Stop">
+            
+            <svg id="playIcon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                <path d="M8 5v14l11-7z"/>
+            </svg>
+           
+            <svg id="stopIcon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display: none;">
+                <path d="M6 6h12v12H6z"/>
+            </svg>
+        </button>
+
+        <select id="trackSelect" class="track-select">
+            <option value="" disabled selected>SELECT TRACK</option>
+            <option value="assetss/track_1.mp3">Track01</option>
+            <option value="assets/track_2.mp3">Track02</option>
+            <option value="assets/track_3.mp3">Track03</option>
+            <option value="aasets/track_4.mp3">Track04</option>
+            <option value="assets/track_5.mp3">Track05</option>
+        </select>
+
+        <div class="volume-wrapper">
+            <span class="vol-icon">VOL</span>
+            <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.05" value="0.7">
+        </div>
+    </div>
+   
+    <audio id="audioPlayer" preload="auto"></audio>
+</div>
 </div>
 
     <div class="master-panel" id="masterPanel">
@@ -2640,6 +2670,63 @@ window.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         container.classList.add('unlocked');
     }, 50); 
+});
+</script>
+
+<script>
+// Keep your JS trigger the same (fires almost instantly on DOM load)
+window.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.name-unlock-container');
+    setTimeout(() => {
+        container.classList.add('unlocked');
+    }, 50); 
+});
+</script>
+
+<script>
+const audioPlayer = document.getElementById('audioPlayer');
+const playStopBtn = document.getElementById('playStopBtn');
+const playIcon = document.getElementById('playIcon');
+const stopIcon = document.getElementById('stopIcon');
+const trackSelect = document.getElementById('trackSelect');
+const volumeSlider = document.getElementById('volumeSlider');
+
+// Play/Stop toggle logic
+playStopBtn.addEventListener('click', () => {
+    if (!trackSelect.value) return; // Don't do anything if no track is selected
+    
+    if (audioPlayer.paused) {
+        if (audioPlayer.src === "" || !audioPlayer.src.includes(trackSelect.value)) {
+            audioPlayer.src = trackSelect.value;
+        }
+        audioPlayer.play();
+        playIcon.style.display = 'none';
+        stopIcon.style.display = 'block';
+    } else {
+        audioPlayer.pause();
+        audioPlayer.currentTime = 0;
+        playIcon.style.display = 'block';
+        stopIcon.style.display = 'none';
+    }
+});
+
+// Change track from dropdown
+trackSelect.addEventListener('change', () => {
+    audioPlayer.src = trackSelect.value;
+    audioPlayer.play();
+    playIcon.style.display = 'none';
+    stopIcon.style.display = 'block';
+});
+
+// Volume control
+volumeSlider.addEventListener('input', (e) => {
+    audioPlayer.volume = e.target.value;
+});
+
+// Reset icons when track ends naturally
+audioPlayer.addEventListener('ended', () => {
+    playIcon.style.display = 'block';
+    stopIcon.style.display = 'none';
 });
 </script>
 	
