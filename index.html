@@ -1422,13 +1422,6 @@ footer {
 
 <div class="intro-block" id="introBlock">
     <p class="intro-action">Click the chevron to access content</p>
-    <p class="tagline">
-         <span id="tagline-rotate">Digital Architecture</span>
-    </p>
-
-    <div class="tagline-card">
-         <img id="tagline-img" src="D2.jpg" alt="Tagline Visual" />
-    </div>
 </div>
 
     <div class="master-panel" id="masterPanel">
@@ -1453,6 +1446,9 @@ footer {
                         My background sits at the intersection of these shifts, blending Operational Security, Digital Architecture and Engineering to provide full-scale productivity implementation, robust maintenance, and developmental continuity.<br>
                         Navigating how to design systems that evolve with their environments, ensuring coherence, resilience, and emergent intelligence across every operational layer is an ongoing commitment.
                     </p>
+					<div class="tagline-card profile-image-card">
+                       <img src="assets/D3.jpg" alt="Profile Visual" />
+                    </div>
                 </div>
             </div>
 
@@ -1468,6 +1464,9 @@ footer {
                         <p>I am currently architecting a novel form of code intelligence engine designed to confront and stabilize the phenomena
                         of hallucination and cognitive drift.</p>
                     </p>
+					<div class="tagline-card profile-image-card">
+                       <img src="assets/D1.jpg" alt="Profile Visual" />
+                    </div>
                 </div>
             </div>
 
@@ -1484,6 +1483,9 @@ footer {
                         <li>Security Administration, Field Operations & Solutions</li>
                         <li>OHS, risk procedures, and protocol compliance training</li>
                     </ul>
+				    <div class="tagline-card profile-image-card">
+                       <img src="assets/D2.jpg" alt="Profile Visual" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -2426,50 +2428,6 @@ function unlockSection(event, gateKey, contentKey, subjectText) {
         errorDiv.innerText = "Verification failed. Please ensure the file is hosted online (GitHub or Tiiny.host) to activate form handshakes.";
     });
 }
-</script>
-
-<script>
-const tagline = document.getElementById('tagline-rotate');
-const taglineImg = document.getElementById('tagline-img');
-
-const taglineStates = [
-    "— Digital Architecture —",
-    "— Site Security Ops —",
-    "— Engineering —"
-];
-
-const imageStates = [
-    "assets/D2.jpg",
-    "assets/D1.jpg",
-    "assets/D3.jpg"
-];
-
-let taglineIndex = 0;
-
-function rotateTagline() {
-    tagline.style.opacity = 0;
-    taglineImg.style.opacity = 0;
-
-    setTimeout(() => {
-        taglineIndex = (taglineIndex + 1) % taglineStates.length;
-        
-        tagline.innerText = taglineStates[taglineIndex];
-        taglineImg.src = imageStates[taglineIndex];
-
-        tagline.style.opacity = 1;
-        taglineImg.style.opacity = 1;
-
-        tagline.classList.add("glow");
-        setTimeout(() => tagline.classList.remove("glow"), 500);
-    }, 500);
-}
-
-tagline.innerText = taglineStates[0];
-taglineImg.src = imageStates[0];
-tagline.style.opacity = 1;
-taglineImg.style.opacity = 1;
-
-setInterval(rotateTagline, 3000);
 </script>
 
 <script>
