@@ -1365,6 +1365,105 @@ footer {
     }
 }
 
+		/* ==========================================================================
+   AUDIO TRACK PLAYER
+   ========================================================================== */
+.track-player-container {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin: 300px 0 20px -10px; /* Aligns with your left-side padding */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 10px rgba(56, 189, 248, 0.08);
+    font-family: 'Michroma', sans-serif;
+}
+
+.player-main-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.player-btn {
+    background: transparent;
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    color: #38bdf8;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-shadow: 0 0 6px rgba(56, 189, 248, 0.5);
+}
+
+.player-btn:hover {
+    background: rgba(56, 189, 248, 0.15);
+    border-color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+.track-select {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: #f8fafc;
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.75rem;
+    padding: 6px 10px;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.track-select:hover, .track-select:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+}
+
+.track-select option {
+    background: #0f172a;
+    color: #f8fafc;
+}
+
+.volume-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.65rem;
+    color: #38bdf8;
+}
+
+.volume-slider {
+    width: 60px;
+    accent-color: #38bdf8;
+    cursor: pointer;
+}
+
+.track-select::-webkit-scrollbar {
+    width: 3px;
+}
+
+.track-select::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+
+.track-select::-webkit-scrollbar-thumb {
+    background-color: #38bdf8;
+    border-radius: 2px;
+    box-shadow: 0 0 6px rgba(56, 189, 248, 0.5);
+}
+
+.track-select::-webkit-scrollbar-thumb:hover {
+    background-color: #7dd3fc;
+}
+		
     </style>
 </head>
 <body>
