@@ -22,38 +22,66 @@
 
 body {
     margin: 0;
-    padding: 0; 
+    padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #e2e8f0; 
-    
-    background-image: url('assets/Cube6.png');
-    background-color: #090d16; 
-    background-size: cover;   
-    background-position: center; 
+    background-image: url('Cube6.png');
+    background-color: #090d16;
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-
     height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
 }
 
-.page-content {
-    padding: 25px 10px;
+/* Thin Custom Scrollbar for the Entire Window */
+body::-webkit-scrollbar {
+    width: 3px;
+}
+
+body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #38bdf8;
+    border-radius: 2px;
+    box-shadow: 0 0 6px rgba(56, 189, 248, 0.5);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background-color: #7dd3fc;
 }
 
 .container {
-    min-height: 700px;
+    /* Remove overflow-y here so it doesn't conflict with the body */
     position: relative;
-    overflow: hidden;
     max-width: 900px;
     margin: -15px auto 10px auto;
     padding: 15px;
     border-radius: 12px;
-    box-shadow:
-        0 20px 25px -5px rgba(0, 0, 0, 0.3),
-        0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* Thin Custom Scrollbar for the Container */
+.container::-webkit-scrollbar {
+    width: 3px; /* Controls how thin the scrollbar is */
+}
+
+.container::-webkit-scrollbar-track {
+    background: transparent; /* Keeps the track background clean */
+}
+
+.container::-webkit-scrollbar-thumb {
+    background-color: #38bdf8; /* Matches your neon cyan theme */
+    border-radius: 2px;
+    box-shadow: 0 0 6px rgba(56, 189, 248, 0.5); /* Adds a subtle glow */
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+    background-color: #7dd3fc;
 }
 
 .hero-bg {
