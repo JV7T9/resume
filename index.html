@@ -1374,7 +1374,7 @@ footer {
     border: 1px solid rgba(56, 189, 248, 0.3);
     border-radius: 6px;
     padding: 6px 12px;
-    margin: 300px 0 20px -10px; /* Aligns with your left-side padding */
+    margin: 300px 0 20px -10px; 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 10px rgba(56, 189, 248, 0.08);
     font-family: 'Michroma', sans-serif;
 }
@@ -1428,32 +1428,7 @@ footer {
     background: #0f172a;
     color: #f8fafc;
 }
-		
-.custom-track-dropdown {
-    position: relative;
-    display: inline-block;
-    font-family: 'Michroma', sans-serif;
-}
 
-.track-select-btn {
-    background: rgba(15, 23, 42, 0.6);
-    border: 1px solid rgba(56, 189, 248, 0.3);
-    color: #f8fafc;
-    font-family: 'Michroma', sans-serif;
-    font-size: 0.75rem;
-    padding: 6px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    text-align: left;
-    min-width: 130px;
-    transition: all 0.2s ease;
-}
-
-.track-select-btn:hover {
-    border-color: #38bdf8;
-    box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
-}
-		
 .volume-wrapper {
     display: flex;
     align-items: center;
@@ -1484,6 +1459,58 @@ footer {
 
 .track-select::-webkit-scrollbar-thumb:hover {
     background-color: #7dd3fc;
+}
+.track-options-list {
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    border-radius: 6px;
+    display: none;
+    flex-direction: column;
+    z-index: 100;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.2);
+    
+    max-height: 74px; 
+    overflow-y: auto;
+}
+
+.track-options-list.open {
+    display: flex;
+}
+
+.track-option {
+    padding: 8px 12px;
+    font-size: 0.7rem;
+    color: #cbd5e1;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+    white-space: nowrap;
+}
+
+.track-option:last-child {
+    border-bottom: none;
+}
+
+.track-option:hover {
+    background: rgba(56, 189, 248, 0.2);
+    color: #38bdf8;
+}
+
+.track-options-list::-webkit-scrollbar {
+    width: 3px;
+}
+.track-options-list::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+.track-options-list::-webkit-scrollbar-thumb {
+    background-color: #38bdf8;
+    border-radius: 2px;
 }
 		
     </style>
@@ -2712,38 +2739,16 @@ const audioPlayer = document.getElementById('audioPlayer');
 const playStopBtn = document.getElementById('playStopBtn');
 const playIcon = document.getElementById('playIcon');
 const stopIcon = document.getElementById('stopIcon');
-const trackSelectBtn = document.getElementById('trackSelectBtn');
-const trackOptionsList = document.getElementById('trackOptionsList');
+const trackSelect = document.getElementById('trackSelect');
 const volumeSlider = document.getElementById('volumeSlider');
 
-let selectedTrackUrl = "";
-
-trackSelectBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    trackOptionsList.classList.toggle('open');
-});
-
-window.addEventListener('click', () => {
-    trackOptionsList.classList.remove('open');
-});
-
-document.querySelectorAll('.track-option').forEach(option => {
-    option.addEventListener('click', function() {
-        selectedTrackUrl = this.getAttribute('data-value');
-        trackSelectBtn.textContent = this.textContent;
-        trackOptionsList.classList.remove('open');
-        
-        audioPlayer.src = selectedTrackUrl;
-        audioPlayer.play();
-        playIcon.style.display = 'none';
-        stopIcon.style.display = 'block';
-    });
-});
-
 playStopBtn.addEventListener('click', () => {
-    if (!selectedTrackUrl) return;
+    if (!trackSelect.value) return; 
     
     if (audioPlayer.paused) {
+        if (audioPlayer.src === "" || !audioPlayer.src.includes(trackSelect.value)) {
+            audioPlayer.src = trackSelect.value;
+        }
         audioPlayer.play();
         playIcon.style.display = 'none';
         stopIcon.style.display = 'block';
@@ -2753,6 +2758,13 @@ playStopBtn.addEventListener('click', () => {
         playIcon.style.display = 'block';
         stopIcon.style.display = 'none';
     }
+});
+
+trackSelect.addEventListener('change', () => {
+    audioPlayer.src = trackSelect.value;
+    audioPlayer.play();
+    playIcon.style.display = 'none';
+    stopIcon.style.display = 'block';
 });
 
 volumeSlider.addEventListener('input', (e) => {
