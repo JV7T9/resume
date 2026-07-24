@@ -328,6 +328,29 @@ body {
     margin-left: 0px;
 }
 
+.tagline-card {
+    background: rgba(0, 20, 40, 0.6);
+    border: 0px solid rgba(0, 255, 255, 0.2);
+    border-radius: 8px;
+    padding:5px;
+    margin-top: 5px;
+    max-width: 250px; 
+    /* Remove any fixed heights or overflow properties that might clip the content */
+    height: auto; 
+    overflow: visible;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.tagline-card img {
+    width: 100%;
+    height: auto; /* Ensures the image scales proportionally downwards */
+    max-height: none; /* Prevents it from being artificially constrained vertically */
+    border-radius: 4px;
+    display: block;
+    transition: opacity 0.5s ease;
+    opacity: 0.1;
+}
+
 .glass-header {
     padding: 15px 32px;
     margin-bottom: 30px;
@@ -1400,9 +1423,13 @@ footer {
 
 <div class="intro-block" id="introBlock">
     <p class="intro-action">Click the chevron to access content</p>
-	<p class="tagline">
-        <span id="tagline-rotate">Digital Architecture</span>
+    <p class="tagline">
+         <span id="tagline-rotate">Digital Architecture</span>
     </p>
+
+    <div class="tagline-card">
+         <img id="tagline-img" src="D1.jpg" alt="Tagline Visual" />
+    </div>
 </div>
 
     <div class="master-panel" id="masterPanel">
@@ -2404,22 +2431,34 @@ function unlockSection(event, gateKey, contentKey, subjectText) {
 
 <script>
 const tagline = document.getElementById('tagline-rotate');
+const taglineImg = document.getElementById('tagline-img');
+
 const taglineStates = [
     "— Digital Architecture —",
     "— Site Security Ops —",
     "— Engineering —"
 ];
 
+const imageStates = [
+    "D1.jpg",
+    "D2.jpg",
+    "D3.jpg"
+];
+
 let taglineIndex = 0;
 
 function rotateTagline() {
     tagline.style.opacity = 0;
+    taglineImg.style.opacity = 0;
 
     setTimeout(() => {
         taglineIndex = (taglineIndex + 1) % taglineStates.length;
+        
         tagline.innerText = taglineStates[taglineIndex];
+        taglineImg.src = imageStates[taglineIndex];
 
         tagline.style.opacity = 1;
+        taglineImg.style.opacity = 1;
 
         tagline.classList.add("glow");
         setTimeout(() => tagline.classList.remove("glow"), 500);
@@ -2427,7 +2466,9 @@ function rotateTagline() {
 }
 
 tagline.innerText = taglineStates[0];
+taglineImg.src = imageStates[0];
 tagline.style.opacity = 1;
+taglineImg.style.opacity = 1;
 
 setInterval(rotateTagline, 3000);
 </script>
