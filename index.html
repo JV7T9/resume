@@ -2299,6 +2299,14 @@ function toggleMasterPanel() {
     const toggleBtn = document.getElementById('masterToggle');
     const masterPanel = document.getElementById('masterPanel');
     const introBlock = document.getElementById('introBlock'); 
+    const unlockDiamond = document.querySelector('.unlock-diamond'); 
+    
+    if (unlockDiamond) {
+        unlockDiamond.style.animation = 'none';
+        void unlockDiamond.offsetWidth; 
+        unlockDiamond.style.animation = 'spinAndWindDown 1.6s cubic-bezier(0.15, 0.85, 0.35, 1) forwards';
+    }
+
     const isOpen = masterPanel.classList.contains('open');
 
     if (!isOpen) {
