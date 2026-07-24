@@ -1374,7 +1374,7 @@ footer {
     border: 1px solid rgba(56, 189, 248, 0.3);
     border-radius: 6px;
     padding: 6px 12px;
-    margin: 300px 0 20px -10px; 
+    margin: 108px 0 20px -10px; /* Aligns with your left-side padding */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 10px rgba(56, 189, 248, 0.08);
     font-family: 'Michroma', sans-serif;
 }
@@ -1428,7 +1428,7 @@ footer {
     background: #0f172a;
     color: #f8fafc;
 }
-		
+
 .track-select-btn {
     background: rgba(15, 23, 42, 0.6);
     border: 1px solid rgba(56, 189, 248, 0.3);
@@ -1447,6 +1447,7 @@ footer {
     border-color: #38bdf8;
     box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
 }
+
 .volume-wrapper {
     display: flex;
     align-items: center;
@@ -1459,76 +1460,6 @@ footer {
     width: 60px;
     accent-color: #38bdf8;
     cursor: pointer;
-}
-
-.track-select::-webkit-scrollbar {
-    width: 3px;
-}
-
-.track-select::-webkit-scrollbar-track {
-    background: #0f172a;
-}
-
-.track-select::-webkit-scrollbar-thumb {
-    background-color: #38bdf8;
-    border-radius: 2px;
-    box-shadow: 0 0 6px rgba(56, 189, 248, 0.5);
-}
-
-.track-select::-webkit-scrollbar-thumb:hover {
-    background-color: #7dd3fc;
-}
-.track-options-list {
-    position: absolute;
-    bottom: calc(100% + 6px);
-    left: 0;
-    right: 0;
-    background: rgba(15, 23, 42, 0.95);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(56, 189, 248, 0.4);
-    border-radius: 6px;
-    display: none;
-    flex-direction: column;
-    z-index: 100;
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.2);
-    
-    max-height: 74px; 
-    overflow-y: auto;
-}
-
-.track-options-list.open {
-    display: flex;
-}
-
-.track-option {
-    padding: 8px 12px;
-    font-size: 0.7rem;
-    color: #cbd5e1;
-    cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
-    border-bottom: 1px solid rgba(56, 189, 248, 0.1);
-    white-space: nowrap;
-}
-
-.track-option:last-child {
-    border-bottom: none;
-}
-
-.track-option:hover {
-    background: rgba(56, 189, 248, 0.2);
-    color: #38bdf8;
-}
-
-.track-options-list::-webkit-scrollbar {
-    width: 3px;
-}
-.track-options-list::-webkit-scrollbar-track {
-    background: #0f172a;
-}
-.track-options-list::-webkit-scrollbar-thumb {
-    background-color: #38bdf8;
-    border-radius: 2px;
 }
 		
     </style>
@@ -2753,9 +2684,8 @@ const stopIcon = document.getElementById('stopIcon');
 const trackSelect = document.getElementById('trackSelect');
 const volumeSlider = document.getElementById('volumeSlider');
 
-// Play/Stop toggle logic
 playStopBtn.addEventListener('click', () => {
-    if (!trackSelect.value) return; // Don't do anything if no track is selected
+    if (!trackSelect.value) return; 
     
     if (audioPlayer.paused) {
         if (audioPlayer.src === "" || !audioPlayer.src.includes(trackSelect.value)) {
@@ -2772,7 +2702,6 @@ playStopBtn.addEventListener('click', () => {
     }
 });
 
-// Change track from dropdown
 trackSelect.addEventListener('change', () => {
     audioPlayer.src = trackSelect.value;
     audioPlayer.play();
@@ -2780,12 +2709,10 @@ trackSelect.addEventListener('change', () => {
     stopIcon.style.display = 'block';
 });
 
-// Volume control
 volumeSlider.addEventListener('input', (e) => {
     audioPlayer.volume = e.target.value;
 });
 
-// Reset icons when track ends naturally
 audioPlayer.addEventListener('ended', () => {
     playIcon.style.display = 'block';
     stopIcon.style.display = 'none';
