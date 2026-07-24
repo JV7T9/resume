@@ -1534,10 +1534,10 @@ footer {
 
         <select id="trackSelect" class="track-select">
             <option value="" disabled selected>SELECT TRACK</option>
-            <option value="assetss/track_1.mp3">Track01</option>
+            <option value="assets/track_1.mp3">Track01</option>
             <option value="assets/track_2.mp3">Track02</option>
             <option value="assets/track_3.mp3">Track03</option>
-            <option value="aasets/track_4.mp3">Track04</option>
+            <option value="assets/track_4.mp3">Track04</option>
             <option value="assets/track_5.mp3">Track05</option>
         </select>
 
@@ -2691,9 +2691,8 @@ const stopIcon = document.getElementById('stopIcon');
 const trackSelect = document.getElementById('trackSelect');
 const volumeSlider = document.getElementById('volumeSlider');
 
-// Play/Stop toggle logic
 playStopBtn.addEventListener('click', () => {
-    if (!trackSelect.value) return; // Don't do anything if no track is selected
+    if (!trackSelect.value) return; 
     
     if (audioPlayer.paused) {
         if (audioPlayer.src === "" || !audioPlayer.src.includes(trackSelect.value)) {
@@ -2710,7 +2709,6 @@ playStopBtn.addEventListener('click', () => {
     }
 });
 
-// Change track from dropdown
 trackSelect.addEventListener('change', () => {
     audioPlayer.src = trackSelect.value;
     audioPlayer.play();
@@ -2718,12 +2716,10 @@ trackSelect.addEventListener('change', () => {
     stopIcon.style.display = 'block';
 });
 
-// Volume control
 volumeSlider.addEventListener('input', (e) => {
     audioPlayer.volume = e.target.value;
 });
 
-// Reset icons when track ends naturally
 audioPlayer.addEventListener('ended', () => {
     playIcon.style.display = 'block';
     stopIcon.style.display = 'none';
