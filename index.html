@@ -1586,38 +1586,34 @@ footer {
 
 <div class="intro-block" id="introBlock">
     <p class="intro-action">Click the chevron to access content</p>
-    <div class="track-player-container">
-        <div class="player-main-controls">
-            <button id="playStopBtn" class="player-btn" title="Play/Stop">
-                <svg id="playIcon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                    <path d="M8 5v14l11-7z"/>
-                </svg>
-                <svg id="stopIcon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display: none;">
-                    <path d="M6 6h12v12H6z"/>
-                </svg>
-            </button>
+<div class="track-player-container">
+    <div class="player-main-controls">
+        <button id="playStopBtn" class="player-btn" title="Play/Stop">
+            <svg id="playIcon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                <path d="M8 5v14l11-7z"/>
+            </svg>
+            <svg id="stopIcon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display: none;">
+                <path d="M6 6h12v12H6z"/>
+            </svg>
+        </button>
 
-            <div class="custom-track-dropdown">
-                <button type="button" class="track-select-btn" id="trackSelectBtn">SELECT TRACK</button>
-                <div class="track-options-list" id="trackOptionsList">
-                    <div class="track-option" data-value="assets/Track_1.mp3">Track01</div>
-                    <div class="track-option" data-value="assets/Track_2.mp3">Track02</div>
-                    <div class="track-option" data-value="assets/Track_3.mp3">Track03</div>
-                    <div class="track-option" data-value="assets/Track_4.mp3">Track04</div>
-                    <div class="track-option" data-value="assets/Track_5.mp3">Track05</div>
-                </div>
-            </div>
+        <select id="trackSelect" class="track-select">
+            <option value="" disabled selected>SELECT TRACK</option>
+            <option value="track_1.mp3">Track01</option>
+            <option value="track_2.mp3">Track02</option>
+            <option value="track_3.mp3">Track03</option>
+            <option value="track_4.mp3">Track04</option>
+            <option value="track_5.mp3">Track05</option>
+        </select>
 
-            <div class="volume-wrapper">
-                <span class="vol-icon">VOL</span>
-                <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.05" value="0.7">
-            </div>
+        <div class="volume-wrapper">
+            <span class="vol-icon">VOL</span>
+            <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.05" value="0.7">
         </div>
-       
-        <audio id="audioPlayer" preload="auto"></audio>
     </div>
+    <audio id="audioPlayer" preload="auto"></audio>
 </div>
-
+</div>
     <div class="master-panel" id="masterPanel">
 
     <div class="dropdown-block">
