@@ -293,9 +293,9 @@ body {
     width: auto;
     font-family: 'Michroma', sans-serif;
     opacity: 1;
-    max-height: 120px;
-    overflow: hidden;
-    transition: opacity 0.3s ease, max-height 0.3s ease, padding 0.3s ease, margin 0.3s ease, border-width 0.3s ease;
+    max-height: none; 
+    overflow: visible;
+    transition: opacity 0.3s ease, padding 0.3s ease, margin 0.3s ease, border-width 0.3s ease;
 }
 
 .intro-block.hidden {
@@ -334,8 +334,7 @@ body {
     border-radius: 8px;
     padding:5px;
     margin-top: 5px;
-    max-width: 250px; 
-    /* Remove any fixed heights or overflow properties that might clip the content */
+    max-width: 300px; 
     height: auto; 
     overflow: visible;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
@@ -343,8 +342,8 @@ body {
 
 .tagline-card img {
     width: 100%;
-    height: auto; /* Ensures the image scales proportionally downwards */
-    max-height: none; /* Prevents it from being artificially constrained vertically */
+    height: auto;
+    max-height: none;
     border-radius: 4px;
     display: block;
     transition: opacity 0.5s ease;
