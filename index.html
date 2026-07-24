@@ -1365,9 +1365,6 @@ footer {
     }
 }
 
-		/* ==========================================================================
-   AUDIO TRACK PLAYER
-   ========================================================================== */
 .track-player-container {
     display: inline-flex;
     align-items: center;
@@ -1431,7 +1428,32 @@ footer {
     background: #0f172a;
     color: #f8fafc;
 }
+		
+.custom-track-dropdown {
+    position: relative;
+    display: inline-block;
+    font-family: 'Michroma', sans-serif;
+}
 
+.track-select-btn {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: #f8fafc;
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.75rem;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: left;
+    min-width: 130px;
+    transition: all 0.2s ease;
+}
+
+.track-select-btn:hover {
+    border-color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+}
+		
 .volume-wrapper {
     display: flex;
     align-items: center;
@@ -1521,26 +1543,27 @@ footer {
     <p class="intro-action">Click the chevron to access content</p>
     <div class="track-player-container">
         <div class="player-main-controls">
-            <!-- Play Button -->
+            <!-- Play / Stop Button -->
             <button id="playStopBtn" class="player-btn" title="Play/Stop">
                 <svg id="playIcon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
                     <path d="M8 5v14l11-7z"/>
                 </svg>
-                <!-- Stop Button (Hidden by default) -->
                 <svg id="stopIcon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display: none;">
                     <path d="M6 6h12v12H6z"/>
                 </svg>
             </button>
 
-            <!-- Track Selector Dropdown -->
-            <select id="trackSelect" class="track-select">
-                <option value="" disabled selected>SELECT TRACK</option>
-                <option value="assets/Track_1.mp3">Track01</option>
-                <option value="assets/Track_2.mp3">Track02</option>
-                <option value="assets/Track_3.mp3">Track03</option>
-                <option value="assets/Track_4.mp3">Track04</option>
-                <option value="assets/Track_5.mp3">Track05</option>
-            </select>
+            <!-- Custom Upward Dropdown Replacement -->
+            <div class="custom-track-dropdown">
+                <button type="button" class="track-select-btn" id="trackSelectBtn">SELECT TRACK</button>
+                <div class="track-options-list" id="trackOptionsList">
+                    <div class="track-option" data-value="assets/Track_1.mp3">Track01</div>
+                    <div class="track-option" data-value="assets/Track_2.mp3">Track02</div>
+                    <div class="track-option" data-value="assets/Track_3.mp3">Track03</div>
+                    <div class="track-option" data-value="assets/Track_4.mp3">Track04</div>
+                    <div class="track-option" data-value="assets/Track_5.mp3">Track05</div>
+                </div>
+            </div>
 
             <!-- Volume Control -->
             <div class="volume-wrapper">
@@ -1549,7 +1572,6 @@ footer {
             </div>
         </div>
        
-        <!-- Hidden Audio Engine Element -->
         <audio id="audioPlayer" preload="auto"></audio>
     </div>
 </div>
@@ -2677,7 +2699,6 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script>
-// Keep your JS trigger the same (fires almost instantly on DOM load)
 window.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector('.name-unlock-container');
     setTimeout(() => {
@@ -2691,16 +2712,38 @@ const audioPlayer = document.getElementById('audioPlayer');
 const playStopBtn = document.getElementById('playStopBtn');
 const playIcon = document.getElementById('playIcon');
 const stopIcon = document.getElementById('stopIcon');
-const trackSelect = document.getElementById('trackSelect');
+const trackSelectBtn = document.getElementById('trackSelectBtn');
+const trackOptionsList = document.getElementById('trackOptionsList');
 const volumeSlider = document.getElementById('volumeSlider');
 
+let selectedTrackUrl = "";
+
+trackSelectBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    trackOptionsList.classList.toggle('open');
+});
+
+window.addEventListener('click', () => {
+    trackOptionsList.classList.remove('open');
+});
+
+document.querySelectorAll('.track-option').forEach(option => {
+    option.addEventListener('click', function() {
+        selectedTrackUrl = this.getAttribute('data-value');
+        trackSelectBtn.textContent = this.textContent;
+        trackOptionsList.classList.remove('open');
+        
+        audioPlayer.src = selectedTrackUrl;
+        audioPlayer.play();
+        playIcon.style.display = 'none';
+        stopIcon.style.display = 'block';
+    });
+});
+
 playStopBtn.addEventListener('click', () => {
-    if (!trackSelect.value) return; 
+    if (!selectedTrackUrl) return;
     
     if (audioPlayer.paused) {
-        if (audioPlayer.src === "" || !audioPlayer.src.includes(trackSelect.value)) {
-            audioPlayer.src = trackSelect.value;
-        }
         audioPlayer.play();
         playIcon.style.display = 'none';
         stopIcon.style.display = 'block';
@@ -2710,13 +2753,6 @@ playStopBtn.addEventListener('click', () => {
         playIcon.style.display = 'block';
         stopIcon.style.display = 'none';
     }
-});
-
-trackSelect.addEventListener('change', () => {
-    audioPlayer.src = trackSelect.value;
-    audioPlayer.play();
-    playIcon.style.display = 'none';
-    stopIcon.style.display = 'block';
 });
 
 volumeSlider.addEventListener('input', (e) => {
