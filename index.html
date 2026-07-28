@@ -2739,18 +2739,6 @@ function openTLPPlayer() {
 function resetTLPPlayer() {
     const link = document.getElementById('tlpToggleLink');
     const container = document.getElementById('trackPlayerContainer');
-    const trackSelect = document.getElementById('trackSelect');
-
-    if (audioPlayer) {
-        audioPlayer.pause();
-        audioPlayer.currentTime = 0;
-        audioPlayer.src = "";
-    }
-    
-    if (trackSelect) {
-        trackSelect.selectedIndex = 0;
-    }
-    updatePlayButtonUI(false);
 
     if (container && link) {
         container.classList.remove('show');
