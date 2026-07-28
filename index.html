@@ -1502,6 +1502,188 @@ footer {
     cursor: pointer;
 }
 
+/* ==========================================================================
+   DIPLOMA STUDIES FOCUS & PIE GRAPH STYLES
+   ========================================================================== */
+
+.diploma-focus-wrapper {
+    font-family: 'Michroma', sans-serif;
+    color: #f8fafc;
+}
+
+.diploma-header-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.diploma-title-label {
+    font-size: 0.85rem;
+    color: #38bdf8;
+    text-shadow: 0 0 6px rgba(56, 189, 248, 0.4);
+    letter-spacing: 0.5px;
+}
+
+/* Dropdown Container (Hidden by default, swaps with link) */
+.diploma-dropdown-container {
+    display: none;
+    flex-direction: column;
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 8px;
+    padding: 14px;
+    margin-top: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 12px rgba(56, 189, 248, 0.1);
+}
+
+.diploma-dropdown-container.show {
+    display: flex;
+}
+
+.diploma-container-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    color: #38bdf8;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+}
+
+.gradient-score-header {
+    background: linear-gradient(90deg, #38bdf8, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+/* Metrics List & Bars */
+.diploma-metrics-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.metric-row {
+    display: grid;
+    grid-template-columns: 240px 1fr 50px;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.7rem;
+}
+
+.metric-name {
+    color: #cbd5e1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bar-track {
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #0284c7, #38bdf8, #818cf8);
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+}
+
+.metric-val {
+    text-align: right;
+    color: #38bdf8;
+    font-weight: bold;
+}
+
+/* Pie Chart Layout & CSS Conic Graph */
+.chart-summary-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed rgba(56, 189, 248, 0.2);
+}
+
+.pie-chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cyber-pie-chart {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    /* Conic gradient accurately mapping data proportion weightings */
+    background: conic-gradient(
+        #38bdf8 0% 9%,
+        #0284c7 9% 19%,
+        #6366f1 19% 34%,
+        #818cf8 34% 46%,
+        #34d399 46% 59%,
+        #f43f5e 59% 69%,
+        #fbbf24 69% 83%,
+        #a855f7 83% 95%,
+        #ec4899 95% 100%
+    );
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+    border: 1px solid rgba(56, 189, 248, 0.4);
+}
+
+.chart-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.legend-title {
+    font-size: 0.75rem;
+    color: #38bdf8;
+}
+
+.legend-desc {
+    font-size: 0.65rem;
+    color: #94a3b8;
+    line-height: 1.4;
+}
+
+/* Responsive layout adjustments for smaller viewports */
+@media(max-width: 768px) {
+    .metric-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+    .metric-val {
+        text-align: left;
+    }
+    .chart-summary-section {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* Unique color weighting for the security pie chart slices */
+.cyber-pie-chart.security-pie {
+    background: conic-gradient(
+        #38bdf8 0% 12%,
+        #0284c7 12% 23%,
+        #6366f1 23% 37%,
+        #818cf8 37% 49%,
+        #34d399 49% 61%,
+        #f43f5e 61% 73%,
+        #fbbf24 73% 87%,
+        #a855f7 87% 100%
+    );
+}
 		
     </style>
 </head>
@@ -2157,28 +2339,160 @@ footer {
                         </div>
                     </div>
                 </div>
-				<div class="grid-2" style="margin-bottom: 20px;">
-                    <div class="card">
-                        <h3>Diploma Studies Focus</h3>
-                        <p style="font-size: 0.85rem; line-height: 1.5;">
-                            Fundamentals of Programming & Problem Solving | Hardware Servicing | IT Systems Overview |
-                            Professional Practice | Database Administration | Implementing Networks | IT Technical Support |
-                            Server Management
-                        </p>
-                    </div>
+<div class="diploma-focus-wrapper" style="margin-bottom: 20px;">
+    <!-- Section Title & Toggle Link (Swaps in place like your track player) -->
+    <div class="diploma-header-row">
+        <span class="diploma-title-label">DIPLOMA STUDIES FOCUS: DIGITAL TECHNOLOGY</span>
+        <a class="tlp-toggle-link" id="diplomaToggleLink" onclick="openDiplomaFocus()">| Click to open data breakdown |</a>
+    </div>
 
-                    <div class="card">
-                        <h3>Security Engagements</h3>
-                        <p style="font-size: 0.85rem; line-height: 1.5;">
-                            Site Security & Control Room Operations | Private Investigator | Close Protection Agent |
-                            Static Guarding | Digital Site Mapping | Corporate & Covert Security | Loss Prevention |
-                            Access Control
-                        </p>
-                    </div>
-                </div>
-            </section>
+    <!-- Dropdown Container -->
+    <div class="diploma-dropdown-container" id="diplomaDropdownContainer">
+        <div class="diploma-container-header">
+            <span>DATA BREAKDOWN</span>
+            <span class="gradient-score-header">GRADE / 100%</span>
+            <button class="player-btn close-player-btn" title="Close" onclick="resetDiplomaFocus()">×</button>
+        </div>
+
+        <!-- Metric Rows with Bar Graphs -->
+        <div class="diploma-metrics-list">
+            <div class="metric-row">
+                <span class="metric-name">Fundamentals of Programming & Problem Solving</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 57%;"></div></div>
+                <span class="metric-val">57%</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-name">Hardware Servicing</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 64%;"></div></div>
+                <span class="metric-val">64%</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-name">Hardware Servicing Remedial</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 93%;"></div></div>
+                <span class="metric-val">93%</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-name">IT Systems Overview</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 75%;"></div></div>
+                <span class="metric-val">75%</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-name">Professional Practice</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 82%;"></div></div>
+                <span class="metric-val">82%</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-name">Database Administration</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 61%;"></div></div>
+                <span class="metric-val">61%</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-name">Implementing Networks</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 85%;"></div></div>
+                <span class="metric-val">85%</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-name">IT Technical Support</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 82%;"></div></div>
+                <span class="metric-val">82%</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-name">Server Management</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 74%;"></div></div>
+                <span class="metric-val">74%</span>
+            </div>
+        </div>
+
+        <!-- Pie / Conic Chart Visualizer -->
+        <div class="chart-summary-section">
+            <div class="pie-chart-container">
+                <!-- Pure CSS Conic Gradient Multi-Slice Pie Chart -->
+                <div class="cyber-pie-chart"></div>
+            </div>
+
+            <div class="chart-legend">
+                <div class="legend-title">AGGREGATE DATA DISTRIBUTION</div>
+                <div class="legend-desc">Visual synthesis reflecting weighted dataset proportions across core academic vectors.</div>
+            </div>
         </div>
     </div>
+
+<div class="diploma-focus-wrapper" style="margin-bottom: 20px;">
+    <!-- Section Title & Toggle Link (Swaps in place) -->
+    <div class="diploma-header-row">
+        <span class="diploma-title-label">SECURITY ENGAGEMENTS</span>
+        <a class="tlp-toggle-link" id="securityToggleLink" onclick="openSecurityFocus()">| Click to open data breakdown |</a>
+    </div>
+
+    <!-- Dropdown Container -->
+    <div class="diploma-dropdown-container" id="securityDropdownContainer">
+        <div class="diploma-container-header">
+            <span>DATA BREAKDOWN</span>
+            <span class="gradient-score-header">PRO-LEVEL / 100%</span>
+            <button class="player-btn close-player-btn" title="Close" onclick="resetSecurityFocus()">×</button>
+        </div>
+
+        <!-- Metric Rows with Bar Graphs -->
+        <div class="diploma-metrics-list">
+            <div class="metric-row">
+                <span class="metric-name">Site Security & Control Room Operations</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 88%;"></div></div>
+                <span class="metric-val">88%</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-name">Private Investigator</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 76%;"></div></div>
+                <span class="metric-val">76%</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-name">Close Protection Agent</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 92%;"></div></div>
+                <span class="metric-val">92%</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-name">Static Guarding</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 81%;"></div></div>
+                <span class="metric-val">81%</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-name">Digital Site Mapping</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 79%;"></div></div>
+                <span class="metric-val">79%</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-name">Corporate & Covert Security</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 85%;"></div></div>
+                <span class="metric-val">85%</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-name">Loss Prevention</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 80%;"></div></div>
+                <span class="metric-val">80%</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-name">Access Control</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 87%;"></div></div>
+                <span class="metric-val">87%</span>
+            </div>
+        </div>
+
+        <!-- Pie / Conic Chart Visualizer -->
+        <div class="chart-summary-section">
+            <div class="pie-chart-container">
+                <!-- Pure CSS Conic Gradient Multi-Slice Pie Chart -->
+                <div class="cyber-pie-chart security-pie"></div>
+            </div>
+            <div class="chart-legend">
+                <div class="legend-title">AGGREGATE DATA DISTRIBUTION</div>
+                <div class="legend-desc">Visual synthesis reflecting weighted operational competencies across tactical security vectors.</div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+</div>
+</div>
+
 
     <div class="dropdown-block">
         <button class="dropdown-header" onclick="handleDropdownClick('employmentContent', this)">
@@ -2798,6 +3112,52 @@ if (audioPlayer) {
     audioPlayer.addEventListener('ended', () => {
         updatePlayButtonUI(false);
     });
+}
+</script>
+
+	<script>
+// --- Diploma Focus Dropdown Controls ---
+function openDiplomaFocus() {
+    const link = document.getElementById('diplomaToggleLink');
+    const container = document.getElementById('diplomaDropdownContainer');
+    
+    if (link && container) {
+        link.style.display = 'none';
+        container.classList.add('show');
+    }
+}
+
+function resetDiplomaFocus() {
+    const link = document.getElementById('diplomaToggleLink');
+    const container = document.getElementById('diplomaDropdownContainer');
+
+    if (container && link) {
+        container.classList.remove('show');
+        link.style.display = 'inline-block';
+    }
+}
+</script>
+
+<script>
+// --- Security Focus Dropdown Controls ---
+function openSecurityFocus() {
+    const link = document.getElementById('securityToggleLink');
+    const container = document.getElementById('securityDropdownContainer');
+    
+    if (link && container) {
+        link.style.display = 'none';
+        container.classList.add('show');
+    }
+}
+
+function resetSecurityFocus() {
+    const link = document.getElementById('securityToggleLink');
+    const container = document.getElementById('securityDropdownContainer');
+
+    if (container && link) {
+        container.classList.remove('show');
+        link.style.display = 'inline-block';
+    }
 }
 </script>
 	
