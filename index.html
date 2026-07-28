@@ -1686,6 +1686,122 @@ footer {
     width: 5%;
     justify-content: center;
 }
+
+/* Section Title */
+.learning-history-title {
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.95rem;
+    color: #38bdf8;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+
+/* Timeline Wrapper */
+.edu-timeline-wrapper {
+    font-family: 'Michroma', sans-serif;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: rgba(15, 23, 42, 0.4);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 6px;
+    text-align: center;
+}
+
+.timeline-years-row {
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.8rem;
+    color: #38bdf8;
+}
+
+.timeline-node-btn {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-shadow: 0 0 6px rgba(56, 189, 248, 0.4);
+}
+
+.timeline-node-btn:hover {
+    color: #7dd3fc;
+    transform: scale(1.1);
+}
+
+.timeline-separator {
+    color: rgba(56, 189, 248, 0.4);
+    user-select: none;
+}
+
+.accordion-item {
+    display: none; 
+    font-family: 'Michroma', sans-serif;
+    border: 1px solid rgba(56, 189, 248, 0.15);
+    border-radius: 6px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    background: transparent;
+}
+
+.accordion-header {
+    background: rgba(30, 41, 59, 0.5);
+    padding: 14px 20px;
+    display: flex;
+    color: #38bdf8;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease;
+}
+
+.accordion-header:hover {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(56, 189, 248, 0.5);
+}
+
+.accordion-title {
+    font-size: 0.8rem;
+    color: #cbd5e1;
+}
+
+.accordion-year {
+    background: rgba(56, 189, 248, 0.15);
+    color: #38bdf8;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    margin-left: auto;
+    margin-right: 15px;
+}
+
+.accordion-icon {
+    font-size: 0.85rem;
+    transition: transform 0.3s ease;
+    color: #38bdf8;
+}
+
+.accordion-item .accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    background: #1e293b;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-content {
+    display: none;
+    max-height: 0;
+    overflow: hidden;
+    background: #1e293b;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-item.active .accordion-content {
+    display: block;
+    max-height: 2000px;
+}
+
+.accordion-item.active .accordion-icon {
+    transform: rotate(180deg);
+}
 		
     </style>
 </head>
@@ -2267,80 +2383,96 @@ footer {
             <span class="chevron">▾</span>
         </button>
 
-        <div class="dropdown-body" id="trainingContent">
-            <section>
-                <div class="accordion-container">
+<div class="dropdown-body" id="trainingContent">
+<section>
 
-                    <div class="accordion-item">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
-                            <span class="accordion-title">Manukau Institute of Technology</span>
-                            <span class="accordion-year">2025</span>
-                            <span class="accordion-icon">▼</span>
-                        </div>
-                        <div class="accordion-content">
-                            <div class="accordion-body">
-                                <div><strong>Field of Study:</strong> Digital Technology – IT Technical Support</div>
-                                <div><strong>Qualification:</strong> New Zealand Diploma</div>
-                            </div>
-                        </div>
-                    </div>
+<h3 class="learning-history-title">LEARNING HISTORY</h3>
 
-                    <div class="accordion-item">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
-                            <span class="accordion-title">Downer Civils & Infrastructure Program</span>
-                            <span class="accordion-year">2014</span>
-                            <span class="accordion-icon">▼</span>
-                        </div>
-                        <div class="accordion-content">
-                            <div class="accordion-body">
-                                <div><strong>Field of Study:</strong> Civil Works & Infrastructure</div>
-                                <div><strong>Qualification:</strong> NZQA Accredited</div>
-                            </div>
-                        </div>
-                    </div>
+<div class="edu-timeline-wrapper">
+    <div class="timeline-years-row">
+        <span onclick="openTimelineItem('year-1997')" class="timeline-node-btn">1997</span>
+        <span class="timeline-separator">|</span>
+        <span onclick="openTimelineItem('year-2000')" class="timeline-node-btn">2000</span>
+        <span class="timeline-separator">|</span>
+        <span onclick="openTimelineItem('year-2008')" class="timeline-node-btn">2008</span>
+        <span class="timeline-separator">|</span>
+        <span onclick="openTimelineItem('year-2014')" class="timeline-node-btn">2014</span>
+        <span class="timeline-separator">|</span>
+        <span onclick="openTimelineItem('year-2025')" class="timeline-node-btn">2025</span>
+    </div>
+</div>
 
-                    <div class="accordion-item">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
-                            <span class="accordion-title">Best Pacific Institute of Education</span>
-                            <span class="accordion-year">2008</span>
-                            <span class="accordion-icon">▼</span>
-                        </div>
-                        <div class="accordion-content">
-                            <div class="accordion-body">
-                                <div><strong>Field of Study:</strong> Freight Operations</div>
-                                <div><strong>Qualification:</strong> National Certificate</div>
-                            </div>
-                        </div>
-                    </div>
+<div class="accordion-container">
+    <div class="accordion-item" id="year-2025">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-title">Manukau Institute of Technology</span>
+            <span class="accordion-year">2025</span>
+            <span class="accordion-icon">▼</span>
+        </div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div><strong>Field of Study:</strong> Digital Technology – IT Technical Support</div>
+                <div><strong>Qualification:</strong> New Zealand Diploma</div>
+            </div>
+        </div>
+    </div>
 
-                    <div class="accordion-item">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
-                            <span class="accordion-title">Connect Training Services</span>
-                            <span class="accordion-year">2000</span>
-                            <span class="accordion-icon">▼</span>
-                        </div>
-                        <div class="accordion-content">
-                            <div class="accordion-body">
-                                <div><strong>Field of Study:</strong> Security</div>
-                                <div><strong>Qualification:</strong> National Certificate</div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="accordion-item" id="year-2014">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-title">Downer Civils & Infrastructure Program</span>
+            <span class="accordion-year">2014</span>
+            <span class="accordion-icon">▼</span>
+        </div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div><strong>Field of Study:</strong> Civil Works & Infrastructure</div>
+                <div><strong>Qualification:</strong> NZQA Accredited</div>
+            </div>
+        </div>
+    </div>
 
-                    <div class="accordion-item">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
-                            <span class="accordion-title">Manukau Institute of Technology</span>
-                            <span class="accordion-year">1997</span>
-                            <span class="accordion-icon">▼</span>
-                        </div>
-                        <div class="accordion-content">
-                            <div class="accordion-body">
-                                <div><strong>Field of Study:</strong> Light Fabrication Engineering</div>
-                                <div><strong>Qualification:</strong> National Certificate</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="accordion-item" id="year-2008">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-title">Best Pacific Institute of Education</span>
+            <span class="accordion-year">2008</span>
+            <span class="accordion-icon">▼</span>
+        </div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div><strong>Field of Study:</strong> Freight Operations</div>
+                <div><strong>Qualification:</strong> National Certificate</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item" id="year-2000">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-title">Connect Training Services</span>
+            <span class="accordion-year">2000</span>
+            <span class="accordion-icon">▼</span>
+        </div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div><strong>Field of Study:</strong> Security</div>
+                <div><strong>Qualification:</strong> National Certificate</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item" id="year-1997">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-title">Manukau Institute of Technology</span>
+            <span class="accordion-year">1997</span>
+            <span class="accordion-icon">▼</span>
+        </div>
+        <div class="accordion-content">
+            <div class="accordion-body">
+                <div><strong>Field of Study:</strong> Light Fabrication Engineering</div>
+                <div><strong>Qualification:</strong> National Certificate</div>
+            </div>
+        </div>
+    </div>
+</div>
 				
 <div class="diploma-focus-wrapper" style="margin-bottom: 20px;">
     <div class="diploma-header-row">
@@ -3149,6 +3281,40 @@ function resetSecurityFocus() {
         container.classList.remove('show');
         link.style.display = 'inline-block';
     }
+}
+</script>
+
+<script>
+function toggleAccordion(headerElement) {
+    const item = headerElement.parentElement;
+    const isAlreadyActive = item.classList.contains('active');
+
+    document.querySelectorAll('.accordion-item').forEach(el => {
+        el.classList.remove('active');
+    });
+
+    if (!isAlreadyActive) {
+        item.classList.add('active');
+    }
+}
+
+function openTimelineItem(itemId) {
+    const targetItem = document.getElementById(itemId);
+    if (!targetItem) return;
+
+    const isVisible = targetItem.style.display === "block";
+
+    document.querySelectorAll('.accordion-item').forEach(item => {
+        item.style.display = "none";
+        item.classList.remove('active'); 
+    });
+
+    if (isVisible) {
+        targetItem.style.display = "none";
+        return;
+    }
+
+    targetItem.style.display = "block";
 }
 </script>
 	
