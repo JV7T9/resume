@@ -1403,10 +1403,10 @@ footer {
     display: inline-block;
     margin: 0px 0 20px 0px; /* Aligned to match your layout spacing */
     font-family: 'Michroma', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: #38bdf8;
     cursor: pointer;
-    text-decoration: underline;
+    text-decoration: none; /* Changed from underline to none */
     text-shadow: 0 0 6px rgba(56, 189, 248, 0.5);
     transition: color 0.2s ease;
 }
@@ -1742,7 +1742,7 @@ footer {
 
 <div class="intro-block" id="introBlock">
     <p class="intro-action">Click the chevron to access content</p>
-<a class="tlp-toggle-link" id="tlpToggleLink" onclick="openTLPPlayer()">| Click to open TLP |</a>
+<a class="tlp-toggle-link" id="tlpToggleLink" onclick="openTLPPlayer()">|OPEN▶TLP|</a>
 <div class="track-player-container" id="trackPlayerContainer">
     <div class="player-main-controls">
         <button id="playStopBtn" class="player-btn" title="Play/Stop" onclick="togglePlayState()">
