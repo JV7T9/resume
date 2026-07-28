@@ -1517,7 +1517,6 @@ footer {
         0 0 12px rgba(125, 211, 252, 0.35);
 }
 
-
 .diploma-focus-wrapper {
     font-family: 'Michroma', sans-serif;
     color: #f8fafc;
@@ -1576,6 +1575,7 @@ footer {
     font-weight: bold;
 }
 
+/* Metrics List & Bars */
 .diploma-metrics-list {
     display: flex;
     flex-direction: column;
@@ -1637,7 +1637,6 @@ footer {
     width: 90px;
     height: 90px;
     border-radius: 50%;
-   
     background: conic-gradient(
         #38bdf8 0% 9%,
         #0284c7 9% 19%,
@@ -1692,11 +1691,11 @@ footer {
         rgba(56, 189, 248, 0.57) 0% 11%,   
         rgba(56, 189, 248, 0.64) 11% 22%,  
         rgba(56, 189, 248, 0.93) 22% 33%,  
-        rgba(56, 189, 248, 0.75) 33% 44%,  
+        rgba(56, 189, 248, 0.75) 33% 44%, 
         rgba(56, 189, 248, 0.82) 44% 55%,  
         rgba(56, 189, 248, 0.61) 55% 66%,  
         rgba(56, 189, 248, 0.85) 66% 77%,  
-        rgba(56, 189, 248, 0.82) 77% 88%, 
+        rgba(56, 189, 248, 0.82) 77% 88%,  
         rgba(56, 189, 248, 0.74) 88% 100%  
     );
 
@@ -1706,13 +1705,13 @@ footer {
 
 .cyber-pie-chart.security-pie {
     background: conic-gradient(
-        rgba(56, 189, 248, 0.12) 0% 12%,    
-        rgba(56, 189, 248, 0.18) 12% 23%,   
-        rgba(56, 189, 248, 0.26) 23% 34%,   
+        rgba(56, 189, 248, 0.12) 0% 12%,   
+        rgba(56, 189, 248, 0.18) 12% 23%,  
+        rgba(56, 189, 248, 0.26) 23% 34%,  
         rgba(56, 189, 248, 0.34) 34% 46%,   
         rgba(56, 189, 248, 0.42) 46% 59%,   
         rgba(56, 189, 248, 0.50) 59% 69%,   
-        rgba(56, 189, 248, 0.60) 69% 83%,  
+        rgba(56, 189, 248, 0.60) 69% 83%,   
         rgba(56, 189, 248, 0.75) 83% 100%   
     );
 
@@ -1786,8 +1785,11 @@ footer {
     user-select: none;
 }
 
+.timeline-accordion-item {
+    display: none;
+}
+
 .accordion-item {
-    display: none; 
     font-family: 'Michroma', sans-serif;
     border: 1px solid rgba(56, 189, 248, 0.15);
     border-radius: 6px;
@@ -1860,7 +1862,6 @@ footer {
     transform: rotate(180deg);
 }
 
-
 .accordion-divider {
     width: 100%;
     height: 1px;
@@ -1873,6 +1874,22 @@ footer {
     );
 }
 
+.timeline-accordion-item .accordion-content {
+    display: none;
+    max-height: 0;
+    overflow: hidden;
+    background: #1e293b;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-accordion-item.active .accordion-content {
+    display: block;
+    max-height: 2000px;
+}
+
+.timeline-accordion-item.active .accordion-icon {
+    transform: rotate(180deg);
+}
 		
     </style>
 </head>
@@ -2448,19 +2465,18 @@ footer {
         </div>
     </div>
 
-<div class="dropdown-block">
-    <button class="dropdown-header" onclick="handleDropdownClick('trainingContent', this)">
-         <span class="title">Training & Education</span>
-         <span class="chevron">▾</span>
-    </button>
+    <div class="dropdown-block">
+        <button class="dropdown-header" onclick="handleDropdownClick('trainingContent', this)">
+            <span class="title">Training & Education</span>
+            <span class="chevron">▾</span>
+        </button>
 
 <div class="dropdown-body" id="trainingContent">
 <section>
 <h3 class="learning-history-title">LEARNING HISTORY</h3>
 
-
 <div class="edu-timeline-wrapper">
-<span class="year-hint">[click year]</span>
+    <span class="year-hint">[click year]</span>
     <div class="timeline-years-row">
         <span onclick="openTimelineItem('year-1997')" class="timeline-node-btn">1997</span>
         <span class="timeline-separator">|</span>
@@ -2475,7 +2491,8 @@ footer {
 </div>
 
 <div class="accordion-container">
-    <div class="accordion-item" id="year-2025">
+
+    <div class="timeline-accordion-item" id="year-2025">
         <div class="accordion-header" onclick="toggleAccordion(this)">
             <span class="accordion-title">Manukau Institute of Technology</span>
             <span class="accordion-year">2025</span>
@@ -2489,7 +2506,7 @@ footer {
         </div>
     </div>
 
-    <div class="accordion-item" id="year-2014">
+    <div class="timeline-accordion-item" id="year-2014">
         <div class="accordion-header" onclick="toggleAccordion(this)">
             <span class="accordion-title">Downer Civils & Infrastructure Program</span>
             <span class="accordion-year">2014</span>
@@ -2503,7 +2520,7 @@ footer {
         </div>
     </div>
 
-    <div class="accordion-item" id="year-2008">
+    <div class="timeline-accordion-item" id="year-2008">
         <div class="accordion-header" onclick="toggleAccordion(this)">
             <span class="accordion-title">Best Pacific Institute of Education</span>
             <span class="accordion-year">2008</span>
@@ -2517,7 +2534,7 @@ footer {
         </div>
     </div>
 
-    <div class="accordion-item" id="year-2000">
+    <div class="timeline-accordion-item" id="year-2000">
         <div class="accordion-header" onclick="toggleAccordion(this)">
             <span class="accordion-title">Connect Training Services</span>
             <span class="accordion-year">2000</span>
@@ -2531,7 +2548,7 @@ footer {
         </div>
     </div>
 
-    <div class="accordion-item" id="year-1997">
+    <div class="timeline-accordion-item" id="year-1997">
         <div class="accordion-header" onclick="toggleAccordion(this)">
             <span class="accordion-title">Manukau Institute of Technology</span>
             <span class="accordion-year">1997</span>
@@ -2544,12 +2561,14 @@ footer {
             </div>
         </div>
     </div>
+
 </div>
+
 
 <div class="diploma-focus-wrapper" style="margin-bottom: 20px;">
     <div class="diploma-header-row">
         <span class="diploma-title-label">DIPLOMA STUDIES FOCUS 2025:</span>
-        <a class="tlp-toggle-link" id="diplomaToggleLink" onclick="openDiplomaFocus()">[ Open ]</a>
+        <a class="tlp-toggle-link" id="diplomaToggleLink" onclick="openDiplomaFocus()">[ Open ▼]</a>
     </div>
 
     <div class="diploma-dropdown-container" id="diplomaDropdownContainer">
@@ -2623,7 +2642,7 @@ footer {
 <div class="diploma-focus-wrapper" style="margin-bottom: 20px;">
     <div class="diploma-header-row">
         <span class="diploma-title-label">SECURITY ENGAGEMENTS:</span>
-        <a class="tlp-toggle-link" id="securityToggleLink" onclick="openSecurityFocus()">[ Open ]</a>
+        <a class="tlp-toggle-link" id="securityToggleLink" onclick="openSecurityFocus()">[ Open ▼]</a>
     </div>
 
     <div class="diploma-dropdown-container" id="securityDropdownContainer">
@@ -2677,6 +2696,7 @@ footer {
 
         <div class="chart-summary-section">
             <div class="pie-chart-container">
+
                 <div class="cyber-pie-chart security-pie"></div>
             </div>
             <div class="chart-legend">
@@ -2691,8 +2711,6 @@ footer {
 <div class="accordion-divider"></div>
 </div>
 </div>
-
-
 
     <div class="dropdown-block">
         <button class="dropdown-header" onclick="handleDropdownClick('employmentContent', this)">
@@ -2725,10 +2743,10 @@ footer {
                     <div class="accordion-container" style="margin-top: 15px;">
 
                         <div class="accordion-item">
-                            <div class="accordion-header" onclick="toggleAccordion(this)">
-                                <span class="accordion-title" style="color: var(--accent-color);">💼 Professional</span>
-                                <span class="accordion-icon">▼</span>
-                            </div>
+			<div class="accordion-header" onclick="toggleEmploymentAccordion(this)">
+    				<span class="accordion-title" style="color: var(--accent-color);">💼 Professional</span>
+    				<span class="accordion-icon">▼</span>
+			</div>
                             <div class="accordion-content">
                                 <table>
                                     <thead>
@@ -2756,10 +2774,10 @@ footer {
                         </div>
 
                         <div class="accordion-item">
-                            <div class="accordion-header" onclick="toggleAccordion(this)">
-                                <span class="accordion-title" style="color: var(--accent-color);">🛡️ Entry Level</span>
-                                <span class="accordion-icon">▼</span>
-                            </div>
+			<div class="accordion-header" onclick="toggleEmploymentAccordion(this)">
+    				<span class="accordion-title" style="color: var(--accent-color);">🛡️ Entry Level</span>
+    				<span class="accordion-icon">▼</span>
+			</div>
                             <div class="accordion-content">
                                 <table>
                                     <thead>
@@ -2780,10 +2798,10 @@ footer {
                         </div>
 
                         <div class="accordion-item">
-                            <div class="accordion-header" onclick="toggleAccordion(this)">
-                                <span class="accordion-title" style="color: var(--accent-color);">🎓 College & Tertiary</span>
-                                <span class="accordion-icon">▼</span>
-                            </div>
+			<div class="accordion-header" onclick="toggleEmploymentAccordion(this)">
+    				<span class="accordion-title" style="color: var(--accent-color);">🎓 College & Tertiary</span>
+    				<span class="accordion-icon">▼</span>
+			</div>
                             <div class="accordion-content">
                                 <table>
                                     <thead>
@@ -2856,7 +2874,7 @@ footer {
                     </div>
                 </div>
             </section>
-
+         <div class="accordion-divider"></div>
         </div>
     </div>
 
@@ -3048,7 +3066,7 @@ function closeAllSubDropdowns() {
 </script>
 
 <script>
-function toggleAccordion(element) {
+function toggleEmploymentAccordion(element) {
     const item = element.parentElement;
     item.classList.toggle('active');
 }
@@ -3364,7 +3382,7 @@ function toggleAccordion(headerElement) {
     const item = headerElement.parentElement;
     const isAlreadyActive = item.classList.contains('active');
 
-    document.querySelectorAll('.accordion-item').forEach(el => {
+    document.querySelectorAll('.accordion-item, .timeline-accordion-item').forEach(el => {
         el.classList.remove('active');
     });
 
@@ -3377,19 +3395,19 @@ function openTimelineItem(itemId) {
     const targetItem = document.getElementById(itemId);
     if (!targetItem) return;
 
-    const isVisible = targetItem.style.display === "block";
+    const isAlreadyOpen = targetItem.classList.contains('active');
 
-    document.querySelectorAll('.accordion-item').forEach(item => {
+    document.querySelectorAll('.timeline-accordion-item').forEach(item => {
         item.style.display = "none";
-        item.classList.remove('active'); 
+        item.classList.remove('active');
     });
 
-    if (isVisible) {
-        targetItem.style.display = "none";
+    if (isAlreadyOpen) {
         return;
     }
 
     targetItem.style.display = "block";
+    targetItem.classList.add('active');
 }
 </script>
 	
