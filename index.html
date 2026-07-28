@@ -1399,8 +1399,24 @@ footer {
     }
 }
 
+.tlp-toggle-link {
+    display: inline-block;
+    margin: 0px 0 20px 0px; /* Aligned to match your layout spacing */
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.8rem;
+    color: #38bdf8;
+    cursor: pointer;
+    text-decoration: underline;
+    text-shadow: 0 0 6px rgba(56, 189, 248, 0.5);
+    transition: color 0.2s ease;
+}
+
+.tlp-toggle-link:hover {
+    color: #7dd3fc;
+}
+
 .track-player-container {
-    display: inline-flex;
+    display: none; 
     align-items: center;
     background: rgba(15, 23, 42, 0.45);
     backdrop-filter: blur(10px);
@@ -1408,9 +1424,13 @@ footer {
     border: 1px solid rgba(56, 189, 248, 0.3);
     border-radius: 6px;
     padding: 2px 4px;
-    margin: 300px 0 20px -10px; /* Aligns with your left-side padding */
+    margin: 0px 0 20px 5px; 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 10px rgba(56, 189, 248, 0.08);
     font-family: 'Michroma', sans-serif;
+}
+
+.track-player-container.show {
+    display: inline-flex;
 }
 
 .player-main-controls {
@@ -1440,6 +1460,11 @@ footer {
     box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
 }
 
+.close-player-btn {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
 .track-select {
     background: rgba(15, 23, 42, 0.6);
     border: 1px solid rgba(56, 189, 248, 0.3);
@@ -1463,25 +1488,6 @@ footer {
     color: #f8fafc;
 }
 
-.track-select-btn {
-    background: rgba(15, 23, 42, 0.6);
-    border: 1px solid rgba(56, 189, 248, 0.3);
-    color: #f8fafc;
-    font-family: 'Michroma', sans-serif;
-    font-size: 0.75rem;
-    padding: 6px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    text-align: left;
-    min-width: 130px;
-    transition: all 0.2s ease;
-}
-
-.track-select-btn:hover {
-    border-color: #38bdf8;
-    box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
-}
-
 .volume-wrapper {
     display: flex;
     align-items: center;
@@ -1495,6 +1501,7 @@ footer {
     accent-color: #38bdf8;
     cursor: pointer;
 }
+
 		
     </style>
 </head>
@@ -1551,34 +1558,27 @@ footer {
 
 <div class="intro-block" id="introBlock">
     <p class="intro-action">Click the chevron to access content</p>
-<div class="track-player-container">
+<a class="tlp-toggle-link" id="tlpToggleLink" onclick="openTLPPlayer()">| Click to open TLP |</a>
+<div class="track-player-container" id="trackPlayerContainer">
     <div class="player-main-controls">
-        <button id="playStopBtn" class="player-btn" title="Play/Stop">
-       
-            <svg id="playIcon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                <path d="M8 5v14l11-7z"/>
-            </svg>
-        
-            <svg id="stopIcon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display: none;">
-                <path d="M6 6h12v12H6z"/>
-            </svg>
+        <button id="playStopBtn" class="player-btn" title="Play/Stop" onclick="togglePlayState()">
+            <svg id="playIcon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg id="stopIcon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display: none;"><path d="M6 6h12v12H6z"/></svg>
         </button>
-
-        <select id="trackSelect" class="track-select">
+        <select id="trackSelect" class="track-select" onchange="changeTrack(this.value)">
             <option value="" disabled selected>SELECT TRACK</option>
-            <option value="assets/Track_1.mp3">Track01</option>
-            <option value="assets/Track_2.mp3">Track02</option>
-            <option value="assets/Track_3.mp3">Track03</option>
-            <option value="assets/Track_4.mp3">Track04</option>
-            <option value="assets/Track_5.mp3">Track05</option>
+            <option value="track_1.mp3">Track01</option>
+            <option value="track_2.mp3">Track02</option>
+            <option value="track_3.mp3">Track03</option>
+            <option value="track_4.mp3">Track04</option>
+            <option value="track_5.mp3">Track05</option>
         </select>
-
         <div class="volume-wrapper">
             <span class="vol-icon">VOL</span>
-            <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.05" value="0.7">
+            <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.05" value="0.7" oninput="adjustVolume(this.value)">
         </div>
+        <button class="player-btn close-player-btn" title="Close" onclick="resetTLPPlayer()">×</button>
     </div>
- 
     <audio id="audioPlayer" preload="auto"></audio>
 </div>
 </div>
@@ -2715,46 +2715,102 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script>
-const audioPlayer = document.getElementById('audioPlayer');
-const playStopBtn = document.getElementById('playStopBtn');
-const playIcon = document.getElementById('playIcon');
-const stopIcon = document.getElementById('stopIcon');
-const trackSelect = document.getElementById('trackSelect');
-const volumeSlider = document.getElementById('volumeSlider');
-
-playStopBtn.addEventListener('click', () => {
-    if (!trackSelect.value) return; 
-    
-    if (audioPlayer.paused) {
-        if (audioPlayer.src === "" || !audioPlayer.src.includes(trackSelect.value)) {
-            audioPlayer.src = trackSelect.value;
-        }
-        audioPlayer.play();
-        playIcon.style.display = 'none';
-        stopIcon.style.display = 'block';
-    } else {
-        audioPlayer.pause();
-        audioPlayer.currentTime = 0;
-        playIcon.style.display = 'block';
-        stopIcon.style.display = 'none';
+window.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.name-unlock-container');
+    if (container) {
+        setTimeout(() => {
+            container.classList.add('unlocked');
+        }, 50); 
     }
 });
 
-trackSelect.addEventListener('change', () => {
-    audioPlayer.src = trackSelect.value;
+const audioPlayer = document.getElementById('audioPlayer');
+
+function openTLPPlayer() {
+    const link = document.getElementById('tlpToggleLink');
+    const container = document.getElementById('trackPlayerContainer');
+    
+    if (link && container) {
+        link.style.display = 'none';
+        container.classList.add('show');
+    }
+}
+
+function resetTLPPlayer() {
+    const link = document.getElementById('tlpToggleLink');
+    const container = document.getElementById('trackPlayerContainer');
+    const trackSelect = document.getElementById('trackSelect');
+
+    if (audioPlayer) {
+        audioPlayer.pause();
+        audioPlayer.currentTime = 0;
+        audioPlayer.src = "";
+    }
+    
+    if (trackSelect) {
+        trackSelect.selectedIndex = 0;
+    }
+    updatePlayButtonUI(false);
+
+    if (container && link) {
+        container.classList.remove('show');
+        link.style.display = 'inline-block';
+    }
+}
+
+function changeTrack(src) {
+    if (!src || !audioPlayer) return;
+    audioPlayer.src = src;
     audioPlayer.play();
-    playIcon.style.display = 'none';
-    stopIcon.style.display = 'block';
-});
+    updatePlayButtonUI(true);
+}
 
-volumeSlider.addEventListener('input', (e) => {
-    audioPlayer.volume = e.target.value;
-});
+function togglePlayState() {
+    const trackSelect = document.getElementById('trackSelect');
+    if (!audioPlayer) return;
+    
+    if (!audioPlayer.src || audioPlayer.src === window.location.href) {
+        if (trackSelect && trackSelect.value) {
+            changeTrack(trackSelect.value);
+        }
+        return;
+    }
 
-audioPlayer.addEventListener('ended', () => {
-    playIcon.style.display = 'block';
-    stopIcon.style.display = 'none';
-});
+    if (audioPlayer.paused) {
+        audioPlayer.play();
+        updatePlayButtonUI(true);
+    } else {
+        audioPlayer.pause();
+        audioPlayer.currentTime = 0;
+        updatePlayButtonUI(false);
+    }
+}
+
+function adjustVolume(val) {
+    if (audioPlayer) {
+        audioPlayer.volume = val;
+    }
+}
+
+function updatePlayButtonUI(isPlaying) {
+    const playIcon = document.getElementById('playIcon');
+    const stopIcon = document.getElementById('stopIcon');
+    if (!playIcon || !stopIcon) return;
+    
+    if (isPlaying) {
+        playIcon.style.display = 'none';
+        stopIcon.style.display = 'block';
+    } else {
+        playIcon.style.display = 'block';
+        stopIcon.style.display = 'none';
+    }
+}
+
+if (audioPlayer) {
+    audioPlayer.addEventListener('ended', () => {
+        updatePlayButtonUI(false);
+    });
+}
 </script>
 	
 </body>
