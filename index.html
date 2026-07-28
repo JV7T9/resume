@@ -1502,6 +1502,21 @@ footer {
     cursor: pointer;
 }
 
+.tlp-toggle-link {
+    color: #7dd3fc; 
+    text-shadow: 0 0 6px rgba(125, 211, 252, 0.45); 
+    cursor: pointer;
+    font-weight: 500;
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.tlp-toggle-link:hover {
+    color: #bce7ff; 
+    text-shadow:
+        0 0 8px rgba(125, 211, 252, 0.55),
+        0 0 12px rgba(125, 211, 252, 0.35);
+}
+
 
 .diploma-focus-wrapper {
     font-family: 'Michroma', sans-serif;
@@ -1509,17 +1524,20 @@ footer {
 }
 
 .diploma-header-row {
+   
     display: flex;
     flex-direction: column;
     gap: 6px;
 }
 
 .diploma-title-label {
-    font-size: 0.95rem;
+    background: rgba(15, 23, 42, 0.75);
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.85rem;
     color: #38bdf8;
-    text-shadow: 0 0 6px rgba(56, 189, 248, 0.4);
-    letter-spacing: 0.5px;
-	margin-top: 10px;
+    margin-bottom: -10px;
+    letter-spacing: 1px;
+    border-radius: 6px;
 }
 
 .diploma-dropdown-container {
@@ -1529,9 +1547,10 @@ footer {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(15px);
     border: 1px solid rgba(56, 189, 248, 0.3);
-    border-radius: 8px;
+    border-radius: 6px;
     padding: 14px;
-    margin-top: 8px;
+    margin-top: 25px;
+    margin-bottom: 20px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 12px rgba(56, 189, 248, 0.1);
 }
 
@@ -1543,7 +1562,7 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.85rem;
+    font-size: 0.65rem;
     color: #38bdf8;
     border-bottom: 1px solid rgba(56, 189, 248, 0.2);
     padding-bottom: 8px;
@@ -1618,7 +1637,7 @@ footer {
     width: 90px;
     height: 90px;
     border-radius: 50%;
-  
+   
     background: conic-gradient(
         #38bdf8 0% 9%,
         #0284c7 9% 19%,
@@ -1665,18 +1684,45 @@ footer {
     }
 }
 
+.cyber-pie-chart {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: conic-gradient(
+        rgba(56, 189, 248, 0.57) 0% 11%,   
+        rgba(56, 189, 248, 0.64) 11% 22%,  
+        rgba(56, 189, 248, 0.93) 22% 33%,  
+        rgba(56, 189, 248, 0.75) 33% 44%,  
+        rgba(56, 189, 248, 0.82) 44% 55%,  
+        rgba(56, 189, 248, 0.61) 55% 66%,  
+        rgba(56, 189, 248, 0.85) 66% 77%,  
+        rgba(56, 189, 248, 0.82) 77% 88%, 
+        rgba(56, 189, 248, 0.74) 88% 100%  
+    );
+
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+    border: 1px solid rgba(56, 189, 248, 0.4);
+}
+
 .cyber-pie-chart.security-pie {
     background: conic-gradient(
-        #38bdf8 0% 12%,
-        #0284c7 12% 23%,
-        #6366f1 23% 37%,
-        #818cf8 37% 49%,
-        #34d399 49% 61%,
-        #f43f5e 61% 73%,
-        #fbbf24 73% 87%,
-        #a855f7 87% 100%
+        rgba(56, 189, 248, 0.12) 0% 12%,    
+        rgba(56, 189, 248, 0.18) 12% 23%,   
+        rgba(56, 189, 248, 0.26) 23% 34%,   
+        rgba(56, 189, 248, 0.34) 34% 46%,   
+        rgba(56, 189, 248, 0.42) 46% 59%,   
+        rgba(56, 189, 248, 0.50) 59% 69%,   
+        rgba(56, 189, 248, 0.60) 69% 83%,  
+        rgba(56, 189, 248, 0.75) 83% 100%   
     );
+
+    box-shadow: 
+        0 0 15px rgba(56, 189, 248, 0.30),
+        0 0 25px rgba(56, 189, 248, 0.20);
+
+    border: 1px solid rgba(56, 189, 248, 0.40);
 }
+
 .diploma-dropdown-container .close-player-btn {
     display: flex;
     margin-left: auto;
@@ -1687,31 +1733,41 @@ footer {
     justify-content: center;
 }
 
-/* Section Title */
 .learning-history-title {
+    background: rgba(15, 23, 42, 0.75);
     font-family: 'Michroma', sans-serif;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     color: #38bdf8;
     margin-bottom: 12px;
     letter-spacing: 1px;
+    border-radius: 6px;
 }
 
-/* Timeline Wrapper */
+.year-hint {
+    font-size: 0.65rem;
+    color: #D0D0D0;
+    opacity: 0.75;
+    text-shadow: 0 0 4px rgba(208, 208, 208, 0.35);
+    letter-spacing: 0.5px;
+}
+
 .edu-timeline-wrapper {
     font-family: 'Michroma', sans-serif;
     margin-bottom: 20px;
+    margin-top: -10px;
     padding: 10px;
     background: rgba(15, 23, 42, 0.4);
-    border: 1px solid rgba(56, 189, 248, 0.2);
+    border: 0px solid rgba(56, 189, 248, 0.2);
     border-radius: 6px;
-    text-align: center;
+    text-align: left;
 }
 
 .timeline-years-row {
     display: flex;
     justify-content: space-around;
     font-size: 0.8rem;
-    color: #38bdf8;
+    color: #D0D0D0; 
+    text-shadow: 0 0 6px rgba(208, 208, 208, 0.45); 
 }
 
 .timeline-node-btn {
@@ -1736,6 +1792,7 @@ footer {
     border: 1px solid rgba(56, 189, 248, 0.15);
     border-radius: 6px;
     margin-bottom: 10px;
+    margin-top: -15px;
     overflow: hidden;
     background: transparent;
 }
@@ -1802,6 +1859,20 @@ footer {
 .accordion-item.active .accordion-icon {
     transform: rotate(180deg);
 }
+
+
+.accordion-divider {
+    width: 100%;
+    height: 1px;
+    margin-top: 12px;
+    background: linear-gradient(
+        to right,
+        rgba(56, 189, 248, 0),
+        rgba(56, 189, 248, 0.4),
+        rgba(56, 189, 248, 0)
+    );
+}
+
 		
     </style>
 </head>
@@ -2377,18 +2448,19 @@ footer {
         </div>
     </div>
 
-    <div class="dropdown-block">
-        <button class="dropdown-header" onclick="handleDropdownClick('trainingContent', this)">
-            <span class="title">Training & Education</span>
-            <span class="chevron">▾</span>
-        </button>
+<div class="dropdown-block">
+    <button class="dropdown-header" onclick="handleDropdownClick('trainingContent', this)">
+         <span class="title">Training & Education</span>
+         <span class="chevron">▾</span>
+    </button>
 
 <div class="dropdown-body" id="trainingContent">
 <section>
-
 <h3 class="learning-history-title">LEARNING HISTORY</h3>
 
+
 <div class="edu-timeline-wrapper">
+<span class="year-hint">[click year]</span>
     <div class="timeline-years-row">
         <span onclick="openTimelineItem('year-1997')" class="timeline-node-btn">1997</span>
         <span class="timeline-separator">|</span>
@@ -2473,10 +2545,10 @@ footer {
         </div>
     </div>
 </div>
-				
+
 <div class="diploma-focus-wrapper" style="margin-bottom: 20px;">
     <div class="diploma-header-row">
-        <span class="diploma-title-label">DIPLOMA STUDIES FOCUS:</span>
+        <span class="diploma-title-label">DIPLOMA STUDIES FOCUS 2025:</span>
         <a class="tlp-toggle-link" id="diplomaToggleLink" onclick="openDiplomaFocus()">[ Open ]</a>
     </div>
 
@@ -2484,6 +2556,7 @@ footer {
         <div class="diploma-container-header">
             <span>DIGITAL TECHNOLOGY</span>
             <span class="gradient-score-header">GRADE / 100%</span>
+            
         </div>
 
         <div class="diploma-metrics-list">
@@ -2542,7 +2615,7 @@ footer {
             <div class="chart-legend">
                 <div class="legend-title">AGGREGATE DATA DISTRIBUTION</div>
                 <div class="legend-desc">Visual synthesis reflecting weighted dataset proportions across core academic vectors.</div>
-			<button class="player-btn close-player-btn" title="Close" onclick="resetDiplomaFocus()">×</button>
+            <button class="player-btn close-player-btn" title="Close" onclick="resetDiplomaFocus()">×</button>
             </div>
         </div>
     </div>
@@ -2609,14 +2682,16 @@ footer {
             <div class="chart-legend">
                 <div class="legend-title">AGGREGATE DATA DISTRIBUTION</div>
                 <div class="legend-desc">Visual synthesis reflecting weighted operational competencies across tactical security vectors.</div>
-			<button class="player-btn close-player-btn" title="Close" onclick="resetSecurityFocus()">×</button>
+            <button class="player-btn close-player-btn" title="Close" onclick="resetSecurityFocus()">×</button>
             </div>
         </div>
     </div>
 </div>
 </section>
+<div class="accordion-divider"></div>
 </div>
 </div>
+
 
 
     <div class="dropdown-block">
