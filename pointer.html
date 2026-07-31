@@ -24,7 +24,7 @@
 
         .container {
             max-width: 800px;
-            min-height: 85vh;
+            min-height: 85vh; /* Ensures it stretches to mimic a full document page */
             margin: 0 auto;
             background: #ffffff;
             padding: 40px;
@@ -33,13 +33,15 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             display: flex;
             flex-direction: column;
-            justify-content: space-between; 
+            justify-content: space-between; /* Pushes the footer down to the bottom */
         }
 
+        /* Top Content Wrapper to keep everything above the footer grouped */
         .content-wrapper {
             width: 100%;
         }
 
+        /* Header Styles */
         .glass-header {
             text-align: center;
             margin-bottom: 30px;
@@ -55,6 +57,7 @@
             margin-bottom: 15px;
         }
 
+        /* Profile Section */
         .profile-section {
             display: flex;
             align-items: center;
@@ -92,6 +95,7 @@
             line-height: 1.5;
         }
 
+        /* Main Message Content */
         .message-body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-size: 1rem;
@@ -103,12 +107,14 @@
             margin-bottom: 15px;
         }
 
+        /* Call to Action Link Box */
         .resume-link-box {
             background: #eff6ff;
             border: 1px solid #bfdbfe;
             padding: 15px 20px;
             border-radius: 6px;
-            margin-bottom: 30px;
+            margin-bottom: 15px;
+            margin-top: -15px;
             text-align: center;
         }
 
@@ -125,6 +131,7 @@
             text-decoration: underline;
         }
 
+        /* Contact Details Section */
         .contact-details {
             border-top: 1px solid #e2e8f0;
             padding-top: 20px;
@@ -154,6 +161,7 @@
             color: #64748b;
         }
 
+        /* Footer Copyright */
         .document-footer {
             border-top: 1px solid #f1f5f9;
             padding-top: 15px;
@@ -165,6 +173,7 @@
             margin-top: auto;
         }
 
+        /* Print styles to ensure clean PDF export */
         @media print {
             body {
                 padding: 0;
@@ -178,6 +187,9 @@
             }
         }
 
+/* ==========================================================================
+   MASTER NAVIGATION TOGGLE (Enlarged)
+   ========================================================================== */
 .master-nav {
     display: flex;
     justify-content: center;
@@ -195,6 +207,7 @@
     color: #2563eb;
 }
 
+/* Thicker shafts with increased expanded length */
 .master-toggle .arrow-shaft,
 .master-toggle .arrow-shaft-right {
     display: inline-block;
@@ -215,7 +228,7 @@
 .master-toggle .arrow-head {
     background: transparent;
     display: inline-block;
-    font-size: 3rem; 
+    font-size: 3rem; /* Larger chevron */
     line-height: 1;
     z-index: 100;
     color: #2563eb;
@@ -227,7 +240,7 @@
     color: #1d4ed8;
 }
 
-
+/* Stage 1: Left shaft extends out, right shaft compresses away */
 .master-toggle.extending .arrow-shaft {
     width: 220px;
 }
@@ -242,9 +255,9 @@
 <body>
 
     <div class="container">
-
+        <!-- Main Content Wrapper -->
         <div class="content-wrapper">
-
+            <!-- Header -->
             <header class="glass-header">
                 <h1 class="intro-title">𖤲 Custom-Digital Resume 𖤆</h1>
                 <div class="master-nav">
@@ -256,6 +269,7 @@
                 </div>
             </header>
 
+            <!-- Profile & Intro Note -->
             <div class="profile-section">
                 <div class="profile-avatar">
                     <svg viewBox="0 0 24 24">
@@ -263,44 +277,42 @@
                     </svg>
                 </div>
                 <div class="profile-text">
-                    <p>I am interested in the role advertised by your company. Please find my Custom-Designed Resume linked below.</p>
+                    <p>I am interested in the role of <strong>Applications Specialist</strong> advertised by your company. Please find my Custom-Designed Resume linked below.</p>
                 </div>
             </div>
 
+            <!-- Main Body Note -->
             <div class="message-body">
-                <p>My qualification scope covers the core skillsets and experience required for this role:</p>
-			<p>- [Skillset 1]</P>
-
-			<p>- [Skillset 2]</p>
-
-			<p>- [Skillset 3]</p>
-
-			<p>[ Relevant Experience - paragraph]</p>
+                <p>My qualification scope covers the core skillsets and experience required for this role:
+			<p>&nbsp;&nbsp;<strong>- Enterprise Systems & ERP</strong></P>
+			<p>&nbsp;&nbsp;<strong>- Systems Analysis & Requirements Gathering</strong></p>
+			<p>&nbsp;&nbsp;<strong>- Technical Troubleshooting & Operations</strong></p>
+		</p>
+			<p>My experience spans end-to-end technical support, system architecture analysis, and automating complex operational workflows. Whether designing deterministic simulation pipelines or supporting critical software environments, I focus on reducing system friction and ensuring business applications operate reliably. I bring a strong background in analytical problem-solving, platform integration, and collaborating directly with stakeholders to deliver seamless software operations</p>
 
                 <p>If you have any questions, or want to confirm the validity of this PDF pointer, please feel free to contact me using the details below.</p>
                 <p>I look forward to hearing from you.</p>
             </div>
 
+            <!-- Digital Resume Link Card -->
             <div class="resume-link-box">
                 <a href="https://jv7t9.github.io/resume/" target="_blank">https://jv7t9.github.io/resume/</a>
             </div>
 
+            <!-- Contact Details -->
             <div class="contact-details">
                 <h3>Contact Details</h3>
                 <ul>
-                    <li><strong>Name:</strong> [Your Name]</li>
-                    <li><strong>Email:</strong> [Your Email Address]</li>
-                    <li><strong>Phone:</strong> [Your Phone Number]</li>
+                    <li><strong>Name:</strong> John Va'afuti</li>
+                    <li><strong>Email:</strong> John.Vaafuti@gmail.com</li>
+                    <li><strong>Phone:</strong> 021 293 2877</li>
                 </ul>
-            </div>
-
-            <div class="closing-note">
-                <p>Thank you for your time and consideration.</p>
             </div>
         </div>
 
+        <!-- Copyright Footer -->
         <footer class="document-footer">
-            <p>Custom-Digital Resume copyright 2026 C-DR Pointer</p>
+            <p>Custom-Digital Resume © 2026 C-DR Pointer</p>
         </footer>
     </div>
 
