@@ -1111,12 +1111,88 @@ td em, td i {
     letter-spacing: 2px;
 }
 
-.contact-font,
-.contact-font p,
-.contact-font strong,
-.contact-font a {
-    font-family: 'Michroma', sans-serif;
-    letter-spacing: 1px;
+.contact-gate-container {
+    border: 1px solid rgba(0, 243, 255, 0.4);
+    background: rgba(0, 15, 30, 0.6);
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.15), inset 0 0 8px rgba(0, 243, 255, 0.1);
+    padding: 10px 12px;
+    border-radius: 6px;
+    backdrop-filter: blur(4px);
+    width: 100%;
+    max-width: 300px; 
+    box-sizing: border-box;
+    margin: 8px 0;
+}
+
+.gate-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.gate-notice {
+    color: #00f3ff;
+    font-size: 0.75rem;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin: 0;
+    white-space: nowrap; 
+    text-shadow: 0 0 6px rgba(0, 243, 255, 0.6);
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+}
+
+.cyber-input {
+    flex: 1; 
+    min-width: 0; 
+    background: rgba(0, 50, 80, 0.3);
+    border: 1px solid rgba(0, 243, 255, 0.3);
+    color: #e0f7fc;
+    padding: 6px 8px;
+    font-size: 0.75rem;
+    border-radius: 3px;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.cyber-input::placeholder {
+    color: rgba(0, 243, 255, 0.4);
+}
+
+.cyber-input:focus {
+    border-color: #00f3ff;
+    box-shadow: 0 0 8px rgba(0, 243, 255, 0.4);
+    background: rgba(0, 50, 80, 0.5);
+}
+
+.cyber-button {
+    background: transparent;
+    border: 1px solid #00f3ff;
+    color: #00f3ff;
+    padding: 6px 10px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    border-radius: 3px;
+    white-space: nowrap; 
+    transition: all 0.3s ease;
+    text-shadow: 0 0 4px rgba(0, 243, 255, 0.5);
+}
+
+.cyber-button:hover {
+    background: #00f3ff;
+    color: #050b14;
+    box-shadow: 0 0 12px rgba(0, 243, 255, 0.8);
+    font-weight: bold;
 }
 
 footer {
@@ -2921,21 +2997,33 @@ footer {
         </div>
     </div>
 
-    <div class="dropdown-block">
-        <button class="dropdown-header" onclick="handleDropdownClick('contactContent', this)">
-            <span class="title">Contact</span>
-            <span class="chevron">▾</span>
-        </button>
+<div class="dropdown-block">
+    <button class="dropdown-header" onclick="handleDropdownClick('contactContent', this)">
+        <span class="title">Contact</span>
+        <span class="chevron">▾</span>
+    </button>
 
-        <div class="dropdown-body contact-font" id="contactContent">
-            <footer>
-                <p>Thank you for your time and consideration.</p>
-                <p>I welcome the opportunity to discuss how my background aligns with your interests, and I am available to provide references, qualifications, and project demonstrations upon request.</p>
-                <br>
+    <div class="dropdown-body contact-font" id="contactContent">
+        <footer>
+            <p>Thank you for your time and consideration.</p>
+            <p>I welcome the opportunity to discuss how my background aligns with your interests, and I am available to provide references, qualifications, and project demonstrations upon request.</p>
+            <br>
 
-                <p><strong>Mobile:</strong>&emsp; 021 293 2877</p>
-                <p><strong>Email:</strong>&emsp; <a href="mailto:John.Vaafuti@gmail.com">John.Vaafuti@gmail.com</a></p>
-                <br>
+<div class="privacy-gate contact-gate-container" data-gate="contact-gate">
+    <form onsubmit="unlockSection(event, 'contact-gate', 'contact-content', 'Contact Details Unlock Request')" class="gate-form">
+        <p class="gate-notice"><span class="lock-icon">🔒</span> Unlock Contact Details</p>
+        <div class="input-wrapper">
+            <input type="email" placeholder="Enter business email..." required class="cyber-input">
+            <button type="submit" class="cyber-button">Unlock</button>
+        </div>
+        <div class="error-msg" style="display:none; color:#ff4d4d;"></div>
+    </form>
+</div>
+
+<div class="hidden-content contact-revealed-content" data-content="contact-content" style="display: none;">
+    <p><strong>Mobile:</strong>&emsp; 021 293 2877</p>
+    <p><strong>Email:</strong>&emsp; <a href="mailto:John.Vaafuti@gmail.com" class="cyber-link">John.Vaafuti@gmail.com</a></p>
+</div>
 
 <div class="floating-social-bar" id="socialBar">
     <a href="https://linkedin.com/in/john-va-afuti-096233294" target="_blank" class="social-icon-btn" title="LinkedIn">
