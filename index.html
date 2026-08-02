@@ -1966,6 +1966,8 @@ footer {
 .timeline-accordion-item.active .accordion-icon {
     transform: rotate(180deg);
 }
+
+
 		
     </style>
 </head>
@@ -2548,9 +2550,16 @@ footer {
         </button>
 
 <div class="dropdown-body" id="trainingContent">
+<div class="diploma-focus-wrapper" style="margin-bottom: 5px;">
 <section>
-<h3 class="learning-history-title">LEARNING HISTORY</h3>
+<div class="diploma-header-row">
+        <span class="diploma-title-label">LEARNING HISTORY:</span>
+        <a class="tlp-toggle-link" id="learningHistoryToggleLink" onclick="openLearningHistory()">[ Open ▼]</a>
+    </div>
 
+<div class="diploma-dropdown-container" id="learningHistoryDropdownContainer" style="display: none; background: transparent; border: 1px; margin-top: 5px; box-shadow: none; ">
+        
+        <div class="accordion-container" style="width: 100%; margin-top: 5px;">
 <div class="edu-timeline-wrapper">
     <span class="year-hint">[click year]</span>
     <div class="timeline-years-row">
@@ -2566,7 +2575,7 @@ footer {
     </div>
 </div>
 
-<div class="accordion-container">
+<div class="accordion-container" style="margin-top: -15px;">
 
     <div class="timeline-accordion-item" id="year-2025">
         <div class="accordion-header" onclick="toggleAccordion(this)">
@@ -2579,6 +2588,9 @@ footer {
                 <div><strong>Field of Study:</strong> Digital Technology – IT Technical Support</div>
                 <div><strong>Qualification:</strong> New Zealand Diploma</div>
             </div>
+        <div style="margin-top: -30px; margin-bottom: 0px; text-align: right;">
+            <button class="player-btn close-player-btn" title="Close" onclick="resetLearningHistory()">×</button>
+        </div>
         </div>
     </div>
 
@@ -2593,6 +2605,9 @@ footer {
                 <div><strong>Field of Study:</strong> Civil Works & Infrastructure</div>
                 <div><strong>Qualification:</strong> NZQA Accredited</div>
             </div>
+        <div style="margin-top: -30px; margin-bottom: 0px; text-align: right;">
+            <button class="player-btn close-player-btn" title="Close" onclick="resetLearningHistory()">×</button>
+        </div>
         </div>
     </div>
 
@@ -2607,6 +2622,9 @@ footer {
                 <div><strong>Field of Study:</strong> Freight Operations</div>
                 <div><strong>Qualification:</strong> National Certificate</div>
             </div>
+        <div style="margin-top: -30px; margin-bottom: 0px; text-align: right;">
+            <button class="player-btn close-player-btn" title="Close" onclick="resetLearningHistory()">×</button>
+        </div>
         </div>
     </div>
 
@@ -2621,6 +2639,9 @@ footer {
                 <div><strong>Field of Study:</strong> Security</div>
                 <div><strong>Qualification:</strong> National Certificate</div>
             </div>
+        <div style="margin-top: -30px; margin-bottom: 0px; text-align: right;">
+            <button class="player-btn close-player-btn" title="Close" onclick="resetLearningHistory()">×</button>
+        </div>
         </div>
     </div>
 
@@ -2635,12 +2656,16 @@ footer {
                 <div><strong>Field of Study:</strong> Light Fabrication Engineering</div>
                 <div><strong>Qualification:</strong> National Certificate</div>
             </div>
+        <div style="margin-top: -30px; margin-bottom: 0px; text-align: right;">
+            <button class="player-btn close-player-btn" title="Close" onclick="resetLearningHistory()">×</button>
+        </div>
         </div>
     </div>
-
+</div>
+</div>
 </div>
 
-
+	
 <div class="diploma-focus-wrapper" style="margin-bottom: 20px;">
     <div class="diploma-header-row">
         <span class="diploma-title-label">DIPLOMA STUDIES FOCUS:</span>
@@ -3496,6 +3521,16 @@ function openTimelineItem(itemId) {
 
     targetItem.style.display = "block";
     targetItem.classList.add('active');
+}
+
+function openLearningHistory() {
+    document.getElementById('learningHistoryDropdownContainer').style.display = 'block';
+    document.getElementById('learningHistoryToggleLink').style.display = 'none';
+}
+
+function resetLearningHistory() {
+    document.getElementById('learningHistoryDropdownContainer').style.display = 'none';
+    document.getElementById('learningHistoryToggleLink').style.display = 'inline-block';
 }
 </script>
 	
