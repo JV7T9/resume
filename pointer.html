@@ -24,7 +24,7 @@
 
         .container {
             max-width: 800px;
-            min-height: 85vh; /* Ensures it stretches to mimic a full document page */
+            min-height: 85vh; 
             margin: 0 auto;
             background: #ffffff;
             padding: 40px;
@@ -33,15 +33,13 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             display: flex;
             flex-direction: column;
-            justify-content: space-between; /* Pushes the footer down to the bottom */
+            justify-content: space-between; 
         }
 
-        /* Top Content Wrapper to keep everything above the footer grouped */
         .content-wrapper {
             width: 100%;
         }
 
-        /* Header Styles */
         .glass-header {
             text-align: center;
             margin-bottom: 30px;
@@ -57,7 +55,6 @@
             margin-bottom: 15px;
         }
 
-        /* Profile Section */
         .profile-section {
             display: flex;
             align-items: center;
@@ -95,7 +92,6 @@
             line-height: 1.5;
         }
 
-        /* Main Message Content */
         .message-body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-size: 1rem;
@@ -107,7 +103,6 @@
             margin-bottom: 15px;
         }
 
-        /* Call to Action Link Box */
         .resume-link-box {
             background: #eff6ff;
             border: 1px solid #bfdbfe;
@@ -131,7 +126,6 @@
             text-decoration: underline;
         }
 
-        /* Contact Details Section */
         .contact-details {
             border-top: 1px solid #e2e8f0;
             padding-top: 20px;
@@ -161,7 +155,6 @@
             color: #64748b;
         }
 
-        /* Footer Copyright */
         .document-footer {
             border-top: 1px solid #f1f5f9;
             padding-top: 15px;
@@ -173,7 +166,6 @@
             margin-top: auto;
         }
 
-        /* Print styles to ensure clean PDF export */
         @media print {
             body {
                 padding: 0;
@@ -187,9 +179,6 @@
             }
         }
 
-/* ==========================================================================
-   MASTER NAVIGATION TOGGLE (Enlarged)
-   ========================================================================== */
 .master-nav {
     display: flex;
     justify-content: center;
@@ -207,7 +196,6 @@
     color: #2563eb;
 }
 
-/* Thicker shafts with increased expanded length */
 .master-toggle .arrow-shaft,
 .master-toggle .arrow-shaft-right {
     display: inline-block;
@@ -228,7 +216,7 @@
 .master-toggle .arrow-head {
     background: transparent;
     display: inline-block;
-    font-size: 3rem; /* Larger chevron */
+    font-size: 3rem; 
     line-height: 1;
     z-index: 100;
     color: #2563eb;
@@ -240,7 +228,6 @@
     color: #1d4ed8;
 }
 
-/* Stage 1: Left shaft extends out, right shaft compresses away */
 .master-toggle.extending .arrow-shaft {
     width: 220px;
 }
@@ -250,14 +237,36 @@
 }
 
 
+@media screen and (max-width: 600px) {
+    body {
+        padding: 15px; 
+    }
+    
+    .container {
+        padding: 20px; 
+        min-height: auto;
+    }
+
+    .master-toggle .arrow-shaft-right {
+        width: 120px; 
+    }
+
+    .master-toggle.extending .arrow-shaft {
+        width: 100px; 
+    }
+
+    .profile-section {
+        flex-direction: column; 
+        text-align: center;
+    }
+}
+
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Main Content Wrapper -->
         <div class="content-wrapper">
-            <!-- Header -->
             <header class="glass-header">
                 <h1 class="intro-title">𖤲 Custom-Digital Resume 𖤆</h1>
                 <div class="master-nav">
@@ -269,7 +278,6 @@
                 </div>
             </header>
 
-            <!-- Profile & Intro Note -->
             <div class="profile-section">
                 <div class="profile-avatar">
                     <svg viewBox="0 0 24 24">
@@ -281,7 +289,6 @@
                 </div>
             </div>
 
-            <!-- Main Body Note -->
             <div class="message-body">
                 <p>My qualification scope covers the core skillsets and experience required for this role:
 			<p>&nbsp;&nbsp;<strong>- [Skillset 1]</strong></P>
@@ -294,12 +301,10 @@
                 <p>I look forward to hearing from you.</p>
             </div>
 
-            <!-- Digital Resume Link Card -->
             <div class="resume-link-box">
                 <a href="https://jv7t9.github.io/resume/" target="_blank">https://jv7t9.github.io/resume/</a>
             </div>
 
-            <!-- Contact Details -->
             <div class="contact-details">
                 <h3>Contact Details</h3>
                 <ul>
@@ -310,7 +315,6 @@
             </div>
         </div>
 
-        <!-- Copyright Footer -->
         <footer class="document-footer">
             <p>Custom-Digital Resume © 2026 C-DR Pointer</p>
         </footer>
