@@ -1477,12 +1477,12 @@ footer {
 
 .tlp-toggle-link {
     display: inline-block;
-    margin: 0px 0 20px 0px; /* Aligned to match your layout spacing */
+    margin: 0px 0 20px 0px; 
     font-family: 'Michroma', sans-serif;
     font-size: 0.7rem;
     color: #38bdf8;
     cursor: pointer;
-    text-decoration: none; /* Changed from underline to none */
+    text-decoration: none;
     text-shadow: 0 0 6px rgba(56, 189, 248, 0.5);
     transition: color 0.2s ease;
 }
@@ -1580,7 +1580,7 @@ footer {
 
 .tlp-toggle-link {
     color: #7dd3fc; 
-    text-shadow: 0 0 6px rgba(125, 211, 252, 0.45); 
+    text-shadow: 0 0 6px rgba(125, 211, 252, 0.45);
     cursor: pointer;
     font-weight: 500;
     transition: color 0.25s ease, text-shadow 0.25s ease;
@@ -1592,6 +1592,7 @@ footer {
         0 0 8px rgba(125, 211, 252, 0.55),
         0 0 12px rgba(125, 211, 252, 0.35);
 }
+
 
 .diploma-focus-wrapper {
     font-family: 'Michroma', sans-serif;
@@ -1651,7 +1652,6 @@ footer {
     font-weight: bold;
 }
 
-/* Metrics List & Bars */
 .diploma-metrics-list {
     display: flex;
     flex-direction: column;
@@ -1764,14 +1764,14 @@ footer {
     height: 90px;
     border-radius: 50%;
     background: conic-gradient(
-        rgba(56, 189, 248, 0.57) 0% 11%,   
-        rgba(56, 189, 248, 0.64) 11% 22%,  
-        rgba(56, 189, 248, 0.93) 22% 33%,  
+        rgba(56, 189, 248, 0.57) 0% 11%,  
+        rgba(56, 189, 248, 0.64) 11% 22%, 
+        rgba(56, 189, 248, 0.93) 22% 33%, 
         rgba(56, 189, 248, 0.75) 33% 44%, 
-        rgba(56, 189, 248, 0.82) 44% 55%,  
-        rgba(56, 189, 248, 0.61) 55% 66%,  
-        rgba(56, 189, 248, 0.85) 66% 77%,  
-        rgba(56, 189, 248, 0.82) 77% 88%,  
+        rgba(56, 189, 248, 0.82) 44% 55%, 
+        rgba(56, 189, 248, 0.61) 55% 66%, 
+        rgba(56, 189, 248, 0.85) 66% 77%, 
+        rgba(56, 189, 248, 0.82) 77% 88%, 
         rgba(56, 189, 248, 0.74) 88% 100%  
     );
 
@@ -1781,13 +1781,13 @@ footer {
 
 .cyber-pie-chart.security-pie {
     background: conic-gradient(
-        rgba(56, 189, 248, 0.12) 0% 12%,   
-        rgba(56, 189, 248, 0.18) 12% 23%,  
+        rgba(56, 189, 248, 0.12) 0% 12%, 
+        rgba(56, 189, 248, 0.18) 12% 23%, 
         rgba(56, 189, 248, 0.26) 23% 34%,  
-        rgba(56, 189, 248, 0.34) 34% 46%,   
-        rgba(56, 189, 248, 0.42) 46% 59%,   
-        rgba(56, 189, 248, 0.50) 59% 69%,   
-        rgba(56, 189, 248, 0.60) 69% 83%,   
+        rgba(56, 189, 248, 0.34) 34% 46%, 
+        rgba(56, 189, 248, 0.42) 46% 59%,
+        rgba(56, 189, 248, 0.50) 59% 69%,  
+        rgba(56, 189, 248, 0.60) 69% 83%, 
         rgba(56, 189, 248, 0.75) 83% 100%   
     );
 
@@ -1803,7 +1803,7 @@ footer {
     margin-left: auto;
     margin-top: 5px;
     padding-top: 5px;
-    border-top: 1px dashed rgba(56, 189, 248, 0.2); 
+    border-top: 1px dashed rgba(56, 189, 248, 0.2);
     width: 5%;
     justify-content: center;
 }
@@ -1838,6 +1838,7 @@ footer {
 }
 
 .timeline-years-row {
+    margin-bottom: 0px;
     display: flex;
     justify-content: space-around;
     font-size: 0.8rem;
@@ -1866,11 +1867,12 @@ footer {
 }
 
 .accordion-item {
+
     font-family: 'Michroma', sans-serif;
     border: 1px solid rgba(56, 189, 248, 0.15);
     border-radius: 6px;
-    margin-bottom: 10px;
-    margin-top: -15px;
+    margin-bottom: -10px;
+    margin-top: -50px;
     overflow: hidden;
     background: transparent;
 }
@@ -1938,6 +1940,23 @@ footer {
     transform: rotate(180deg);
 }
 
+.timeline-accordion-item.active .timeline-name-panel {
+    display: block;
+    max-height: none;
+}
+
+.timeline-details-panel {
+    display: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-details-panel.open {
+    display: block;
+    max-height: 2000px;
+}
+
 .accordion-divider {
     width: 100%;
     height: 1px;
@@ -1951,7 +1970,7 @@ footer {
 }
 
 .timeline-accordion-item .accordion-content {
-    display: none;
+    display: none !important;
     max-height: 0;
     overflow: hidden;
     background: #1e293b;
@@ -1959,7 +1978,7 @@ footer {
 }
 
 .timeline-accordion-item.active .accordion-content {
-    display: block;
+    display: block !important;
     max-height: 2000px;
 }
 
