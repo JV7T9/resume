@@ -2134,6 +2134,7 @@ footer {
         </div>
     </div>
 
+
     <div class="dropdown-block">
         <button class="dropdown-header" onclick="handleDropdownClick('traitsContent', this)">
             <span class="title">Key Traits</span>
@@ -2556,11 +2557,48 @@ footer {
                             </ul>
                         </div>
                     </div>
+
+                    <div class="trait-item">
+                        <button class="trait-header" onclick="toggleTrait(this)">
+                            AI Systems Design & Human-AI Relations
+                        </button>
+
+                        <div class="trait-body">
+                            <p><strong>Multi-Engine Orchestration & Testing Methodology:</strong></p>
+                            <ul>
+                                <li>Designed and built a relay-based workflow tool running a single prompt across multiple AI engines (ChatGPT, Gemini, Grok, Claude, Perplexity), with each engine reviewing prior outputs before independently responding.</li>
+                                <li>Developed a structured verification framework — six defined failure modes including retrodiction-as-prediction, unhedged claims inside hedged document structures, and fabricated context — used to fact-check AI-generated analysis against independent sources.</li>
+                                <li>Published a dated, publicly auditable testing log documenting real failures caught across multiple real-world cases, with corrections left visible rather than edited out.</li>
+                                <li>Validated framework durability by identifying the same failure mode recurring across three different engines and unrelated topics, confirming a genre-level pattern rather than a single-model quirk.</li>
+                            </ul>
+
+                            <p><strong>Product Architecture & Tiered Access Systems:</strong></p>
+                            <ul>
+                                <li>Architected a three-tier access model (anonymous / free / paid) across a six-page platform, with entitlements designed for server-side enforcement rather than cosmetic UI gating.</li>
+                                <li>Specced an account and case-archive system for Cloudflare Workers + D1, including single-use free-sample logic, per-document paywalls, and persistent user-generated case storage.</li>
+                                <li>Evaluated payment-processor tradeoffs (Stripe vs. Lemon Squeezy) against fee structure and merchant-of-record tax handling for a low-price-point subscription model.</li>
+                            </ul>
+
+                            <p><strong>Frontend Engineering & Interface Systems:</strong></p>
+                            <ul>
+                                <li>Built a shared, site-wide account/session component handling UI state, a slide-out signup interaction, and a stacking-context-safe dropdown pattern via DOM portalling.</li>
+                                <li>Diagnosed and resolved cross-browser layout defects — flexbox centring bugs, z-index containment traps, box-model inconsistencies — through root-cause CSS analysis rather than symptom patching.</li>
+                                <li>Designed a resizable, drag-to-adjust split-pane layout with persisted user preference and a dedicated stacked-mobile fallback.</li>
+                            </ul>
+
+                            <p><strong>Documentation & Structured Reporting:</strong></p>
+                            <ul>
+                                <li>Built client-side document export pipelines producing formatted, presentation-ready analytical reports in matched .txt/.pdf pairs.</li>
+                                <li>Defined document metadata standards (generation timestamp, full-length topic text, verifier attribution) for professional, client-facing use.</li>
+                            </ul>
+                        </div>
+                    </div>
+
                 </div>
             </section>
+          <div class="accordion-divider"></div>
         </div>
     </div>
-
 
 <div class="dropdown-block">
     <button class="dropdown-header" onclick="handleDropdownClick('trainingContent', this)">
