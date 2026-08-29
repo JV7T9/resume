@@ -37,7 +37,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Thin Custom Scrollbar for the Entire Window */
 body::-webkit-scrollbar {
     width: 1px;
 }
@@ -57,7 +56,6 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .container {
-    /* Remove overflow-y here so it doesn't conflict with the body */
     position: relative;
     max-width: 900px;
     margin: -15px auto 10px auto;
@@ -65,19 +63,18 @@ body::-webkit-scrollbar-thumb:hover {
     border-radius: 12px;
 }
 
-/* Thin Custom Scrollbar for the Container */
 .container::-webkit-scrollbar {
-    width: 1px; /* Controls how thin the scrollbar is */
+    width: 1px; 
 }
 
 .container::-webkit-scrollbar-track {
-    background: transparent; /* Keeps the track background clean */
+    background: transparent; 
 }
 
 .container::-webkit-scrollbar-thumb {
-    background-color: #38bdf8; /* Matches your neon cyan theme */
+    background-color: #38bdf8; 
     border-radius: 2px;
-    box-shadow: 0 0 6px rgba(56, 189, 248, 0.5); /* Adds a subtle glow */
+    box-shadow: 0 0 6px rgba(56, 189, 248, 0.5); 
 }
 
 .container::-webkit-scrollbar-thumb:hover {
