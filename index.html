@@ -3282,6 +3282,7 @@ input[type=range]::-webkit-slider-runnable-track {
     const width = container.clientWidth;
     const height = container.clientHeight;
 
+    // --- Scene & Camera Setup ---
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
     camera.position.set(0, 0, 5.5);
@@ -3291,11 +3292,13 @@ input[type=range]::-webkit-slider-runnable-track {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
+    // --- OrbitControls ---
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     controls.enableZoom = false;
 
+    // --- Geometry Setup ---
     const uSegments = 48;
     const vSegments = 24;
     const radius = 1.4;
@@ -3324,9 +3327,11 @@ input[type=range]::-webkit-slider-runnable-track {
     const mesh = new THREE.LineSegments(geometry, material);
     scene.add(mesh);
 
+    // Initial Orientations
     mesh.rotation.x = 0.35;
     mesh.rotation.z = 0.00;
 
+    // --- Eversion Algorithm ---
     function updateModel(factor) {
       const posAttr = geometry.attributes.position;
       let index = 0;
@@ -3361,6 +3366,7 @@ input[type=range]::-webkit-slider-runnable-track {
       posAttr.needsUpdate = true;
     }
 
+    // --- UI Controls & Logic ---
     const eversionSlider = document.getElementById('eversion-slider');
     const verticalSlider = document.getElementById('vertical-slider');
     const tiltSlider = document.getElementById('tilt-slider');
@@ -3370,11 +3376,32 @@ input[type=range]::-webkit-slider-runnable-track {
     const tiltLabel = document.getElementById('tilt-label');
 
     let currentFactor = 0;
-    let animSpeed = 0.006;
     let isPaused = false; 
 
+    // Animation speeds (Slider 1 at ~10% speed, Slider 2 moving normally)
+    let baseAnimSpeed = 0.006; 
+    let speedSlider1 = 0.1;   
+    let speedSlider2 = 1.0;   
+
+    // Set Slider 3 (Tilt/Roll) static at the very top (assuming range is -1 to 1, max top = 1.0)
+    let tiltVal = 1.0;
+    if (tiltSlider) {
+      tiltSlider.value = tiltVal;
+    }
+    mesh.rotation.z = tiltVal;
+    if (tiltLabel) tiltLabel.textContent = `${tiltVal.toFixed(2)} rad`;
+
+    // Set Slider 2 (Vertical Pitch) to 25% up from the bottom 
+    // Range -1 to 1: Bottom is -1, 25% up from bottom is -0.5
+    let verticalVal = -0.5;
+    if (verticalSlider) {
+      verticalSlider.value = verticalVal;
+    }
+    mesh.rotation.x = verticalVal;
+
+    // Eversion Slider: Click/Pointer toggle for Pause/Play
     if (eversionSlider) {
-      eversionSlider.addEventListener('mousedown', () => {
+      eversionSlider.addEventListener('pointerdown', () => {
         isPaused = !isPaused;
       });
 
@@ -3384,17 +3411,20 @@ input[type=range]::-webkit-slider-runnable-track {
       });
     }
 
+    // Pitch Slider (Vertical) Manual handling
     if (verticalSlider) {
       verticalSlider.addEventListener('input', (e) => {
-        mesh.rotation.x = parseFloat(e.target.value);
+        verticalVal = parseFloat(e.target.value);
+        mesh.rotation.x = verticalVal;
       });
     }
 
+    // Roll Slider (Tilt) Manual handling
     if (tiltSlider) {
       tiltSlider.addEventListener('input', (e) => {
-        const val = parseFloat(e.target.value);
-        mesh.rotation.z = val;
-        if (tiltLabel) tiltLabel.textContent = `${val.toFixed(2)} rad`;
+        tiltVal = parseFloat(e.target.value);
+        mesh.rotation.z = tiltVal;
+        if (tiltLabel) tiltLabel.textContent = `${tiltVal.toFixed(2)} rad`;
       });
     }
 
@@ -3408,24 +3438,31 @@ input[type=range]::-webkit-slider-runnable-track {
       }
     }
 
+    // --- Render Loop ---
     function animate() {
       requestAnimationFrame(animate);
 
-      if (!isPaused && eversionSlider) {
-        currentFactor += animSpeed;
+      if (!isPaused) {
+        // Slider 1 (Eversion): Moves at 10% speed automatically
+        currentFactor += baseAnimSpeed * speedSlider1;
         if (currentFactor > 1 || currentFactor < -1) {
-          animSpeed *= -1;
+          baseAnimSpeed *= -1; 
         }
-        eversionSlider.value = currentFactor;
+        if (eversionSlider) eversionSlider.value = currentFactor;
         applyState(currentFactor);
+
+        // Slider 2 (Vertical Pitch): Optional subtle automated motion or kept static based on preference. 
+        // Currently responds to manual interaction while paused/playing.
       }
 
+      // Continuous Y rotation of the overall wireframe
       mesh.rotation.y += 0.008;
 
       controls.update();
       renderer.render(scene, camera);
     }
 
+    // Initialize
     updateModel(0);
     animate();
   </script>
