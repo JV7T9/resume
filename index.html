@@ -3281,10 +3281,8 @@ input[type=range]::-webkit-slider-runnable-track {
     const container = document.getElementById('eversion-canvas');
     const width = container.clientWidth;
     const height = container.clientHeight;
-
-    // --- Scene & Camera Setup ---
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(55, width / height, 0.1, 1000);
     camera.position.set(0, 0, 5.5);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -3292,13 +3290,11 @@ input[type=range]::-webkit-slider-runnable-track {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
-    // --- OrbitControls ---
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     controls.enableZoom = false;
 
-    // --- Geometry Setup ---
     const uSegments = 48;
     const vSegments = 24;
     const radius = 1.4;
@@ -3327,11 +3323,9 @@ input[type=range]::-webkit-slider-runnable-track {
     const mesh = new THREE.LineSegments(geometry, material);
     scene.add(mesh);
 
-    // Initial Orientations
     mesh.rotation.x = 0.35;
     mesh.rotation.z = 0.00;
 
-    // --- Eversion Algorithm ---
     function updateModel(factor) {
       const posAttr = geometry.attributes.position;
       let index = 0;
@@ -3366,7 +3360,6 @@ input[type=range]::-webkit-slider-runnable-track {
       posAttr.needsUpdate = true;
     }
 
-    // --- UI Controls & Logic ---
     const eversionSlider = document.getElementById('eversion-slider');
     const verticalSlider = document.getElementById('vertical-slider');
     const tiltSlider = document.getElementById('tilt-slider');
@@ -3378,12 +3371,10 @@ input[type=range]::-webkit-slider-runnable-track {
     let currentFactor = 0;
     let isPaused = false; 
 
-    // Animation speeds (Slider 1 at ~10% speed, Slider 2 moving normally)
     let baseAnimSpeed = 0.006; 
-    let speedSlider1 = 0.1;   
+    let speedSlider1 = 0.50;   
     let speedSlider2 = 1.0;   
 
-    // Set Slider 3 (Tilt/Roll) static at the very top (assuming range is -1 to 1, max top = 1.0)
     let tiltVal = 1.0;
     if (tiltSlider) {
       tiltSlider.value = tiltVal;
@@ -3391,15 +3382,12 @@ input[type=range]::-webkit-slider-runnable-track {
     mesh.rotation.z = tiltVal;
     if (tiltLabel) tiltLabel.textContent = `${tiltVal.toFixed(2)} rad`;
 
-    // Set Slider 2 (Vertical Pitch) to 25% up from the bottom 
-    // Range -1 to 1: Bottom is -1, 25% up from bottom is -0.5
     let verticalVal = -0.5;
     if (verticalSlider) {
       verticalSlider.value = verticalVal;
     }
     mesh.rotation.x = verticalVal;
 
-    // Eversion Slider: Click/Pointer toggle for Pause/Play
     if (eversionSlider) {
       eversionSlider.addEventListener('pointerdown', () => {
         isPaused = !isPaused;
@@ -3411,7 +3399,6 @@ input[type=range]::-webkit-slider-runnable-track {
       });
     }
 
-    // Pitch Slider (Vertical) Manual handling
     if (verticalSlider) {
       verticalSlider.addEventListener('input', (e) => {
         verticalVal = parseFloat(e.target.value);
@@ -3419,7 +3406,6 @@ input[type=range]::-webkit-slider-runnable-track {
       });
     }
 
-    // Roll Slider (Tilt) Manual handling
     if (tiltSlider) {
       tiltSlider.addEventListener('input', (e) => {
         tiltVal = parseFloat(e.target.value);
@@ -3438,31 +3424,24 @@ input[type=range]::-webkit-slider-runnable-track {
       }
     }
 
-    // --- Render Loop ---
     function animate() {
       requestAnimationFrame(animate);
 
       if (!isPaused) {
-        // Slider 1 (Eversion): Moves at 10% speed automatically
         currentFactor += baseAnimSpeed * speedSlider1;
         if (currentFactor > 1 || currentFactor < -1) {
           baseAnimSpeed *= -1; 
         }
         if (eversionSlider) eversionSlider.value = currentFactor;
         applyState(currentFactor);
-
-        // Slider 2 (Vertical Pitch): Optional subtle automated motion or kept static based on preference. 
-        // Currently responds to manual interaction while paused/playing.
       }
 
-      // Continuous Y rotation of the overall wireframe
       mesh.rotation.y += 0.008;
 
       controls.update();
       renderer.render(scene, camera);
     }
 
-    // Initialize
     updateModel(0);
     animate();
   </script>
@@ -3498,29 +3477,26 @@ let masterAnimating = false;
 function toggleMasterPanel() {
     const toggleBtn = document.getElementById('masterToggle');
     const masterPanel = document.getElementById('masterPanel');
-    const introBlock = document.getElementById('introBlock'); // Grab the intro block
-    const unlockDiamond = document.querySelector('.unlock-diamond'); // Grab the diamond
-    const heroBg = document.querySelector('.hero-bg'); // Grab the sphere container
+    const introBlock = document.getElementById('introBlock'); 
+    const unlockDiamond = document.querySelector('.unlock-diamond'); 
+    const heroBg = document.querySelector('.hero-bg'); 
     
-    // --- RE-TRIGGER SPINNING DIAMOND ANIMATION ---
     if (unlockDiamond) {
         unlockDiamond.style.animation = 'none';
-        void unlockDiamond.offsetWidth; // Force a browser reflow
+        void unlockDiamond.offsetWidth; 
         unlockDiamond.style.animation = 'spinAndWindDown 1.6s cubic-bezier(0.15, 0.85, 0.35, 1) forwards';
     }
 
     const isOpen = masterPanel.classList.contains('open');
 
     if (!isOpen) {
-        // OPENING SEQUENCE: Hide intro text immediately, extend shaft, then drop panel open
         if (introBlock) introBlock.classList.add('hidden');
         
-        // Handle view-specific behavior on opening
         if (heroBg) {
             if (window.innerWidth <= 768) {
-                heroBg.classList.add('mobile-hide-sphere'); // Hide completely on mobile
+                heroBg.classList.add('mobile-hide-sphere'); 
             } else {
-                heroBg.classList.add('dimmed');             // Dim down on desktop
+                heroBg.classList.add('dimmed');  
             }
         }
         
@@ -3530,11 +3506,9 @@ function toggleMasterPanel() {
             toggleBtn.classList.add('open');
         }, 350); 
     } else {
-        // CLOSING SEQUENCE: Close panel first, let it slide back, then rotate/retract shaft & bring intro back
         masterPanel.classList.remove('open');
         toggleBtn.classList.remove('open'); 
 
-        // Restore sphere visibility/opacity as it starts closing
         if (heroBg) {
             if (window.innerWidth <= 768) {
                 heroBg.classList.remove('mobile-hide-sphere');
@@ -3545,10 +3519,9 @@ function toggleMasterPanel() {
 
         setTimeout(() => {
             toggleBtn.classList.remove('extending'); 
-            if (introBlock) introBlock.classList.remove('hidden'); // Bring intro text back after closing finishes
+            if (introBlock) introBlock.classList.remove('hidden'); 
         }, 350); 
 
-        // --- GLOBAL RESET / CLOSE ALL OPEN CONTENT ---
         closeAllSubDropdowns();
 
         document.querySelectorAll('.dropdown-block.dropdown-open').forEach(block => {
@@ -3569,7 +3542,7 @@ function toggleMasterPanel() {
 
         document.querySelectorAll('.trait-header').forEach(header => {
             header.addEventListener('click', function() {
-                this.classList.toggle('open'); // Keeps the header lit
+                this.classList.toggle('open'); 
         
                 const body = this.nextElementSibling;
                 if (body && body.classList.contains('trait-body')) {
@@ -3709,7 +3682,6 @@ function handleDropdownClick(id, headerBtn) {
         toggleSectionDropdown(headerBtn);
         return;
     }
-
     openPanel(id, headerBtn);
 }
 </script>
