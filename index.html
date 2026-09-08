@@ -2001,7 +2001,7 @@ footer {
     transform: rotate(180deg);
 }
 
-    .hero-bg {
+.hero-bg {
       position: absolute;
       width: 400px;
       height: 400px;
@@ -2013,6 +2013,12 @@ footer {
       border-radius: 8px;
       overflow: hidden;
       z-index: 10;
+      transition: opacity 0.4s ease; 
+    }
+
+    .hero-bg.dimmed {
+      opacity: 0.15; 
+      pointer-events: none; 
     }
 
 @media (max-width: 768px) {
@@ -3455,23 +3461,30 @@ let masterAnimating = false;
 function toggleMasterPanel() {
     const toggleBtn = document.getElementById('masterToggle');
     const masterPanel = document.getElementById('masterPanel');
-    const introBlock = document.getElementById('introBlock'); 
-    const unlockDiamond = document.querySelector('.unlock-diamond'); 
-    const heroBg = document.querySelector('.hero-bg'); 
+    const introBlock = document.getElementById('introBlock'); // Grab the intro block
+    const unlockDiamond = document.querySelector('.unlock-diamond'); // Grab the diamond
+    const heroBg = document.querySelector('.hero-bg'); // Grab the sphere container
     
+    // --- RE-TRIGGER SPINNING DIAMOND ANIMATION ---
     if (unlockDiamond) {
         unlockDiamond.style.animation = 'none';
-        void unlockDiamond.offsetWidth; 
+        void unlockDiamond.offsetWidth; // Force a browser reflow
         unlockDiamond.style.animation = 'spinAndWindDown 1.6s cubic-bezier(0.15, 0.85, 0.35, 1) forwards';
     }
 
     const isOpen = masterPanel.classList.contains('open');
 
     if (!isOpen) {
+        // OPENING SEQUENCE: Hide intro text immediately, extend shaft, then drop panel open
         if (introBlock) introBlock.classList.add('hidden');
         
-        if (window.innerWidth <= 768 && heroBg) {
-            heroBg.classList.add('mobile-hide-sphere');
+        // Handle view-specific behavior on opening
+        if (heroBg) {
+            if (window.innerWidth <= 768) {
+                heroBg.classList.add('mobile-hide-sphere'); // Hide completely on mobile
+            } else {
+                heroBg.classList.add('dimmed');             // Dim down on desktop
+            }
         }
         
         toggleBtn.classList.add('extending');
@@ -3480,18 +3493,25 @@ function toggleMasterPanel() {
             toggleBtn.classList.add('open');
         }, 350); 
     } else {
+        // CLOSING SEQUENCE: Close panel first, let it slide back, then rotate/retract shaft & bring intro back
         masterPanel.classList.remove('open');
         toggleBtn.classList.remove('open'); 
 
-        if (window.innerWidth <= 768 && heroBg) {
-            heroBg.classList.remove('mobile-hide-sphere');
+        // Restore sphere visibility/opacity as it starts closing
+        if (heroBg) {
+            if (window.innerWidth <= 768) {
+                heroBg.classList.remove('mobile-hide-sphere');
+            } else {
+                heroBg.classList.remove('dimmed');
+            }
         }
 
         setTimeout(() => {
             toggleBtn.classList.remove('extending'); 
-            if (introBlock) introBlock.classList.remove('hidden'); 
+            if (introBlock) introBlock.classList.remove('hidden'); // Bring intro text back after closing finishes
         }, 350); 
 
+        // --- GLOBAL RESET / CLOSE ALL OPEN CONTENT ---
         closeAllSubDropdowns();
 
         document.querySelectorAll('.dropdown-block.dropdown-open').forEach(block => {
@@ -3512,7 +3532,7 @@ function toggleMasterPanel() {
 
         document.querySelectorAll('.trait-header').forEach(header => {
             header.addEventListener('click', function() {
-                this.classList.toggle('open');
+                this.classList.toggle('open'); // Keeps the header lit
         
                 const body = this.nextElementSibling;
                 if (body && body.classList.contains('trait-body')) {
