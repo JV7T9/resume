@@ -371,23 +371,38 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .glass-header {
-    padding: 15px 32px;
-    margin-bottom: 30px;
+    padding: 10px 20px;
+    margin-bottom: 0px;
     border-radius: 14px;
-
     background: transparent;
     background-size: cover;
     background-position: center;
-
     backdrop-filter: blur(0px);
     border: 0px solid rgba(45, 212, 191, 0.35);
-
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 10;
-
     text-shadow: 0 0 12px rgba(56, 189, 248, 0.55);
+}
+
+@media screen and (max-width: 768px) {
+    .name-unlock-container {
+        font-size: 1.3rem; 
+    }
+
+    .intro-title, 
+    .glyph-left, 
+    .glyph-right {
+        font-size: 0.85rem; 
+    }
+
+    .glass-header {
+        padding: 8px 12px;
+        flex-direction: column;
+        gap: 6px;
+        width: 100%;
+    }
 }
 
 #sliding-header {
