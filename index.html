@@ -1231,7 +1231,7 @@ footer {
 }
 
 .project-title a {
-    color: #38bdf8; 
+    color: #38bdf8;
     text-decoration: none;
     transition: color 0.2s ease, text-shadow 0.2s ease;
 }
@@ -1249,6 +1249,7 @@ footer {
 }
 
 .project-video-wrapper {
+    display: block;
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -1256,6 +1257,13 @@ footer {
     border-radius: 6px;
     background: #090d16;
     border: 1px solid rgba(56, 189, 248, 0.15);
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-video-wrapper:hover {
+    border-color: rgba(56, 189, 248, 0.6);
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
 }
 
 .project-video {
@@ -3188,57 +3196,65 @@ input[type=range]::-webkit-slider-runnable-track {
 
 
 <div class="dropdown-block">
-        <button class="dropdown-header" onclick="handleDropdownClick('projectsContent', this)">
-            <span class="title">Projects & Developments</span>
-            <span class="chevron">▾</span>
-        </button>
+    <button class="dropdown-header" onclick="handleDropdownClick('projectsContent', this)">
+        <span class="title">Projects & Developments</span>
+        <span class="chevron">▾</span>
+    </button>
 
-        <div class="dropdown-body" id="projectsContent">
-            <div class="projects-grid">
-                
-                <div class="project-card">
-                    <h3 class="project-title"><a href="https://www.facebook.com/profile.php?id=61590670702853" target="_blank" rel="noopener noreferrer">GlyphTek Projects</a></h3>
-                    <p class="project-desc">ARC, AI-Fusion Engine & Resonance Chamber</p>
-                    <div class="project-video-wrapper">
-                        <video autoplay muted loop playsinline class="project-video">
-                            <source src="assets/ARC5.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <h3 class="project-title"><a href="https://jv7t9.github.io/DTSIM/" target="_blank" rel="noopener noreferrer">DTSIM</a></h3>
-                    <p class="project-desc">Digital Transcription SIM</p>
-                    <div class="project-video-wrapper">
-                        <video autoplay muted loop playsinline class="project-video">
-                            <source src="assets/DTSIM.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <h3 class="project-title"><a href="https://www.facebook.com/people/Site-Security-Ops/61552047390676/" target="_blank" rel="noopener noreferrer">Site Security OPS</a></h3>
-                    <p class="project-desc">Workstation Builds & OPS Accessories</p>
-                    <div class="project-video-wrapper">
-                        <video autoplay muted loop playsinline class="project-video">
-                            <source src="assets/OPS.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                </div>
-
-				<div class="project-card">
-                    <h3 class="project-title"><a href="https://jv7t9.github.io/gears-lattice/" target="_blank" rel="noopener noreferrer">Human-AI Relations</a></h3>
-                    <p class="project-desc">The Gears Read As A Lattice</p>
-                    <div class="project-video-wrapper">
-                        <video autoplay muted loop playsinline class="project-video">
-                            <source src="assets/gears.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                </div>
-
+    <div class="dropdown-body" id="projectsContent">
+        <div class="projects-grid">
+            
+            <div class="project-card">
+                <h3 class="project-title">
+                    <a href="https://www.facebook.com/profile.php?id=61590670702853" target="_blank" rel="noopener noreferrer">GlyphTek Projects</a>
+                </h3>
+                <p class="project-desc">ARC, AI-Fusion Engine & Resonance Chamber</p>
+                <a href="https://www.facebook.com/profile.php?id=61590670702853" target="_blank" rel="noopener noreferrer" class="project-video-wrapper">
+                    <video autoplay muted loop playsinline class="project-video">
+                        <source src="assets/ARC5.mp4" type="video/mp4">
+                    </video>
+                </a>
             </div>
+
+            <div class="project-card">
+                <h3 class="project-title">
+                    <a href="https://jv7t9.github.io/DTSIM/" target="_blank" rel="noopener noreferrer">DTSIM</a>
+                </h3>
+                <p class="project-desc">Digital Transcription SIM</p>
+                <a href="https://jv7t9.github.io/DTSIM/" target="_blank" rel="noopener noreferrer" class="project-video-wrapper">
+                    <video autoplay muted loop playsinline class="project-video">
+                        <source src="assets/DTSIM.mp4" type="video/mp4">
+                    </video>
+                </a>
+            </div>
+
+            <div class="project-card">
+                <h3 class="project-title">
+                    <a href="https://www.facebook.com/people/Site-Security-Ops/61552047390676/" target="_blank" rel="noopener noreferrer">Site Security OPS</a>
+                </h3>
+                <p class="project-desc">Workstation Builds & OPS Accessories</p>
+                <a href="https://www.facebook.com/people/Site-Security-Ops/61552047390676/" target="_blank" rel="noopener noreferrer" class="project-video-wrapper">
+                    <video autoplay muted loop playsinline class="project-video">
+                        <source src="assets/OPS.mp4" type="video/mp4">
+                    </video>
+                </a>
+            </div>
+
+            <div class="project-card">
+                <h3 class="project-title">
+                    <a href="https://jv7t9.github.io/gears-lattice/" target="_blank" rel="noopener noreferrer">Human-AI Relations</a>
+                </h3>
+                <p class="project-desc">The Gears Read As A Lattice</p>
+                <a href="https://jv7t9.github.io/gears-lattice/" target="_blank" rel="noopener noreferrer" class="project-video-wrapper">
+                    <video autoplay muted loop playsinline class="project-video">
+                        <source src="assets/gears.mp4" type="video/mp4">
+                    </video>
+                </a>
+            </div>
+
         </div>
     </div>
+</div>
 
 <div class="dropdown-block">
     <button class="dropdown-header" onclick="handleDropdownClick('contactContent', this)">
