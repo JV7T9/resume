@@ -2035,10 +2035,10 @@ footer {
 }
 
 .hero-bg {
-      position: absolute;
+      position: relative
       width: 400px;
       height: 400px;
-      margin-left: 460px;
+      margin-left: 450px;
       margin-top: 150px;  
       background: transparent;
       border: 0px solid rgba(0, 213, 255, 0.25);
@@ -2050,7 +2050,7 @@ footer {
     }
 
     .hero-bg.dimmed {
-      opacity: 0.15; 
+      opacity: 0.15;
       pointer-events: none; 
     }
 
@@ -2058,7 +2058,7 @@ footer {
   .hero-bg {
     width: 90vw;
     max-width: 360px;
-    height: 340px; 
+    height: 340px;
     margin-left: 10px;
     margin-right: 0px;
     margin-top: 150px;
@@ -2077,57 +2077,78 @@ footer {
     pointer-events: none;
   }
 }
-    #eversion-canvas {
-      margin-left: -60%;
-      width: 200%;
-      height: 100%;
-      display: block;
+
+#eversion-canvas {
+  width: calc(100% - 90px); 
+  height: 100%;
+  display: block;
+}
+
+    .control-panel {
+      position: absolute;
+      background: rgba(8, 18, 28, 0.85);
+      border: 1px solid rgba(0, 213, 255, 0.3);
+      border-radius: 6px;
+      backdrop-filter: blur(4px);
+      z-index: 10;
+      color: #00d5ff;
+      font-size: 11px;
     }
 
-.equalizer-panel {
-    position: absolute;
-    top: 12px;
-    right: 0px; 
-    bottom: 12px;
-    display: flex;
-    flex-direction: row;
-    gap: 2px; 
-    background: transparent;
-    border: none;
-    padding: 0;
-    z-index: 10;
-}
+    .mode-toggle {
+      right: 16px;
+      bottom: 12px;
+      width: 75px;
+      padding: 6px 0;
+      text-align: center;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: background 0.2s;
+      font-size: 9px;
+    }
+    .mode-toggle:hover {
+      background: rgba(0, 213, 255, 0.15);
+    }
 
-.eq-slider-strip {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    width: 20px;
-    background: transparent;
-    border: 0px solid transparent;
-    padding: 2px 0px;
-    font-family: monospace;
-    color: #00d5ff;
-    font-size: 8px;
-}
+    .equalizer-panel {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      bottom: 45px; 
+      width: 75px;
+      background:transparent;
+      border: 0px solid rgba(0, 213, 255, 0.3);
+      border-radius: 6px;
+      backdrop-filter: blur(0px);
+      z-index: 10;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 8px 4px;
+    }
 
-input[type=range].eq-vertical-slider {
-    writing-mode: bt-lr;
-    appearance: slider-vertical;
-    width: 4px;
-    height: 80%;
-    background: transparent;
-    border: 0px solid transparent;
-    accent-color: #00d5ff;
-    cursor: pointer;
-    box-shadow: none;
-}
+    .eq-slider-strip {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      color: #00d5ff;
+      font-size: 9px;
+      font-weight: bold;
+    }
 
-input[type=range]::-webkit-slider-runnable-track {
-    background: transparent;
-    border: 0px solid transparent;
-}    
+    input[type=range].eq-vertical-slider {
+      writing-mode: bt-lr;
+      appearance: slider-vertical;
+      width: 3px;
+      height: 80%;
+      accent-color: #00d5ff;
+      cursor: pointer;
+      margin: 4px 0;
+    }
+
 
 </style>
 </head>
@@ -2143,7 +2164,6 @@ input[type=range]::-webkit-slider-runnable-track {
     <div id="eversion-canvas"></div>
     
     <div class="equalizer-panel">
-
       <div class="eq-slider-strip">
         <span>T</span>
         <input type="range" id="tilt-slider" class="eq-vertical-slider" min="-3.14" max="3.14" step="0.01" value="0">
@@ -2163,6 +2183,10 @@ input[type=range]::-webkit-slider-runnable-track {
       </div>
     </div>
   </div>
+
+    <div class="control-panel mode-toggle" id="mode-toggle-btn">
+      VIEW: <span id="view-mode-label">POINTS</span>
+    </div>
 
     <header class="glass-header">
         <div id="sliding-header">
@@ -3321,6 +3345,7 @@ input[type=range]::-webkit-slider-runnable-track {
 const container = document.getElementById('eversion-canvas');
 const width = container.clientWidth;
 const height = container.clientHeight;
+
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(55, width / height, 0.1, 1000);
 camera.position.set(0, 0, 5.5);
@@ -3353,16 +3378,55 @@ for (let i = 0; i < uSegments; i++) {
     indices.push(first, second);
   }
 }
-geometry.setIndex(indices);
+const lineGeometry = geometry.clone();
+lineGeometry.setIndex(indices);
 
-const material = new THREE.LineBasicMaterial({
+const lineMaterial = new THREE.LineBasicMaterial({
   color: 0x00d5ff,
   transparent: true,
   opacity: 0.85
 });
+const lineMesh = new THREE.LineSegments(lineGeometry, lineMaterial);
+scene.add(lineMesh);
 
-const mesh = new THREE.LineSegments(geometry, material);
-scene.add(mesh);
+function createGlowTexture() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 64;
+  canvas.height = 64;
+  const ctx = canvas.getContext('2d');
+  const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+  gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+  gradient.addColorStop(0.3, 'rgba(0, 213, 255, 0.8)');
+  gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 64, 64);
+  return new THREE.CanvasTexture(canvas);
+}
+
+const pointMaterial = new THREE.PointsMaterial({
+  color: 0x00d5ff,
+  size: 0.08,
+  map: createGlowTexture(),
+  transparent: true,
+  opacity: 0.9,
+  depthWrite: false,
+  blending: THREE.AdditiveBlending
+});
+const pointMesh = new THREE.Points(geometry, pointMaterial);
+scene.add(pointMesh);
+
+let isPointMode = true;
+pointMesh.visible = true;
+lineMesh.visible = false;
+
+const modeToggleBtn = document.getElementById('mode-toggle-btn');
+const viewModeLabel = document.getElementById('view-mode-label');
+modeToggleBtn.addEventListener('click', () => {
+  isPointMode = !isPointMode;
+  pointMesh.visible = isPointMode;
+  lineMesh.visible = !isPointMode;
+  viewModeLabel.textContent = isPointMode ? 'POINTS' : 'LINES';
+});
 
 function updateModel(factor) {
   const posAttr = geometry.attributes.position;
@@ -3396,33 +3460,37 @@ function updateModel(factor) {
     }
   }
   posAttr.needsUpdate = true;
+  lineGeometry.attributes.position.copy(posAttr);
+  lineGeometry.attributes.position.needsUpdate = true;
 }
 
 const eversionSlider = document.getElementById('eversion-slider');
 const verticalSlider = document.getElementById('vertical-slider');
 const tiltSlider = document.getElementById('tilt-slider');
 
-let currentFactor = 0;
-let isPaused = false;
+let pauseEversion = false;
+let pauseVertical = false;
+let pauseTilt = false;
+let currentFactor = parseFloat(eversionSlider.value);
 let baseAnimSpeed = 0.006;
 let speedSlider1 = 0.50;
-let speedSlider2 = 0.25; 
-let speedSlider3 = 0.25;  
-let verticalVal = -0.5;   
-let tiltVal = 0.3;      
+let speedSlider2 = 0.25;
+let speedSlider3 = 0.25;
 
-verticalSlider.value = verticalVal;
-tiltSlider.value = tiltVal;
+let verticalVal = parseFloat(verticalSlider.value);
+let tiltVal = parseFloat(tiltSlider.value);
 
-mesh.rotation.x = verticalVal;
-mesh.rotation.z = tiltVal;
+pointMesh.rotation.x = verticalVal;
+lineMesh.rotation.x = verticalVal;
+pointMesh.rotation.z = tiltVal;
+lineMesh.rotation.z = tiltVal;
 
-let verticalVel = -baseAnimSpeed * speedSlider2;   
-let tiltVel =  baseAnimSpeed * speedSlider3;     
+let verticalVel = -baseAnimSpeed * speedSlider2;
+let tiltVel = baseAnimSpeed * speedSlider3;
 
-eversionSlider.addEventListener('pointerdown', () => {
-  isPaused = !isPaused;
-});
+eversionSlider.addEventListener('pointerdown', () => { pauseEversion = !pauseEversion; });
+verticalSlider.addEventListener('pointerdown', () => { pauseVertical = !pauseVertical; });
+tiltSlider.addEventListener('pointerdown', () => { pauseTilt = !pauseTilt; });
 
 eversionSlider.addEventListener('input', (e) => {
   currentFactor = parseFloat(e.target.value);
@@ -3431,50 +3499,47 @@ eversionSlider.addEventListener('input', (e) => {
 
 verticalSlider.addEventListener('input', (e) => {
   verticalVal = parseFloat(e.target.value);
-  mesh.rotation.x = verticalVal;
+  pointMesh.rotation.x = verticalVal;
+  lineMesh.rotation.x = verticalVal;
 });
 
 tiltSlider.addEventListener('input', (e) => {
   tiltVal = parseFloat(e.target.value);
-  mesh.rotation.z = tiltVal;
+  pointMesh.rotation.z = tiltVal;
+  lineMesh.rotation.z = tiltVal;
 });
 
 function animate() {
   requestAnimationFrame(animate);
 
-  if (!isPaused) {
-
+  if (!pauseEversion) {
     currentFactor += baseAnimSpeed * speedSlider1;
     if (currentFactor > 1 || currentFactor < -1) baseAnimSpeed *= -1;
-
     eversionSlider.value = currentFactor;
     updateModel(currentFactor);
-
-    verticalVal += verticalVel;
-    if (verticalVal > 3.14 || verticalVal < -3.14) {
-      verticalVel *= -1;
-    }
-    verticalSlider.value = verticalVal;
-    mesh.rotation.x = verticalVal;
-
-    tiltVal += tiltVel;
-    if (tiltVal > 3.14 || tiltVal < -3.14) {
-      tiltVel *= -1;
-    }
-    tiltSlider.value = tiltVal;
-    mesh.rotation.z = tiltVal;
-
-    controls.autoRotate = true;
-
-  } else {
-    controls.autoRotate = false;
-    controls.update = function() {};
   }
 
+  if (!pauseVertical) {
+    verticalVal += verticalVel;
+    if (verticalVal > 3.14 || verticalVal < -3.14) verticalVel *= -1;
+    verticalSlider.value = verticalVal;
+    pointMesh.rotation.x = verticalVal;
+    lineMesh.rotation.x = verticalVal;
+  }
+
+  if (!pauseTilt) {
+    tiltVal += tiltVel;
+    if (tiltVal > 3.14 || tiltVal < -3.14) tiltVel *= -1;
+    tiltSlider.value = tiltVal;
+    pointMesh.rotation.z = tiltVal;
+    lineMesh.rotation.z = tiltVal;
+  }
+
+  controls.update();
   renderer.render(scene, camera);
 }
 
-updateModel(0);
+updateModel(currentFactor);
 animate();
 </script>
 
