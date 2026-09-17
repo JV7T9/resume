@@ -2092,7 +2092,7 @@ footer {
       backdrop-filter: blur(4px);
       z-index: 10;
       color: #00d5ff;
-      font-size: 11px;
+      font-size: 7px;
     }
 
     .mode-toggle {
@@ -2105,7 +2105,7 @@ footer {
       text-transform: uppercase;
       letter-spacing: 0.5px;
       transition: background 0.2s;
-      font-size: 9px;
+      font-size: 7px;
     }
     .mode-toggle:hover {
       background: rgba(0, 213, 255, 0.15);
@@ -2135,7 +2135,7 @@ footer {
       justify-content: space-between;
       height: 100%;
       color: #00d5ff;
-      font-size: 9px;
+      font-size: 7px;
       font-weight: bold;
     }
 
@@ -2182,11 +2182,10 @@ footer {
         <span>V</span>
       </div>
     </div>
-  </div>
-
     <div class="control-panel mode-toggle" id="mode-toggle-btn">
-      VIEW: <span id="view-mode-label">POINTS</span>
+    <span id="view-mode-label">GRID</span>
     </div>
+  </div>
 
     <header class="glass-header">
         <div id="sliding-header">
@@ -3425,7 +3424,7 @@ modeToggleBtn.addEventListener('click', () => {
   isPointMode = !isPointMode;
   pointMesh.visible = isPointMode;
   lineMesh.visible = !isPointMode;
-  viewModeLabel.textContent = isPointMode ? 'POINTS' : 'LINES';
+  viewModeLabel.textContent = isPointMode ? 'GRID' : 'MESH';
 });
 
 function updateModel(factor) {
