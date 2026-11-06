@@ -3433,7 +3433,7 @@ footer {
                 </h3>
                 <p class="project-desc">Mapping The Structural Stack</p>
                 <a href="https://jv7t9.github.io/human-ai-relations/" target="_blank" rel="noopener noreferrer" class="project-video-wrapper">
-                    <video muted loop playsinline preload="none" class="project-video">
+                    <video muted loop playsinline preload="metadata" class="project-video">
                         <source src="assets/SS3.mp4" type="video/mp4">
                     </video>
                 </a>
@@ -3445,7 +3445,7 @@ footer {
                 </h3>
                 <p class="project-desc">Interactive lattice of connected gears</p>
                 <a href="https://gears-lattice.tfmsupport.workers.dev/" target="_blank" rel="noopener noreferrer" class="project-video-wrapper">
-                    <video muted loop playsinline preload="none" class="project-video">
+                    <video muted loop playsinline preload="metadata" class="project-video">
                         <source src="assets/gears.mp4" type="video/mp4">
                     </video>
                 </a>
@@ -3457,7 +3457,7 @@ footer {
                 </h3>
                 <p class="project-desc">Digital Transcription SIM</p>
                 <a href="https://jv7t9.github.io/DTSIM/" target="_blank" rel="noopener noreferrer" class="project-video-wrapper">
-                    <video muted loop playsinline preload="none" class="project-video">
+                    <video muted loop playsinline preload="metadata" class="project-video">
                         <source src="assets/DTSIM.mp4" type="video/mp4">
                     </video>
                 </a>
@@ -3469,7 +3469,7 @@ footer {
                 </h3>
                 <p class="project-desc">Workstation Builds & Site Operations</p>
                 <a href="https://www.facebook.com/people/Site-Security-Ops/61552047390676/" target="_blank" rel="noopener noreferrer" class="project-video-wrapper">
-                    <video muted loop playsinline preload="none" class="project-video">
+                    <video muted loop playsinline preload="metadata" class="project-video">
                         <source src="assets/SSO3.mp4" type="video/mp4">
                     </video>
                 </a>
@@ -3481,7 +3481,7 @@ footer {
                 </h3>
                 <p class="project-desc">ARC, AI-Fusion Engine & Resonance Chamber</p>
                 <a href="https://www.facebook.com/profile.php?id=61590670702853" target="_blank" rel="noopener noreferrer" class="project-video-wrapper">
-                    <video muted loop playsinline preload="none" class="project-video">
+                    <video muted loop playsinline preload="metadata" class="project-video">
                         <source src="assets/ARC5.mp4" type="video/mp4">
                     </video>
                 </a>
@@ -4359,9 +4359,10 @@ function resetLearningHistory() {
             else { v.pause(); }
         });
     }, { threshold: 0.25 });
+    var seen = new WeakSet();
     function watch(root) {
         (root.querySelectorAll ? root.querySelectorAll('video.project-video') : []).forEach(function (v) {
-            if (!v.dataset.watched) { v.dataset.watched = '1'; io.observe(v); }
+            if (!seen.has(v)) { seen.add(v); io.observe(v); }
         });
     }
     watch(document);
