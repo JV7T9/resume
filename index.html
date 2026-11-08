@@ -1,0 +1,4374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2&family=Michroma&family=Orbitron:wght@400;900&family=Rajdhani:wght@600&display=swap" rel="stylesheet">
+    <title>John Va'afuti - Professional Trait Stack</title>
+    <style>
+:root {
+    --primary-color: #1e293b;
+    --accent-color: #2563eb;
+    --border-color: #e2e8f0;
+    --dropdown-highlight: rgba(37, 99, 235, 0.08);
+    --dropdown-highlight-hover: rgba(37, 99, 235, 0.15);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #e2e8f0; 
+    background-image: url('assets/Metallic3.jpg');
+    background-color: #090d16;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Thin Custom Scrollbar for the Entire Window */
+body::-webkit-scrollbar {
+    width: 1px;
+}
+
+body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 2px;
+    box-shadow: 0 0 6px rgba(56, 189, 248, 0.5);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background-color: #7dd3fc;
+}
+
+.container {
+    /* Remove overflow-y here so it doesn't conflict with the body */
+    position: relative;
+    max-width: 900px;
+    margin: -15px auto 10px auto;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+/* Thin Custom Scrollbar for the Container */
+.container::-webkit-scrollbar {
+    width: 1px; /* Controls how thin the scrollbar is */
+}
+
+.container::-webkit-scrollbar-track {
+    background: transparent; /* Keeps the track background clean */
+}
+
+.container::-webkit-scrollbar-thumb {
+    background-color: #38bdf8; /* Matches your neon cyan theme */
+    border-radius: 2px;
+    box-shadow: 0 0 6px rgba(56, 189, 248, 0.5); /* Adds a subtle glow */
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+    background-color: #7dd3fc;
+}
+
+
+/* ==========================================================================
+   VIDEO BACKGROUND
+   ========================================================================== */
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 700px; /* matches the card's original min-height */
+    overflow: hidden;
+    border-radius: 12px;
+    z-index: -1;
+    
+}
+
+.container-video {
+    position: absolute;
+    top: 0;
+    right: 0; /* aligns video to the right side */
+    width: 115%;
+    height: 115%;
+    object-fit: cover;
+    opacity: 1.00;
+}
+
+/* Gradient overlay */
+.hero-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: transparent;
+
+}
+
+.sub-header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 10px;
+    width: 100%;
+    gap: 20px;
+}
+
+
+/* ==========================================================================
+   NAME UNLOCK FEATURE
+   ========================================================================== */
+.name-unlock-container {
+    display: inline-flex;
+    align-items: left;
+    gap: 0px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    color: #f8fafc;
+}
+
+/* The Central Diamond: Spins on load, then winds down to a complete stop */
+.unlock-diamond {
+    display: inline-block;
+    color: #38bdf8;
+    /* 3 full spins (1080deg) ending on a smooth ease-out stop */
+    animation: spinAndWindDown 1.6s cubic-bezier(0.15, 0.85, 0.35, 1) forwards;
+    transform-origin: center;
+    z-index: 2;
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+}
+
+@keyframes diamondDoubleSpin {
+    0% {
+        transform: rotate(0deg) scale(0.8);
+        opacity: 0.5;
+        text-shadow: 0 0 5px rgba(56, 189, 248, 0.2);
+    }
+    /* Phase 1: The initial 180deg unlock that pushes the names out (completes at ~50% duration) */
+    50% {
+        transform: rotate(180deg) scale(1);
+        opacity: 1;
+        text-shadow: 0 0 15px rgba(56, 189, 248, 0.7);
+    }
+    /* Phase 2: An extra full 360deg rotation smoothly winding down to a stop (540deg total) */
+    100% {
+        transform: rotate(540deg) scale(1);
+        opacity: 1;
+        text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+    }
+}
+
+@keyframes spinAndWindDown {
+    0% {
+        transform: rotate(0deg) scale(0.8);
+        opacity: 0.5;
+    }
+    100% {
+        /* Total rotation stops precisely upright (multiple of 360) */
+        transform: rotate(1080deg) scale(1);
+        opacity: 1;
+        text-shadow: 0 0 12px rgba(56, 189, 248, 0.8);
+    }
+}
+
+/* Name Parts: Slide out during the first half while the initial 180deg spin happens */
+.name-part {
+    opacity: 0;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+}
+
+.first-name {
+    transform: translateX(45px); 
+}
+
+.last-name {
+    transform: translateX(-45px); 
+}
+
+/* Unlocked State: Names lock into final position as the first half finishes */
+.name-unlock-container.unlocked .first-name {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.name-unlock-container.unlocked .last-name {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ==========================================================================
+   MASTER NAVIGATION TOGGLE
+   Dual-shaft sliding mechanical effect. Click plays two stages:
+   1) left shaft extends outward while right shaft compresses away (.extending)
+   2) the arrowhead rotates to point down and the panel drops open (.open)
+   Reverse order on close.
+   ========================================================================== */
+.master-nav {
+    padding: 0 6px;
+    margin-bottom: 10px;
+    margin-top: -50px;
+    z-index: 9999;
+}
+
+.master-toggle {
+    display: inline-flex;
+    align-items: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px 6px;
+    color: #38bdf8;
+}
+
+/* Base styles for both shafts */
+.master-toggle .arrow-shaft,
+.master-toggle .arrow-shaft-right {
+    display: inline-block;
+    height: 2.5px;
+    background: transparent;
+    border-bottom: 2px solid #38bdf8; /* neon line */
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.6); /* glow */
+    transition: width 0.35s ease;
+}
+
+/* Left shaft starts closed, right shaft starts fully open */
+.master-toggle .arrow-shaft {
+    width: 0;
+}
+
+.master-toggle .arrow-shaft-right {
+    width: 258px;
+}
+
+.master-toggle .arrow-head {
+    display: inline-block;
+    font-size: 2.5rem;
+    line-height: 1;
+    z-index: 100;
+
+    /* Neon cyan to match the shaft border */
+    color: #38bdf8;
+
+    /* Stronger glow to match the shaft’s border glow */
+    text-shadow:
+        0 0 6px rgba(56, 189, 248, 0.75),
+        0 0 12px rgba(56, 189, 248, 0.55),
+        0 0 18px rgba(56, 189, 248, 0.35);
+
+    transition: transform 0.35s ease, color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.master-toggle:hover .arrow-head {
+    color: #7dd3fc;
+    text-shadow:
+        0 0 8px rgba(125, 211, 252, 0.85),
+        0 0 16px rgba(56, 189, 248, 0.65),
+        0 0 24px rgba(56, 189, 248, 0.45);
+}
+
+/* Stage 1: Left shaft extends out, right shaft compresses away */
+.master-toggle.extending .arrow-shaft {
+    width: 258px;
+}
+
+.master-toggle.extending .arrow-shaft-right {
+    width: 0;
+}
+
+/* Stage 2: once the panel is open, the arrowhead rotates to point down */
+.master-toggle.open .arrow-head {
+    transform: rotate(180deg);
+}
+
+/* Reverse close sequence: hold rotation until the panel slides back, then spin back */
+.master-toggle:not(.open) .arrow-head {
+    transition: transform 0.25s ease 0.35s, color 0.3s ease; 
+    transform: rotate(0deg);
+}
+
+.master-panel {
+    backdrop-filter: blur(12px);
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.4s ease;
+}
+
+.master-panel.open {
+    backdrop-filter: blur(0px);
+    max-height: 6000px; /* generously large so the tallest section always fits */
+    opacity: 1;
+}
+
+/* Base state for dropdown blocks inside the master panel */
+.master-panel .dropdown-block {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition-delay: 0s;
+    backdrop-filter: blur(12px);
+}
+
+/* When the master panel opens, cascade them downward one after another */
+.master-panel.open .dropdown-block {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger each dropdown block sequentially (adjust the time steps as desired) */
+.master-panel.open .dropdown-block:nth-child(1) { transition-delay: 0.1s; }
+.master-panel.open .dropdown-block:nth-child(2) { transition-delay: 0.2s; }
+.master-panel.open .dropdown-block:nth-child(3) { transition-delay: 0.3s; }
+.master-panel.open .dropdown-block:nth-child(4) { transition-delay: 0.4s; }
+.master-panel.open .dropdown-block:nth-child(5) { transition-delay: 0.5s; }
+.master-panel.open .dropdown-block:nth-child(6) { transition-delay: 0.6s; }
+
+/* When closing, reverse the cascade or make them snap shut smoothly upward */
+.master-panel:not(.open) .dropdown-block {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+
+/* ==========================================================================
+   INTRO BOX
+   ========================================================================== */
+.intro-block {
+    background: transparent;
+    border: 0px solid rgba(56, 189, 248, 0.3);
+    box-shadow: 0 0 0px rgba(56, 189, 248, 0.1);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: -40px 6px 25px -5px;
+    text-align: left;
+    width: auto;
+    font-family: 'Michroma', sans-serif;
+    z-index: -1;
+    /* Smooth transition states */
+    opacity: 1;
+    /* Remove max-height or increase it to fit your card, and change overflow */
+    max-height: none; 
+    overflow: visible;
+    transition: opacity 0.3s ease, padding 0.3s ease, margin 0.3s ease, border-width 0.3s ease;
+}
+
+.intro-block.hidden {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-width: 0;
+    pointer-events: none;
+}
+
+.intro-title {
+    font-family: 'Michroma', sans-serif;
+    font-size: 1rem;
+    color: #38bdf8;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    text-align: left;
+    text-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+    z-index: 0;
+}
+
+.intro-action {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.95rem;
+    color: #94a3b8;
+    letter-spacing: 0.5px;
+    text-align: left;
+    margin-left: 0px;
+}
+
+.tagline-card {
+    background: transparent;
+    border: 0px solid rgba(0, 255, 255, 0.2);
+    border-radius: 8px;
+    padding:5px;
+    margin-top: 5px;
+    max-width: 600px; 
+    /* Remove any fixed heights or overflow properties that might clip the content */
+    height: auto; 
+    overflow: visible;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.tagline-card img {
+    width: 100%;
+    height: auto; /* Ensures the image scales proportionally downwards */
+    max-height: none; /* Prevents it from being artificially constrained vertically */
+    border-radius: 4px;
+    display: block;
+    transition: opacity 0.5s ease;
+    opacity: 0.8;
+}
+
+/* ==========================================================================
+   GLOWING MIRROR HEADER BOX
+   ========================================================================== */
+/* Base desktop/default settings */
+.glass-header {
+    padding: 10px 20px;
+    margin-bottom: 0px;
+    border-radius: 14px;
+    background: transparent;
+    background-size: cover;
+    background-position: center;
+    backdrop-filter: blur(0px);
+    border: 0px solid rgba(45, 212, 191, 0.35);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    text-shadow: 0 0 12px rgba(56, 189, 248, 0.55);
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVE ADJUSTMENTS (Screens 768px and down)
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+    /* Scale down main titles and header text for mobile */
+    .name-unlock-container {
+        font-size: 1.3rem; /* Drops from desktop size down to fit mobile */
+    }
+
+    .intro-title, 
+    .glyph-left, 
+    .glyph-right {
+        font-size: 0.85rem; /* Reduces size so glyphs and text stay inline */
+    }
+
+    .glass-header {
+        padding: 8px 12px;
+        flex-direction: column;
+        gap: 6px;
+        width: 100%;
+    }
+}
+
+/* Sliding Header Container */
+#sliding-header {
+    width: 100%; /* Expands wider than the default container */
+    max-width: none; /* Removes any width restriction */
+    margin-left: -5%; /* Centers it if it overflows the edges */
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    padding: 2px 10px;
+}
+
+/* Sliding Track */
+.sliding-track {
+    display: inline-flex;
+    gap: 60px; /* spacing between titles */
+    animation: slideLoop 18s linear infinite;
+}
+
+/* Header Text Style */
+.sliding-track span {
+    font-size: 2rem;
+    font-weight: 600;
+    font-family: 'Michroma', sans-serif;
+    letter-spacing: 2px;
+    color: #38bdf8; /* neon cyan */
+    text-shadow:
+        0 0 10px rgba(56, 189, 248, 0.5),
+        0 0 20px rgba(56, 189, 248, 0.3);
+}
+
+/* Animation */
+@keyframes slideLoop {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* ==========================================================================
+   Section Layouts & General Typography
+   ========================================================================== */
+.header-identity {
+    text-align: left;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    padding-left: 4px;
+}
+
+.header-identity h2 {
+    text-align: left;
+    font-size: 2.4rem;
+    font-family: 'Exo 2', sans-serif;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: 3px;
+    transition: opacity 0.1s ease;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 4px;
+}
+
+.header-identity .tagline {
+    font-size: 0.85rem;
+    text-align: center;
+    color: #94a3b8;
+    font-family: 'Michroma', sans-serif;
+    margin: 0;
+    letter-spacing: 3px;
+    transition: opacity 0.4s ease;
+}
+
+/* Glow pulse class used by JS */
+.glow {
+    text-shadow: 0 0 14px rgba(56, 189, 248, 0.65);
+}
+
+.header-identity h2.glow,
+.header-identity .tagline.glow {
+    text-shadow: 0 0 8px rgba(56, 189, 248, 0.35);
+}
+
+section {
+    margin-bottom: 35px;
+}
+
+h2 {
+    font-size: 1.3rem;
+    color: #38bdf8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+h3 {
+    color: #f8fafc;
+}
+
+/* Grid Frameworks (side-by-side columns) */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.card {
+    background: transparent;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #38bdf8;
+
+    border-top: 1px solid rgba(56, 189, 248, 0.1);
+    border-right: 1px solid rgba(56, 189, 248, 0.05);
+    border-bottom: 1px solid rgba(56, 189, 248, 0.05);
+
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.2),
+        0 0 15px rgba(56, 189, 248, 0.08);
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 6px 25px rgba(0, 0, 0, 0.25),
+        0 0 20px rgba(56, 189, 248, 0.15);
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    color: #f8fafc;
+    font-size: 1.1rem;
+}
+
+.card ul {
+    list-style-type: square;
+    padding-left: 20px;
+    font-size: 0.9rem;
+}
+
+.card li {
+    margin-bottom: 5px;
+}
+
+/* ==========================================================================
+   DROPDOWN HEADERS / BODIES (consolidated — was previously split across
+   three separate blocks with overlapping rules)
+   ========================================================================== */
+.dropdown-block {
+    margin: 0px 0;
+    border-radius: 6px;
+    background: transparent;
+}
+
+.dropdown-header {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start; 
+    gap: 8px;
+    width: 85%;
+    text-align: left;
+    background: transparent;
+    color: #38bdf8;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.90rem;
+    letter-spacing: 2.5px;
+    padding: 10px 12px;
+    margin-bottom: 6px;
+    border-radius: 6px;
+    border: 0px solid transparent; /* Keeps border rendering smooth during shifts */
+    cursor: pointer;
+    
+    /* Consolidated transition properties for motion and glow */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                background 0.3s ease, 
+                color 0.3s ease, 
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+    transform: translateX(0);
+}
+
+.dropdown-header:hover {
+    color: #7dd3fc;
+    text-shadow: 0 0 6px #7dd3fc, 0 0 12px #38bdf8;
+    transform: translateX(8px); /* Lifts/pushes forward on hover (~1.5 to 2mm visual shift) */
+    border-color: transparent;
+    background-color: transparent;
+}
+
+/* Persistent Active State (stays forward and accented while open) */
+.dropdown-header.is-active-state {
+    transform: translateX(12px); /* Pushes out just a fraction more than hover */
+    border-color: #38bdf8;
+    background-color: rgba(56, 189, 248, 0.12);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
+}
+
+.dropdown-header .chevron {
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+/* Chevron rotation when the desktop overlay panel is open (see openPanel JS) */
+.dropdown-header.active .chevron {
+    transform: rotate(-90deg);
+}
+
+/* Chevron rotation for standard in-page section dropdowns */
+.dropdown-block.dropdown-open > .dropdown-header .chevron {
+    transform: rotate(180deg);
+}
+
+.dropdown-body {
+    display: none;
+    padding: 15px 20px;
+    background: transparent;
+    border-top: 1px solid #444;
+    text-align: left;
+    text-justify: auto;
+    opacity: 0;
+    animation: dropdownFadeIn 0.45s ease forwards;
+}
+
+.dropdown-open .dropdown-body {
+    display: block;
+}
+
+@keyframes dropdownFadeIn {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ==========================================================================
+   PROFILE STATEMENT — INTERNAL MINI-DROPDOWNS
+   One shared source (Profile Statement / Digital Intelligence / Site Security).
+   ========================================================================== */
+p.profile-statement {
+    font-size: 1rem;
+    text-align: left;
+    margin-bottom: 12px;
+    font-family: 'Rajdhani', sans-serif;
+    line-height: 1.5;
+    letter-spacing: normal;
+}
+
+.mini-dropdown {
+    margin-bottom: 12px;
+    background: transparent;
+    border-radius: 8px;
+    border-left: 1px solid #38bdf8;
+    overflow: hidden;
+}
+
+.mini-header {
+    display: flex;
+    align-items: left;
+    justify-content: space-between;
+    width: 100%;
+    background: rgba(15, 23, 42, 0.35);
+    border: none;
+    color: #f8fafc;
+    font-family: 'Michroma', sans-serif;
+    font-size: 1rem;
+    font-weight: 200;
+    letter-spacing: 0.5px;
+    padding: 14px 18px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.mini-header:hover {
+    color: #7dd3fc;
+}
+
+.mini-header .chevron {
+    color: #38bdf8;
+    transition: transform 0.3s ease;
+}
+
+.mini-header.open .chevron {
+    transform: rotate(180deg);
+}
+
+.mini-body {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding: 0 18px; /* Restores comfortable left and right padding */
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    text-align: left; /* Forces standard left alignment */
+    letter-spacing: normal;
+    color: #cbd5e1;
+    transition: max-height 0.35s ease, opacity 0.3s ease;
+}
+
+.mini-body.open {
+    max-height: 2000px;
+    opacity: 1;
+    padding: 0 18px 16px 18px;
+}
+
+.mini-body {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(15px);
+    background: transparent; /*rgba(15, 23, 42, 0.35);  subtle dark glass */
+}
+
+/* ==========================================================================
+   Interactive Accordion Styles 
+   (Training / Employment History tables)
+   ========================================================================== */
+.accordion-body {
+    padding: 20px;
+    background-color: #1e293b;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.75rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    color: #f8fafc;
+}
+
+.accordion-item {
+    font-family: 'Michroma', sans-serif;
+    border: 1px solid rgba(56, 189, 248, 0.15);
+    border-radius: 6px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    background: transparent;
+}
+
+.accordion-item.active .accordion-content {
+    display: block; /* Turns display back on when active */
+    max-height: 2000px;
+}
+
+
+.accordion-item.active .accordion-icon {
+    transform: rotate(180deg);
+}
+
+.accordion-item.active .accordion-content {
+    max-height: 2000px;
+}
+
+.accordion-header {
+    background: rgba(30, 41, 59, 0.5); /* Semi-transparent dark slate */
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 16px 22px;
+    display: flex;
+    font-family: 'Michroma', sans-serif;
+    font-color: #38bdf8;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 6px;
+    border: 0px solid rgba(56, 189, 248, 0.2); /* Subtle cyan neon border */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.accordion-header:hover {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(56, 189, 248, 0.5); /* Brighter cyan on hover */
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+}
+
+.accordion-title {
+    font-family: 'Michroma', sans-serif;
+    font-weight: 400;
+    color: #cbd5e1;
+    text-shadow: 0 0 8px rgba(203, 213, 225, 0.6), 0 0 16px rgba(255, 255, 255, 0.3);
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.accordion-year {
+    background: rgba(56, 189, 248, 0.15); /* Glass-pill style */
+    color: #38bdf8;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.accordion-icon {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+    color: #38bdf8;
+}
+
+.accordion-content {
+    display: none; /* Keeps them entirely hidden out of layout flow by default */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background: #1e293b;
+}
+
+
+/* Tables inside history dropdowns */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.65rem;
+}
+
+table tr, td {
+    padding: 12px;
+    text-align: left;
+    background-color: #1e293b;
+    border-bottom: 1px solid #334155;
+    color: #cbd5e1;
+}
+
+th {
+    background-color: #0f172a;
+    color: #38bdf8;
+    font-weight: 600;
+    padding: 12px;
+    text-align: left;
+}
+
+td em, td i {
+    color: #38bdf8;
+}
+
+.year-col { width: 12%; }
+.pos-col { width: 28%; }
+.comp-col { width: 25%; }
+.desc-col { width: 35%; }
+
+/* Privacy Gate Shielding */
+.privacy-gate {
+    background: transparent;
+    border: 0px dashed #334155;
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.85rem;
+    color: #f8fafc;
+    padding: 20px;
+    text-align: left;
+    border-radius: 8px;
+    margin-top: 0px;
+    transition: all 0.3s ease;
+}
+
+.privacy-gate p {
+    margin-bottom: 15px;
+    font-weight: 500;
+    color: #f8fafc;
+}
+
+.gate-form {
+    display: flex;
+    justify-content: center;
+    max-width: 450px;
+    margin: 0 auto;
+    gap: 10px;
+}
+
+.gate-input {
+    flex: 1;
+    padding: 10px 15px;
+    background: rgba(15, 23, 42, 0.45); /* Frosted dark grayish background */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(56, 189, 248, 0.3); /* Subtle cyan border */
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: #f8fafc;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.gate-input::placeholder {
+    color: #94a3b8; /* Soft placeholder text color */
+}
+
+.gate-input:disabled {
+    background: rgba(15, 23, 42, 0.2);
+    cursor: not-allowed;
+}
+
+.gate-input:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+}
+
+.gate-btn {
+    background: rgba(15, 23, 42, 0.45); /* Frosted dark transparent look */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(15px);
+    color: #38bdf8; /* Neon cyan text */
+    border: 1px solid rgba(56, 189, 248, 0.4); /* Matching transparent border */
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-shadow: 0 0 6px rgba(56, 189, 248, 0.4);
+    transition: all 0.2s ease;
+}
+
+.gate-btn:hover {
+    background: rgba(56, 189, 248, 0.15); /* Lights up slightly on hover */
+    border-color: #38bdf8;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+    transform: scale(1.02);
+}
+
+.gate-btn:disabled {
+    background: rgba(15, 23, 42, 0.2);
+    border-color: #334155;
+    color: #94a3b8;
+    cursor: not-allowed;
+}
+
+.error-msg {
+    color: #dc2626;
+    font-size: 0.85rem;
+    margin-top: 8px;
+    display: none;
+    font-weight: 500;
+}
+
+/* Hidden Blocks Framework */
+.hidden-content {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.references-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    background: transparent;
+    padding: 20px;
+    border-radius: 8px;
+    border: 0px solid rgba(56, 189, 248, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.ref-card h4 {
+    color: #ffffff;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+.ref-card p {
+    font-size: 0.9rem;
+    margin-bottom: 2px;
+    color: #cbd5e1;
+}
+
+.glow-glyph {
+    color: #3182ce;
+    text-shadow: 0 0 8px rgba(49, 130, 206, 0.8),
+                 0 0 15px rgba(49, 130, 206, 0.4);
+    font-size: 1.2rem;
+    margin-right: 8px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* ==========================================================================
+   KEY TRAITS ACCORDION STYLING
+   ========================================================================== */
+.traits-accordion {
+    margin-top: 0px;
+}
+
+.trait-item {
+    margin-bottom: 8px;
+}
+
+.trait-header {
+    width: 100%;
+    text-align: left;
+    background: rgba(30, 41, 59, 0.5);
+    color: #f8fafc;
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.95rem;
+    padding: 10px 20px;
+    margin-bottom: 6px;
+    border-radius: 6px;
+    border-top: 0px solid rgba(56, 189, 248, 0.25);
+    border-bottom: 0px;
+    border-right: 0px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.trait-header:hover {
+    opacity: 0.55;
+    background: #334155;
+}
+
+.trait-body {
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.70rem;
+    letter-spacing: 1px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.45s ease, opacity 0.35s ease;
+    padding: 0 4px;
+    background: transparent;
+    border-left: 0px solid #f8fafc;;
+    border-radius: 0 0 6px 6px;
+    margin-top: 4px;
+    overflow-y: auto;
+}
+
+.trait-body {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(15px);
+    background: transparent; /*rgba(15, 23, 42, 0.35); /* subtle dark glass */
+}
+
+.trait-body::-webkit-scrollbar {
+    width: 1px;
+}
+
+.trait-body::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+
+.trait-body::-webkit-scrollbar-thumb {
+    background-color: #38bdf8;
+    border-radius: 1px;
+}
+
+.trait-body.open {
+    max-height: 2000px;
+    opacity: 1;
+    padding: 10px 14px;
+}
+
+.trait-header::after {
+    content: "▾";
+    float: right;
+    transition: transform 0.3s ease;
+}
+
+.trait-header.open::after {
+    transform: rotate(180deg);
+}
+
+.trait-body ul {
+    margin-left: 28px;
+    padding-left: 12px;
+}
+
+.trait-header.open {
+    color: #7dd3fc;
+    background: rgba(56, 189, 248, 0.12);
+    border-color: #38bdf8;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
+}
+
+@media (max-width: 768px) {
+    .trait-body.open {
+        max-height: 400px; /* scroll inside dropdown */
+    }
+}
+
+/* ==========================================================================
+   CONTACTS SECTION - Footer & COntact Details
+   ========================================================================== */
+/* Container Box */
+.contact-gate-container {
+    border: 1px solid rgba(0, 243, 255, 0.4);
+    background: rgba(0, 15, 30, 0.6);
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.15), inset 0 0 8px rgba(0, 243, 255, 0.1);
+    padding: 10px 12px;
+    border-radius: 6px;
+    backdrop-filter: blur(4px);
+    width: 100%;
+    max-width: 300px; /* Constrain width neatly */
+    box-sizing: border-box;
+    margin: 8px 0;
+}
+
+/* Form Layout (Stack header on top, row on bottom) */
+.gate-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+/* Header Text */
+.gate-notice {
+    color: #00f3ff;
+    font-size: 0.75rem;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin: 0;
+    white-space: nowrap; /* Keeps "UNLOCK CONTACT DETAILS" on 1 line */
+    text-shadow: 0 0 6px rgba(0, 243, 255, 0.6);
+}
+
+/* Horizontal Row for Input + Button */
+.input-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+}
+
+/* Input Styling */
+.cyber-input {
+    flex: 1; /* Fills remaining horizontal space */
+    min-width: 0; /* Allows input to shrink inside flexbox */
+    background: rgba(0, 50, 80, 0.3);
+    border: 1px solid rgba(0, 243, 255, 0.3);
+    color: #e0f7fc;
+    padding: 6px 8px;
+    font-size: 0.75rem;
+    border-radius: 3px;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.cyber-input::placeholder {
+    color: rgba(0, 243, 255, 0.4);
+}
+
+.cyber-input:focus {
+    border-color: #00f3ff;
+    box-shadow: 0 0 8px rgba(0, 243, 255, 0.4);
+    background: rgba(0, 50, 80, 0.5);
+}
+
+/* Button Styling */
+.cyber-button {
+    background: transparent;
+    border: 1px solid #00f3ff;
+    color: #00f3ff;
+    padding: 6px 10px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    border-radius: 3px;
+    white-space: nowrap; /* Keeps button text on one line */
+    transition: all 0.3s ease;
+    text-shadow: 0 0 4px rgba(0, 243, 255, 0.5);
+}
+
+.cyber-button:hover {
+    background: #00f3ff;
+    color: #050b14;
+    box-shadow: 0 0 12px rgba(0, 243, 255, 0.8);
+    font-weight: bold;
+}
+
+footer {
+    margin-top: 00px;
+    text-align: left;
+    font-size: 0.80rem;
+    font-family: 'Michroma', sans-serif;
+    border-top: none; /* Removes the top border line */
+    padding-top: 20px;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.4); /* Adds a sleek neon cyan line to the bottom */
+    padding-bottom: 40px; /* Adds breathing room below the text */
+}
+
+/* ==========================================================================
+   SOCIAL MEDIA
+   ========================================================================== */
+
+.floating-social-bar {
+    position: relative; /* Keeps it inside the footer flow */
+    margin-top: 100px;          /* Optional vertical spacing */
+    left: 0;
+    display: flex;
+    gap: 16px;          /* Slightly increased gap for larger buttons */
+    z-index: 10;
+    
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    transform: translateY(0);
+}
+
+.floating-social-bar.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    pointer-events: none;
+}
+
+/* Individual Icon Buttons */
+.social-icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;          /* Increased size from 42px to 52px */
+    height: 52px;         /* Increased size from 42px to 52px */
+    background: rgba(15, 23, 42, 0.85); 
+    border: 1.5px solid rgba(56, 189, 248, 0.5); /* Slightly thicker cyber border */
+    border-radius: 50%;
+    color: #38bdf8; 
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.2); /* Ambient base glow */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enlarged SVG inside to match the bigger button */
+.social-icon-btn svg {
+    width: 22px;          /* Scaled up from 18px */
+    height: 22px;         /* Scaled up from 18px */
+    transition: transform 0.3s ease;
+}
+
+/* Hover State: Expand, Brighten, and Heavy Neon Glow */
+.social-icon-btn:hover {
+    background: rgba(56, 189, 248, 0.2); 
+    border-color: #38bdf8;
+    color: #ffffff;
+    transform: scale(1.15) translateY(-3px); /* Expands/grows and lifts up */
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.8), inset 0 0 10px rgba(56, 189, 248, 0.4); /* Intense double-layer neon glow */
+}
+
+/* ==========================================================================
+   PROJECTS |R&D SECTION 
+   ========================================================================== */
+/* Apply Orbitron specifically to the Projects header title */
+#projectsContent ~ .dropdown-header .title, /* (Depending on your HTML nesting) */
+.dropdown-block:has(#projectsContent) .dropdown-header {
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+}
+
+/* Optional: If you also want the list items inside to have the Orbitron tech feel */
+#projectsContent ul.indent li {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   PROJECTS & R&D PANEL STYLING
+   ========================================================================== */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.project-card {
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-left: 4px solid #38bdf8;
+    border-radius: 8px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), 0 0 15px rgba(56, 189, 248, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(56, 189, 248, 0.5);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25), 0 0 20px rgba(56, 189, 248, 0.15);
+}
+
+.project-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+/* Style the project title links to match your theme blue */
+.project-title a {
+    color: #38bdf8;
+    text-decoration: none;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.project-title a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+}
+
+.project-desc {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.9rem;
+    color: #94a3b8;
+    margin: 0;
+}
+
+/* Clickable video wrapper styling */
+.project-video-wrapper {
+    display: block;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 6px;
+    background: #090d16;
+    border: 1px solid rgba(56, 189, 248, 0.15);
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-video-wrapper:hover {
+    border-color: rgba(56, 189, 248, 0.6);
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+}
+
+.project-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.95;
+    transition: opacity 0.3s ease;
+}
+
+.project-card:hover .project-video {
+    opacity: 1.0;
+}
+
+/* Responsive adjustment for desktop overlay panel view */
+#overlay-panel .projects-grid {
+    grid-template-columns: 1fr;
+}
+/* ==========================================================================
+   DESKTOP OVERLAY PANEL
+   ========================================================================== */
+:root {
+    --header-bottom: 120px;
+    --footer-height: 50px;
+}
+
+@media (min-width: 900px) {
+    #overlay-panel {
+        position: absolute;
+        top: var(--header-bottom);
+        right: 0;
+        width: 60%;
+        height: calc(100vh - var(--header-bottom) - var(--footer-height));
+        overflow-y: auto;
+        background: transparent;
+        border-left: 1px solid rgba(56, 189, 248, 0.3);
+        padding: 20px;
+        display: none;
+        z-index: 10;
+        animation: fadeGlideRight 0.45s ease forwards;
+    }
+}
+
+@keyframes slideInFromLeft {
+    0% { opacity: 0; transform: translateX(-40px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideOutToRight {
+    0% { opacity: 1; transform: translateX(0); }
+    100% { opacity: 0; transform: translateX(40px); }
+}
+
+@media (max-width: 899px) {
+    #overlay-panel {
+        display: none !important;
+    }
+}
+
+#overlay-panel::-webkit-scrollbar {
+    width: 4px;
+}
+
+#overlay-panel::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#overlay-panel::-webkit-scrollbar-thumb {
+    background: rgba(56, 189, 248, 0.15);
+    border-radius: 4px;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+#overlay-panel::-webkit-scrollbar-thumb:hover {
+    background: rgba(56, 189, 248, 0.35);
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+}
+
+/* The overlay panel is ~60% of the card's width — narrower than mobile's
+   full-width flow — so multi-column grids get a single-column layout here
+   to avoid cramped/overlapping content. */
+#overlay-panel .grid-2,
+#overlay-panel .references-grid,
+#overlay-panel .accordion-body {
+    grid-template-columns: 1fr;
+}
+
+/* Employment tables have 4 fixed-width columns — let them scroll
+   horizontally in the narrower panel rather than squeeze/wrap awkwardly. */
+#overlay-panel .accordion-content {
+    overflow-x: auto;
+}
+
+#overlay-panel table {
+    min-width: 480px;
+}
+
+
+/* Project & Development Table */
+.indent li {
+    padding-left: 1.5rem;
+}
+.indent {
+    padding-left: 40px; /* Adjust this number to move them further right */
+}
+
+/* ==========================================================================
+   CONSOLIDATED MOBILE SNAP LAYOUT (For screens under 768px)
+   ========================================================================== */
+/* Disable Android Chrome's default touch highlight box */
+.master-toggle, 
+.dropdown-header, 
+.mini-header, 
+.accordion-header {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Ensure active/focus states on mobile don't default to a solid fill */
+.master-toggle:active,
+.dropdown-header:active,
+.mini-header:active,
+.accordion-header:active {
+    z-index: 9999;
+    background-color: transparent !important;
+}
+
+@media (max-width: 768px) {
+    /* Exclude mini-headers or headers from being forced into vertical flex columns */
+    .grid-2, .accordion-body, [style*="display: flex"]:not(.mini-header) {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 15px !important;
+    }
+    
+    /* Ensure the mini-header stays a proper horizontal flex row on mobile */
+    .mini-header {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        text-align: left !important;
+    }
+
+    .glass-header {
+        flex-direction: column !important;
+        text-align: center !important;
+        padding: 20px !important;
+        gap: 15px;
+    }
+
+    .header-identity {
+        flex: none !important;
+        width: 100% !important;
+        text-align: left !important;
+    }
+
+    .header-identity h2 {
+        font-size: 1.4rem !important;
+    }
+
+    .grid-2, .accordion-body, [style*="display: flex"] {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 15px !important;
+    }
+
+    .card, .ref-card {
+        width: 100% !important;
+        margin-bottom: 10px;
+    }
+
+    .privacy-gate {
+        padding: 25px 15px !important;
+    }
+
+    .privacy-gate p {
+        margin-bottom: 20px !important;
+        line-height: 1.5;
+    }
+
+    .gate-form {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 12px !important;
+    }
+
+    .gate-input, .gate-btn {
+        width: 100% !important;
+        min-height: 44px; /* comfortable tap target on mobile */
+    }
+
+    .grid-2, .references-grid, .accordion-body, [style*="display: flex"] {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 15px !important;
+    }
+    
+    .card, .ref-card {
+        width: 100% !important;
+        margin-bottom: 10px;
+    }
+
+    /* Enable horizontal scrolling for employment history tables on mobile */
+    .accordion-content {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch; /* Smooth momentum scrolling for iOS */
+    }
+
+    /* Ensure the table doesn't get squashed and maintains readable minimum width */
+    .accordion-content table {
+        min-width: 480px; 
+    }
+}
+
+/* ==========================================================================
+   PRINT STYLES
+   ========================================================================== */
+@media print {
+    body {
+        background: #ffffff;
+        padding: 0;
+    }
+    .container {
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+    }
+    .card {
+        background: #ffffff;
+        border: 1px solid var(--border-color);
+        border-left: 4px solid var(--accent-color);
+        page-break-inside: avoid;
+    }
+    .privacy-gate {
+        display: none !important;
+    }
+    .hidden-content {
+        display: block !important;
+        opacity: 1 !important;
+    }
+    .accordion-content {
+        max-height: none !important;
+        display: block !important;
+    }
+    .accordion-icon {
+        display: none !important;
+    }
+    tr, section, footer, .accordion-item {
+        page-break-inside: avoid;
+    }
+}
+
+
+/* ==========================================================================
+   AUDIO TRACK PLAYER & TOGGLE LINK
+   ========================================================================== */
+.tlp-toggle-link {
+    display: inline-block;
+    margin: 0px 0 20px 0px; /* Aligned to match your layout spacing */
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.7rem;
+    color: #38bdf8;
+    cursor: pointer;
+    text-decoration: none; /* Changed from underline to none */
+    text-shadow: 0 0 6px rgba(56, 189, 248, 0.85);
+    transition: color 0.2s ease;
+    z-index:200;
+}
+
+.tlp-toggle-link:hover {
+    color: #7dd3fc;
+}
+
+.track-player-container {
+    display: none; /* Hidden by default; link is shown instead */
+    align-items: center;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 6px;
+    padding: 2px 4px;
+    margin: 0px 0 20px 0px; /* Exact same layout positioning as the link */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 10px rgba(56, 189, 248, 0.08);
+    font-family: 'Michroma', sans-serif;
+    z-index:20;
+}
+
+.track-player-container.show {
+    display: inline-flex; /* Replaces the link in position when active */
+}
+
+.player-main-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.player-btn {
+    background: transparent;
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    color: #38bdf8;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-shadow: 0 0 6px rgba(56, 189, 248, 0.5);
+}
+
+.player-btn:hover {
+    background: rgba(56, 189, 248, 0.15);
+    border-color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+.close-player-btn {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.track-select {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: #f8fafc;
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.65rem;
+    padding: 6px 8px;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.track-select:hover, .track-select:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+}
+
+.track-select option {
+    background: #0f172a;
+    color: #f8fafc;
+}
+
+.volume-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.65rem;
+    color: #38bdf8;
+}
+
+.volume-slider {
+    width: 40px;
+    accent-color: #38bdf8;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   DIPLOMA STUDIES FOCUS & PIE GRAPH STYLES
+   ========================================================================== */
+.tlp-toggle-link {
+    color: #7dd3fc; /* Light blue */
+    text-shadow: 0 0 6px rgba(125, 211, 252, 0.45); /* Soft blue glow */
+    cursor: pointer;
+    font-weight: 500;
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.tlp-toggle-link:hover {
+    color: #bce7ff; /* Brighter light blue */
+    text-shadow:
+        0 0 8px rgba(125, 211, 252, 0.55),
+        0 0 12px rgba(125, 211, 252, 0.35);
+}
+
+
+.diploma-focus-wrapper {
+    font-family: 'Michroma', sans-serif;
+    color: #f8fafc;
+}
+
+.diploma-header-row {
+    margin-top: 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.diploma-title-label {
+    background: rgba(15, 23, 42, 0.75);
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.85rem;
+    color: #38bdf8;
+    margin-bottom: -10px;
+    letter-spacing: 1px;
+    border-radius: 6px;
+}
+
+/* Dropdown Container (Hidden by default, swaps with link) */
+.diploma-dropdown-container {
+    display: none;
+    flex-direction: column;
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 6px;
+    padding: 14px;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 12px rgba(56, 189, 248, 0.1);
+}
+
+.diploma-dropdown-container.show {
+    display: flex;
+}
+
+.diploma-container-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.65rem;
+    color: #38bdf8;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+}
+
+.gradient-score-header {
+    background: linear-gradient(90deg, #38bdf8, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+/* Metrics List & Bars */
+.diploma-metrics-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.metric-row {
+    display: grid;
+    grid-template-columns: 240px 1fr 50px;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.7rem;
+}
+
+.metric-name {
+    color: #cbd5e1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bar-track {
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #0284c7, #38bdf8, #818cf8);
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+}
+
+.metric-val {
+    text-align: right;
+    color: #38bdf8;
+    font-weight: bold;
+}
+
+/* Pie Chart Layout & CSS Conic Graph */
+.chart-summary-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed rgba(56, 189, 248, 0.2);
+}
+
+.pie-chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cyber-pie-chart {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    /* Conic gradient accurately mapping data proportion weightings */
+    background: conic-gradient(
+        #38bdf8 0% 9%,
+        #0284c7 9% 19%,
+        #6366f1 19% 34%,
+        #818cf8 34% 46%,
+        #34d399 46% 59%,
+        #f43f5e 59% 69%,
+        #fbbf24 69% 83%,
+        #a855f7 83% 95%,
+        #ec4899 95% 100%
+    );
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+    border: 1px solid rgba(56, 189, 248, 0.4);
+}
+
+.chart-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.legend-title {
+    font-size: 0.75rem;
+    color: #38bdf8;
+}
+
+.legend-desc {
+    font-size: 0.65rem;
+    color: #94a3b8;
+    line-height: 1.4;
+}
+
+/* Responsive layout adjustments for smaller viewports */
+@media(max-width: 768px) {
+    .metric-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+    .metric-val {
+        text-align: left;
+    }
+    .chart-summary-section {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* Diploma pie chart mapped to bar percentages */
+.cyber-pie-chart {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: conic-gradient(
+        rgba(56, 189, 248, 0.57) 0% 11%,   /* 57% */
+        rgba(56, 189, 248, 0.64) 11% 22%,  /* 64% */
+        rgba(56, 189, 248, 0.93) 22% 33%,  /* 93% */
+        rgba(56, 189, 248, 0.75) 33% 44%,  /* 75% */
+        rgba(56, 189, 248, 0.82) 44% 55%,  /* 82% */
+        rgba(56, 189, 248, 0.61) 55% 66%,  /* 61% */
+        rgba(56, 189, 248, 0.85) 66% 77%,  /* 85% */
+        rgba(56, 189, 248, 0.82) 77% 88%,  /* 82% */
+        rgba(56, 189, 248, 0.74) 88% 100%  /* 74% */
+    );
+
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+    border: 1px solid rgba(56, 189, 248, 0.4);
+}
+
+
+
+/* Monochrome glowing transparent cyan slices matching main pie chart aesthetic */
+.cyber-pie-chart.security-pie {
+    background: conic-gradient(
+        rgba(56, 189, 248, 0.12) 0% 12%,    /* ghost cyan */
+        rgba(56, 189, 248, 0.18) 12% 23%,   /* slightly brighter */
+        rgba(56, 189, 248, 0.26) 23% 34%,   /* medium ghost */
+        rgba(56, 189, 248, 0.34) 34% 46%,   /* mid glow */
+        rgba(56, 189, 248, 0.42) 46% 59%,   /* brighter glow */
+        rgba(56, 189, 248, 0.50) 59% 69%,   /* strong glow */
+        rgba(56, 189, 248, 0.60) 69% 83%,   /* neon glow */
+        rgba(56, 189, 248, 0.75) 83% 100%   /* brightest cyan */
+    );
+
+    box-shadow: 
+        0 0 15px rgba(56, 189, 248, 0.30),
+        0 0 25px rgba(56, 189, 248, 0.20);
+
+    border: 1px solid rgba(56, 189, 248, 0.40);
+}
+
+
+
+.diploma-dropdown-container .close-player-btn {
+    display: flex;
+    margin-left: auto;
+    margin-top: 5px;
+    padding-top: 5px;
+    border-top: 1px dashed rgba(56, 189, 248, 0.2); /* Optional cyber border line */
+    width: 5%;
+    justify-content: center;
+}
+
+
+
+/* Section Title */
+.learning-history-title {
+    background: rgba(15, 23, 42, 0.75);
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.85rem;
+    color: #38bdf8;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+    border-radius: 6px;
+}
+
+.year-hint {
+    font-size: 0.65rem;
+    color: #D0D0D0;
+    opacity: 0.75;
+    text-shadow: 0 0 4px rgba(208, 208, 208, 0.35);
+    letter-spacing: 0.5px;
+}
+
+
+/* Timeline Wrapper */
+.edu-timeline-wrapper {
+    font-family: 'Michroma', sans-serif;
+    margin-bottom: 20px;
+    margin-top: -10px;
+    padding: 10px;
+    background: rgba(15, 23, 42, 0.4);
+    border: 0px solid rgba(56, 189, 248, 0.2);
+    border-radius: 6px;
+    text-align: left;
+}
+
+.timeline-years-row {
+    margin-bottom: 0px;
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.65rem;
+    color: #D0D0D0; /* Light grey */
+    text-shadow: 0 0 6px rgba(208, 208, 208, 0.45); /* Glow */
+}
+
+.timeline-node-btn {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-shadow: 0 0 6px rgba(56, 189, 248, 0.4);
+}
+
+.timeline-node-btn:hover {
+    color: #7dd3fc;
+    transform: scale(1.1);
+}
+
+.timeline-separator {
+    color: rgba(56, 189, 248, 0.4);
+    user-select: none;
+}
+
+.timeline-accordion-item {
+    display: none;
+}
+
+/* Accordion Base Card */
+.accordion-item {
+
+    font-family: 'Michroma', sans-serif;
+    border: 1px solid rgba(56, 189, 248, 0.15);
+    border-radius: 6px;
+    margin-bottom: -10px;
+    margin-top: 10px;
+    overflow: hidden;
+    background: transparent;
+}
+
+.accordion-header {
+    background: rgba(30, 41, 59, 0.5);
+    padding: 14px 20px;
+    display: flex;
+    color: #38bdf8;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease;
+}
+
+.accordion-header:hover {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(56, 189, 248, 0.5);
+}
+
+.accordion-title {
+    font-size: 0.8rem;
+    color: #cbd5e1;
+}
+
+.accordion-year {
+    background: rgba(56, 189, 248, 0.15);
+    color: #38bdf8;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    margin-left: auto;
+    margin-right: 15px;
+}
+
+.accordion-icon {
+    font-size: 0.85rem;
+    transition: transform 0.3s ease;
+    color: #38bdf8;
+}
+
+/* --- STRICT DEFAULT HIDDEN STATE --- */
+.accordion-item .accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    background: #1e293b;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-content {
+    display: none;
+    max-height: 0;
+    overflow: hidden;
+    background: #1e293b;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-item.active .accordion-content {
+    display: block;
+    max-height: 2000px;
+}
+
+.accordion-item.active .accordion-icon {
+    transform: rotate(180deg);
+}
+
+/* Name panel: always visible when the year is opened */
+.timeline-accordion-item.active .timeline-name-panel {
+    display: block;
+    max-height: none;
+}
+
+/* Details panel: hidden until triangle is clicked */
+.timeline-details-panel {
+    display: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Details panel open state */
+.timeline-details-panel.open {
+    display: block;
+    max-height: 2000px;
+}
+
+.accordion-divider {
+    width: 100%;
+    height: 1px;
+    margin-top: 12px;
+    background: linear-gradient(
+        to right,
+        rgba(56, 189, 248, 0),
+        rgba(56, 189, 248, 0.4),
+        rgba(56, 189, 248, 0)
+    );
+}
+
+/* Timeline accordion hidden state */
+.timeline-accordion-item .accordion-content {
+    display: none !important;
+    max-height: 0;
+    overflow: hidden;
+    background: #1e293b;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Timeline accordion open state */
+.timeline-accordion-item.active .accordion-content {
+    display: block !important;
+    max-height: 2000px;
+}
+
+/* Timeline icon rotation */
+.timeline-accordion-item.active .accordion-icon {
+    transform: rotate(180deg);
+}
+
+
+/* ==========================================================================
+   SPHERE DESIGN
+   ========================================================================== */
+.hero-bg {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      margin-left: 450px;
+      margin-top: 150px;  
+      background: transparent;
+      border: 0px solid rgba(0, 213, 255, 0.25);
+      box-shadow: 0 0 0px rgba(0, 213, 255, 0.15);
+      border-radius: 8px;
+      overflow: hidden;
+      z-index: 10;
+      transition: opacity 0.4s ease; /* Smooth fade effect */
+    }
+
+    /* When the panel opens, dim the sphere container */
+    .hero-bg.dimmed {
+      opacity: 0.15; /* Adjust this value (0.1 to 0.3) to make it dimmer or brighter */
+      pointer-events: none; /* Prevents interaction with the sphere while menu is open */
+    }
+
+@media (max-width: 768px) {
+  .hero-bg {
+    width: 90vw;
+    max-width: 360px;
+    height: 340px; /* Fixed from 0px to give the sphere height */
+    margin-left: 10px;
+    margin-right: 0px;
+    margin-top: 150px;
+    position: center;
+    transition: opacity 0.4s ease, max-height 0.4s ease, margin 0.4s ease;
+    max-height: 400px;
+    opacity: 1;
+  }
+
+  /* When the panel is open on mobile, hide the sphere container */
+  .hero-bg.mobile-hide-sphere {
+    opacity: 0;
+    max-height: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+}
+
+#eversion-canvas {
+  width: calc(100% - 90px); /* Reserves space on the right for the slider strip */
+  height: 100%;
+  display: block;
+}
+
+/* Common Control Panel Base */
+.control-panel {
+  position: absolute;
+  background: linear-gradient(135deg, rgba(20, 32, 45, 0.9) 0%, rgba(10, 18, 28, 0.95) 100%);
+  background-image: 
+    linear-gradient(135deg, rgba(20, 32, 45, 0.9) 0%, rgba(10, 18, 28, 0.95) 100%),
+    repeating-linear-gradient(90deg, rgba(0, 213, 255, 0.03) 0px, rgba(0, 213, 255, 0.03) 1px, transparent 1px, transparent 3px);
+  border: 1px solid rgba(0, 213, 255, 0.4);
+  box-shadow: inset 0 1px 0 rgba(0, 213, 255, 0.2), 0 2px 6px rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+  backdrop-filter: blur(2px);
+  z-index: 10;
+  color: #00d5ff;
+  font-size: 7px;
+}
+
+/* Mode Toggle Button Styling */
+.mode-toggle {
+  right: 25px;
+  bottom: 12px;
+  width: 55px;
+  padding: 6px 0;
+  text-align: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+  font-size: 7px;
+  font-weight: bold;
+}
+.mode-toggle:hover {
+  background-color: rgba(0, 213, 255, 0.2);
+  box-shadow: inset 0 1px 0 rgba(0, 213, 255, 0.4), 0 0 10px rgba(0, 213, 255, 0.3);
+  border-color: rgba(0, 213, 255, 0.7);
+}
+
+    /* Equalizer Stack Layout Styling */
+    .equalizer-panel {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      bottom: 45px; /* Leaves room for the toggle button below */
+      width: 75px;
+      background:transparent;
+      border: 0px solid rgba(0, 213, 255, 0.3);
+      border-radius: 6px;
+      backdrop-filter: blur(0px);
+      z-index: 10;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 8px 4px;
+    }
+
+    .eq-slider-strip {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      height: 80%;
+      color: #00d5ff;
+      font-size: 7px;
+      font-weight: bold;
+    }
+
+    input[type=range].eq-vertical-slider {
+      writing-mode: bt-lr;
+      appearance: slider-vertical;
+      width: 3px;
+      height: 100%;
+      accent-color: #00d5ff;
+      cursor: pointer;
+      margin: 4px 0;
+    }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Three.js Library & OrbitControls -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+
+  <div class="hero-bg">
+    <div id="eversion-canvas"></div>
+    
+<!-- Equalizer Stack Layout: All 3 Sliders Side-by-Side as Thin Lines -->
+    <div class="equalizer-panel">
+      <!-- Slider 1: Tilt L/R -->
+      <div class="eq-slider-strip">
+        <span>T</span>
+        <input type="range" id="tilt-slider" class="eq-vertical-slider" min="-3.14" max="3.14" step="0.01" value="0">
+        <span>L</span>
+      </div>
+
+      <!-- Slider 2: Eversion Mode -->
+      <div class="eq-slider-strip">
+        <span>M</span>
+        <input type="range" id="eversion-slider" class="eq-vertical-slider" min="-1" max="1" step="0.005" value="0">
+        <span>E</span>
+      </div>
+
+      <!-- Slider 3: Vertical Pitch -->
+      <div class="eq-slider-strip">
+        <span>P</span>
+        <input type="range" id="vertical-slider" class="eq-vertical-slider" min="-3.14" max="3.14" step="0.01" value="0.35">
+        <span>V</span>
+      </div>
+    </div>
+<!-- Mode Toggle Button (Positioned underneath the equalizer sliders) -->
+    <div class="control-panel mode-toggle" id="mode-toggle-btn">
+    <span id="view-mode-label">GRID</span>
+    </div>
+  </div>
+
+
+
+    <!-- Main Title Box -->
+    <header class="glass-header">
+        <div id="sliding-header">
+            <div class="sliding-track">
+                <span>CURRICULUM𖧹VITAE</span>
+                <span>· 𖧦 ·</span>
+                <span>PRO~TRAIT STACK</span>
+                <span>· 𖧫 ·</span>
+                <span>PORT◈FOLIO</span>
+                <span>· 𖦗 ·</span>
+
+                <!-- Repeated for seamless looping -->
+                <span>CURRICULUM𖧹VITAE</span>
+                <span>· 𖧦 ·</span>
+                <span>PRO~TRAIT STACK</span>
+                <span>· 𖧫 ·</span>
+                <span>PORT◈FOLIO</span>
+                <span>· 𖦗 ·</span>
+            </div>
+        </div>
+    </header>
+
+    <div id="overlay-panel"></div>
+
+    <!-- Sub-Header Alignment Wrapper -->
+    <div class="sub-header-wrapper">
+        <div class="header-identity">
+            <div class="name-unlock-container">
+                <span class="name-part first-name">Custom - Digital&thinsp;</span>
+                <div class="unlock-diamond" id="unlockDiamond">❖</div>
+                <span class="name-part last-name">&thinsp;Resume</span>
+             </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================
+         MASTER NAVIGATION TOGGLE
+         Single trigger for all section dropdowns below. Click plays a
+         two-stage animation: the arrow shaft extends first, then the
+         panel drops open (see toggleMasterPanel JS).
+         ========================================================== -->
+<div class="master-nav">
+    <button class="master-toggle" id="masterToggle" onclick="toggleMasterPanel()" aria-label="Show sections">
+        <span class="arrow-shaft"></span>
+        <span class="arrow-head">➣</span>
+        <span class="arrow-shaft-right"></span>
+    </button>
+</div>
+
+<div class="intro-block" id="introBlock">
+    <p class="intro-action">Tap the chevron to access content</p>
+<!-- Click to Open TLP Feature Link -->
+<a class="tlp-toggle-link" id="tlpToggleLink" onclick="openTLPPlayer()" style="margin: 405px 0 20px 0px;">| OPEN ▶TLP |</a>
+
+<!-- Tracks List Player Container (Hidden by default, shares the exact same spot) -->
+<div class="track-player-container" id="trackPlayerContainer" style="margin: 400px 0 20px 0px;">
+    <div class="player-main-controls">
+        <button id="playStopBtn" class="player-btn" title="Play/Stop" onclick="togglePlayState()">
+            <svg id="playIcon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg id="stopIcon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display: none;"><path d="M6 6h12v12H6z"/></svg>
+        </button>
+        <select id="trackSelect" class="track-select" onchange="changeTrack(this.value)">
+            <option value="" disabled selected>SELECT TRACK</option>
+            <option value="tracks/Track_1.mp3">Track01</option>
+            <option value="tracks/Track_2.mp3">Track02</option>
+            <option value="tracks/Track_3.mp3">Track03</option>
+            <option value="tracks/Track_4.mp3">Track04</option>
+            <option value="tracks/Track_5.mp3">Track05</option>
+        </select>
+        <div class="volume-wrapper">
+            <span class="vol-icon">VOL</span>
+            <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.05" value="0.7" oninput="adjustVolume(this.value)">
+        </div>
+        <!-- Optional Close/Reset Button inside player if needed -->
+        <button class="player-btn close-player-btn" title="Close" onclick="resetTLPPlayer()">×</button>
+    </div>
+    <audio id="audioPlayer" preload="auto"></audio>
+</div>
+</div>
+
+<div class="master-panel" id="masterPanel">
+    <!-- ==========================================================
+         PROFILE STATEMENT / DIGITAL INTELLIGENCE / SITE SECURITY
+         Single source of content — used directly inline on mobile,
+         and cloned into the overlay panel on desktop (see openPanel JS).
+         ========================================================== -->
+    <div class="dropdown-block">
+            <p class="intro-title"><strong>𖤲 JOHN • VA'AFUTI 𖤆</strong></p>
+        <button class="dropdown-header" onclick="handleDropdownClick('profileContent', this)">
+            <span class="title">Profile</span>
+            <span class="chevron">▾</span>
+        </button>
+
+        <div class="dropdown-body" id="profileContent">
+
+            <div class="mini-dropdown">
+                <button class="mini-header" onclick="toggleMini(this)">
+                    <span>Statement</span>
+                    <span class="chevron">▾</span>
+                </button>
+                <div class="mini-body">
+                    <p class="profile-statement">
+                        As the professional landscape transmutes into a dynamic field of complex operational systems, businesses require a high-fidelity, adaptive approach to maintain an edge.<br>
+                        My background sits at the intersection of these shifts, blending Operational Security, Digital Architecture and Engineering to provide full-scale productivity implementation, robust maintenance, and developmental continuity.<br>
+                        Navigating how to design systems that evolve with their environments, ensuring coherence, resilience, and emergent intelligence across every operational layer is an ongoing commitment.
+                    </p>
+                    <div class="tagline-card profile-image-card">
+                       <img src="assets/D3.jpg" alt="Profile Visual" />
+                    </div>
+                </div>
+             </div>
+
+<div class="mini-dropdown">
+                <button class="mini-header" onclick="toggleMini(this)">
+                    <span>Digital Intelligence</span>
+                    <span class="chevron">▾</span>
+                </button>
+                <div class="mini-body">
+                    <p style="text-align: left; margin-bottom: 12px;">
+                        Recently graduated with a 2025 Diploma in Digital Technology, my experience spans IT Networks and Technical Support,
+                        Website Design and Architecture, UX/UI, AI Engine development, and Database Systems.
+                    </p>
+                    <p style="text-align: left;">
+                        I am currently architecting a novel form of code intelligence engine designed to confront and stabilize the phenomena of hallucination and cognitive drift.
+                    </p>
+                    <div class="tagline-card profile-image-card">
+                       <img src="assets/S2.jpg" alt="Profile Visual" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="mini-dropdown">
+                <button class="mini-header" onclick="toggleMini(this)">
+                    <span>Site Security OPS</span>
+                    <span class="chevron">▾</span>
+                </button>
+                <div class="mini-body">
+                    <ul>
+                        <li>Construction of full-scale site security operations</li>
+                        <li>Design & build of operational security workstations</li>
+                        <li>Access Management, Surveillance & Data-storage Systems</li>
+                        <li>Security Administration, Field Operations & Solutions</li>
+                        <li>OHS, risk procedures, and protocol compliance training</li>
+                    </ul>
+                    <div class="tagline-card profile-image-card">
+                       <img src="assets/s1.jpg" alt="Profile Visual" />
+                    </div>
+                </div>
+            
+            </div>
+           <div class="accordion-divider"></div>
+        </div><!-- end #profileContent -->
+
+    </div><!-- end dropdown-block -->
+
+
+<!-- Key Traits -->
+    <div class="dropdown-block">
+        <button class="dropdown-header" onclick="handleDropdownClick('traitsContent', this)">
+            <span class="title">Key Traits</span>
+            <span class="chevron">▾</span>
+        </button>
+
+        <div class="dropdown-body" id="traitsContent">
+            <section>
+                <div class="traits-accordion">
+
+                    <div class="trait-item">
+                        <button class="trait-header" onclick="toggleTrait(this)">
+                            Digital Technology / Software & Hardware
+                        </button>
+
+                        <div class="trait-body">
+                            <p><strong>Core Competencies:</strong></p>
+                            <ul>
+                                <li>PC hardware installation, configuration, and diagnostics</li>
+                                <li>Operating system deployment (Windows 10, Windows Server 2019)</li>
+                                <li>Component-level troubleshooting (CPU, RAM, GPU, SATA, PSU)</li>
+                                <li>Virtualised environment setup using Oracle VirtualBox</li>
+                                <li>Network configuration (DHCP, static IP, TCP/IP)</li>
+                                <li>Printer setup using TCP/IP and driver management</li>
+                                <li>Device Manager diagnostics and driver resolution</li>
+                                <li>Partitioning, formatting, and storage configuration</li>
+                                <li>Software installation, updates, and system optimisation</li>
+                                <li>Enterprise server role installation (DNS, DHCP, ADDS, SMTP)</li>
+                                <li>Group Policy creation, linking, and enforcement</li>
+                                <li>RAID 1 & RAID 5 configuration and redundancy testing</li>
+                            </ul>
+
+                            <p><strong>Networking & Infrastructure Implementation:</strong></p>
+                            <ul>
+                                <li>Designed and built multi‑LAN network topologies using Cisco Packet Tracer</li>
+                                <li>Configured routers, switches, PCs, and servers using correct cabling standards</li>
+                                <li>Assigned IP addressing across Class A, B, and C networks including /30 serial links</li>
+                                <li>Implemented dynamic routing using RIP across multi‑router environments</li>
+                                <li>Configured DHCP services including gateway, subnet mask, and IP pools</li>
+                                <li>Performed static IP configuration for client devices</li>
+                                <li>Installed HWIC‑2T modules and configured serial DCE/DTE connections</li>
+                                <li>Applied Cisco best‑practice hardening (password encryption, MOTD, console/vty security)</li>
+                                <li>Verified connectivity using ping, show commands, and interface diagnostics</li>
+                                <li>Explained and diagrammed network topologies (Star, Token Ring) with advantages/disadvantages</li>
+                            </ul>
+
+                            <p><strong>Advanced Networking & Router Configuration:</strong></p>
+                            <ul>
+                                <li>Built multi‑router network topologies with serial DCE/DTE links and multiple LANs</li>
+                                <li>Configured router interfaces including GigabitEthernet and Serial with correct subnetting</li>
+                                <li>Applied Cisco best‑practice hardening (password encryption, console/VTY security, MOTD)</li>
+                                <li>Implemented DHCP static configuration with correct gateway, mask, and IP pool</li>
+                                <li>Configured static IP addressing for multiple client devices</li>
+                                <li>Implemented dynamic routing using RIP across multi‑network environments</li>
+                                <li>Created and applied ACLs to restrict client access (e.g., blocking PC1)</li>
+                                <li>Verified full network connectivity using ping and show commands</li>
+                                <li>Produced complete addressing tables for routers, PCs, and DHCP servers</li>
+                            </ul>
+
+                            <p><strong>Diploma Studies – Technical Foundations:</strong></p>
+                            <ul>
+                                <li>Fundamentals of Programming & Problem Solving</li>
+                                <li>Hardware Servicing</li>
+                                <li>IT Systems Overview</li>
+                                <li>Professional Practice</li>
+                                <li>Database Administration</li>
+                                <li>Implementing Networks</li>
+                                <li>IT Technical Support</li>
+                                <li>Server Management</li>
+                            </ul>
+
+                            <p><strong>Practical Evidence:</strong></p>
+                            <ul>
+                                <li>Installed CPU, RAM, GPU, and SATA storage with correct ESD procedures</li>
+                                <li>Diagnosed and resolved "No bootable device" error by identifying disconnected SATA cable</li>
+                                <li>Configured Windows Server 2019, DHCP scopes, DNS zones, and ADDS domain services</li>
+                                <li>Created OUs, users, and joined client machines to the domain</li>
+                                <li>Implemented RAID 1 and RAID 5 volumes and validated disk redundancy</li>
+                                <li>Set up HP LaserJet printer using TCP/IP port and correct drivers</li>
+                                <li>Performed full OS installation including partitioning and privacy configuration</li>
+                                <li>Troubleshot USB header faults and optical drive connectivity issues</li>
+                                <li>Verified network connectivity using ping, Task Manager, and adapter diagnostics</li>
+                                <li>Created and managed SQL databases, tables, constraints, and CRUD operations</li>
+                                <li>Deployed Microsoft Edge across domain clients using GPO software installation</li>
+                            </ul>
+
+                            <p><strong>Tools & Technologies:</strong></p>
+                            <ul>
+                                <li>Windows 10 / Windows Server 2019</li>
+                                <li>Oracle VirtualBox</li>
+                                <li>Active Directory Domain Services</li>
+                                <li>DNS Manager, DHCP Manager</li>
+                                <li>IIS 6.0 Manager (SMTP)</li>
+                                <li>Group Policy Management Console</li>
+                                <li>Device Manager, Disk Management, Task Manager</li>
+                                <li>SQL Server Management Studio</li>
+                                <li>HP Printer Management Utilities</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="trait-item">
+                        <button class="trait-header" onclick="toggleTrait(this)">
+                            Site Security Operations & Management
+                        </button>
+
+                        <div class="trait-body">
+                            <p><strong>Security Operations Leadership:</strong></p>
+                            <ul>
+                                <li>Designed and implemented a full-scale Site Security Operation for Downer NZ's Auckland Penrose Depot</li>
+                                <li>Developed a complex Security & Monitoring WorkStation for real-time operational oversight</li>
+                                <li>Created concept design and proposal for a nationwide Security Division including promotional media and documentation</li>
+                                <li>Built strong communicative relationships across all organisational levels: executives, managers, engineers, technicians, field operatives, and contractors</li>
+                            </ul>
+
+                            <p><strong>Security Administration & Documentation:</strong></p>
+                            <ul>
+                                <li>Created securitisation documents for site access, management control, and operational protocols</li>
+                                <li>Formatted spreadsheets and security charts for data entry, classification, and encrypted record keeping</li>
+                                <li>Updated weekly security intelligence for SharePoint-based company systems</li>
+                                <li>Performed daily analysis of security logs and produced follow-up reports for areas requiring action</li>
+                            </ul>
+
+                            <p><strong>CCTV Monitoring & Security Investigations:</strong></p>
+                            <ul>
+                                <li>Designed full-site CCTV coverage plans and digital security sitemaps</li>
+                                <li>Conducted in-depth analysis of surveillance footage for investigations and incident reporting</li>
+                                <li>Produced detailed evidential reports for security incidents</li>
+                                <li>Performed regular maintenance checks on IP and analog camera units</li>
+                                <li>Managed NVR/DVR operating systems daily</li>
+                            </ul>
+
+                            <p><strong>Access Management & Control Systems:</strong></p>
+                            <ul>
+                                <li>Deployed and configured Access Management Systems including design layout and operational workflows</li>
+                                <li>Assembled fully functional monitoring systems and engineered complex security workstation setups</li>
+                                <li>Programmed security access fobs for staff and contractors</li>
+                                <li>Managed alarm activations, responses, and coordination with monitoring companies</li>
+                                <li>Performed technical and manual inspections on buildings, gates, entry/exit points, and access faults</li>
+                            </ul>
+
+                            <p><strong>Site Security Protocols & Emergency Management:</strong></p>
+                            <ul>
+                                <li>Designed and integrated security protocols across multiple departments</li>
+                                <li>Developed and updated detailed operational procedures and emergency plan protocols</li>
+                                <li>Managed contractor bookings and delivered full-site training for security guards</li>
+                                <li>Implemented site patrols, welfare checks, and OH&S security compliance</li>
+                            </ul>
+
+                            <p><strong>Professional Security Background:</strong></p>
+                            <ul>
+                                <li>Security Specialist — Downer NZ (2014–2023)</li>
+                                <li>Control Room Operator & Security Liaison — Icon Group / Global Security</li>
+                                <li>Operations Supervisor — Simply Security (UoA, ASB, Westpac)</li>
+                                <li>Private Security Contractor — Executive Security Group (Northern Territory)</li>
+                                <li>Gatehouse Operator — Chubb Security</li>
+                                <li>Security Officer — Group 4 Securitas (Sydney)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="trait-item">
+                        <button class="trait-header" onclick="toggleTrait(this)">
+                            Systems Administration & Database
+                        </button>
+
+                        <div class="trait-body">
+                            <p><strong>Enterprise Systems Administration:</strong></p>
+                            <ul>
+                                <li>Installed and configured Windows Server 2019 in a virtualised environment (Oracle VirtualBox)</li>
+                                <li>Deployed core server roles including DNS, DHCP, ADDS, and SMTP</li>
+                                <li>Promoted server to a domain controller and configured domain structure</li>
+                                <li>Created organisational units, users, and managed domain join procedures for client machines</li>
+                                <li>Configured Group Policy Objects for password policies, login restrictions, software deployment, and workstation control</li>
+                                <li>Implemented RAID 1 and RAID 5 volumes and validated redundancy through disk failover testing</li>
+                                <li>Managed shared folders, NTFS permissions, mapped drives, and departmental access structures</li>
+                                <li>Performed server diagnostics using Task Manager, Event Viewer, and network utilities</li>
+                            </ul>
+
+                            <p><strong>Database Administration:</strong></p>
+                            <ul>
+                                <li>Designed relational database schemas with correct PK/FK relationships</li>
+                                <li>Performed table creation, data type selection, and constraint management</li>
+                                <li>Normalised datasets from 1NF → 2NF → 3NF to remove redundancy and dependency issues</li>
+                                <li>Created ERDs to model entities, attributes, and relationships</li>
+                                <li>Executed CRUD operations across multiple tables</li>
+                                <li>Debugged SQL scripts involving incorrect data types, missing commas, and invalid constraints</li>
+                                <li>Resolved referential integrity issues through table renaming and constraint correction</li>
+                                <li>Updated and validated client records to ensure data accuracy and compliance</li>
+                            </ul>
+
+                            <p><strong>Systems Monitoring & Reporting:</strong></p>
+                            <ul>
+                                <li>Performed daily analysis of system logs and produced follow-up reports for required actions</li>
+                                <li>Updated SharePoint-based company systems with weekly operational intelligence</li>
+                                <li>Formatted spreadsheets and system charts for data entry, classification, and secure record keeping</li>
+                                <li>Managed workstation configurations and supported operational monitoring systems</li>
+                            </ul>
+
+                            <p><strong>Tools & Technologies:</strong></p>
+                            <ul>
+                                <li>Windows Server 2019</li>
+                                <li>Active Directory Domain Services</li>
+                                <li>DNS Manager, DHCP Manager</li>
+                                <li>IIS 6.0 Manager (SMTP)</li>
+                                <li>Group Policy Management Console</li>
+                                <li>SQL Server Management Studio</li>
+                                <li>Oracle VirtualBox</li>
+                                <li>SharePoint</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="trait-item">
+                        <button class="trait-header" onclick="toggleTrait(this)">
+                            Risk Management, Assessment & Solutions
+                        </button>
+
+                        <div class="trait-body">
+                            <p><strong>Operational Risk Identification & Analysis:</strong></p>
+                            <ul>
+                                <li>Identified operational risks across security, IT systems, customer service, and organisational workflows</li>
+                                <li>Evaluated vulnerabilities in access control, CCTV coverage, alarm response, and site patrol procedures</li>
+                                <li>Performed daily analysis of security logs and produced follow-up reports for areas requiring action</li>
+                                <li>Assessed risks related to staff behaviour, communication failures, and procedural non-compliance</li>
+                                <li>Analysed recruitment and HR workflow risks including misleading job ads, poor communication, and policy gaps</li>
+                            </ul>
+
+                            <p><strong>Security & Incident Response Solutions:</strong></p>
+                            <ul>
+                                <li>Developed multi-stage emergency response protocols for high-risk incidents</li>
+                                <li>Integrated SIEM components (CCTV, SAS, VMS, ECN, AMS, NSS) into unified risk mitigation workflows</li>
+                                <li>Produced evidential reports for incidents using surveillance footage and digital logs</li>
+                                <li>Implemented structured contractor management and site access control procedures</li>
+                                <li>Designed operational solutions for alarm activations, access faults, and emergency communication</li>
+                            </ul>
+
+                            <p><strong>IT Systems Risk Mitigation:</strong></p>
+                            <ul>
+                                <li>Applied Group Policy restrictions to enforce password policies, login hours, and workstation security</li>
+                                <li>Configured RAID 1 and RAID 5 redundancy to mitigate data loss risks</li>
+                                <li>Implemented secure folder permissions and NTFS access controls for departmental data protection</li>
+                                <li>Deployed software via GPO to ensure consistent, secure application rollout across domain clients</li>
+                                <li>Performed network diagnostics to identify connectivity risks and misconfigurations</li>
+                            </ul>
+
+                            <p><strong>Ethical & Professional Risk Assessment:</strong></p>
+                            <ul>
+                                <li>Applied the ITP Code of Ethics to organisational scenarios involving integrity, fairness, and confidentiality</li>
+                                <li>Identified ethical risks in communication, recruitment, and digital system usage</li>
+                                <li>Proposed policy-driven solutions to mitigate professional behaviour risks</li>
+                                <li>Evaluated consequences of improper software implementation and lack of security audits</li>
+                                <li>Integrated Ten Commandments of Computer Ethics into organisational decision-making</li>
+                            </ul>
+
+                            <p><strong>Enterprise Systems & Policy Integration:</strong></p>
+                            <ul>
+                                <li>Mapped multi-stage recruitment workflows (IOA, ODI, PRO, WHP) with embedded risk controls</li>
+                                <li>Explained how ERP systems (NetSuite, KMS, IMS, OMS, CRM) support risk mitigation and compliance</li>
+                                <li>Used Power BI concepts to support data-driven risk assessment and organisational reporting</li>
+                                <li>Created flowcharts demonstrating secure, compliant end-to-end business processes</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="trait-item">
+                        <button class="trait-header" onclick="toggleTrait(this)">
+                            Access Management & Surveillance Technology
+                        </button>
+
+                        <div class="trait-body">
+                            <p><strong>CCTV Surveillance & Monitoring:</strong></p>
+                            <ul>
+                                <li>Designed full-site CCTV coverage plans and digital security sitemaps for operational visibility</li>
+                                <li>Monitored live and recorded surveillance feeds to detect incidents, hazards, and unauthorised activity</li>
+                                <li>Conducted detailed analysis of CCTV footage for investigations and evidential reporting</li>
+                                <li>Performed regular maintenance checks on IP and analog camera units</li>
+                                <li>Managed NVR/DVR systems including playback, export, and storage oversight</li>
+                            </ul>
+
+                            <p><strong>Access Control Systems & Credential Management:</strong></p>
+                            <ul>
+                                <li>Deployed and configured Access Management Systems including layout design and operational workflows</li>
+                                <li>Programmed and issued access fobs for staff, contractors, and temporary personnel</li>
+                                <li>Managed access permissions, entry/exit logs, and secure credential updates</li>
+                                <li>Performed technical and manual inspections on gates, doors, and access points</li>
+                                <li>Responded to access faults, lock failures, and system alerts with corrective action</li>
+                            </ul>
+
+                            <p><strong>Alarm Systems & Emergency Response:</strong></p>
+                            <ul>
+                                <li>Managed alarm activations, responses, and coordination with monitoring companies</li>
+                                <li>Integrated alarm systems with CCTV and access control for unified incident response</li>
+                                <li>Developed emergency communication workflows using ECN and site protocols</li>
+                                <li>Performed welfare checks, site patrols, and OH&S compliance inspections</li>
+                                <li>Delivered full-site training for security guards and contractors</li>
+                            </ul>
+
+                            <p><strong>Security Workstation Engineering:</strong></p>
+                            <ul>
+                                <li>Designed and assembled a fully functional Security & Monitoring WorkStation for Downer NZ</li>
+                                <li>Integrated CCTV, AMS, alarm systems, and monitoring tools into a single operational console</li>
+                                <li>Created securitisation documents and operational protocols for workstation use</li>
+                                <li>Produced weekly intelligence updates and digital reports for SharePoint-based systems</li>
+                                <li>Engineered complex monitoring setups for multi-department security operations</li>
+                            </ul>
+
+                            <p><strong>Surveillance Reporting & Evidence Handling:</strong></p>
+                            <ul>
+                                <li>Produced detailed evidential reports using surveillance footage and digital logs</li>
+                                <li>Classified and stored security data using encrypted spreadsheets and secure documentation formats</li>
+                                <li>Performed daily analysis of security logs and generated follow-up reports for required actions</li>
+                                <li>Maintained accurate records of incidents, access events, and alarm responses</li>
+                                <li>Ensured compliance with organisational and legal standards for evidence handling</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="trait-item">
+                        <button class="trait-header" onclick="toggleTrait(this)">
+                            Interpersonal Interaction & Communication
+                        </button>
+
+                        <div class="trait-body">
+                            <p><strong>Professional Communication & Workplace Conduct:</strong></p>
+                            <ul>
+                                <li>Demonstrated clear, structured communication across multiple professional practice assignments</li>
+                                <li>Produced detailed reports explaining organisational systems, workflows, and staff responsibilities</li>
+                                <li>Communicated complex IT and business concepts in accessible, user-friendly language</li>
+                                <li>Applied professional tone, formatting, and documentation standards consistently</li>
+                                <li>Showed strong awareness of workplace expectations, behaviour, and professional identity</li>
+                            </ul>
+
+                            <p><strong>User Documentation & Instructional Design:</strong></p>
+                            <ul>
+                                <li>Created a complete user guide for the Microsoft Teams Polls App with step-by-step instructions</li>
+                                <li>Integrated labelled screenshots and visual aids to support user understanding</li>
+                                <li>Designed documentation for both meeting-based and chat-based poll workflows</li>
+                                <li>Provided user experience tips to improve clarity, engagement, and accessibility</li>
+                                <li>Delivered a professional report outlining objectives, solutions, outcomes, and delivery formats</li>
+                            </ul>
+
+                            <p><strong>Ethical Reasoning & Professional Behaviour:</strong></p>
+                            <ul>
+                                <li>Applied the ITP Code of Ethics to real-world organisational scenarios and workplace dilemmas</li>
+                                <li>Identified ethical, social, and professional risks in recruitment, communication, and IT operations</li>
+                                <li>Proposed policy-driven solutions to ensure fairness, accuracy, and professionalism</li>
+                                <li>Demonstrated mature understanding of confidentiality, integrity, and responsible conduct</li>
+                                <li>Evaluated consequences of improper communication, misleading information, and poor workplace behaviour</li>
+                            </ul>
+
+                            <p><strong>Teamwork, Collaboration & Organisational Awareness:</strong></p>
+                            <ul>
+                                <li>Explained cross-departmental collaboration within HR, IT, and operational systems</li>
+                                <li>Mapped multi-stage recruitment workflows and communication channels</li>
+                                <li>Showed understanding of how digital tools support teamwork and shared organisational goals</li>
+                                <li>Recognised the importance of clear communication between staff, management, and customers</li>
+                                <li>Demonstrated ability to reflect on personal performance and professional growth</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="trait-item">
+                        <button class="trait-header" onclick="toggleTrait(this)">
+                            Infrastructure Works / Construction & Design
+                        </button>
+
+                        <div class="trait-body">
+                            <p><strong>Site Infrastructure Planning & Design:</strong></p>
+                            <ul>
+                                <li>Designed full-scale security infrastructure for Downer NZ's Auckland Penrose Depot</li>
+                                <li>Created detailed CCTV coverage maps and digital sitemaps for operational visibility</li>
+                                <li>Planned access control layouts including gate systems, entry/exit points, and credential workflows</li>
+                                <li>Engineered multi-system Security & Monitoring WorkStations integrating CCTV, AMS, alarms, and monitoring tools</li>
+                                <li>Developed site-specific operational protocols and infrastructure documentation</li>
+                            </ul>
+
+                            <p><strong>Light Fabrication Engineering & Welding:</strong></p>
+                            <ul>
+                                <li>Performed hands-on fabrication tasks including cutting, grinding, drilling, shaping, and assembly of materials</li>
+                                <li>Experienced in MIG, TIG, ARC, and Gas welding for structural and component fabrication</li>
+                                <li>Constructed and reinforced physical infrastructure to support CCTV, access control, and alarm systems</li>
+                                <li>Modified metal frames, brackets, mounts, and housings for security hardware installations</li>
+                                <li>Applied engineering principles to ensure durability, alignment, and safe installation of fabricated components</li>
+                            </ul>
+
+                            <p><strong>Construction Site Operations & Compliance:</strong></p>
+                            <ul>
+                                <li>Performed OH&S compliance checks across construction and industrial environments</li>
+                                <li>Conducted hazard identification, risk control, and site safety inspections</li>
+                                <li>Managed contractor access, bookings, and on-site operational coordination</li>
+                                <li>Ensured adherence to workplace safety standards and emergency procedures</li>
+                                <li>Integrated security systems with construction workflows for safe site operation</li>
+                            </ul>
+
+                            <p><strong>Technical Installation & System Integration:</strong></p>
+                            <ul>
+                                <li>Installed and configured CCTV systems including IP and analog camera units</li>
+                                <li>Deployed Access Management Systems and programmed secure access credentials</li>
+                                <li>Integrated alarm systems with surveillance and access control for unified site protection</li>
+                                <li>Performed technical inspections on gates, doors, locks, and access points</li>
+                                <li>Maintained NVR/DVR systems and ensured reliable recording and storage infrastructure</li>
+                            </ul>
+
+                            <p><strong>Infrastructure Documentation & Reporting:</strong></p>
+                            <ul>
+                                <li>Produced detailed infrastructure reports including sitemaps, coverage plans, and operational diagrams</li>
+                                <li>Created encrypted spreadsheets and security charts for data classification and record keeping</li>
+                                <li>Generated weekly intelligence updates for SharePoint-based company systems</li>
+                                <li>Documented incident findings using surveillance evidence and site analysis</li>
+                                <li>Developed training materials for contractors and security personnel</li>
+                            </ul>
+
+                            <p><strong>NZQA Unit Standards & Industry Credentials:</strong></p>
+                            <ul>
+                                <li>Completed NZQA-recognised unit standards in workplace safety, hazard management, and operational compliance</li>
+                                <li>Achieved formal recognition for construction site protocols and safe work practices</li>
+                                <li>Certified in risk identification, emergency response, and workplace communication</li>
+                                <li>Holds NZQA Record of Achievement supporting infrastructure and operational competencies</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- NEW DROPDOWN ADDED HERE AS THE LAST ITEM -->
+                    <div class="trait-item">
+                        <button class="trait-header" onclick="toggleTrait(this)">
+                            AI Systems Design & Human-AI Relations
+                        </button>
+
+                        <div class="trait-body">
+                            <p><strong>Multi-Engine Orchestration & Testing Methodology:</strong></p>
+                            <ul>
+                                <li>Designed and built a relay-based workflow tool running a single prompt across multiple AI engines (ChatGPT, Gemini, Grok, Claude, Perplexity), with each engine reviewing prior outputs before independently responding.</li>
+                                <li>Developed a structured verification framework — six defined failure modes including retrodiction-as-prediction, unhedged claims inside hedged document structures, and fabricated context — used to fact-check AI-generated analysis against independent sources.</li>
+                                <li>Published a dated, publicly auditable testing log documenting real failures caught across multiple real-world cases, with corrections left visible rather than edited out.</li>
+                                <li>Validated framework durability by identifying the same failure mode recurring across three different engines and unrelated topics, confirming a genre-level pattern rather than a single-model quirk.</li>
+                            </ul>
+
+                            <p><strong>Product Architecture & Tiered Access Systems:</strong></p>
+                            <ul>
+                                <li>Architected a three-tier access model (anonymous / free / paid) across a six-page platform, with entitlements designed for server-side enforcement rather than cosmetic UI gating.</li>
+                                <li>Specced an account and case-archive system for Cloudflare Workers + D1, including single-use free-sample logic, per-document paywalls, and persistent user-generated case storage.</li>
+                                <li>Evaluated payment-processor tradeoffs (Stripe vs. Lemon Squeezy) against fee structure and merchant-of-record tax handling for a low-price-point subscription model.</li>
+                            </ul>
+
+                            <p><strong>Frontend Engineering & Interface Systems:</strong></p>
+                            <ul>
+                                <li>Built a shared, site-wide account/session component handling UI state, a slide-out signup interaction, and a stacking-context-safe dropdown pattern via DOM portalling.</li>
+                                <li>Diagnosed and resolved cross-browser layout defects — flexbox centring bugs, z-index containment traps, box-model inconsistencies — through root-cause CSS analysis rather than symptom patching.</li>
+                                <li>Designed a resizable, drag-to-adjust split-pane layout with persisted user preference and a dedicated stacked-mobile fallback.</li>
+                            </ul>
+
+                            <p><strong>Documentation & Structured Reporting:</strong></p>
+                            <ul>
+                                <li>Built client-side document export pipelines producing formatted, presentation-ready analytical reports in matched .txt/.pdf pairs.</li>
+                                <li>Defined document metadata standards (generation timestamp, full-length topic text, verifier attribution) for professional, client-facing use.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+          <div class="accordion-divider"></div>
+        </div>
+    </div>
+
+
+<!-- Training & Education -->
+<div class="dropdown-block">
+    <button class="dropdown-header" onclick="handleDropdownClick('trainingContent', this)">
+        <span class="title">Training & Education</span>
+        <span class="chevron">▾</span>
+    </button>
+
+    <div class="dropdown-body" id="trainingContent">
+        
+        <!-- 1. Learning History Section -->
+        <div class="diploma-focus-wrapper" style="margin-bottom: 10px;">
+            <section>
+                <div class="diploma-header-row">
+                    <span class="diploma-title-label">LEARNING HISTORY:</span>
+                    <a class="tlp-toggle-link" id="learningHistoryToggleLink" onclick="openLearningHistory()">[ open ▼]</a>
+                </div>
+
+                <div class="diploma-dropdown-container" id="learningHistoryDropdownContainer" style="display: none; background: transparent; border: 1px; margin-top: 5px; box-shadow: none;">
+                    <!-- Accordion Items Container -->
+                    <div class="accordion-container" style="width: 100%; margin-top: 5px;">
+                        <div class="edu-timeline-wrapper">
+                            <span class="year-hint">[click year]</span>
+                            <div class="timeline-years-row">
+                                <span onclick="openTimelineItem('year-1997')" class="timeline-node-btn">&nbsp;1997</span>
+                                <span class="timeline-separator">&nbsp;|</span>
+                                <span onclick="openTimelineItem('year-2000')" class="timeline-node-btn">&nbsp;2000</span>
+                                <span class="timeline-separator">&nbsp;|</span>
+                                <span onclick="openTimelineItem('year-2008')" class="timeline-node-btn">&nbsp;2008</span>
+                                <span class="timeline-separator">&nbsp;|</span>
+                                <span onclick="openTimelineItem('year-2014')" class="timeline-node-btn">&nbsp;2014</span>
+                                <span class="timeline-separator">&nbsp;|</span>
+                                <span onclick="openTimelineItem('year-2025')" class="timeline-node-btn">&nbsp;2025</span>
+                            </div>
+                        </div>
+
+                        <div class="accordion-container" style="margin-top: -15px;">
+                            <div class="timeline-accordion-item" id="year-2025">
+                                <div class="accordion-header" onclick="toggleAccordion(this)">
+                                    <span class="accordion-title">Manukau Institute of Technology</span>
+                                    <span class="accordion-year">2025</span>
+                                    <span class="accordion-icon">▼</span>
+                                </div>
+                                <div class="accordion-content">
+                                    <div class="accordion-body">
+                                        <div><strong>Field of Study:</strong> Digital Technology – IT Technical Support</div>
+                                        <div><strong>Qualification:</strong> New Zealand Diploma</div>
+                                    </div>
+                                    <div style="margin-top: -30px; margin-bottom: 0px; text-align: right;">
+                                        <button class="player-btn close-player-btn" title="Close" onclick="resetLearningHistory()">×</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="timeline-accordion-item" id="year-2014">
+                                <div class="accordion-header" onclick="toggleAccordion(this)">
+                                    <span class="accordion-title">Downer Civils & Infrastructure Program</span>
+                                    <span class="accordion-year">2014</span>
+                                    <span class="accordion-icon">▼</span>
+                                </div>
+                                <div class="accordion-content">
+                                    <div class="accordion-body">
+                                        <div><strong>Field of Study:</strong> Civil Works & Infrastructure</div>
+                                        <div><strong>Qualification:</strong> NZQA Accredited</div>
+                                    </div>
+                                    <div style="margin-top: -30px; margin-bottom: 0px; text-align: right;">
+                                        <button class="player-btn close-player-btn" title="Close" onclick="resetLearningHistory()">×</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="timeline-accordion-item" id="year-2008">
+                                <div class="accordion-header" onclick="toggleAccordion(this)">
+                                    <span class="accordion-title">Best Pacific Institute of Education</span>
+                                    <span class="accordion-year">2008</span>
+                                    <span class="accordion-icon">▼</span>
+                                </div>
+                                <div class="accordion-content">
+                                    <div class="accordion-body">
+                                        <div><strong>Field of Study:</strong> Freight Operations</div>
+                                        <div><strong>Qualification:</strong> National Certificate</div>
+                                    </div>
+                                    <div style="margin-top: -30px; margin-bottom: 0px; text-align: right;">
+                                        <button class="player-btn close-player-btn" title="Close" onclick="resetLearningHistory()">×</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="timeline-accordion-item" id="year-2000">
+                                <div class="accordion-header" onclick="toggleAccordion(this)">
+                                    <span class="accordion-title">Connect Training Services</span>
+                                    <span class="accordion-year">2000</span>
+                                    <span class="accordion-icon">▼</span>
+                                </div>
+                                <div class="accordion-content">
+                                    <div class="accordion-body">
+                                        <div><strong>Field of Study:</strong> Security</div>
+                                        <div><strong>Qualification:</strong> National Certificate</div>
+                                    </div>
+                                    <div style="margin-top: -30px; margin-bottom: 0px; text-align: right;">
+                                        <button class="player-btn close-player-btn" title="Close" onclick="resetLearningHistory()">×</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="timeline-accordion-item" id="year-1997">
+                                <div class="accordion-header" onclick="toggleAccordion(this)">
+                                    <span class="accordion-title">Manukau Institute of Technology</span>
+                                    <span class="accordion-year">1997</span>
+                                    <span class="accordion-icon">▼</span>
+                                </div>
+                                <div class="accordion-content">
+                                    <div class="accordion-body">
+                                        <div><strong>Field of Study:</strong> Light Fabrication Engineering</div>
+                                        <div><strong>Qualification:</strong> National Certificate</div>
+                                    </div>
+                                    <div style="margin-top: -30px; margin-bottom: 0px; text-align: right;">
+                                        <button class="player-btn close-player-btn" title="Close" onclick="resetLearningHistory()">×</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 2. Diploma Studies Focus Section -->
+        <div class="diploma-focus-wrapper" style="margin-bottom: 10px; margin-top: -30px;">
+            <div class="diploma-header-row">
+                <span class="diploma-title-label">DIPLOMA STUDIES FOCUS:</span>
+                <a class="tlp-toggle-link" id="diplomaToggleLink" onclick="openDiplomaFocus()">[ open ▼]</a>
+            </div>
+
+            <div class="diploma-dropdown-container" id="diplomaDropdownContainer">
+                <div class="diploma-container-header">
+                    <span>DIGITAL TECHNOLOGY</span>
+                    <span class="gradient-score-header">GRADE / 100%</span>
+                </div>
+
+                <div class="diploma-metrics-list">
+                    <div class="metric-row">
+                        <span class="metric-name">Fundamentals of Programming & Problem Solving</span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 57%;"></div></div>
+                        <span class="metric-val">57%</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">Hardware Servicing</span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 64%;"></div></div>
+                        <span class="metric-val">64%</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">Hardware Servicing Remedial</span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 93%;"></div></div>
+                        <span class="metric-val">93%</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">IT Systems Overview</span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 75%;"></div></div>
+                        <span class="metric-val">75%</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">Professional Practice</span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 82%;"></div></div>
+                        <span class="metric-val">82%</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">Database Administration</span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 61%;"></div></div>
+                        <span class="metric-val">61%</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">Implementing Networks</span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 85%;"></div></div>
+                        <span class="metric-val">85%</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">IT Technical Support</span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 82%;"></div></div>
+                        <span class="metric-val">82%</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">Server Management</span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 74%;"></div></div>
+                        <span class="metric-val">74%</span>
+                    </div>
+                </div>
+
+                <div class="chart-summary-section">
+                    <div class="pie-chart-container">
+                        <div class="cyber-pie-chart"></div>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-title">AGGREGATE DATA DISTRIBUTION</div>
+                        <div class="legend-desc">Visual synthesis reflecting weighted dataset proportions across core academic vectors.</div>
+                        <button class="player-btn close-player-btn" title="Close" onclick="resetDiplomaFocus()">×</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Security Engagements Section -->
+        <div class="diploma-focus-wrapper" style="margin-bottom: 20px; margin-top: 0px;">
+            <div class="diploma-header-row">
+                <span class="diploma-title-label">SECURITY ENGAGEMENTS:</span>
+                <a class="tlp-toggle-link" id="securityToggleLink" onclick="openSecurityFocus()">[ open ▼]</a>
+            </div>
+
+            <div class="diploma-dropdown-container" id="securityDropdownContainer">
+                <div class="diploma-container-header">
+                    <span>PROFESSION</span>
+                    <span class="gradient-score-header">LEVEL / 100%</span>
+                </div>
+
+                <div class="diploma-metrics-list">
+                    <div class="metric-row">
+                        <span class="metric-name">Site Security & Control Room Operations</span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 88%;"></div></div>
+                        <span class="metric-val">88%</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">Private Investigator</span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 76%;"></div></div>
+                        <span class="metric-val">76%</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">Close Protection Agent</span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 92%;"></div></div>
+                        <span class="metric-val">92%</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">Static Guarding</span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 81%;"></div></div>
+                        <span class="metric-val">81%</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">Digital Site Mapping</span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 79%;"></div></div>
+                        <span class="metric-val">79%</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">Corporate & Covert Security</span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 85%;"></div></div>
+                        <span class="metric-val">85%</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">Loss Prevention</span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 80%;"></div></div>
+                        <span class="metric-val">80%</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">Access Control</span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 87%;"></div></div>
+                        <span class="metric-val">87%</span>
+                    </div>
+                </div>
+
+                <div class="chart-summary-section">
+                    <div class="pie-chart-container">
+                        <div class="cyber-pie-chart security-pie"></div>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-title">AGGREGATE DATA DISTRIBUTION</div>
+                        <div class="legend-desc">Visual synthesis reflecting weighted operational competencies across tactical security vectors.</div>
+                        <button class="player-btn close-player-btn" title="Close" onclick="resetSecurityFocus()">×</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-divider"></div>
+    </div>
+</div>
+
+
+    <!-- Employment Details -->
+    <div class="dropdown-block">
+        <button class="dropdown-header" onclick="handleDropdownClick('employmentContent', this)">
+            <span class="title">Employment Details</span>
+            <span class="chevron">▾</span>
+        </button>
+
+        <div class="dropdown-body" id="employmentContent">
+
+            <!-- EMPLOYMENT HISTORY -->
+            <section>
+                <h3>Employment History</h3>
+
+                <div class="privacy-gate" data-gate="historyGate">
+                    <p class="gate-instructions">
+                        <span class="glow-glyph">𖦤</span> To protect work history privacy, entering your professional email address will unlock this section.
+                    </p>
+
+                    <form class="gate-form" onsubmit="unlockSection(event, 'historyGate', 'historyContent', 'Employment History Verification')">
+                        <input type="hidden" name="form-name" value="Employment History Gate">
+                        <input type="email" name="email" class="gate-input" placeholder="name@company.com" required>
+                        <button type="submit" class="gate-btn">Unlock History</button>
+                    </form>
+
+                    <div class="error-msg">
+                        Verification failed. Please check your internet connection or use a valid email format.
+                    </div>
+                </div>
+
+                <div class="hidden-content" data-content="historyContent">
+                    <div class="accordion-container" style="margin-top: 15px;">
+
+                        <!-- Professional Occupations -->
+                        <div class="accordion-item">
+			<div class="accordion-header" onclick="toggleEmploymentAccordion(this)">
+    				<span class="accordion-title" style="color: var(--accent-color);">💼 Professional</span>
+    				<span class="accordion-icon">▼</span>
+			</div>
+                            <div class="accordion-content">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="year-col">Year</th>
+                                            <th class="pos-col">Position</th>
+                                            <th class="comp-col">Company / Location</th>
+                                            <th class="desc-col">Job Brief</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>2023</td><td><strong>Consultant & Advisor</strong></td><td>Independent Contractor</td><td>Site Security Services & Technology</td></tr>
+                                        <tr><td>2014</td><td><strong>Security Specialist</strong></td><td>Downer NZ Ltd</td><td>Site Security Operations</td></tr>
+                                        <tr><td>2013</td><td><strong>Private Security Contractor</strong></td><td>Executive Security Group Ltd (NT)</td><td>Corporate Security, Close Protection, Private Investigations</td></tr>
+                                        <tr><td>2012</td><td><strong>Operations Supervisor / Admin</strong></td><td>Simply Security - Auckland</td><td>Oversee guards for UoA Campuses, ASB, and Westpac branches</td></tr>
+                                        <tr><td>2010</td><td><strong>Control Room / Security Liaison</strong></td><td>Icon Group Security (Now Global)</td><td>ASB Cash Processing Centre / Dominion Rd Business Assoc.</td></tr>
+                                        <tr><td>2008</td><td><strong>Contractor</strong></td><td>EcoWorx</td><td>Environmental Services, Heavy Machinery, Project Designer</td></tr>
+                                        <tr><td>2006</td><td><strong>Professional Labourer</strong></td><td>Action Labour / Recruitment Agency</td><td>Building, Concrete, Tiling, Roofing, Plastering, Electrical, Plumbing</td></tr>
+                                        <tr><td>2005</td><td><strong>Painter & Decor</strong></td><td>Golden Touch Service</td><td>Internal & External House Restorations</td></tr>
+                                        <tr><td>2003</td><td><strong>Gatehouse / Site Security</strong></td><td>Chubb Security (Onehunga-Otahuhu)</td><td>Inquiries, Alarm Response, CCTV Monitoring, Patrols, Admin</td></tr>
+                                        <tr><td>2002</td><td><strong>Furnace Man & Die Caster</strong></td><td>Cheviot Alloy Wheels (Onehunga)</td><td>Die Setter, Heat Treatment, Foundry Operations</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Entry Level Occupations -->
+                        <div class="accordion-item">
+			<div class="accordion-header" onclick="toggleEmploymentAccordion(this)">
+    				<span class="accordion-title" style="color: var(--accent-color);">🛡️ Entry Level</span>
+    				<span class="accordion-icon">▼</span>
+			</div>
+                            <div class="accordion-content">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="year-col">Year</th>
+                                            <th class="pos-col">Position</th>
+                                            <th class="comp-col">Company / Location</th>
+                                            <th class="desc-col">Job Brief</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>2000</td><td><strong>Security Officer</strong></td><td>Group 4 Securitas (Sydney, NSW)</td><td>Security Field Work across multiple Sydney CBD sites</td></tr>
+                                        <tr><td>1999</td><td><strong>Fabrication & Welding</strong></td><td>Premier Stainless Steel Ltd (NSW)</td><td>Aluminium & Stainless-Steel Projects</td></tr>
+                                        <tr><td>1998</td><td><strong>Trainee Maintenance Tech</strong></td><td>Autodor Services Ltd (Onehunga)</td><td>General Maintenance & Automatic Sliding Door Installations</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- College & Tertiary Years -->
+                        <div class="accordion-item">
+			<div class="accordion-header" onclick="toggleEmploymentAccordion(this)">
+    				<span class="accordion-title" style="color: var(--accent-color);">🎓 College & Tertiary</span>
+    				<span class="accordion-icon">▼</span>
+			</div>
+                            <div class="accordion-content">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="year-col">Year</th>
+                                            <th class="pos-col">Position</th>
+                                            <th class="comp-col">Company / Location</th>
+                                            <th class="desc-col">Job Brief</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>1996</td><td><strong>Crew Staff & Trainer</strong></td><td>McDonalds / Fun Station (Panmure)</td><td>Kitchen Duties, Customer Service, Maintenance</td></tr>
+                                        <tr><td>1995</td><td><strong>Kitchen Hand</strong></td><td>Ashby Takeaways Restaurant</td><td>Prep & Cook Assistant, Cleaning & Maintenance</td></tr>
+                                        <tr><td>1994</td><td><strong>Produce Worker</strong></td><td>3 Guys Supermarket (Glen Innes)</td><td>Handling fresh produce, Department Floor Setup, Customer Service</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- PROFESSIONAL REFERENCES -->
+            <section>
+                <h3>Professional References</h3>
+
+                <div class="privacy-gate" data-gate="privacyGate">
+                    <p class="gate-instructions">
+                        <span class="glow-glyph">𖦤</span> To protect referee privacy, entering your professional email address will unlock this section.
+                    </p>
+
+                    <form class="gate-form" onsubmit="unlockSection(event, 'privacyGate', 'referencesContent', 'Professional References Verification')">
+                        <input type="hidden" name="form-name" value="Professional References Gate">
+                        <input type="email" name="email" class="gate-input" placeholder="name@company.com" required>
+                        <button type="submit" class="gate-btn">Unlock References</button>
+                    </form>
+
+                    <div class="error-msg">
+                        Verification failed. Please check your internet connection or use a valid email format.
+                    </div>
+                </div>
+
+                <div class="hidden-content" data-content="referencesContent">
+                    <div class="references-grid"></div>
+                </div>
+            </section>
+         <div class="accordion-divider"></div>
+        </div>
+    </div>
+
+
+<div class="dropdown-block">
+    <button class="dropdown-header" onclick="handleDropdownClick('projectsContent', this)">
+        <span class="title">Projects & Developments</span>
+        <span class="chevron">▾</span>
+    </button>
+
+    <div class="dropdown-body" id="projectsContent">
+        <div class="projects-grid">
+
+            <div class="project-card">
+                <h3 class="project-title">
+                    <a href="https://jv7t9.github.io/human-ai-relations/" target="_blank" rel="noopener noreferrer">Human-AI Relations</a>
+                </h3>
+                <p class="project-desc">Mapping The Structural Stack</p>
+                <a href="https://jv7t9.github.io/human-ai-relations/" target="_blank" rel="noopener noreferrer" class="project-video-wrapper">
+                    <video muted loop playsinline preload="metadata" class="project-video">
+                        <source src="assets/SS3.mp4" type="video/mp4">
+                    </video>
+                </a>
+            </div>
+
+            <div class="project-card">
+                <h3 class="project-title">
+                    <a href="https://gears-lattice.tfmsupport.workers.dev/" target="_blank" rel="noopener noreferrer">TFM - The Gears Lattice</a>
+                </h3>
+                <p class="project-desc">Interactive lattice of connected gears</p>
+                <a href="https://gears-lattice.tfmsupport.workers.dev/" target="_blank" rel="noopener noreferrer" class="project-video-wrapper">
+                    <video muted loop playsinline preload="metadata" class="project-video">
+                        <source src="assets/gears.mp4" type="video/mp4">
+                    </video>
+                </a>
+            </div>
+
+            <div class="project-card">
+                <h3 class="project-title">
+                    <a href="https://jv7t9.github.io/DTSIM/" target="_blank" rel="noopener noreferrer">DTSIM</a>
+                </h3>
+                <p class="project-desc">Digital Transcription SIM</p>
+                <a href="https://jv7t9.github.io/DTSIM/" target="_blank" rel="noopener noreferrer" class="project-video-wrapper">
+                    <video muted loop playsinline preload="metadata" class="project-video">
+                        <source src="assets/DTSIM.mp4" type="video/mp4">
+                    </video>
+                </a>
+            </div>
+
+            <div class="project-card">
+                <h3 class="project-title">
+                    <a href="https://www.facebook.com/people/Site-Security-Ops/61552047390676/" target="_blank" rel="noopener noreferrer">Site Security OPS</a>
+                </h3>
+                <p class="project-desc">Workstation Builds & Site Operations</p>
+                <a href="https://www.facebook.com/people/Site-Security-Ops/61552047390676/" target="_blank" rel="noopener noreferrer" class="project-video-wrapper">
+                    <video muted loop playsinline preload="metadata" class="project-video">
+                        <source src="assets/SSO3.mp4" type="video/mp4">
+                    </video>
+                </a>
+            </div>
+
+            <div class="project-card">
+                <h3 class="project-title">
+                    <a href="https://www.facebook.com/profile.php?id=61590670702853" target="_blank" rel="noopener noreferrer">GlyphTek Projects</a>
+                </h3>
+                <p class="project-desc">ARC, AI-Fusion Engine & Resonance Chamber</p>
+                <a href="https://www.facebook.com/profile.php?id=61590670702853" target="_blank" rel="noopener noreferrer" class="project-video-wrapper">
+                    <video muted loop playsinline preload="metadata" class="project-video">
+                        <source src="assets/ARC5.mp4" type="video/mp4">
+                    </video>
+                </a>
+            </div>
+
+        </div>
+
+        <a href="https://jv-projects.tfmsupport.workers.dev/" target="_blank" rel="noopener noreferrer"
+           style="display:inline-block;margin:18px 0 6px 4px;padding:10px 20px;border-radius:6px;font-family:'Orbitron',sans-serif;font-size:0.8rem;letter-spacing:1px;color:#38bdf8;background:rgba(15,23,42,0.45);border:1px solid rgba(56,189,248,0.5);text-decoration:none;">
+            VIEW ALL PROJECTS ↗
+        </a>
+    </div>
+</div>
+
+
+<!-- Contact -->
+<div class="dropdown-block">
+    <button class="dropdown-header" onclick="handleDropdownClick('contactContent', this)">
+        <span class="title">Contact</span>
+        <span class="chevron">▾</span>
+    </button>
+
+    <div class="dropdown-body contact-font" id="contactContent">
+        <footer>
+            <p>Thank you for your time and consideration.</p>
+            <p>I welcome the opportunity to discuss how my background aligns with your interests, and I am available to provide references, qualifications, and project demonstrations upon request.</p>
+            <br>
+
+<!-- COMBINED CONTACT GATE CONTAINER -->
+<div class="privacy-gate contact-gate-container" data-gate="contact-gate">
+    <form onsubmit="unlockSection(event, 'contact-gate', 'contact-content', 'Contact Details Unlock Request')" class="gate-form">
+        <p class="gate-notice"><span class="lock-icon">🔒</span> Unlock Contact Details</p>
+        <div class="input-wrapper">
+            <input type="email" placeholder="Enter business email..." required class="cyber-input">
+            <button type="submit" class="cyber-button">Unlock</button>
+        </div>
+        <div class="error-msg" style="display:none; color:#ff4d4d;"></div>
+    </form>
+</div>
+
+<!-- HIDDEN CONTENT (REVEALED TOGETHER) -->
+<div class="hidden-content contact-revealed-content" data-content="contact-content" style="display: none;"></div>
+
+<!-- Floating Social Bar (Inline Footer Style) -->
+<div class="floating-social-bar" id="socialBar">
+    <!-- LinkedIn Icon -->
+    <a href="https://linkedin.com/in/john-va-afuti-096233294" target="_blank" class="social-icon-btn" title="LinkedIn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+    </a>
+    
+    <!-- Quora Icon -->
+    <a href="https://sharingltdknowledge.quora.com/?ch=10&oid=6780182&share=396067ef&srid=3UG1ll&target_type=tribe" target="_blank" class="social-icon-btn" title="Quora">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.15 15.32a6.38 6.38 0 0 0 1.25-3.85C19.4 7.6 15.8 4 11.4 4S3.4 7.6 3.4 11.47c0 3.86 3.6 7.46 8 7.46 1.15 0 2.25-.26 3.23-.74l3.15 1.57-.63-3.94c.3-.49.57-1.02.8-1.5zM11.4 14.8c-1.85 0-3.33-1.48-3.33-3.33s1.48-3.33 3.33-3.33 3.33 1.48 3.33 3.33-1.48 3.33-3.33 3.33z"/></svg>
+    </a>
+
+    <!-- Facebook Icon -->
+    <a href="https://www.facebook.com/profile.php?id=61552047390676" target="_blank" class="social-icon-btn" title="Facebook">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3.8l.2-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+
+    </div><!-- end .master-panel -->
+
+</div><!-- end .container -->
+
+<script>
+const container = document.getElementById('eversion-canvas');
+const width = container.clientWidth;
+const height = container.clientHeight;
+
+// --- Scene & Camera Setup ---
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(55, width / height, 0.1, 1000);
+camera.position.set(0, 0, 5.5);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setSize(width, height);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+container.appendChild(renderer.domElement);
+
+// --- OrbitControls ---
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+controls.enableZoom = false;
+controls.autoRotate = true;
+
+// --- Geometry Setup (Shared) ---
+const uSegments = 48;
+const vSegments = 24;
+const radius = 1.4;
+
+const geometry = new THREE.BufferGeometry();
+const positions = new Float32Array((uSegments + 1) * (vSegments + 1) * 3);
+geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+// 1. Line Mesh Setup
+const indices = [];
+for (let i = 0; i < uSegments; i++) {
+  for (let j = 0; j < vSegments; j++) {
+    const first = i * (vSegments + 1) + j;
+    const second = first + vSegments + 1;
+    indices.push(first, first + 1);
+    indices.push(first, second);
+  }
+}
+const lineGeometry = geometry.clone();
+lineGeometry.setIndex(indices);
+
+const lineMaterial = new THREE.LineBasicMaterial({
+  color: 0x00d5ff,
+  transparent: true,
+  opacity: 0.85
+});
+const lineMesh = new THREE.LineSegments(lineGeometry, lineMaterial);
+scene.add(lineMesh);
+
+// 2. Glowing Particle Texture Generator
+function createGlowTexture() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 64;
+  canvas.height = 64;
+  const ctx = canvas.getContext('2d');
+  const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+  gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+  gradient.addColorStop(0.3, 'rgba(0, 213, 255, 0.8)');
+  gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 64, 64);
+  return new THREE.CanvasTexture(canvas);
+}
+
+// 3. Point Mesh Setup
+const pointMaterial = new THREE.PointsMaterial({
+  color: 0x00d5ff,
+  size: 0.08,
+  map: createGlowTexture(),
+  transparent: true,
+  opacity: 0.9,
+  depthWrite: false,
+  blending: THREE.AdditiveBlending
+});
+const pointMesh = new THREE.Points(geometry, pointMaterial);
+scene.add(pointMesh);
+
+// Default visibility view mode toggle support
+let isPointMode = true;
+pointMesh.visible = true;
+lineMesh.visible = false;
+
+const modeToggleBtn = document.getElementById('mode-toggle-btn');
+const viewModeLabel = document.getElementById('view-mode-label');
+modeToggleBtn.addEventListener('click', () => {
+  isPointMode = !isPointMode;
+  pointMesh.visible = isPointMode;
+  lineMesh.visible = !isPointMode;
+  viewModeLabel.textContent = isPointMode ? 'GRID' : 'MESH';
+});
+
+// --- Eversion Algorithm ---
+function updateModel(factor) {
+  const posAttr = geometry.attributes.position;
+  let index = 0;
+
+  for (let i = 0; i <= uSegments; i++) {
+    const u = (i / uSegments) * Math.PI * 2;
+    for (let j = 0; j <= vSegments; j++) {
+      const v = (j / vSegments) * Math.PI - Math.PI / 2;
+
+      let x = radius * Math.cos(v) * Math.cos(u);
+      let y = radius * Math.sin(v);
+      let z = radius * Math.cos(v) * Math.sin(u);
+
+      if (factor < 0) {
+        const k = Math.abs(factor);
+        const radialScale = 1 - k * Math.pow(Math.sin(v), 2);
+        x *= radialScale;
+        y *= (1 - k * 1.25 * Math.cos(v));
+        z *= radialScale;
+      } else if (factor > 0) {
+        const k = factor;
+        const flare = 1 + k * Math.pow(Math.sin(v), 2) * 1.4;
+        const waist = 1 - k * 0.45 * Math.cos(v);
+        x *= flare;
+        y *= waist;
+        z *= flare;
+      }
+
+      posAttr.setXYZ(index++, x, y, z);
+    }
+  }
+  posAttr.needsUpdate = true;
+  lineGeometry.attributes.position.copy(posAttr);
+  lineGeometry.attributes.position.needsUpdate = true;
+}
+
+// --- UI Controls ---
+const eversionSlider = document.getElementById('eversion-slider');
+const verticalSlider = document.getElementById('vertical-slider');
+const tiltSlider = document.getElementById('tilt-slider');
+
+// --- Independent Pause Flags ---
+let pauseEversion = false;
+let pauseVertical = false;
+let pauseTilt = false;
+
+// --- Animation State ---
+let currentFactor = parseFloat(eversionSlider.value);
+let baseAnimSpeed = 0.006;
+let speedSlider1 = 0.50;
+let speedSlider2 = 0.25;
+let speedSlider3 = 0.25;
+
+// --- Slider Starting Positions ---
+let verticalVal = parseFloat(verticalSlider.value);
+let tiltVal = parseFloat(tiltSlider.value);
+
+pointMesh.rotation.x = verticalVal;
+lineMesh.rotation.x = verticalVal;
+pointMesh.rotation.z = tiltVal;
+lineMesh.rotation.z = tiltVal;
+
+// --- Velocities ---
+let verticalVel = -baseAnimSpeed * speedSlider2;
+let tiltVel = baseAnimSpeed * speedSlider3;
+
+// --- Pause on Click (Independent) ---
+eversionSlider.addEventListener('pointerdown', () => { pauseEversion = !pauseEversion; });
+verticalSlider.addEventListener('pointerdown', () => { pauseVertical = !pauseVertical; });
+tiltSlider.addEventListener('pointerdown', () => { pauseTilt = !pauseTilt; });
+
+// --- Manual Input ---
+eversionSlider.addEventListener('input', (e) => {
+  currentFactor = parseFloat(e.target.value);
+  updateModel(currentFactor);
+});
+
+verticalSlider.addEventListener('input', (e) => {
+  verticalVal = parseFloat(e.target.value);
+  pointMesh.rotation.x = verticalVal;
+  lineMesh.rotation.x = verticalVal;
+});
+
+tiltSlider.addEventListener('input', (e) => {
+  tiltVal = parseFloat(e.target.value);
+  pointMesh.rotation.z = tiltVal;
+  lineMesh.rotation.z = tiltVal;
+});
+
+// --- Render Loop ---
+function animate() {
+  requestAnimationFrame(animate);
+
+  if (!pauseEversion) {
+    currentFactor += baseAnimSpeed * speedSlider1;
+    if (currentFactor > 1 || currentFactor < -1) baseAnimSpeed *= -1;
+    eversionSlider.value = currentFactor;
+    updateModel(currentFactor);
+  }
+
+  if (!pauseVertical) {
+    verticalVal += verticalVel;
+    if (verticalVal > 3.14 || verticalVal < -3.14) verticalVel *= -1;
+    verticalSlider.value = verticalVal;
+    pointMesh.rotation.x = verticalVal;
+    lineMesh.rotation.x = verticalVal;
+  }
+
+  if (!pauseTilt) {
+    tiltVal += tiltVel;
+    if (tiltVal > 3.14 || tiltVal < -3.14) tiltVel *= -1;
+    tiltSlider.value = tiltVal;
+    pointMesh.rotation.z = tiltVal;
+    lineMesh.rotation.z = tiltVal;
+  }
+
+  controls.update();
+  renderer.render(scene, camera);
+}
+
+updateModel(currentFactor);
+animate();
+</script>
+
+
+
+<script>
+// ===============================
+// SECTION DROPDOWNS (AUTO-CLOSE & MOBILE TOGGLE)
+// ===============================
+function toggleSectionDropdown(btn) {
+    const block = btn.parentElement;
+    const isOpen = block.classList.contains('dropdown-open');
+
+    // 1. First, wipe out open states and active highlights from ALL dropdowns
+    document.querySelectorAll('.dropdown-block').forEach(other => {
+        other.classList.remove('dropdown-open');
+        const otherHeader = other.querySelector('.dropdown-header');
+        if (otherHeader) {
+            otherHeader.classList.remove('is-active-state');
+        }
+    });
+
+    // 2. If it was ALREADY open, clicking it again leaves it closed (toggles back to first state)
+    // If it was closed, we open it and apply the active state
+    if (!isOpen) {
+        block.classList.add('dropdown-open');
+        btn.classList.add('is-active-state');
+    }
+
+    // Update social bar visibility if you're using that global check
+    if (typeof updateSocialBarVisibility === 'function') {
+        updateSocialBarVisibility();
+    }
+}
+</script>
+
+<script>
+let masterOpen = false;
+let masterAnimating = false;
+
+function toggleMasterPanel() {
+    const toggleBtn = document.getElementById('masterToggle');
+    const masterPanel = document.getElementById('masterPanel');
+    const introBlock = document.getElementById('introBlock'); // Grab the intro block
+    const unlockDiamond = document.querySelector('.unlock-diamond'); // Grab the diamond
+    const heroBg = document.querySelector('.hero-bg'); // Grab the sphere container
+    
+    // --- RE-TRIGGER SPINNING DIAMOND ANIMATION ---
+    if (unlockDiamond) {
+        unlockDiamond.style.animation = 'none';
+        void unlockDiamond.offsetWidth; // Force a browser reflow
+        unlockDiamond.style.animation = 'spinAndWindDown 1.6s cubic-bezier(0.15, 0.85, 0.35, 1) forwards';
+    }
+
+    const isOpen = masterPanel.classList.contains('open');
+
+    if (!isOpen) {
+        // OPENING SEQUENCE: Hide intro text immediately, extend shaft, then drop panel open
+        if (introBlock) introBlock.classList.add('hidden');
+        
+        // Handle view-specific behavior on opening
+        if (heroBg) {
+            if (window.innerWidth <= 768) {
+                heroBg.classList.add('mobile-hide-sphere'); // Hide completely on mobile
+            } else {
+                heroBg.classList.add('dimmed');             // Dim down on desktop
+            }
+        }
+        
+        toggleBtn.classList.add('extending');
+        setTimeout(() => {
+            masterPanel.classList.add('open');
+            toggleBtn.classList.add('open');
+        }, 350); 
+    } else {
+        // CLOSING SEQUENCE: Close panel first, let it slide back, then rotate/retract shaft & bring intro back
+        masterPanel.classList.remove('open');
+        toggleBtn.classList.remove('open'); 
+
+        // Restore sphere visibility/opacity as it starts closing
+        if (heroBg) {
+            if (window.innerWidth <= 768) {
+                heroBg.classList.remove('mobile-hide-sphere');
+            } else {
+                heroBg.classList.remove('dimmed');
+            }
+        }
+
+        setTimeout(() => {
+            toggleBtn.classList.remove('extending'); 
+            if (introBlock) introBlock.classList.remove('hidden'); // Bring intro text back after closing finishes
+        }, 350); 
+
+        // --- GLOBAL RESET / CLOSE ALL OPEN CONTENT ---
+        closeAllSubDropdowns();
+
+        document.querySelectorAll('.dropdown-block.dropdown-open').forEach(block => {
+            block.classList.remove('dropdown-open');
+        });
+
+        document.querySelectorAll('.accordion-item.active').forEach(item => {
+            item.classList.remove('active');
+        });
+
+        document.querySelectorAll('.mini-header.open').forEach(header => {
+            header.classList.remove('open');
+            const body = header.nextElementSibling;
+            if (body && body.classList.contains('mini-body')) {
+                body.classList.remove('open');
+            }
+        });
+
+        document.querySelectorAll('.trait-header').forEach(header => {
+            header.addEventListener('click', function() {
+                this.classList.toggle('open'); // Keeps the header lit
+        
+                const body = this.nextElementSibling;
+                if (body && body.classList.contains('trait-body')) {
+                    body.classList.toggle('open');
+                }
+            });
+        });
+    }
+}
+
+function closeAllSubDropdowns() {
+    document.querySelectorAll('#masterPanel .dropdown-block').forEach(block => {
+        block.classList.remove('dropdown-open');
+    });
+
+    const overlay = document.getElementById('overlay-panel');
+    if (overlay) {
+        overlay.style.display = 'none';
+        overlay.innerHTML = '';
+        overlay.style.animation = 'none';
+    }
+
+    document.querySelectorAll('#masterPanel .dropdown-header.active').forEach(header => {
+        header.classList.remove('active');
+    });
+
+    currentPanel = null;
+    currentHeader = null;
+}
+</script>
+
+<script>
+// ===============================
+// ACCORDION LOGIC (Training / Employment tables)
+// ===============================
+function toggleEmploymentAccordion(element) {
+    const item = element.parentElement;
+    item.classList.toggle('active');
+}
+</script>
+
+<script>
+// ===============================
+// PRIVACY GATE / EMAIL VERIFICATION
+// gateKey/contentKey identify the gate via data-gate/data-content attributes
+// rather than unique element IDs. This matters because the desktop overlay
+// clones this same markup into #overlay-panel — with real IDs that would
+// create duplicates on the page and break getElementById lookups. Using
+// data-attributes + querySelectorAll lets this safely target every matching
+// instance currently in the DOM (the mobile copy, and the desktop clone if
+// it's open), so unlocking from either view unlocks both, now and on any
+// future re-open of the overlay.
+// ===============================
+const UNLOCK_API = "https://jv-projects.tfmsupport.workers.dev/api/unlock";
+const SECTION_FOR = { historyContent: 'history', referencesContent: 'references', 'contact-content': 'contact' };
+
+function escHtml(t) {
+    return String(t == null ? '' : t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+// Builds the private details from what the server sends back. Nothing private is stored in this page.
+function fillPrivate(contentKey, data) {
+    document.querySelectorAll('.hidden-content[data-content="' + contentKey + '"]').forEach(c => {
+        if (contentKey === 'referencesContent' && data.references) {
+            const grid = c.querySelector('.references-grid');
+            if (grid) grid.innerHTML = data.references.map(r =>
+                '<div class="ref-card">' +
+                '<h4>' + escHtml(r.name) + '</h4>' +
+                '<p><em>' + escHtml(r.role) + '</em></p>' +
+                '<p>' + escHtml(r.org) + '</p>' +
+                '<p>Mob: ' + escHtml(r.mobile) + '</p>' +
+                '<p>Email: ' + escHtml(r.email) + '</p>' +
+                '</div>').join('');
+        }
+        if (contentKey === 'contact-content' && data.contact) {
+            c.innerHTML =
+                '<p><strong>Mobile:</strong>&emsp; ' + escHtml(data.contact.mobile) + '</p>' +
+                '<p><strong>Email:</strong>&emsp; <a href="mailto:' + escHtml(data.contact.email) + '" class="cyber-link">' + escHtml(data.contact.email) + '</a></p>';
+        }
+        c.style.display = 'block';
+    });
+}
+
+function unlockSection(event, gateKey, contentKey, subjectText) {
+    event.preventDefault();
+
+    const form = event.target;
+    const gate = form.closest('.privacy-gate');
+    const emailInput = form.querySelector('input[type="email"]');
+    const button = form.querySelector('button');
+    const errorDiv = gate.querySelector('.error-msg');
+    if (!emailInput) return;
+
+    const typedEmail = emailInput.value.trim();
+    if (!typedEmail.includes('@') || !typedEmail.includes('.') || typedEmail.length < 5) {
+        errorDiv.style.display = 'block';
+        errorDiv.innerText = "Please enter a valid email address (e.g., name@company.com)";
+        return;
+    }
+
+    const originalLabel = button.innerText;
+    errorDiv.style.display = 'none';
+    button.disabled = true;
+    emailInput.disabled = true;
+    button.innerText = "Verifying...";
+
+    fetch(UNLOCK_API, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: typedEmail, section: SECTION_FOR[contentKey] })
+    })
+    .then(r => r.json().catch(() => ({ ok: false })).then(j => ({ status: r.status, body: j })))
+    .then(res => {
+        if (!res.body.ok) throw new Error(res.body.error || "Verification failed. Please try again.");
+        document.querySelectorAll('.privacy-gate[data-gate="' + gateKey + '"]').forEach(g => { g.style.display = 'none'; });
+        fillPrivate(contentKey, res.body.data || {});
+    })
+    .catch(err => {
+        button.disabled = false;
+        emailInput.disabled = false;
+        button.innerText = originalLabel;
+        errorDiv.style.display = 'block';
+        errorDiv.innerText = (err && err.message && err.message !== 'Failed to fetch')
+            ? err.message
+            : "Verification failed. Please check your internet connection and try again.";
+    });
+}
+</script>
+
+<script>
+// ===============================
+// KEY TRAITS ACCORDION
+// ===============================
+function toggleTrait(button) {
+    const body = button.nextElementSibling;
+    // Scope to this specific traits-accordion instance (mobile copy or the
+    // desktop overlay's cloned copy) so opening one never affects the other.
+    const scope = button.closest('.traits-accordion') || document;
+
+    scope.querySelectorAll('.trait-body').forEach(section => {
+        if (section !== body) {
+            section.classList.remove('open');
+        }
+    });
+
+    scope.querySelectorAll('.trait-header').forEach(header => {
+        if (header !== button) {
+            header.classList.remove('open');
+        }
+    });
+
+    body.classList.toggle('open');
+    button.classList.toggle('open');
+}
+</script>
+
+<script>
+// ===============================
+// PROFILE STATEMENT — INTERNAL MINI-DROPDOWNS
+// Collapsed by default, click to expand, one open at a time — this now
+// behaves the same whether it's the mobile inline copy or the version
+// cloned into the desktop overlay panel. Scoped to whichever of those two
+// containers the click happened in, so the two copies never interfere.
+// ===============================
+function toggleMini(btn) {
+    const scope = btn.closest('#profileContent, #overlay-panel') || document;
+    const body = btn.nextElementSibling;
+
+    scope.querySelectorAll('.mini-body').forEach(b => {
+        if (b !== body) {
+            b.classList.remove('open');
+            b.previousElementSibling.classList.remove('open');
+        }
+    });
+
+    body.classList.toggle('open');
+    btn.classList.toggle('open');
+}
+</script>
+
+<script>
+// ===============================
+// DESKTOP / MOBILE MODE HANDLER
+// ===============================
+function handleDropdownClick(id, headerBtn) {
+    if (window.innerWidth < 900) {
+        toggleSectionDropdown(headerBtn);
+        return;
+    }
+
+    openPanel(id, headerBtn);
+}
+</script>
+
+<script>
+// ===============================
+// OVERLAY PANEL LOGIC (DESKTOP)
+// Clones the on-page content for the given section id into the
+// right-hand overlay panel, so there is only ever one copy of
+// the actual text content in the page.
+// ===============================
+let currentPanel = null;
+let currentHeader = null;
+let panelHideTimeout = null; // tracks the pending "hide" from a close animation
+
+function openPanel(id, headerBtn) {
+    const panel = document.getElementById("overlay-panel");
+
+    // Cancel any pending hide left over from a previous close/switch —
+    // this is what was causing a freshly opened panel to vanish ~350ms
+    // later: the old timeout kept running even after new content loaded.
+    if (panelHideTimeout) {
+        clearTimeout(panelHideTimeout);
+        panelHideTimeout = null;
+    }
+
+    // Same header clicked again while its panel is open → close it
+    if (currentPanel === id && panel.style.display === "block") {
+        panel.style.animation = "slideOutToRight 0.35s ease forwards";
+
+        panelHideTimeout = setTimeout(() => {
+            panel.style.display = "none";
+            panelHideTimeout = null;
+        }, 350);
+
+        if (currentHeader) {
+            currentHeader.classList.remove("active");
+        }
+
+        currentPanel = null;
+        currentHeader = null;
+        return;
+    }
+
+    // Switching to a different section (or opening fresh) — just swap the
+    // content in place and slide it in. No separate close step needed:
+    // the content underneath is being replaced anyway.
+    if (currentHeader && currentHeader !== headerBtn) {
+        currentHeader.classList.remove("active");
+    }
+
+    const content = document.getElementById(id).innerHTML;
+    panel.innerHTML = content;
+
+    panel.style.display = "block";
+
+    panel.style.animation = "none";
+    void panel.offsetWidth; // force reflow
+    panel.style.animation = "slideInFromLeft 0.45s ease forwards";
+
+    headerBtn.classList.add("active");
+
+    currentPanel = id;
+    currentHeader = headerBtn;
+}
+</script>
+
+<script>
+// Keep your JS trigger the same (fires almost instantly on DOM load)
+window.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.name-unlock-container');
+    setTimeout(() => {
+        container.classList.add('unlocked');
+    }, 50); 
+});
+
+// --- Existing DOM Load Trigger ---
+window.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.name-unlock-container');
+    if (container) {
+        setTimeout(() => {
+            container.classList.add('unlocked');
+        }, 50); 
+    }
+});
+</script>
+
+<script>
+// --- Audio Player Reference ---
+const audioPlayer = document.getElementById('audioPlayer');
+
+// --- TLP Player Swap Logic (Keeps music playing when closed) ---
+function openTLPPlayer() {
+    const link = document.getElementById('tlpToggleLink');
+    const container = document.getElementById('trackPlayerContainer');
+    
+    if (link && container) {
+        link.style.display = 'none';
+        container.classList.add('show');
+    }
+}
+
+function resetTLPPlayer() {
+    const link = document.getElementById('tlpToggleLink');
+    const container = document.getElementById('trackPlayerContainer');
+
+    // NOTE: audioPlayer.pause() and src clearing removed here 
+    // so background audio playback continues uninterrupted when closing the interface.
+
+    // Swap visual elements back to the clickable link
+    if (container && link) {
+        container.classList.remove('show');
+        link.style.display = 'inline-block';
+    }
+}
+
+// --- Audio Controller Logic ---
+function changeTrack(src) {
+    if (!src || !audioPlayer) return;
+    audioPlayer.src = src;
+    audioPlayer.play();
+    updatePlayButtonUI(true);
+}
+
+function togglePlayState() {
+    const trackSelect = document.getElementById('trackSelect');
+    if (!audioPlayer) return;
+    
+    if (!audioPlayer.src || audioPlayer.src === window.location.href) {
+        if (trackSelect && trackSelect.value) {
+            changeTrack(trackSelect.value);
+        }
+        return;
+    }
+
+    if (audioPlayer.paused) {
+        audioPlayer.play();
+        updatePlayButtonUI(true);
+    } else {
+        audioPlayer.pause();
+        audioPlayer.currentTime = 0; // Stops and resets only when hitting the stop/pause toggle
+        updatePlayButtonUI(false);
+    }
+}
+
+function adjustVolume(val) {
+    if (audioPlayer) {
+        audioPlayer.volume = val;
+    }
+}
+
+function updatePlayButtonUI(isPlaying) {
+    const playIcon = document.getElementById('playIcon');
+    const stopIcon = document.getElementById('stopIcon');
+    if (!playIcon || !stopIcon) return;
+    
+    if (isPlaying) {
+        playIcon.style.display = 'none';
+        stopIcon.style.display = 'block';
+    } else {
+        playIcon.style.display = 'block';
+        stopIcon.style.display = 'none';
+    }
+}
+
+// Reset button icon when audio naturally ends
+if (audioPlayer) {
+    audioPlayer.addEventListener('ended', () => {
+        updatePlayButtonUI(false);
+    });
+}
+</script>
+
+<script>
+// --- Diploma Focus Dropdown Controls ---
+function openDiplomaFocus() {
+    const link = document.getElementById('diplomaToggleLink');
+    const container = document.getElementById('diplomaDropdownContainer');
+    
+    if (link && container) {
+        link.style.display = 'none';
+        container.classList.add('show');
+    }
+}
+
+function resetDiplomaFocus() {
+    const link = document.getElementById('diplomaToggleLink');
+    const container = document.getElementById('diplomaDropdownContainer');
+
+    if (container && link) {
+        container.classList.remove('show');
+        link.style.display = 'inline-block';
+    }
+}
+</script>
+
+<script>
+// --- Security Focus Dropdown Controls ---
+function openSecurityFocus() {
+    const link = document.getElementById('securityToggleLink');
+    const container = document.getElementById('securityDropdownContainer');
+    
+    if (link && container) {
+        link.style.display = 'none';
+        container.classList.add('show');
+    }
+}
+
+function resetSecurityFocus() {
+    const link = document.getElementById('securityToggleLink');
+    const container = document.getElementById('securityDropdownContainer');
+
+    if (container && link) {
+        container.classList.remove('show');
+        link.style.display = 'inline-block';
+    }
+}
+</script>
+
+<script>
+// Toggle individual accordion card
+function toggleAccordion(headerElement) {
+    const item = headerElement.parentElement;
+    const isAlreadyActive = item.classList.contains('active');
+
+    // Close BOTH Employment and Timeline items
+    document.querySelectorAll('.accordion-item, .timeline-accordion-item').forEach(el => {
+        el.classList.remove('active');
+    });
+
+    // Toggle the clicked one
+    if (!isAlreadyActive) {
+        item.classList.add('active');
+    }
+}
+
+
+function openTimelineItem(itemId) {
+    const targetItem = document.getElementById(itemId);
+    if (!targetItem) return;
+
+    const isAlreadyOpen = targetItem.classList.contains('active');
+
+    // Close all timeline items
+    document.querySelectorAll('.timeline-accordion-item').forEach(item => {
+        item.style.display = "none";
+        item.classList.remove('active');
+    });
+
+    // If it was already open, clicking again should close it
+    if (isAlreadyOpen) {
+        return;
+    }
+
+    // Otherwise open it
+    targetItem.style.display = "block";
+    targetItem.classList.add('active');
+}
+
+function openLearningHistory() {
+    // 1. Ensure all timeline items are hidden by default when opening the history
+    document.querySelectorAll('.timeline-accordion-item').forEach(item => {
+        item.style.display = "none";
+        item.classList.remove('active');
+    });
+
+    // 2. Open the main container
+    document.getElementById('learningHistoryDropdownContainer').style.display = 'block';
+    document.getElementById('learningHistoryToggleLink').style.display = 'none';
+}
+
+function resetLearningHistory() {
+    document.getElementById('learningHistoryDropdownContainer').style.display = 'none';
+    document.getElementById('learningHistoryToggleLink').style.display = 'inline-block';
+}
+</script>
+
+<script>
+// Project videos: load and play only while on screen (keeps the page fast on phones)
+(function () {
+    if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+            var v = en.target;
+            if (en.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+            else { v.pause(); }
+        });
+    }, { threshold: 0.25 });
+    var seen = new WeakSet();
+    function watch(root) {
+        (root.querySelectorAll ? root.querySelectorAll('video.project-video') : []).forEach(function (v) {
+            if (!seen.has(v)) { seen.add(v); io.observe(v); }
+        });
+    }
+    watch(document);
+    new MutationObserver(function () { watch(document); })
+        .observe(document.body, { childList: true, subtree: true });
+})();
+</script>
+</body>
+</html>
